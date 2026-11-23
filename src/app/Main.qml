@@ -11,6 +11,10 @@ Kirigami.ApplicationWindow {
     property string currentPage: ""
     readonly property bool setupComplete: Credentials.configured && Config.itemIds.length > 0
     property bool firstRunChecked: false
+    // The first page exists and has its size; Android hides its splash screen
+    // after a frame with it (main.cpp).
+    readonly property bool pageReady: pageStack.currentItem !== null
+                                      && pageStack.currentItem.width > 0 && pageStack.currentItem.height > 0
 
     // First run: open the setup guide instead of an empty overview.
     function checkFirstRun() {

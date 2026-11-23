@@ -325,6 +325,10 @@ skill** (`.claude/skills/release/`) runs the whole flow. By hand:
   `QT_NO_GLOBAL_APK_TARGET_PART_OF_ALL ON` keeps `qt_add_executable`'s own APK step out of the
   build (it failed with "Cannot find application binary"); the container runs as uid 1001, so the
   script sets git `safe.directory` and `dist/` files end up owned by uid 1001 on the host.
+- **Splash screen:** the manifest keeps Qt's splash (`android/res/drawable/splash.xml`, the app icon
+  on the pages' background) up with `splash_screen_sticky`; `main.cpp` hides it after a frame drawn
+  once `Main.qml`'s `pageReady` is true (5 s fallback). Without it the phone showed an empty header
+  for a moment: Qt shows the window before the first page is laid out.
 - `libsaldocore` has no SOVERSION on Android (APKs only take unversioned `.so`). The app links
   `Qt6::Svg` (icons) and `OpenSSL::SSL` (Qt loads OpenSSL at runtime for HTTPS) on Android.
 - **Signing:** KDE signs on its own server, we can't. `tools/sign-apk.sh` runs zipalign +

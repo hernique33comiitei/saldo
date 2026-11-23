@@ -22,7 +22,45 @@
 
 #ifdef Q_OS_ANDROID
 #include <QGuiApplication>
+#include <QtCore/qcoreapplication_platform.h>
+#include <memory>
 using Application = QGuiApplication;
+
+namespace
+{
+// The manifest keeps Android's splash screen up (splash_screen_sticky): Qt
+// shows the window before the first page is laid out, which showed an empty
+// header for a moment. Hide it once a frame drawn after the page got its size
+// is on screen (Main.qml's pageReady), with a fade.
+void hideSplashWhenReady(QQuickWindow *window)
+{
+    auto hidden = std::make_shared<bool>(false);
+    auto hide = [hidden]() {
+        if (!*hidden) {
+            *hidden = true;
+            QNativeInterface::QAndroidApplication::hideSplashScreen(200);
+        }
+    };
+    auto readyFrames = std::make_shared<int>(0);
+    QObject::connect(
+        window,
+        &QQuickWindow::frameSwapped,
+        window,
+        [window, readyFrames, hide]() {
+            if (!window->property("pageReady").toBool()) {
+                return; // the page laying out changes the scene: another frame follows
+            }
+            // The first frame after pageReady may have been synced before it.
+            if (++*readyFrames < 2) {
+                window->update();
+                return;
+            }
+            hide();
+        },
+        Qt::QueuedConnection);
+    QTimer::singleShot(5000, window, hide); // never leave the app stuck behind it
+}
+}
 #else
 #include <QApplication>
 using Application = QApplication; // native file dialogs / widgets
@@ -118,6 +156,13 @@ int main(int argc, char *argv[])
     if (engine.rootObjects().isEmpty()) {
         return -1;
     }
+#ifdef Q_OS_ANDROID
+    if (auto *window = qobject_cast<QQuickWindow *>(engine.rootObjects().constFirst())) {
+        hideSplashWhenReady(window);
+    } else {
+        QNativeInterface::QAndroidApplication::hideSplashScreen();
+    }
+#endif
 
     // Development aid (AppStream screenshots, visual checks):
     // SALDO_SCREENSHOT=/path/file.png saldo --demo --page cards
