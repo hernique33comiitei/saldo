@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: saldo 0.0.4\n"
 "Report-Msgid-Bugs-To: https://github.com/hernique33comiitei/saldo/issues\n"
-"POT-Creation-Date: 2026-11-23 15:46-0300\n"
+"POT-Creation-Date: 2026-11-23 19:10-0300\n"
 "PO-Revision-Date: 2026-11-21 12:00-0300\n"
 "Last-Translator: Henrique Oliveira <henriik.dev@gmail.com>\n"
 "Language-Team: Brazilian Portuguese\n"
@@ -12,24 +12,24 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: src/app/main.cpp:54
+#: src/app/main.cpp:80
 msgid "Saldo"
 msgstr "Saldo"
 
-#: src/app/main.cpp:56
+#: src/app/main.cpp:82
 msgid ""
 "Bank balances, card limits and transactions from Open Finance (Meu Pluggy)"
 msgstr "Saldos, limites de cartão e transações do Open Finance (Meu Pluggy)"
 
-#: src/app/main.cpp:58
+#: src/app/main.cpp:84
 msgid "© 2026 Henrique Oliveira"
 msgstr "© 2026 Henrique Oliveira"
 
-#: src/app/main.cpp:63
+#: src/app/main.cpp:89
 msgid "Author"
 msgstr "Autor"
 
-#: src/app/main.cpp:66
+#: src/app/main.cpp:92
 msgid ""
 "Data comes from the Meu Pluggy personal-use API. Saldo is an independent "
 "open source project, not affiliated with Pluggy."
@@ -37,12 +37,12 @@ msgstr ""
 "Os dados vêm da API de uso pessoal do Meu Pluggy. O Saldo é um projeto open "
 "source independente, sem vínculo com a Pluggy."
 
-#: src/app/main.cpp:74
+#: src/app/main.cpp:100
 msgid "Show fake demo data instead of your Meu Pluggy accounts."
 msgstr ""
 "Mostra dados fictícios de demonstração em vez das suas contas do Meu Pluggy."
 
-#: src/app/main.cpp:76
+#: src/app/main.cpp:102
 msgid ""
 "Page to open: overview, accounts, cards, transactions, investments, "
 "settings, setup or about."
@@ -50,12 +50,12 @@ msgstr ""
 "Página a abrir: overview, accounts, cards, transactions, investments, "
 "settings, setup ou about."
 
-#: src/app/main.cpp:77
+#: src/app/main.cpp:103
 msgctxt "command line value name"
 msgid "page"
 msgstr "página"
 
-#: src/core/categories.cpp:66
+#: src/core/categories.cpp:68
 msgid "Uncategorized"
 msgstr "Sem categoria"
 
@@ -304,15 +304,15 @@ msgid_plural "%1 days ago"
 msgstr[0] "há %1 dia"
 msgstr[1] "há %1 dias"
 
-#: src/core/money.cpp:157
+#: src/core/money.cpp:173
 msgid "Today"
 msgstr "Hoje"
 
-#: src/core/money.cpp:160
+#: src/core/money.cpp:176
 msgid "Yesterday"
 msgstr "Ontem"
 
-#: src/core/money.cpp:175
+#: src/core/money.cpp:191
 msgctxt "%1 month name, %2 year"
 msgid "%1 %2"
 msgstr "%1 de %2"
@@ -680,15 +680,25 @@ msgstr "Botão do meio para ocultar ou mostrar os valores"
 msgid "Name This Connection"
 msgstr "Nomear conexão"
 
-#: src/app/components/RenameConnectionDialog.qml:36
+#: src/app/components/RenameConnectionDialog.qml:30
+#: src/app/pages/SettingsPage.qml:202
+msgid "Save"
+msgstr "Salvar"
+
+#: src/app/components/RenameConnectionDialog.qml:31
+#: src/app/pages/SettingsPage.qml:554
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: src/app/components/RenameConnectionDialog.qml:42
 msgid "Accounts in this connection: %1"
 msgstr "Contas nesta conexão: %1"
 
-#: src/app/components/RenameConnectionDialog.qml:37
+#: src/app/components/RenameConnectionDialog.qml:43
 msgid "Its accounts show up here after the first sync."
 msgstr "As contas dela aparecem aqui depois da primeira sincronização."
 
-#: src/app/components/RenameConnectionDialog.qml:44
+#: src/app/components/RenameConnectionDialog.qml:50
 msgctxt "example name for a bank connection"
 msgid "e.g. Nubank"
 msgstr "ex.: Nubank"
@@ -707,54 +717,58 @@ msgstr "Sincronizando com a Pluggy…"
 msgid "Settings"
 msgstr "Configurações"
 
-#: src/app/components/TransactionDialog.qml:45
+#: src/app/components/TransactionDialog.qml:27
+msgid "Close"
+msgstr "Fechar"
+
+#: src/app/components/TransactionDialog.qml:48
 msgid "Date:"
 msgstr "Data:"
 
-#: src/app/components/TransactionDialog.qml:49
+#: src/app/components/TransactionDialog.qml:52
 msgid "Account:"
 msgstr "Conta:"
 
-#: src/app/components/TransactionDialog.qml:53
+#: src/app/components/TransactionDialog.qml:56
 msgid "Category:"
 msgstr "Categoria:"
 
-#: src/app/components/TransactionDialog.qml:58
+#: src/app/components/TransactionDialog.qml:61
 msgid "To:"
 msgstr "Para:"
 
-#: src/app/components/TransactionDialog.qml:58
+#: src/app/components/TransactionDialog.qml:61
 msgid "From:"
 msgstr "De:"
 
-#: src/app/components/TransactionDialog.qml:63
+#: src/app/components/TransactionDialog.qml:66
 msgid "Installment:"
 msgstr "Parcela:"
 
-#: src/app/components/TransactionDialog.qml:68
+#: src/app/components/TransactionDialog.qml:71
 msgid "Status:"
 msgstr "Situação:"
 
-#: src/app/components/TransactionDialog.qml:69
+#: src/app/components/TransactionDialog.qml:72
 msgid "Pending"
 msgstr "Pendente"
 
-#: src/app/components/TransactionDialog.qml:79
+#: src/app/components/TransactionDialog.qml:82
 msgid "Transfer between my accounts"
 msgstr "Transferência entre minhas contas"
 
-#: src/app/components/TransactionDialog.qml:96
+#: src/app/components/TransactionDialog.qml:99
 msgid ""
 "Not counted as income or expense: the money only moved between your accounts."
 msgstr ""
 "Não conta como entrada nem saída: o dinheiro só mudou de uma conta sua para "
 "outra."
 
-#: src/app/components/TransactionDialog.qml:97
+#: src/app/components/TransactionDialog.qml:100
 msgid "Counted as income or expense."
 msgstr "Conta como entrada ou saída."
 
-#: src/app/components/TransactionDialog.qml:113
+#: src/app/components/TransactionDialog.qml:116
 msgid "Use Automatic Detection"
 msgstr "Usar detecção automática"
 
@@ -1010,27 +1024,27 @@ msgstr "Entradas no mês"
 msgid "Expenses in the month"
 msgstr "Saídas no mês"
 
-#: src/app/pages/OverviewPage.qml:321
+#: src/app/pages/OverviewPage.qml:324
 msgid "Balance in accounts, last 90 days"
 msgstr "Saldo em contas, últimos 90 dias"
 
-#: src/app/pages/OverviewPage.qml:335
+#: src/app/pages/OverviewPage.qml:338
 msgid "Saldo records the balance once a day; the history starts on %1."
 msgstr "O Saldo registra o saldo uma vez por dia; o histórico começa em %1."
 
-#: src/app/pages/OverviewPage.qml:354
+#: src/app/pages/OverviewPage.qml:357
 msgid "Pluggy updated your banks %1"
 msgstr "A Pluggy atualizou seus bancos %1"
 
-#: src/app/pages/OverviewPage.qml:361
+#: src/app/pages/OverviewPage.qml:364
 msgid "next update %1"
 msgstr "próxima atualização %1"
 
-#: src/app/pages/OverviewPage.qml:362
+#: src/app/pages/OverviewPage.qml:365
 msgid "next update soon"
 msgstr "próxima atualização em breve"
 
-#: src/app/pages/OverviewPage.qml:364
+#: src/app/pages/OverviewPage.qml:367
 msgid "last checked %1"
 msgstr "última verificação %1"
 
@@ -1111,10 +1125,6 @@ msgstr "Client Secret"
 #: src/app/pages/SettingsPage.qml:182 src/app/pages/SetupPage.qml:230
 msgid "Stored in the system keyring"
 msgstr "Guardado no chaveiro do sistema"
-
-#: src/app/pages/SettingsPage.qml:202
-msgid "Save"
-msgstr "Salvar"
 
 #: src/app/pages/SettingsPage.qml:209
 msgid "Test Connection"
@@ -1301,6 +1311,10 @@ msgid ""
 msgstr ""
 "O Client ID e o Client Secret serão apagados do chaveiro do sistema. Os "
 "dados em cache continuam até você limpá-los."
+
+#: src/app/pages/SettingsPage.qml:553
+msgid "OK"
+msgstr "OK"
 
 #: src/app/pages/SetupPage.qml:64
 msgid "Checking with Pluggy…"
@@ -1589,11 +1603,11 @@ msgstr "Fora do limite geral"
 msgid "Shares the limit of another card; counted once"
 msgstr "Divide o limite com outro cartão; contado uma vez"
 
-#: src/core/qml/CashflowChart.qml:174
+#: src/core/qml/CashflowChart.qml:186
 msgid "Income: %1"
 msgstr "Entradas: %1"
 
-#: src/core/qml/CashflowChart.qml:175
+#: src/core/qml/CashflowChart.qml:189
 msgid "Expenses: %1"
 msgstr "Saídas: %1"
 
