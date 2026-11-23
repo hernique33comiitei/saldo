@@ -28,7 +28,9 @@ Depends: ${shlibs:Depends},
  qml6-module-org-kde-quickcharts,
  qml6-module-qtquick-controls,
  qml6-module-qtquick-layouts,
- qml6-module-qtquick-window
+ qml6-module-qtquick-window,
+ qml6-module-org-kde-desktop,
+ kf6-breeze-icon-theme
 Recommends: plasma-workspace,
  qml6-module-org-kde-kcmutils
 Description: Personal finances from Open Finance (Meu Pluggy): KDE app and Plasma widget

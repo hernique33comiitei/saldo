@@ -28,6 +28,10 @@ Requires:       kf6-kirigami
 Requires:       kf6-ki18n
 Requires:       kf6-kcoreaddons
 Requires:       kf6-kquickcharts
+# KDE look outside Plasma (GNOME etc.): the org.kde.desktop Qt Quick style and
+# the Breeze icons the UI uses. Plasma brings both; nothing else does.
+Requires:       kf6-qqc2-desktop-style
+Requires:       breeze-icon-theme
 # The keyring is driven through secret-tool (shipped by libsecret).
 Requires:       libsecret
 # The Plasma widget (optional: the app works on its own).
