@@ -1,0 +1,7 @@
+#!/usr/bin/make -f
+
+# Tests open QML/Qt GUI types without a display.
+export QT_QPA_PLATFORM = offscreen
+
+%:
+	dh $@ --buildsystem=cmake+ninja --builddirectory=build-deb

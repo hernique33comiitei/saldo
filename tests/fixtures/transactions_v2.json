@@ -1,0 +1,52 @@
+{
+  "results": [
+    {
+      "id": "tx-1",
+      "accountId": "acc-card-main",
+      "description": "Supermercado Exemplo",
+      "descriptionRaw": "SUPERMERCADO EXEMPLO SP",
+      "currencyCode": "BRL",
+      "amount": 159.2,
+      "date": "2026-11-15T00:00:00.000Z",
+      "category": "Groceries",
+      "categoryId": "10000000",
+      "status": "POSTED",
+      "type": "CREDIT",
+      "merchant": {
+        "name": "Exemplo Supermercados",
+        "businessName": "EXEMPLO COMERCIO LTDA",
+        "cnpj": "00000000000000"
+      },
+      "creditCardMetadata": {
+        "installmentNumber": 2,
+        "totalInstallments": 6,
+        "totalAmount": 955.2,
+        "billId": "bill-1"
+      }
+    },
+    {
+      "id": "tx-2",
+      "accountId": "acc-card-main",
+      "description": "Pagamento recebido",
+      "currencyCode": "BRL",
+      "amount": -1800,
+      "date": "2026-11-10T00:00:00.000Z",
+      "category": "Credit card payment",
+      "status": "POSTED",
+      "type": "DEBIT"
+    },
+    {
+      "id": "tx-3",
+      "accountId": "acc-card-main",
+      "description": "Compra internacional",
+      "currencyCode": "USD",
+      "amount": 20,
+      "amountInAccountCurrency": 112.5,
+      "date": "2026-11-20T00:00:00.000Z",
+      "category": "Online shopping",
+      "status": "PENDING",
+      "type": "CREDIT"
+    }
+  ],
+  "next": "?accountId=acc-card-main&after=eyJpZCI6InR4LTMifQ%3D%3D"
+}

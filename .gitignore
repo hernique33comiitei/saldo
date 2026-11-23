@@ -1,0 +1,30 @@
+/build-user/
+/build/
+/build-*/
+*.user
+compile_commands.json
+po/saldo.pot
+# dpkg-buildpackage output
+/debian/.debhelper/
+/debian/saldo/
+/debian/files
+/debian/*.substvars
+/debian/debhelper-build-stamp
+# local secrets (Android signing keys etc.)
+*.keystore
+*.jks
+.env*
+
+# APK builds (tools/build-apk.sh)
+/dist/
+
+# Gradle leftovers from local APK builds (tools/build-apk.sh)
+/android/.gradle/
+/android/build/
+
+# Editors and tools
+.vscode/
+.idea/
+*.swp
+*~
+.cache/

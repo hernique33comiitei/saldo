@@ -1,0 +1,24 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "henriik.dev@gmail.com",
+                "Name": "Henrique Oliveira"
+            }
+        ],
+        "Category": "Online Services",
+        "Description": "Bank balances, credit card limits and transactions from Meu Pluggy",
+        "Description[pt_BR]": "Saldos, limites de cartão e transações do Meu Pluggy",
+        "Icon": "saldo",
+        "Id": "@SALDO_PLASMOID_ID@",
+        "License": "MIT",
+        "Name": "Saldo",
+        "Name[pt_BR]": "Saldo",
+        "Version": "@PROJECT_VERSION@",
+        "Website": "@SALDO_WEBSITE@"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "X-Plasma-NotificationArea": "true",
+    "X-Plasma-NotificationAreaCategory": "ApplicationStatus"
+}

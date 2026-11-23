@@ -1,0 +1,17 @@
+{
+  "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "connector": {
+    "id": 200,
+    "name": "MeuPluggy",
+    "type": "PERSONAL_BANK",
+    "imageUrl": "https://cdn.pluggy.ai/assets/connector-icons/200.svg"
+  },
+  "status": "UPDATED",
+  "executionStatus": "SUCCESS",
+  "lastUpdatedAt": "2026-11-21T09:15:00.000Z",
+  "createdAt": "2026-01-10T12:00:00.000Z",
+  "updatedAt": "2026-11-21T09:15:00.000Z",
+  "error": null,
+  "consentExpiresAt": "2027-01-10T12:00:00.000Z",
+  "nextAutoSyncAt": "2026-11-22T09:15:00.000Z"
+}

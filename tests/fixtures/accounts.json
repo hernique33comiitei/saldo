@@ -1,0 +1,63 @@
+{
+  "total": 3,
+  "totalPages": 1,
+  "page": 1,
+  "results": [
+    {
+      "id": "acc-checking",
+      "type": "BANK",
+      "subtype": "CHECKING_ACCOUNT",
+      "number": "0001/12345-0",
+      "name": "Conta Corrente",
+      "marketingName": "Conta Digital",
+      "balance": 1520.75,
+      "itemId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "taxNumber": "000.000.000-00",
+      "owner": "Fulano de Tal",
+      "currencyCode": "BRL",
+      "bankData": {
+        "transferNumber": "0001/12345-0",
+        "closingBalance": 1520.75,
+        "automaticallyInvestedBalance": 0
+      },
+      "creditData": null
+    },
+    {
+      "id": "acc-card-main",
+      "type": "CREDIT",
+      "subtype": "CREDIT_CARD",
+      "number": "1234567890124821",
+      "name": "Mastercard Black",
+      "balance": 2100.4,
+      "itemId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "currencyCode": "BRL",
+      "bankData": null,
+      "creditData": {
+        "level": "BLACK",
+        "brand": "MASTERCARD",
+        "balanceCloseDate": "2026-12-03T00:00:00.000Z",
+        "balanceDueDate": "2026-12-10T00:00:00.000Z",
+        "availableCreditLimit": 7900,
+        "minimumPayment": 315.06,
+        "creditLimit": 10000,
+        "status": "ACTIVE",
+        "holderType": "MAIN"
+      }
+    },
+    {
+      "id": "acc-card-virtual",
+      "type": "CREDIT",
+      "subtype": "CREDIT_CARD",
+      "number": "9999",
+      "name": "Mastercard Black Virtual",
+      "balance": 0,
+      "itemId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "currencyCode": "BRL",
+      "creditData": {
+        "availableCreditLimit": 7900,
+        "creditLimit": 10000,
+        "holderType": "MAIN"
+      }
+    }
+  ]
+}

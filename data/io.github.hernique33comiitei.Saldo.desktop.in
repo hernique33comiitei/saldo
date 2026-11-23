@@ -1,0 +1,16 @@
+[Desktop Entry]
+Type=Application
+Name=Saldo
+Name[pt_BR]=Saldo
+GenericName=Personal Finances
+GenericName[pt_BR]=Finanças Pessoais
+Comment=Bank balances, credit card limits and transactions from Meu Pluggy
+Comment[pt_BR]=Saldos, limites de cartão e transações do Meu Pluggy
+Exec=@SALDO_DESKTOP_EXEC@
+Icon=saldo
+Terminal=false
+StartupNotify=true
+StartupWMClass=saldo
+Categories=Office;Finance;Qt;KDE;
+Keywords=finance;bank;credit card;pluggy;money;budget;
+Keywords[pt_BR]=finanças;banco;cartão de crédito;pluggy;dinheiro;orçamento;saldo;

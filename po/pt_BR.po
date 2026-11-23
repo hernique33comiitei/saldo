@@ -1,0 +1,1600 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: saldo 0.0.1\n"
+"Report-Msgid-Bugs-To: https://github.com/hernique33comiitei/saldo/issues\n"
+"POT-Creation-Date: 2026-11-23 01:35-0300\n"
+"PO-Revision-Date: 2026-11-21 12:00-0300\n"
+"Last-Translator: Henrique Oliveira <henriik.dev@gmail.com>\n"
+"Language-Team: Brazilian Portuguese\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: src/app/main.cpp:43
+msgid "Saldo"
+msgstr "Saldo"
+
+#: src/app/main.cpp:45
+msgid "Bank balances, credit card limits and transactions from Meu Pluggy"
+msgstr "Saldos bancários, limites de cartão e transações do Meu Pluggy"
+
+#: src/app/main.cpp:47
+msgid "© 2026 Henrique Oliveira"
+msgstr "© 2026 Henrique Oliveira"
+
+#: src/app/main.cpp:52
+msgid "Author"
+msgstr "Autor"
+
+#: src/app/main.cpp:55
+msgid ""
+"Data comes from the Meu Pluggy personal-use API. Saldo is an independent "
+"open source project, not affiliated with Pluggy."
+msgstr ""
+"Os dados vêm da API de uso pessoal do Meu Pluggy. O Saldo é um projeto open "
+"source independente, sem vínculo com a Pluggy."
+
+#: src/app/main.cpp:63
+msgid "Show fake demo data instead of your Meu Pluggy accounts."
+msgstr ""
+"Mostra dados fictícios de demonstração em vez das suas contas do Meu Pluggy."
+
+#: src/app/main.cpp:65
+msgid ""
+"Page to open: overview, accounts, cards, transactions, investments, "
+"settings, setup or about."
+msgstr "Página a abrir: overview, accounts, cards, transactions, investments, settings, setup ou about."
+
+#: src/app/main.cpp:66
+msgctxt "command line value name"
+msgid "page"
+msgstr "página"
+
+#: src/core/categories.cpp:66
+msgid "Uncategorized"
+msgstr "Sem categoria"
+
+#: src/core/config.cpp:251
+msgid ""
+"This does not look like an item ID. It is a UUID such as 3fa85f64-5717-4562-"
+"b3fc-2c963f66afa6."
+msgstr ""
+"Isto não parece um ID de item. Ele é um UUID como 3fa85f64-5717-4562-"
+"b3fc-2c963f66afa6."
+
+#: src/core/config.cpp:255
+msgctxt "Itens Conectados is a label in the Pluggy dashboard; keep it as is"
+msgid ""
+"That is the Client ID. The item ID is on the demo page of the Pluggy "
+"dashboard, under \"Itens Conectados\"."
+msgstr ""
+"Esse é o Client ID. O ID do item fica na página do demo do painel da Pluggy, "
+"em \"Itens Conectados\"."
+
+#: src/core/config.cpp:258
+msgid "This connection is already in the list."
+msgstr "Esta conexão já está na lista."
+
+#: src/core/config.cpp:261
+msgid "Meu Pluggy personal use allows at most %1 connection."
+msgid_plural "Meu Pluggy personal use allows at most %1 connections."
+msgstr[0] "O uso pessoal do Meu Pluggy permite no máximo %1 conexão."
+msgstr[1] "O uso pessoal do Meu Pluggy permite no máximo %1 conexões."
+
+#: src/core/config.cpp:310
+msgctxt "connection the user has not named yet; %1 is the start of its id"
+msgid "Meu Pluggy · %1"
+msgstr "Meu Pluggy · %1"
+
+#: src/core/credentials.cpp:150
+msgid "Could not save the credentials in the keyring."
+msgstr "Não foi possível salvar as credenciais no chaveiro."
+
+#: src/core/credentials.cpp:168
+msgid "The Client ID is required."
+msgstr "O Client ID é obrigatório."
+
+#: src/core/credentials.cpp:175
+msgid "The Client Secret is required."
+msgstr "O Client Secret é obrigatório."
+
+#: src/core/credentials.cpp:179
+msgid "The Client Secret is a different value from the Client ID."
+msgstr "O Client Secret é um valor diferente do Client ID."
+
+#: src/core/financesummary.cpp:131
+msgid "%1 needs to be reconnected in the Pluggy dashboard (status %2)."
+msgstr "%1 precisa ser reconectado no painel da Pluggy (status %2)."
+
+#: src/core/financesummary.cpp:135
+msgid ""
+"The Meu Pluggy authorization for %2 expires in %1 day. Renew it in the "
+"Pluggy dashboard."
+msgid_plural ""
+"The Meu Pluggy authorization for %2 expires in %1 days. Renew it in the "
+"Pluggy dashboard."
+msgstr[0] ""
+"A autorização do Meu Pluggy para %2 expira em %1 dia. Renove no painel da "
+"Pluggy."
+msgstr[1] ""
+"A autorização do Meu Pluggy para %2 expira em %1 dias. Renove no painel da "
+"Pluggy."
+
+#: src/core/financesummary.cpp:142
+msgid "%1 has not been updated by Pluggy for %2."
+msgstr "%1 não é atualizado pela Pluggy desde %2."
+
+#: src/core/models/accountsmodel.cpp:23
+msgid "Checking account"
+msgstr "Conta corrente"
+
+#: src/core/models/accountsmodel.cpp:26
+msgid "Savings account"
+msgstr "Poupança"
+
+#: src/core/models/accountsmodel.cpp:29
+msgid "Credit card"
+msgstr "Cartão de crédito"
+
+#: src/core/models/categoryspendmodel.cpp:86
+msgctxt "all other expense categories"
+msgid "Other"
+msgstr "Outros"
+
+#: src/core/models/investmentsmodel.cpp:18
+msgid "Fixed income"
+msgstr "Renda fixa"
+
+#: src/core/models/investmentsmodel.cpp:21
+msgid "Securities"
+msgstr "Títulos"
+
+#: src/core/models/investmentsmodel.cpp:24
+msgid "Funds"
+msgstr "Fundos"
+
+#: src/core/models/investmentsmodel.cpp:27
+msgid "Stocks"
+msgstr "Ações"
+
+#: src/core/models/investmentsmodel.cpp:30
+msgid "ETFs"
+msgstr "ETFs"
+
+#: src/core/models/investmentsmodel.cpp:33
+msgid "Structured notes (COE)"
+msgstr "COE"
+
+#: src/core/models/investmentsmodel.cpp:35
+msgctxt "investment type"
+msgid "Other"
+msgstr "Outros"
+
+#: src/core/models/itemsmodel.cpp:20
+msgid "Not synced yet"
+msgstr "Ainda não sincronizada"
+
+#: src/core/models/itemsmodel.cpp:23
+msgid "Up to date"
+msgstr "Atualizada"
+
+#: src/core/models/itemsmodel.cpp:26
+msgid "Updating at Pluggy"
+msgstr "Atualizando na Pluggy"
+
+#: src/core/models/itemsmodel.cpp:29
+msgid "Authorization expired"
+msgstr "Autorização expirada"
+
+#: src/core/models/itemsmodel.cpp:32
+msgid "Outdated"
+msgstr "Desatualizada"
+
+#: src/core/models/itemsmodel.cpp:35
+msgid "Waiting for user action"
+msgstr "Aguardando ação do usuário"
+
+#: src/core/models/transactionsmodel.cpp:147
+msgid ""
+"Pluggy classifies it as a transfer between your own accounts or a card bill "
+"payment."
+msgstr ""
+"A Pluggy classifica como transferência entre suas próprias contas ou "
+"pagamento de fatura."
+
+#: src/core/models/transactionsmodel.cpp:150
+msgid "Sent to or received from your own CPF/CNPJ."
+msgstr "Enviada para ou recebida do seu próprio CPF/CNPJ."
+
+#: src/core/models/transactionsmodel.cpp:153
+msgid "The same amount moved between two of your accounts."
+msgstr "O mesmo valor passou entre duas contas suas."
+
+#: src/core/models/transactionsmodel.cpp:154
+msgid "The same amount moved to or from %1."
+msgstr "O mesmo valor foi para ou veio de %1."
+
+#: src/core/models/transactionsmodel.cpp:157
+msgid "Credit card bill paid from one of your accounts."
+msgstr "Fatura do cartão paga com uma conta sua."
+
+#: src/core/models/transactionsmodel.cpp:158
+msgid "Credit card bill payment, matched with %1."
+msgstr "Pagamento de fatura, combinado com %1."
+
+#: src/core/models/transactionsmodel.cpp:161
+msgid "You marked it as a transfer between your accounts."
+msgstr "Você marcou como transferência entre suas contas."
+
+#: src/core/models/transactionsmodel.cpp:164
+msgid "You marked it to count as income or expense."
+msgstr "Você marcou para contar como entrada ou saída."
+
+#: src/core/models/transactionsmodel.cpp:215
+msgctxt "installment number of total"
+msgid "%1/%2"
+msgstr "%1/%2"
+
+#: src/core/money.cpp:61 src/core/money.cpp:85
+msgctxt "compact money amount in millions, %1 currency symbol, %2 number"
+msgid "%1 %2M"
+msgstr "%1 %2 mi"
+
+#: src/core/money.cpp:64 src/core/money.cpp:88
+msgctxt "compact money amount in thousands, %1 currency symbol, %2 number"
+msgid "%1 %2K"
+msgstr "%1 %2 mil"
+
+#: src/core/money.cpp:98
+msgctxt "percentage"
+msgid "%1%"
+msgstr "%1%"
+
+#: src/core/money.cpp:104
+msgctxt "time of an event that never happened"
+msgid "never"
+msgstr "nunca"
+
+#: src/core/money.cpp:110
+msgctxt "relative time in the future"
+msgid "in %1 minute"
+msgid_plural "in %1 minutes"
+msgstr[0] "em %1 minuto"
+msgstr[1] "em %1 minutos"
+
+#: src/core/money.cpp:113
+msgctxt "relative time in the future"
+msgid "in %1 hour"
+msgid_plural "in %1 hours"
+msgstr[0] "em %1 hora"
+msgstr[1] "em %1 horas"
+
+#: src/core/money.cpp:115
+msgctxt "relative time in the future"
+msgid "in %1 day"
+msgid_plural "in %1 days"
+msgstr[0] "em %1 dia"
+msgstr[1] "em %1 dias"
+
+#: src/core/money.cpp:118
+msgid "just now"
+msgstr "agora mesmo"
+
+#: src/core/money.cpp:121
+msgid "%1 minute ago"
+msgid_plural "%1 minutes ago"
+msgstr[0] "há %1 minuto"
+msgstr[1] "há %1 minutos"
+
+#: src/core/money.cpp:124
+msgid "%1 hour ago"
+msgid_plural "%1 hours ago"
+msgstr[0] "há %1 hora"
+msgstr[1] "há %1 horas"
+
+#: src/core/money.cpp:126
+msgid "%1 day ago"
+msgid_plural "%1 days ago"
+msgstr[0] "há %1 dia"
+msgstr[1] "há %1 dias"
+
+#: src/core/money.cpp:157
+msgid "Today"
+msgstr "Hoje"
+
+#: src/core/money.cpp:160
+msgid "Yesterday"
+msgstr "Ontem"
+
+#: src/core/money.cpp:175
+msgctxt "%1 month name, %2 year"
+msgid "%1 %2"
+msgstr "%1 de %2"
+
+#: src/core/pluggyclient.cpp:82
+msgid "Could not reach Pluggy: %1"
+msgstr "Não foi possível acessar a Pluggy: %1"
+
+#: src/core/pluggyclient.cpp:84
+msgid ""
+"Pluggy refused the request (HTTP %1). Check the Client ID and Client Secret."
+msgstr ""
+"A Pluggy recusou a requisição (HTTP %1). Confira o Client ID e o Client "
+"Secret."
+
+#: src/core/pluggyclient.cpp:85
+msgid "Pluggy refused the request: %1"
+msgstr "A Pluggy recusou a requisição: %1"
+
+#: src/core/pluggyclient.cpp:87
+msgid "Not found on Pluggy. Check the item ID."
+msgstr "Não encontrado na Pluggy. Confira o ID do item."
+
+#: src/core/pluggyclient.cpp:89
+msgid "Pluggy returned HTTP %1."
+msgstr "A Pluggy respondeu HTTP %1."
+
+#: src/core/pluggyclient.cpp:89
+msgid "Pluggy error (HTTP %1): %2"
+msgstr "Erro da Pluggy (HTTP %1): %2"
+
+#: src/core/pluggyclient.cpp:97
+msgid "Pluggy credentials are not configured."
+msgstr "As credenciais da Pluggy não estão configuradas."
+
+#: src/core/pluggyclient.cpp:109
+msgid "Pluggy did not return an API key."
+msgstr "A Pluggy não devolveu uma chave de API."
+
+#: src/core/pluggyclient.cpp:114
+msgid "Pluggy rejected the Client ID or Client Secret."
+msgstr "A Pluggy rejeitou o Client ID ou o Client Secret."
+
+#: src/core/secretstore.cpp:37
+msgid "No system keyring is available to store the Pluggy credentials."
+msgstr ""
+"Nenhum chaveiro do sistema está disponível para guardar as credenciais da "
+"Pluggy."
+
+#: src/core/secretstore.cpp:118
+msgid "secret-tool crashed."
+msgstr "O secret-tool travou."
+
+#: src/core/secretstore.cpp:126
+msgid "Could not start secret-tool."
+msgstr "Não foi possível iniciar o secret-tool."
+
+#: src/core/secretstore.cpp:149
+msgid ""
+"secret-tool was not found. Install libsecret (Fedora: libsecret, Debian/"
+"Ubuntu: libsecret-tools) so Saldo can keep the Pluggy credentials in the "
+"system keyring."
+msgstr ""
+"O secret-tool não foi encontrado. Instale o libsecret (Fedora: libsecret, "
+"Debian/Ubuntu: libsecret-tools) para o Saldo guardar as credenciais da "
+"Pluggy no chaveiro do sistema."
+
+#: src/core/secretstore.cpp:168
+msgid "Saldo: Meu Pluggy credentials"
+msgstr "Saldo: credenciais do Meu Pluggy"
+
+#: src/core/syncmanager.cpp:186
+msgid "Updating demo data…"
+msgstr "Atualizando dados de demonstração…"
+
+#: src/core/syncmanager.cpp:214
+msgid "Reading credentials…"
+msgstr "Lendo credenciais…"
+
+#: src/core/syncmanager.cpp:218
+msgid "Pluggy credentials are not configured. Open Settings to add them."
+msgstr ""
+"As credenciais da Pluggy não estão configuradas. Abra as Configurações para "
+"adicioná-las."
+
+#: src/core/syncmanager.cpp:223
+msgid "No Meu Pluggy connection is configured. Add an item ID in Settings."
+msgstr ""
+"Nenhuma conexão do Meu Pluggy configurada. Adicione um ID de item nas "
+"Configurações."
+
+#: src/core/syncmanager.cpp:245
+msgid "Checking connection %1…"
+msgstr "Verificando a conexão %1…"
+
+#: src/core/syncmanager.cpp:249
+msgid "%1: %2"
+msgstr "%1: %2"
+
+#: src/core/syncmanager.cpp:259
+msgid ""
+"%1: the Meu Pluggy authorization expired or was revoked. Reconnect it in the "
+"Pluggy dashboard."
+msgstr ""
+"%1: a autorização do Meu Pluggy expirou ou foi revogada. Reconecte no painel "
+"da Pluggy."
+
+#: src/core/syncmanager.cpp:273
+msgid "Downloading accounts…"
+msgstr "Baixando contas…"
+
+#: src/core/syncmanager.cpp:290
+msgid ""
+"Could not save the accounts in the local cache. Restart Saldo; if it "
+"persists, use Settings → Clear Local Cache."
+msgstr ""
+"Não foi possível salvar as contas no cache local. Reinicie o Saldo; se "
+"continuar, use Configurações → Limpar cache local."
+
+#: src/core/syncmanager.cpp:317
+msgid "Downloading transactions: %1…"
+msgstr "Baixando transações: %1…"
+
+#: src/core/syncmanager.cpp:346
+msgid ""
+"Could not save the transactions of %1 in the local cache. Restart Saldo; if "
+"it persists, use Settings → Clear Local Cache."
+msgstr ""
+"Não foi possível salvar as transações de %1 no cache local. Reinicie o "
+"Saldo; se continuar, use Configurações → Limpar cache local."
+
+#: src/core/syncmanager.cpp:378
+msgid "Downloading investments…"
+msgstr "Baixando investimentos…"
+
+#: src/core/syncmanager.cpp:407
+msgid "Downloading categories…"
+msgstr "Baixando categorias…"
+
+#: src/core/syncmanager.cpp:434
+msgid "Matching transfers between your accounts…"
+msgstr "Identificando transferências entre suas contas…"
+
+#: src/core/syncmanager.cpp:479
+msgid "Connected to Pluggy."
+msgstr "Conectado à Pluggy."
+
+#: src/core/syncmanager.cpp:495
+msgid "Demo connection"
+msgstr "Conexão de demonstração"
+
+#: src/core/syncmanager.cpp:500
+msgid "Save the Pluggy credentials first."
+msgstr "Salve as credenciais da Pluggy primeiro."
+
+#: src/core/syncmanager.cpp:513
+msgctxt "%1 connector name, %2 status, %3 relative time"
+msgid "%1 · %2 · updated %3"
+msgstr "%1 · %2 · atualizado %3"
+
+#: plasmoid/package/contents/config/config.qml:7
+msgid "General"
+msgstr "Geral"
+
+#: plasmoid/package/contents/ui/ConfigGeneral.qml:23
+msgid "Panel icon shows:"
+msgstr "O ícone do painel mostra:"
+
+#: plasmoid/package/contents/ui/ConfigGeneral.qml:24
+msgid "Only the icon"
+msgstr "Só o ícone"
+
+#: plasmoid/package/contents/ui/ConfigGeneral.qml:30
+msgid "Money in accounts (not in the system tray)"
+msgstr "Dinheiro em contas (fora da bandeja do sistema)"
+
+#: plasmoid/package/contents/ui/ConfigGeneral.qml:37
+msgid "Summary:"
+msgstr "Resumo:"
+
+#: plasmoid/package/contents/ui/ConfigGeneral.qml:38
+msgid "Show investments"
+msgstr "Mostrar investimentos"
+
+#: plasmoid/package/contents/ui/ConfigGeneral.qml:49
+msgid ""
+"Credentials, connections and sync options are in the Saldo app. Middle-click "
+"the panel icon to hide or show values."
+msgstr ""
+"Credenciais, conexões e opções de sincronização ficam no app Saldo. Clique "
+"com o botão do meio no ícone do painel para ocultar ou mostrar os valores."
+
+#: plasmoid/package/contents/ui/ConfigGeneral.qml:55
+msgid "Open Saldo Settings"
+msgstr "Abrir configurações do Saldo"
+
+#: plasmoid/package/contents/ui/FullRepresentation.qml:60
+msgid "Banks updated %1"
+msgstr "Bancos atualizados %1"
+
+#: plasmoid/package/contents/ui/FullRepresentation.qml:62
+msgid "%1 connection"
+msgid_plural "%1 connections"
+msgstr[0] "%1 conexão"
+msgstr[1] "%1 conexões"
+
+#: plasmoid/package/contents/ui/FullRepresentation.qml:78
+#: plasmoid/package/contents/ui/main.qml:54 src/app/pages/AccountsPage.qml:15
+#: src/app/pages/CardsPage.qml:15 src/app/pages/InvestmentsPage.qml:15
+#: src/app/pages/OverviewPage.qml:20 src/app/pages/TransactionsPage.qml:18
+msgid "Refresh"
+msgstr "Atualizar"
+
+#: plasmoid/package/contents/ui/FullRepresentation.qml:87
+#: plasmoid/package/contents/ui/main.qml:60 src/app/pages/OverviewPage.qml:27
+msgid "Show Values"
+msgstr "Mostrar valores"
+
+#: plasmoid/package/contents/ui/FullRepresentation.qml:87
+#: plasmoid/package/contents/ui/main.qml:60 src/app/pages/OverviewPage.qml:27
+msgid "Hide Values"
+msgstr "Ocultar valores"
+
+#: plasmoid/package/contents/ui/FullRepresentation.qml:99
+#: plasmoid/package/contents/ui/main.qml:65
+msgid "Open Saldo"
+msgstr "Abrir o Saldo"
+
+#: plasmoid/package/contents/ui/FullRepresentation.qml:118
+msgid "Summary"
+msgstr "Resumo"
+
+#: plasmoid/package/contents/ui/FullRepresentation.qml:121
+#: src/app/pages/OverviewPage.qml:146
+msgid "Cards"
+msgstr "Cartões"
+
+#: plasmoid/package/contents/ui/FullRepresentation.qml:124 src/app/Main.qml:130
+#: src/app/pages/CardDetailPage.qml:70 src/app/pages/TransactionsPage.qml:14
+msgid "Transactions"
+msgstr "Transações"
+
+#: plasmoid/package/contents/ui/FullRepresentation.qml:142
+#: src/app/components/SyncBanner.qml:34
+msgid "Dismiss"
+msgstr "Dispensar"
+
+#: plasmoid/package/contents/ui/FullRepresentation.qml:169
+msgid "Saldo is not set up"
+msgstr "O Saldo não está configurado"
+
+#: plasmoid/package/contents/ui/FullRepresentation.qml:171
+#: src/app/pages/OverviewPage.qml:48
+msgid "Downloading your data…"
+msgstr "Baixando seus dados…"
+
+#: plasmoid/package/contents/ui/FullRepresentation.qml:171
+#: plasmoid/package/contents/ui/main.qml:35 src/app/pages/OverviewPage.qml:48
+msgid "No data yet"
+msgstr "Ainda sem dados"
+
+#: plasmoid/package/contents/ui/FullRepresentation.qml:174
+#: src/app/pages/OverviewPage.qml:51
+msgid "Your accounts appear here as soon as the first sync finishes."
+msgstr "Suas contas aparecem aqui assim que a primeira sincronização terminar."
+
+#: plasmoid/package/contents/ui/FullRepresentation.qml:175
+msgid "Add your Meu Pluggy credentials and connections in the Saldo app."
+msgstr "Adicione as credenciais e conexões do Meu Pluggy no app Saldo."
+
+#: plasmoid/package/contents/ui/FullRepresentation.qml:178
+#: src/app/pages/AccountsPage.qml:111 src/app/pages/OverviewPage.qml:55
+#: src/app/pages/SettingsPage.qml:466 src/app/pages/SetupPage.qml:526
+msgid "Sync Now"
+msgstr "Sincronizar agora"
+
+#: plasmoid/package/contents/ui/FullRepresentation.qml:178
+msgid "Set Up Saldo"
+msgstr "Configurar o Saldo"
+
+#: plasmoid/package/contents/ui/FullRepresentation.qml:215
+#: src/app/pages/OverviewPage.qml:99
+msgid "In accounts"
+msgstr "Em contas"
+
+#: plasmoid/package/contents/ui/FullRepresentation.qml:236
+#: src/app/pages/OverviewPage.qml:109
+msgid "Invested"
+msgstr "Investido"
+
+#: plasmoid/package/contents/ui/FullRepresentation.qml:243
+#: src/app/pages/OverviewPage.qml:118
+msgid "Next bills"
+msgstr "Próxima fatura"
+
+#: plasmoid/package/contents/ui/FullRepresentation.qml:251
+#: src/app/pages/OverviewPage.qml:142
+msgid "Credit limit"
+msgstr "Limite de crédito"
+
+#: plasmoid/package/contents/ui/FullRepresentation.qml:271
+#: src/app/pages/OverviewPage.qml:188
+msgid "Total limit"
+msgstr "Limite total"
+
+#: plasmoid/package/contents/ui/FullRepresentation.qml:277
+#: src/app/pages/OverviewPage.qml:197
+msgid "Used"
+msgstr "Usado"
+
+#: plasmoid/package/contents/ui/FullRepresentation.qml:282
+#: src/app/pages/OverviewPage.qml:204
+msgid "Available"
+msgstr "Disponível"
+
+#: plasmoid/package/contents/ui/FullRepresentation.qml:290
+msgid "This month"
+msgstr "Este mês"
+
+#: plasmoid/package/contents/ui/FullRepresentation.qml:303
+#: src/core/qml/CashflowChart.qml:42 src/core/qml/CashflowChart.qml:128
+msgid "Income"
+msgstr "Entradas"
+
+#: plasmoid/package/contents/ui/FullRepresentation.qml:309
+#: src/core/qml/CashflowChart.qml:43 src/core/qml/CashflowChart.qml:128
+msgid "Expenses"
+msgstr "Saídas"
+
+#: plasmoid/package/contents/ui/FullRepresentation.qml:364
+#: src/app/pages/CardsPage.qml:106
+msgid "No credit cards"
+msgstr "Nenhum cartão de crédito"
+
+#: plasmoid/package/contents/ui/FullRepresentation.qml:415
+#: src/app/pages/TransactionsPage.qml:138
+msgid "No transactions"
+msgstr "Nenhuma transação"
+
+#: plasmoid/package/contents/ui/FullRepresentation.qml:424
+msgid "Show All Transactions"
+msgstr "Ver todas as transações"
+
+#: plasmoid/package/contents/ui/main.qml:29
+msgid "Not set up: open Saldo to connect Meu Pluggy"
+msgstr "Não configurado: abra o Saldo para conectar o Meu Pluggy"
+
+#: plasmoid/package/contents/ui/main.qml:37
+msgid "Accounts %1"
+msgstr "Contas %1"
+
+#: plasmoid/package/contents/ui/main.qml:39
+msgid "cards %1 used"
+msgstr "cartões %1 usado"
+
+#: plasmoid/package/contents/ui/main.qml:41
+msgid "checked %1"
+msgstr "verificado %1"
+
+#: plasmoid/package/contents/ui/main.qml:46
+msgid "Middle-click to hide or show values"
+msgstr "Botão do meio para ocultar ou mostrar os valores"
+
+#: src/app/components/RenameConnectionDialog.qml:25
+msgid "Name This Connection"
+msgstr "Nomear conexão"
+
+#: src/app/components/RenameConnectionDialog.qml:36
+msgid "Accounts in this connection: %1"
+msgstr "Contas nesta conexão: %1"
+
+#: src/app/components/RenameConnectionDialog.qml:37
+msgid "Its accounts show up here after the first sync."
+msgstr "As contas dela aparecem aqui depois da primeira sincronização."
+
+#: src/app/components/RenameConnectionDialog.qml:44
+msgctxt "example name for a bank connection"
+msgid "e.g. Nubank"
+msgstr "ex.: Nubank"
+
+#: src/app/components/SetupInstructions.qml:28
+msgctxt "number of a step in a list"
+msgid "%1."
+msgstr "%1."
+
+#: src/app/components/SyncBanner.qml:18 src/app/pages/SetupPage.qml:479
+msgid "Syncing with Pluggy…"
+msgstr "Sincronizando com a Pluggy…"
+
+#: src/app/components/SyncBanner.qml:29 src/app/Main.qml:147
+#: src/app/pages/SettingsPage.qml:72
+msgid "Settings"
+msgstr "Configurações"
+
+#: src/app/components/TransactionDialog.qml:45
+msgid "Date:"
+msgstr "Data:"
+
+#: src/app/components/TransactionDialog.qml:49
+msgid "Account:"
+msgstr "Conta:"
+
+#: src/app/components/TransactionDialog.qml:53
+msgid "Category:"
+msgstr "Categoria:"
+
+#: src/app/components/TransactionDialog.qml:58
+msgid "To:"
+msgstr "Para:"
+
+#: src/app/components/TransactionDialog.qml:58
+msgid "From:"
+msgstr "De:"
+
+#: src/app/components/TransactionDialog.qml:63
+msgid "Installment:"
+msgstr "Parcela:"
+
+#: src/app/components/TransactionDialog.qml:68
+msgid "Status:"
+msgstr "Situação:"
+
+#: src/app/components/TransactionDialog.qml:69
+msgid "Pending"
+msgstr "Pendente"
+
+#: src/app/components/TransactionDialog.qml:79
+msgid "Transfer between my accounts"
+msgstr "Transferência entre minhas contas"
+
+#: src/app/components/TransactionDialog.qml:96
+msgid ""
+"Not counted as income or expense: the money only moved between your accounts."
+msgstr ""
+"Não conta como entrada nem saída: o dinheiro só mudou de uma conta sua para "
+"outra."
+
+#: src/app/components/TransactionDialog.qml:97
+msgid "Counted as income or expense."
+msgstr "Conta como entrada ou saída."
+
+#: src/app/components/TransactionDialog.qml:113
+msgid "Use Automatic Detection"
+msgstr "Usar detecção automática"
+
+#: src/app/Main.qml:102 src/app/pages/SetupPage.qml:67
+msgid "Connect Meu Pluggy"
+msgstr "Conectar o Meu Pluggy"
+
+#: src/app/Main.qml:109 src/app/pages/OverviewPage.qml:16
+msgid "Overview"
+msgstr "Visão geral"
+
+#: src/app/Main.qml:116 src/app/pages/AccountsPage.qml:11
+msgid "Accounts"
+msgstr "Contas"
+
+#: src/app/Main.qml:123 src/app/pages/CardsPage.qml:11
+msgid "Credit Cards"
+msgstr "Cartões de crédito"
+
+#: src/app/Main.qml:137 src/app/pages/InvestmentsPage.qml:11
+msgid "Investments"
+msgstr "Investimentos"
+
+#: src/app/Main.qml:154 src/app/pages/AboutPage.qml:95
+msgid "About Saldo"
+msgstr "Sobre o Saldo"
+
+#: src/app/pages/AboutPage.qml:55
+msgid "Send an email to %1"
+msgstr "Enviar um e-mail para %1"
+
+#: src/app/pages/AboutPage.qml:137
+msgctxt "application name and version"
+msgid "%1 %2"
+msgstr "%1 %2"
+
+#: src/app/pages/AboutPage.qml:167
+msgid "License"
+msgstr "Licença"
+
+#: src/app/pages/AboutPage.qml:191
+msgid "Links"
+msgstr "Links"
+
+#: src/app/pages/AboutPage.qml:195
+msgid "Homepage"
+msgstr "Página do projeto"
+
+#: src/app/pages/AboutPage.qml:202
+msgid "Report a Bug"
+msgstr "Relatar um problema"
+
+#: src/app/pages/AboutPage.qml:215
+msgid "Authors"
+msgstr "Autores"
+
+#: src/app/pages/AboutPage.qml:227
+msgid "Credits"
+msgstr "Créditos"
+
+#: src/app/pages/AboutPage.qml:239
+msgid "Translators"
+msgstr "Tradutores"
+
+#: src/app/pages/AccountsPage.qml:28
+msgid "Total in accounts"
+msgstr "Total em contas"
+
+#: src/app/pages/AccountsPage.qml:106
+msgid "No bank accounts"
+msgstr "Nenhuma conta bancária"
+
+#: src/app/pages/AccountsPage.qml:108
+msgid "Accounts from your Meu Pluggy connections show up here after a sync."
+msgstr ""
+"As contas das suas conexões do Meu Pluggy aparecem aqui depois de uma "
+"sincronização."
+
+#: src/app/pages/AccountsPage.qml:109
+msgid "Set up Meu Pluggy to see your accounts."
+msgstr "Configure o Meu Pluggy para ver suas contas."
+
+#: src/app/pages/AccountsPage.qml:111 src/app/pages/OverviewPage.qml:55
+msgid "Set Up Meu Pluggy"
+msgstr "Configurar o Meu Pluggy"
+
+#: src/app/pages/CardDetailPage.qml:66
+msgid "Credit Card"
+msgstr "Cartão de crédito"
+
+#: src/app/pages/CardDetailPage.qml:113
+msgid "“Used” is everything not paid yet, future installments included."
+msgstr "“Usado” é tudo o que ainda não foi pago, parcelas futuras incluídas."
+
+#: src/app/pages/CardDetailPage.qml:119
+msgid "Count this card in the overall limit"
+msgstr "Contar este cartão no limite geral"
+
+#: src/app/pages/CardDetailPage.qml:138
+msgid "Current bill (open)"
+msgstr "Fatura atual (aberta)"
+
+#: src/app/pages/CardDetailPage.qml:147
+msgid "This institution does not tell which purchases are on the open bill."
+msgstr "Esta instituição não informa quais compras estão na fatura aberta."
+
+#: src/app/pages/CardDetailPage.qml:152
+msgid "Closes around"
+msgstr "Fecha por volta de"
+
+#: src/app/pages/CardDetailPage.qml:156
+msgid "Due around"
+msgstr "Vence por volta de"
+
+#: src/app/pages/CardDetailPage.qml:166
+msgid "Last closed bill"
+msgstr "Última fatura fechada"
+
+#: src/app/pages/CardDetailPage.qml:172
+msgid "Due on"
+msgstr "Vence em"
+
+#: src/app/pages/CardDetailPage.qml:176
+msgid "Minimum payment"
+msgstr "Pagamento mínimo"
+
+#: src/app/pages/CardDetailPage.qml:180
+msgid "Status"
+msgstr "Situação"
+
+#: src/app/pages/CardDetailPage.qml:181
+msgid "Paid"
+msgstr "Paga"
+
+#: src/app/pages/CardDetailPage.qml:182
+msgid "No payment found yet"
+msgstr "Nenhum pagamento encontrado ainda"
+
+#: src/app/pages/CardDetailPage.qml:183
+msgid "%1 still to pay"
+msgstr "Faltam %1"
+
+#: src/app/pages/CardDetailPage.qml:191
+msgid "Previous bills"
+msgstr "Faturas anteriores"
+
+#: src/app/pages/CardDetailPage.qml:231
+msgid "Closed %1 · due %2"
+msgstr "Fechou %1 · venceu %2"
+
+#: src/app/pages/CardDetailPage.qml:242
+msgid "This institution does not share past bills through Pluggy."
+msgstr "Esta instituição não compartilha faturas anteriores pela Pluggy."
+
+#: src/app/pages/CardsPage.qml:31
+msgid "Overall limit"
+msgstr "Limite geral"
+
+#: src/app/pages/CardsPage.qml:43
+msgid "%1 used (%2)"
+msgstr "%1 usado (%2)"
+
+#: src/app/pages/CardsPage.qml:48 src/core/qml/CardContent.qml:76
+msgid "%1 available"
+msgstr "%1 disponível"
+
+#: src/app/pages/CardsPage.qml:107
+msgid ""
+"Credit cards from your Meu Pluggy connections show up here after a sync."
+msgstr ""
+"Os cartões das suas conexões do Meu Pluggy aparecem aqui depois de uma "
+"sincronização."
+
+#: src/app/pages/InvestmentsPage.qml:28
+msgid "Total invested (net)"
+msgstr "Total investido (líquido)"
+
+#: src/app/pages/InvestmentsPage.qml:84
+msgid "matures %1"
+msgstr "vence %1"
+
+#: src/app/pages/InvestmentsPage.qml:85
+#, javascript-format
+msgid "%1% in 12 months"
+msgstr "%1% em 12 meses"
+
+#: src/app/pages/InvestmentsPage.qml:118
+msgid "No investments"
+msgstr "Nenhum investimento"
+
+#: src/app/pages/InvestmentsPage.qml:119
+msgid ""
+"Investments appear here when your institutions share them through Meu Pluggy."
+msgstr ""
+"Os investimentos aparecem aqui quando suas instituições os compartilham pelo "
+"Meu Pluggy."
+
+#: src/app/pages/OverviewPage.qml:46
+msgid "Connect your Meu Pluggy account"
+msgstr "Conecte sua conta do Meu Pluggy"
+
+#: src/app/pages/OverviewPage.qml:52
+msgid ""
+"Saldo reads your banks through the free Meu Pluggy personal-use API. You "
+"need a Client ID, a Client Secret and the item ID of each connection."
+msgstr ""
+"O Saldo lê seus bancos pela API gratuita de uso pessoal do Meu Pluggy. Você "
+"precisa de um Client ID, um Client Secret e o ID de item de cada conexão."
+
+#: src/app/pages/OverviewPage.qml:67
+msgid "Month:"
+msgstr "Mês:"
+
+#: src/app/pages/OverviewPage.qml:103 src/app/pages/SetupPage.qml:509
+msgid "%1 account"
+msgid_plural "%1 accounts"
+msgstr[0] "%1 conta"
+msgstr[1] "%1 contas"
+
+#: src/app/pages/OverviewPage.qml:112 src/app/pages/SetupPage.qml:511
+msgid "%1 investment"
+msgid_plural "%1 investments"
+msgstr[0] "%1 investimento"
+msgstr[1] "%1 investimentos"
+
+#: src/app/pages/OverviewPage.qml:122
+msgid "due %1"
+msgstr "vence %1"
+
+#: src/app/pages/OverviewPage.qml:123 src/app/pages/SetupPage.qml:510
+msgid "%1 card"
+msgid_plural "%1 cards"
+msgstr[0] "%1 cartão"
+msgstr[1] "%1 cartões"
+
+#: src/app/pages/OverviewPage.qml:224
+msgid "Spending by category"
+msgstr "Gastos por categoria"
+
+#: src/app/pages/OverviewPage.qml:239
+msgid "No expenses in this month."
+msgstr "Nenhum gasto neste mês."
+
+#: src/app/pages/OverviewPage.qml:257 src/app/pages/TransactionsPage.qml:54
+msgid "Income and expenses"
+msgstr "Entradas e saídas"
+
+#: src/app/pages/OverviewPage.qml:269
+msgid "Income in the month"
+msgstr "Entradas no mês"
+
+#: src/app/pages/OverviewPage.qml:270
+msgid "Expenses in the month"
+msgstr "Saídas no mês"
+
+#: src/app/pages/OverviewPage.qml:321
+msgid "Balance in accounts, last 90 days"
+msgstr "Saldo em contas, últimos 90 dias"
+
+#: src/app/pages/OverviewPage.qml:335
+msgid "Saldo records the balance once a day; the history starts on %1."
+msgstr "O Saldo registra o saldo uma vez por dia; o histórico começa em %1."
+
+#: src/app/pages/OverviewPage.qml:354
+msgid "Pluggy updated your banks %1"
+msgstr "A Pluggy atualizou seus bancos %1"
+
+#: src/app/pages/OverviewPage.qml:357
+msgid "next update %1"
+msgstr "próxima atualização %1"
+
+#: src/app/pages/OverviewPage.qml:359
+msgid "last checked %1"
+msgstr "última verificação %1"
+
+#: src/app/pages/RawDataPage.qml:13
+msgid "Raw Data"
+msgstr "Dados brutos"
+
+#: src/app/pages/RawDataPage.qml:19
+msgid ""
+"Compare \"balance\" and \"creditLimit\" with your bank app. Saldo assumes "
+"amounts in reais; if they look 100 times larger, Pluggy is sending cents. "
+"Never share this data: it contains account details."
+msgstr ""
+"Compare \"balance\" e \"creditLimit\" com o app do seu banco. O Saldo "
+"considera valores em reais; se parecerem 100 vezes maiores, a Pluggy está "
+"enviando centavos. Nunca compartilhe estes dados: eles contêm detalhes das "
+"suas contas."
+
+#: src/app/pages/RawDataPage.qml:37
+msgctxt "account name (account type)"
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: src/app/pages/RawDataPage.qml:45
+msgid "Values are hidden. Turn off “Hide values” to see the raw data."
+msgstr "Os valores estão ocultos. Desligue “Ocultar valores” para ver os dados brutos."
+
+#: src/app/pages/RawDataPage.qml:46
+msgid "No raw data stored for this account. Refresh to download it again."
+msgstr ""
+"Nenhum dado bruto guardado para esta conta. Atualize para baixar de novo."
+
+#: src/app/pages/RawDataPage.qml:72
+msgid "Copy"
+msgstr "Copiar"
+
+#: src/app/pages/RawDataPage.qml:86
+msgid "Nothing cached yet"
+msgstr "Nada em cache ainda"
+
+#: src/app/pages/SettingsPage.qml:76
+msgid "Setup Guide"
+msgstr "Guia de configuração"
+
+#: src/app/pages/SettingsPage.qml:89
+msgid ""
+"Not connected yet. The setup guide walks you through Meu Pluggy step by step."
+msgstr ""
+"Ainda não conectado. O assistente de configuração guia você pelo Meu Pluggy "
+"passo a passo."
+
+#: src/app/pages/SettingsPage.qml:92
+msgid "Open Setup Guide"
+msgstr "Abrir assistente"
+
+#: src/app/pages/SettingsPage.qml:131
+msgid "Credentials saved in the system keyring."
+msgstr "Credenciais salvas no chaveiro do sistema."
+
+#: src/app/pages/SettingsPage.qml:136
+msgid "Credentials removed."
+msgstr "Credenciais removidas."
+
+#: src/app/pages/SettingsPage.qml:156
+msgid "Meu Pluggy credentials"
+msgstr "Credenciais do Meu Pluggy"
+
+#: src/app/pages/SettingsPage.qml:162 src/app/pages/SetupPage.qml:188
+msgid "Client ID"
+msgstr "Client ID"
+
+#: src/app/pages/SettingsPage.qml:177 src/app/pages/SetupPage.qml:223
+msgid "Client Secret"
+msgstr "Client Secret"
+
+#: src/app/pages/SettingsPage.qml:182 src/app/pages/SetupPage.qml:230
+msgid "Stored in the system keyring"
+msgstr "Guardado no chaveiro do sistema"
+
+#: src/app/pages/SettingsPage.qml:202
+msgid "Save"
+msgstr "Salvar"
+
+#: src/app/pages/SettingsPage.qml:209
+msgid "Test Connection"
+msgstr "Testar conexão"
+
+#: src/app/pages/SettingsPage.qml:237
+msgid "Remove Credentials"
+msgstr "Remover credenciais"
+
+#: src/app/pages/SettingsPage.qml:252
+msgid "Connections"
+msgstr "Conexões"
+
+#: src/app/pages/SettingsPage.qml:257
+msgid "None yet"
+msgstr "Nenhuma ainda"
+
+#: src/app/pages/SettingsPage.qml:308
+msgid "updated %1"
+msgstr "atualizada %1"
+
+#: src/app/pages/SettingsPage.qml:309
+msgid "authorized until %1"
+msgstr "autorizada até %1"
+
+#: src/app/pages/SettingsPage.qml:328 src/app/pages/SetupPage.qml:427
+msgid "Name this connection"
+msgstr "Nomear esta conexão"
+
+#: src/app/pages/SettingsPage.qml:338 src/app/pages/SetupPage.qml:436
+msgid "Remove connection"
+msgstr "Remover conexão"
+
+#: src/app/pages/SettingsPage.qml:359
+msgid "Add a connection"
+msgstr "Adicionar conexão"
+
+#: src/app/pages/SettingsPage.qml:368
+msgid "Item ID from the Pluggy dashboard"
+msgstr "ID do item no painel da Pluggy"
+
+#: src/app/pages/SettingsPage.qml:374 src/app/pages/SetupPage.qml:381
+msgid "Add"
+msgstr "Adicionar"
+
+#: src/app/pages/SettingsPage.qml:379 src/app/pages/SetupPage.qml:50
+msgid "No item ID found. It looks like 3fa85f64-5717-4562-b3fc-2c963f66afa6."
+msgstr ""
+"Nenhum ID de item encontrado. Ele tem este formato: 3fa85f64-5717-4562-"
+"b3fc-2c963f66afa6."
+
+#: src/app/pages/SettingsPage.qml:404
+msgid ""
+"Each bank you authorize in Meu Pluggy is a separate connection (up to 5). "
+"Authorizations last one year; renewing one may give it a new item ID."
+msgstr ""
+"Cada banco que você autoriza no Meu Pluggy é uma conexão separada (até 5). "
+"As autorizações duram um ano; ao renovar, a conexão pode ganhar um novo ID."
+
+#: src/app/pages/SettingsPage.qml:419
+msgid "Sync"
+msgstr "Sincronização"
+
+#: src/app/pages/SettingsPage.qml:422
+msgid "Transaction history"
+msgstr "Histórico de transações"
+
+#: src/app/pages/SettingsPage.qml:423
+msgid "How far back the first sync goes."
+msgstr "Até quando a primeira sincronização busca."
+
+#: src/app/pages/SettingsPage.qml:429
+msgid "%1 month"
+msgid_plural "%1 months"
+msgstr[0] "%1 mês"
+msgstr[1] "%1 meses"
+
+#: src/app/pages/SettingsPage.qml:439
+msgid "Check for new data every"
+msgstr "Buscar dados novos a cada"
+
+#: src/app/pages/SettingsPage.qml:440
+msgid ""
+"Meu Pluggy refreshes your banks once a day on its own; checking more often "
+"only picks up that daily update sooner."
+msgstr ""
+"O Meu Pluggy atualiza seus bancos sozinho uma vez por dia; verificar com "
+"mais frequência só pega essa atualização diária mais cedo."
+
+#: src/app/pages/SettingsPage.qml:447
+msgid "%1 hour"
+msgid_plural "%1 hours"
+msgstr[0] "%1 hora"
+msgstr[1] "%1 horas"
+
+#: src/app/pages/SettingsPage.qml:447
+msgid "%1 minute"
+msgid_plural "%1 minutes"
+msgstr[0] "%1 minuto"
+msgstr[1] "%1 minutos"
+
+#: src/app/pages/SettingsPage.qml:457
+msgid "Last sync"
+msgstr "Última sincronização"
+
+#: src/app/pages/SettingsPage.qml:476
+msgid "Privacy"
+msgstr "Privacidade"
+
+#: src/app/pages/SettingsPage.qml:479 src/app/pages/SettingsPage.qml:484
+msgid "Hide values"
+msgstr "Ocultar valores"
+
+#: src/app/pages/SettingsPage.qml:480
+msgid "Hides the amounts in the app and in the widget."
+msgstr "Esconde os valores no app e no widget."
+
+#: src/app/pages/SettingsPage.qml:491
+msgid "Local data"
+msgstr "Dados locais"
+
+#: src/app/pages/SettingsPage.qml:494
+msgid "Raw data"
+msgstr "Dados brutos"
+
+#: src/app/pages/SettingsPage.qml:495
+msgid "What Pluggy returned for each account, to check amounts and signs."
+msgstr ""
+"O que a Pluggy devolveu para cada conta, para conferir valores e sinais."
+
+#: src/app/pages/SettingsPage.qml:497
+msgid "Raw Data…"
+msgstr "Dados brutos…"
+
+#: src/app/pages/SettingsPage.qml:508
+msgid "Local cache"
+msgstr "Cache local"
+
+#: src/app/pages/SettingsPage.qml:509
+msgid ""
+"Deletes the downloaded data; the next sync fetches it again. Settings, "
+"connection names, transfer choices and balance history are kept."
+msgstr ""
+"Apaga os dados baixados; a próxima sincronização busca tudo de novo. "
+"Configurações, nomes das conexões, escolhas de transferência e histórico de "
+"saldo são mantidos."
+
+#: src/app/pages/SettingsPage.qml:511
+msgid "Clear Local Cache"
+msgstr "Limpar cache local"
+
+#: src/app/pages/SettingsPage.qml:527
+msgid "Remove Credentials?"
+msgstr "Remover credenciais?"
+
+#: src/app/pages/SettingsPage.qml:528
+msgid ""
+"The Client ID and Client Secret will be deleted from the system keyring. "
+"Cached data stays until you clear it."
+msgstr ""
+"O Client ID e o Client Secret serão apagados do chaveiro do sistema. Os "
+"dados em cache continuam até você limpá-los."
+
+#: src/app/pages/SetupPage.qml:64
+msgid "Checking with Pluggy…"
+msgstr "Verificando com a Pluggy…"
+
+#: src/app/pages/SetupPage.qml:71
+msgid "Pluggy Guide"
+msgstr "Guia da Pluggy"
+
+#: src/app/pages/SetupPage.qml:89
+msgid "Found: %1"
+msgstr "Encontrado: %1"
+
+#: src/app/pages/SetupPage.qml:98
+msgid "Connected and saved in the system keyring."
+msgstr "Conectado e salvo no chaveiro do sistema."
+
+#: src/app/pages/SetupPage.qml:120
+msgid ""
+"Saldo reads your banks through Meu Pluggy, Pluggy's free personal-use "
+"service. It takes about five minutes, mostly in your browser; keep this "
+"window open and come back after each step."
+msgstr ""
+"O Saldo lê seus bancos pelo Meu Pluggy, o serviço gratuito de uso pessoal da "
+"Pluggy. Leva uns cinco minutos, quase tudo no navegador; deixe esta janela "
+"aberta e volte aqui depois de cada passo."
+
+#: src/app/pages/SetupPage.qml:128
+msgid "Create your Meu Pluggy account"
+msgstr "Crie sua conta no Meu Pluggy"
+
+#: src/app/pages/SetupPage.qml:129
+msgid "Account created and banks connected at meu.pluggy.ai."
+msgstr "Conta criada e bancos conectados em meu.pluggy.ai."
+
+#: src/app/pages/SetupPage.qml:136
+msgid ""
+"Sign up at meu.pluggy.ai and connect your banks there. Each bank asks you to "
+"approve the access in its own app."
+msgstr ""
+"Cadastre-se em meu.pluggy.ai e conecte seus bancos lá. Cada banco pede que "
+"você aprove o acesso no próprio app."
+
+#: src/app/pages/SetupPage.qml:143
+msgid "Open meu.pluggy.ai"
+msgstr "Abrir meu.pluggy.ai"
+
+#: src/app/pages/SetupPage.qml:148
+msgid "My Banks Are Connected"
+msgstr "Meus bancos estão conectados"
+
+#: src/app/pages/SetupPage.qml:159
+msgid "Copy your application's credentials"
+msgstr "Copie as credenciais da sua aplicação"
+
+#: src/app/pages/SetupPage.qml:160
+msgid "Client ID %1… · secret stored in the keyring."
+msgstr "Client ID %1… · secret guardado no chaveiro."
+
+#: src/app/pages/SetupPage.qml:169
+msgctxt "Aplicações is a label in the Pluggy dashboard; keep it as is"
+msgid ""
+"Open the Pluggy dashboard with the same login and go to <b>“Aplicações”</b>."
+msgstr "Abra o painel da Pluggy com o mesmo login e vá em <b>“Aplicações”</b>."
+
+#: src/app/pages/SetupPage.qml:170
+msgid ""
+"On your application (for example <i>Pluggy Demo App</i>), copy the <b>Client "
+"ID</b> with the copy button and paste it below."
+msgstr ""
+"Na sua aplicação (por exemplo <i>Pluggy Demo App</i>), copie o <b>Client ID</"
+"b> pelo botão de copiar e cole abaixo."
+
+#: src/app/pages/SetupPage.qml:172
+msgctxt ""
+"Credenciais and Gerar novo secret are labels in the Pluggy dashboard; keep "
+"them as is"
+msgid ""
+"The <b>Client Secret</b> is shown only once, when it is created. If you "
+"don't have it, open the application's gear and, under <b>“Credenciais”</b>, "
+"click <b>“Gerar novo secret”</b>."
+msgstr ""
+"O <b>Client Secret</b> só aparece uma vez, quando é criado. Se você não o "
+"tem, abra a engrenagem da aplicação e, em <b>“Credenciais”</b>, clique em "
+"<b>“Gerar novo secret”</b>."
+
+#: src/app/pages/SetupPage.qml:176 src/app/pages/SetupPage.qml:325
+msgid "Open the Pluggy Dashboard"
+msgstr "Abrir o painel da Pluggy"
+
+#: src/app/pages/SetupPage.qml:208 src/app/pages/SetupPage.qml:235
+#: src/app/pages/SetupPage.qml:369
+msgid "Paste"
+msgstr "Colar"
+
+#: src/app/pages/SetupPage.qml:253
+msgid "Connect and Save"
+msgstr "Conectar e salvar"
+
+#: src/app/pages/SetupPage.qml:285
+msgid ""
+"The secret goes to your system keyring, never to a file. Don't share it or "
+"post screenshots of it."
+msgstr ""
+"O secret vai para o chaveiro do sistema, nunca para um arquivo. Não "
+"compartilhe nem publique capturas de tela dele."
+
+#: src/app/pages/SetupPage.qml:296
+msgid "Connect Meu Pluggy to your application"
+msgstr "Conecte o Meu Pluggy à sua aplicação"
+
+#: src/app/pages/SetupPage.qml:297
+msgid "MeuPluggy connected through the dashboard demo."
+msgstr "MeuPluggy conectado pelo demo do painel."
+
+#: src/app/pages/SetupPage.qml:306
+msgctxt ""
+"Aplicações and Iniciar Demo are labels in the Pluggy dashboard; keep them as "
+"is"
+msgid ""
+"Back in <b>“Aplicações”</b>, press the <b>▶</b> button (<b>“Iniciar Demo”</"
+"b>) on your application."
+msgstr ""
+"De volta em <b>“Aplicações”</b>, clique no botão <b>▶</b> (<b>“Iniciar "
+"Demo”</b>) da sua aplicação."
+
+#: src/app/pages/SetupPage.qml:308
+msgctxt ""
+"Conectar Conta is a label in the Pluggy dashboard and MeuPluggy a connector "
+"name; keep them as is"
+msgid ""
+"Click <b>“Conectar Conta”</b> and search for <b>MeuPluggy</b>. Pick it, not "
+"your bank."
+msgstr ""
+"Clique em <b>“Conectar Conta”</b> e procure por <b>MeuPluggy</b>. Escolha "
+"ele, não o seu banco."
+
+#: src/app/pages/SetupPage.qml:310
+msgctxt ""
+"Selecione a conta is a label on the Meu Pluggy authorization page; keep it "
+"as is"
+msgid ""
+"Sign in with your Meu Pluggy account and, under <b>“Selecione a conta”</b>, "
+"pick <b>one</b> bank and authorize."
+msgstr ""
+"Entre com sua conta do Meu Pluggy e, em <b>“Selecione a conta”</b>, escolha "
+"<b>um</b> banco e autorize."
+
+#: src/app/pages/SetupPage.qml:311
+msgid ""
+"Each authorization shares one bank. <b>Repeat these steps for every bank</b> "
+"you want in Saldo (up to 5). Authorizations last one year."
+msgstr ""
+"Cada autorização compartilha um banco. <b>Repita estes passos para cada "
+"banco</b> que você quer no Saldo (até 5). As autorizações duram um ano."
+
+#: src/app/pages/SetupPage.qml:319
+msgctxt ""
+"Customização, Conectores, Conectores Diretos and Pessoal are labels in the "
+"Pluggy dashboard; keep them as is"
+msgid ""
+"MeuPluggy not in the list? In the dashboard, enable it under “Customização” "
+"→ “Conectores” (tab “Conectores Diretos”, group “Pessoal”)."
+msgstr ""
+"O MeuPluggy não aparece na lista? No painel, ative-o em “Customização” → "
+"“Conectores” (aba “Conectores Diretos”, grupo “Pessoal”)."
+
+#: src/app/pages/SetupPage.qml:330
+msgid "All My Banks Are Connected"
+msgstr "Todos os meus bancos estão conectados"
+
+#: src/app/pages/SetupPage.qml:341
+msgid "Paste the item ID"
+msgstr "Cole o ID do item"
+
+#: src/app/pages/SetupPage.qml:342
+msgid "%1 connection added."
+msgid_plural "%1 connections added."
+msgstr[0] "%1 conexão adicionada."
+msgstr[1] "%1 conexões adicionadas."
+
+#: src/app/pages/SetupPage.qml:352
+msgctxt "Itens Conectados is a label in the Pluggy dashboard; keep it as is"
+msgid ""
+"On the demo page, under <b>“Itens Conectados”</b>, there is one item per "
+"bank you authorized. Copy the <b>id</b> of each one and paste it here; "
+"several at once works. It is not the Client ID."
+msgstr ""
+"Na página do demo, em <b>“Itens Conectados”</b>, há um item para cada banco "
+"que você autorizou. Copie o <b>id</b> de cada um e cole aqui; dá para colar "
+"vários de uma vez. Não é o Client ID."
+
+#: src/app/pages/SetupPage.qml:362
+msgid "Item ID"
+msgstr "ID do item"
+
+#: src/app/pages/SetupPage.qml:447
+msgid "Continue"
+msgstr "Continuar"
+
+#: src/app/pages/SetupPage.qml:462
+msgid "Download your data"
+msgstr "Baixe seus dados"
+
+#: src/app/pages/SetupPage.qml:463
+msgid "Your accounts are in Saldo."
+msgstr "Suas contas estão no Saldo."
+
+#: src/app/pages/SetupPage.qml:494
+msgid ""
+"If nothing shows up right after connecting, Pluggy may still be importing "
+"your banks. Wait a few minutes and try again."
+msgstr ""
+"Se nada aparecer logo depois de conectar, a Pluggy ainda pode estar "
+"importando seus bancos. Espere alguns minutos e tente de novo."
+
+#: src/app/pages/SetupPage.qml:501
+msgid ""
+"Tip: give each connection a name (Nubank, Inter…) in step 4 so accounts and "
+"cards are grouped by bank."
+msgstr ""
+"Dica: dê um nome a cada conexão (Nubank, Inter…) no passo 4 para agrupar "
+"contas e cartões por banco."
+
+#: src/app/pages/SetupPage.qml:508
+msgid ""
+"All set: %1, %2 and %3. Pluggy refreshes your banks once a day and Saldo "
+"picks it up on its own."
+msgstr ""
+"Tudo pronto: %1, %2 e %3. A Pluggy atualiza seus bancos uma vez por dia e o "
+"Saldo busca isso sozinho."
+
+#: src/app/pages/SetupPage.qml:521
+msgid "See My Finances"
+msgstr "Ver minhas finanças"
+
+#: src/app/pages/SetupPage.qml:526
+msgid "Sync Again"
+msgstr "Sincronizar de novo"
+
+#: src/app/pages/TransactionsPage.qml:43
+msgid "All months"
+msgstr "Todos os meses"
+
+#: src/app/pages/TransactionsPage.qml:55
+msgid "Income only"
+msgstr "Só entradas"
+
+#: src/app/pages/TransactionsPage.qml:56
+msgid "Expenses only"
+msgstr "Só saídas"
+
+#: src/app/pages/TransactionsPage.qml:70
+msgid "Income %1 · Expenses %2"
+msgstr "Entradas %1 · Saídas %2"
+
+#: src/app/pages/TransactionsPage.qml:138
+msgid "No matching transactions"
+msgstr "Nenhuma transação encontrada"
+
+#: src/app/pages/TransactionsPage.qml:140
+msgid "Try another search or month."
+msgstr "Tente outra busca ou outro mês."
+
+#: src/app/pages/TransactionsPage.qml:141
+msgid "Transactions appear here after a sync."
+msgstr "As transações aparecem aqui depois de uma sincronização."
+
+#: src/core/qml/BalanceChart.qml:31
+msgid ""
+"Saldo records your balance once a day; this chart fills in over the next "
+"days."
+msgstr ""
+"O Saldo registra seu saldo uma vez por dia; este gráfico se completa nos "
+"próximos dias."
+
+#: src/core/qml/CardContent.qml:70
+msgid "%1 used of %2"
+msgstr "%1 usado de %2"
+
+#: src/core/qml/CardContent.qml:85
+msgid "Not counted in the overall limit"
+msgstr "Fora do limite geral"
+
+#: src/core/qml/CardContent.qml:86
+msgid "Shares the limit of another card; counted once"
+msgstr "Divide o limite com outro cartão; contado uma vez"
+
+#: src/core/qml/CashflowChart.qml:174
+msgid "Income: %1"
+msgstr "Entradas: %1"
+
+#: src/core/qml/CashflowChart.qml:175
+msgid "Expenses: %1"
+msgstr "Saídas: %1"
+
+#: src/core/qml/CategoryDonut.qml:51
+msgctxt "total expenses, inside a chart"
+msgid "Spent"
+msgstr "Gasto"
+
+#: src/core/qml/LimitBar.qml:19
+#, javascript-format
+msgid "%1% used"
+msgstr "%1% usado"
+
+#: src/core/qml/LimitDonut.qml:23
+#, javascript-format
+msgid "%1% of the credit limit used"
+msgstr "%1% do limite de crédito usado"
+
+#: src/core/qml/LimitDonut.qml:52
+msgctxt "credit limit used, below a percentage"
+msgid "used"
+msgstr "usado"
+
+#: src/core/qml/MoneyLabel.qml:40
+msgid "Hidden amount"
+msgstr "Valor oculto"
+
+#: src/core/qml/TransactionContent.qml:45
+msgid "Between your accounts"
+msgstr "Entre suas contas"
+
+#: src/core/qml/TransactionContent.qml:47
+msgid "installment %1"
+msgstr "parcela %1"
+
+#: src/core/qml/TransactionContent.qml:48
+msgid "pending"
+msgstr "pendente"

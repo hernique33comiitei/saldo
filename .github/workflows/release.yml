@@ -1,0 +1,137 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch: {}
+
+# Build jobs only read the repo; `publish` is the only job that can write.
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Check versions
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Versions match each other and the tag
+        run: |
+          set -euo pipefail
+          cmake_v=$(sed -nE 's/^project\(saldo VERSION ([0-9.]+).*/\1/p' CMakeLists.txt)
+          spec_v=$(sed -nE 's/^Version:[[:space:]]*([0-9.]+).*/\1/p' packaging/fedora/saldo.spec)
+          deb_v=$(head -1 debian/changelog | sed -nE 's/^saldo \(([0-9.]+)-[0-9]+\).*/\1/p')
+          meta_v=$(grep -oE '<release version="[0-9.]+"' data/*.metainfo.xml | head -1 | grep -oE '[0-9]+(\.[0-9]+)+')
+          echo "CMake $cmake_v · spec $spec_v · debian $deb_v · metainfo $meta_v"
+          if [ "$spec_v" != "$cmake_v" ] || [ "$deb_v" != "$cmake_v" ] || [ "$meta_v" != "$cmake_v" ]; then
+            echo "::error::Versions differ; run tools/bump-version.sh"; exit 1
+          fi
+          if [[ "$GITHUB_REF" == refs/tags/v* ]] && [ "${GITHUB_REF_NAME#v}" != "$cmake_v" ]; then
+            echo "::error::Tag $GITHUB_REF_NAME does not match version $cmake_v"; exit 1
+          fi
+
+  rpm:
+    name: Build RPM
+    needs: check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build RPM in a Fedora container
+        run: |
+          docker run --rm -v "$PWD":/src -w /src fedora:latest bash -euxc '
+            dnf -y install rpm-build rpmdevtools git dnf-plugins-core
+            dnf -y builddep packaging/fedora/saldo.spec
+            git config --global --add safe.directory /src
+            V=$(rpmspec -q --qf "%{version}\n" packaging/fedora/saldo.spec | head -1)
+            rpmdev-setuptree
+            git archive --format=tar.gz --prefix=saldo-$V/ \
+              -o ~/rpmbuild/SOURCES/saldo-$V.tar.gz HEAD
+            rpmbuild -ba packaging/fedora/saldo.spec
+            mkdir -p /src/dist
+            find ~/rpmbuild/RPMS ~/rpmbuild/SRPMS -name "*.rpm" ! -name "*-debug*" -exec cp {} /src/dist/ \;
+          '
+      - uses: actions/upload-artifact@v4
+        with:
+          name: rpm
+          path: dist/*.rpm
+          if-no-files-found: error
+
+  deb:
+    name: Build DEB
+    needs: check
+    runs-on: ubuntu-latest
+    # An LTS with Qt >= 6.8 and KDE Frameworks 6 (the runner's own Ubuntu may be older).
+    container: ubuntu:26.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install build deps (from debian/control)
+        run: |
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends devscripts equivs
+          mk-build-deps -i -r -t "apt-get -y --no-install-recommends" debian/control
+      - name: Build DEB
+        run: |
+          dpkg-buildpackage -us -uc -b
+          mkdir -p dist && cp ../*.deb dist/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: deb
+          path: dist/*.deb
+          if-no-files-found: error
+
+  apk:
+    name: Build APK
+    needs: check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Free disk space
+        # KDE's Android image and Craft's prebuilt Qt/KF6 need ~20 GB; keep the
+        # runner's Android SDK (apksigner) and drop the rest.
+        run: |
+          sudo rm -rf /usr/share/dotnet /opt/ghc /usr/local/.ghcup /opt/hostedtoolcache/CodeQL /usr/local/share/boost
+          df -h /
+      - name: Build APK with KDE Craft
+        run: tools/build-apk.sh --docker
+      - name: Sign APK
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          for apk in dist/*-unsigned.apk; do tools/sign-apk.sh "$apk"; done
+          rm -f dist/*-unsigned.apk
+          ls -l dist/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: apk
+          path: dist/*.apk
+          if-no-files-found: error
+
+  # One release, created only when all three packages built (every release
+  # carries RPM + DEB + APK), with the curated changelog as its text.
+  publish:
+    name: Publish release
+    needs: [rpm, deb, apk]
+    if: startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+      - name: Release notes from debian/changelog
+        run: |
+          awk 'NR>1 && /^ -- /{exit} NR>1 && /^  \* /{sub(/^  \* /,"- "); print} NR>1 && /^    /{sub(/^    /,"  "); print}' \
+            debian/changelog > notes.md
+          cat notes.md
+          ls -l dist/
+      - uses: softprops/action-gh-release@v2
+        with:
+          body_path: notes.md
+          files: dist/*
+          fail_on_unmatched_files: true

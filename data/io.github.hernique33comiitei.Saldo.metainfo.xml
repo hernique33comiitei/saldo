@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.hernique33comiitei.Saldo</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+
+  <name>Saldo</name>
+  <summary>Personal finances from Meu Pluggy</summary>
+  <summary xml:lang="pt-BR">Finanças pessoais a partir do Meu Pluggy</summary>
+
+  <description>
+    <p>
+      Saldo shows your bank balances, credit card limits, card bills, investments
+      and transactions in one place, as a KDE app and a Plasma widget. The data
+      comes from the free Meu Pluggy personal-use API.
+    </p>
+    <p>Features:</p>
+    <ul>
+      <li>Overall and per-card credit limit: used and available.</li>
+      <li>Money in accounts, investments and the next card bills.</li>
+      <li>Spending by category, monthly income and expenses, balance history.</li>
+      <li>Searchable transactions with installments.</li>
+      <li>Plasma widget for the panel, the system tray or the desktop.</li>
+      <li>Credentials stored in the system keyring; data cached locally.</li>
+    </ul>
+  </description>
+
+  <screenshots>
+    <screenshot type="default">
+      <caption>Overview with balances, credit limit and spending charts</caption>
+      <image>https://raw.githubusercontent.com/hernique33comiitei/saldo/main/data/screenshots/overview.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>Credit cards with the limit used by each one</caption>
+      <image>https://raw.githubusercontent.com/hernique33comiitei/saldo/main/data/screenshots/cards.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>Searchable transactions grouped by day</caption>
+      <image>https://raw.githubusercontent.com/hernique33comiitei/saldo/main/data/screenshots/transactions.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>The Plasma widget popup</caption>
+      <image>https://raw.githubusercontent.com/hernique33comiitei/saldo/main/data/screenshots/widget.png</image>
+    </screenshot>
+  </screenshots>
+
+  <launchable type="desktop-id">io.github.hernique33comiitei.Saldo.desktop</launchable>
+  <icon type="stock">saldo</icon>
+
+  <categories>
+    <category>Office</category>
+    <category>Finance</category>
+  </categories>
+
+  <url type="homepage">https://github.com/hernique33comiitei/saldo</url>
+  <url type="bugtracker">https://github.com/hernique33comiitei/saldo/issues</url>
+
+  <developer id="io.github.hernique33comiitei">
+    <name>Henrique Oliveira</name>
+  </developer>
+
+  <provides>
+    <binary>saldo</binary>
+  </provides>
+
+  <requires>
+    <internet>always</internet>
+  </requires>
+
+  <content_rating type="oars-1.1"/>
+
+  <releases>
+    <release version="0.0.1" date="2026-11-21">
+      <description>
+        <p>Initial release.</p>
+      </description>
+    </release>
+  </releases>
+</component>
