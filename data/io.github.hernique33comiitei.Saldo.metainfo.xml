@@ -70,9 +70,16 @@
   <content_rating type="oars-1.1"/>
 
   <releases>
-    <release version="0.0.1" date="2026-11-21">
+    <release version="0.0.1" date="2026-11-23">
       <description>
-        <p>Initial release.</p>
+        <ul>
+          <li>Bank balances, credit card limits, bills, investments and transactions from the free Meu Pluggy personal-use API</li>
+          <li>Overview with next card bills, credit limit, spending by category, income and expenses and balance history, by month</li>
+          <li>Card details with the open bill, the last closed bill and whether it was paid</li>
+          <li>Transfers between your own accounts and card bill payments are not counted as income or expenses</li>
+          <li>Plasma 6 widget for the panel or the system tray</li>
+          <li>Step-by-step guide to connect Meu Pluggy; credentials stay in the system keyring</li>
+        </ul>
       </description>
     </release>
   </releases>

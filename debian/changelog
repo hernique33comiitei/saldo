@@ -1,5 +1,11 @@
 saldo (0.0.1-1) unstable; urgency=medium
 
-  * Initial release.
+  * Bank balances, credit card limits, bills, investments and transactions from the free Meu Pluggy personal-use API
+  * Overview with next card bills, credit limit, spending by category, income and expenses and balance history, by month
+  * Card details with the open bill, the last closed bill and whether it was paid
+  * Transfers between your own accounts and card bill payments are not counted as income or expenses
+  * Plasma 6 widget for the panel or the system tray
+  * Step-by-step guide to connect Meu Pluggy; credentials stay in the system keyring
 
- -- Henrique Oliveira <henriik.dev@gmail.com>  Sat, 21 Nov 2026 16:15:56 -0300
+ -- Henrique Oliveira <henriik.dev@gmail.com>  Mon, 23 Nov 2026 02:01:41 -0300
+

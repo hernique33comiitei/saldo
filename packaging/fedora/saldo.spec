@@ -71,5 +71,11 @@ export QT_QPA_PLATFORM=offscreen
 %{_datadir}/icons/hicolor/scalable/apps/saldo-symbolic.svg
 
 %changelog
-* Sat Nov 21 2026 Henrique Oliveira <henriik.dev@gmail.com> - 0.0.1-1
-- Initial release.
+* Mon Nov 23 2026 Henrique Oliveira <henriik.dev@gmail.com> - 0.0.1-1
+- Bank balances, credit card limits, bills, investments and transactions from the free Meu Pluggy personal-use API
+- Overview with next card bills, credit limit, spending by category, income and expenses and balance history, by month
+- Card details with the open bill, the last closed bill and whether it was paid
+- Transfers between your own accounts and card bill payments are not counted as income or expenses
+- Plasma 6 widget for the panel or the system tray
+- Step-by-step guide to connect Meu Pluggy; credentials stay in the system keyring
+
