@@ -4,7 +4,6 @@
 #include "config.h"
 #include "database.h"
 #include "money.h"
-#include "paths.h"
 
 #include <KLocalizedString>
 
@@ -49,14 +48,9 @@ ItemsModel::ItemsModel(QObject *parent)
 
 QList<QVariantMap> ItemsModel::fetchRows()
 {
-    QStringList ids = Config::instance()->itemIds();
+    // The demo's connections are in Config too (DemoData::itemIds()).
+    const QStringList ids = Config::instance()->itemIds();
     QSqlQuery q(Database::connection());
-    if (Paths::isDemo()) {
-        q.exec(u"SELECT id FROM items"_s);
-        while (q.next()) {
-            ids.append(q.value(0).toString());
-        }
-    }
 
     QList<QVariantMap> rows;
     for (const QString &id : std::as_const(ids)) {

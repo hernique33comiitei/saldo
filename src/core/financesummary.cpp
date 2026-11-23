@@ -6,7 +6,6 @@
 #include "config.h"
 #include "database.h"
 #include "money.h"
-#include "paths.h"
 
 #include <KLocalizedString>
 
@@ -112,7 +111,7 @@ void FinanceSummary::reload()
     const QDateTime now = QDateTime::currentDateTimeUtc();
     while (q.next()) {
         const QString itemId = q.value(0).toString();
-        if (!Paths::isDemo() && !Config::instance()->itemIds().contains(itemId)) {
+        if (!Config::instance()->itemIds().contains(itemId)) {
             continue;
         }
         ++m_connectionCount;
