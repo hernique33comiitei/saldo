@@ -166,13 +166,29 @@ ColumnLayout {
             anchors.fill: bars
             hoverEnabled: true
 
+            // Own lines instead of `text`, and an explicit content size: the
+            // Breeze style (Android) sizes a tooltip by measuring its `text`,
+            // which took the first line only and wrapped the amounts.
             QQC2.ToolTip {
                 visible: hover.row !== null
                 x: Math.max(0, Math.min(hover.width - width, (hover.index + 0.5) * hover.columnWidth - width / 2))
                 y: -height - Kirigami.Units.smallSpacing
-                text: hover.row ? [hover.row.monthLabel,
-                                   i18nd("saldo", "Income: %1", root.amount(hover.row.income)),
-                                   i18nd("saldo", "Expenses: %1", root.amount(hover.row.expense))].join("\n") : ""
+                contentWidth: tipLines.implicitWidth
+                contentHeight: tipLines.implicitHeight
+                contentItem: ColumnLayout {
+                    id: tipLines
+                    spacing: 0
+                    QQC2.Label {
+                        text: hover.row ? hover.row.monthLabel : ""
+                        font.weight: Font.DemiBold
+                    }
+                    QQC2.Label {
+                        text: hover.row ? i18nd("saldo", "Income: %1", root.amount(hover.row.income)) : ""
+                    }
+                    QQC2.Label {
+                        text: hover.row ? i18nd("saldo", "Expenses: %1", root.amount(hover.row.expense)) : ""
+                    }
+                }
             }
         }
     }
