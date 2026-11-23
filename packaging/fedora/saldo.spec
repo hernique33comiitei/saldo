@@ -1,5 +1,5 @@
 Name:           saldo
-Version:        0.0.4
+Version:        0.0.5
 Release:        1%{?dist}
 Summary:        Personal finances from Open Finance (Meu Pluggy): KDE app and Plasma widget
 
@@ -75,6 +75,13 @@ export QT_QPA_PLATFORM=offscreen
 %{_datadir}/icons/hicolor/scalable/apps/saldo-symbolic.svg
 
 %changelog
+* Mon Nov 23 2026 Henrique Oliveira <henriik.dev@gmail.com> - 0.0.5-1
+- Dates always read day/month/year, and month names, weekdays and categories follow the language chosen in the app, even when the phone is set to another language
+- The whole app follows the chosen language, including the search field, the menu and the dialog buttons
+- Numbers always use the Brazilian format, also for percentages and other currencies
+- The month's income and expense totals stay side by side on phones
+- The chart's month details no longer wrap the amounts
+
 * Mon Nov 23 2026 Henrique Oliveira <henriik.dev@gmail.com> - 0.0.4-1
 - Works on desktops without KDE Plasma, such as GNOME: the packages now bring the KDE style and the Breeze icons the app needs
 - The app opens even when the KDE style is missing, with Qt's default look

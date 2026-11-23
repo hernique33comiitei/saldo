@@ -98,6 +98,17 @@
   <content_rating type="oars-1.1"/>
 
   <releases>
+    <release version="0.0.5" date="2026-11-23">
+      <description>
+        <ul>
+          <li>Dates always read day/month/year, and month names, weekdays and categories follow the language chosen in the app, even when the phone is set to another language</li>
+          <li>The whole app follows the chosen language, including the search field, the menu and the dialog buttons</li>
+          <li>Numbers always use the Brazilian format, also for percentages and other currencies</li>
+          <li>The month's income and expense totals stay side by side on phones</li>
+          <li>The chart's month details no longer wrap the amounts</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.0.4" date="2026-11-23">
       <description>
         <ul>
