@@ -1,3 +1,9 @@
+saldo (0.0.6-1) unstable; urgency=medium
+
+  * On Android, the app opens on its icon until the overview is ready, instead of showing an empty screen first
+
+ -- Henrique Oliveira <henriik.dev@gmail.com>  Mon, 23 Nov 2026 20:29:14 -0300
+
 saldo (0.0.5-1) unstable; urgency=medium
 
   * Dates always read day/month/year, and month names, weekdays and categories follow the language chosen in the app, even when the phone is set to another language

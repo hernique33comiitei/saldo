@@ -98,6 +98,13 @@
   <content_rating type="oars-1.1"/>
 
   <releases>
+    <release version="0.0.6" date="2026-11-23">
+      <description>
+        <ul>
+          <li>On Android, the app opens on its icon until the overview is ready, instead of showing an empty screen first</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.0.5" date="2026-11-23">
       <description>
         <ul>

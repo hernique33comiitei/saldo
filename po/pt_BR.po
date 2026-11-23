@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: saldo 0.0.5\n"
+"Project-Id-Version: saldo 0.0.6\n"
 "Report-Msgid-Bugs-To: https://github.com/hernique33comiitei/saldo/issues\n"
 "POT-Creation-Date: 2026-11-23 19:10-0300\n"
 "PO-Revision-Date: 2026-11-21 12:00-0300\n"
