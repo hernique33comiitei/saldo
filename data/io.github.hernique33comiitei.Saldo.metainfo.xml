@@ -5,41 +5,59 @@
   <project_license>MIT</project_license>
 
   <name>Saldo</name>
-  <summary>Personal finances from Meu Pluggy</summary>
-  <summary xml:lang="pt-BR">Finanças pessoais a partir do Meu Pluggy</summary>
+  <summary>Personal finances from Open Finance (Meu Pluggy)</summary>
+  <summary xml:lang="pt-BR">Finanças pessoais pelo Open Finance (Meu Pluggy)</summary>
 
   <description>
     <p>
       Saldo shows your bank balances, credit card limits, card bills, investments
       and transactions in one place, as a KDE app and a Plasma widget. The data
-      comes from the free Meu Pluggy personal-use API.
+      comes from Open Finance Brasil, through the free Meu Pluggy personal-use API,
+      so it works with Brazilian banks.
+    </p>
+    <p xml:lang="pt-BR">
+      O Saldo mostra os saldos dos seus bancos, os limites e as faturas dos cartões,
+      os investimentos e as transações num só lugar, como app do KDE e widget do
+      Plasma. Os dados vêm do Open Finance Brasil, pela API gratuita de uso pessoal
+      do Meu Pluggy, então funciona com bancos brasileiros.
     </p>
     <p>Features:</p>
+    <p xml:lang="pt-BR">Recursos:</p>
     <ul>
       <li>Overall and per-card credit limit: used and available.</li>
+      <li xml:lang="pt-BR">Limite de crédito geral e por cartão: usado e disponível.</li>
       <li>Money in accounts, investments and the next card bills.</li>
+      <li xml:lang="pt-BR">Dinheiro nas contas, investimentos e as próximas faturas.</li>
       <li>Spending by category, monthly income and expenses, balance history.</li>
+      <li xml:lang="pt-BR">Gastos por categoria, entradas e saídas do mês, histórico do saldo.</li>
       <li>Searchable transactions with installments.</li>
+      <li xml:lang="pt-BR">Transações com busca e parcelas.</li>
       <li>Plasma widget for the panel, the system tray or the desktop.</li>
+      <li xml:lang="pt-BR">Widget do Plasma para o painel, a bandeja do sistema ou a área de trabalho.</li>
       <li>Credentials stored in the system keyring; data cached locally.</li>
+      <li xml:lang="pt-BR">Credenciais no chaveiro do sistema; dados em cache local.</li>
     </ul>
   </description>
 
   <screenshots>
     <screenshot type="default">
       <caption>Overview with balances, credit limit and spending charts</caption>
+      <caption xml:lang="pt-BR">Visão geral com saldos, limite de crédito e gráficos de gastos</caption>
       <image>https://raw.githubusercontent.com/hernique33comiitei/saldo/main/data/screenshots/overview.png</image>
     </screenshot>
     <screenshot>
       <caption>Credit cards with the limit used by each one</caption>
+      <caption xml:lang="pt-BR">Cartões de crédito com o limite usado por cada um</caption>
       <image>https://raw.githubusercontent.com/hernique33comiitei/saldo/main/data/screenshots/cards.png</image>
     </screenshot>
     <screenshot>
       <caption>Searchable transactions grouped by day</caption>
+      <caption xml:lang="pt-BR">Transações com busca, agrupadas por dia</caption>
       <image>https://raw.githubusercontent.com/hernique33comiitei/saldo/main/data/screenshots/transactions.png</image>
     </screenshot>
     <screenshot>
       <caption>The Plasma widget popup</caption>
+      <caption xml:lang="pt-BR">O popup do widget do Plasma</caption>
       <image>https://raw.githubusercontent.com/hernique33comiitei/saldo/main/data/screenshots/widget.png</image>
     </screenshot>
   </screenshots>
@@ -51,6 +69,16 @@
     <category>Office</category>
     <category>Finance</category>
   </categories>
+
+  <keywords>
+    <keyword>Open Finance</keyword>
+    <keyword>Pluggy</keyword>
+    <keyword>bank</keyword>
+    <keyword>credit card</keyword>
+    <keyword xml:lang="pt-BR">banco</keyword>
+    <keyword xml:lang="pt-BR">cartão de crédito</keyword>
+    <keyword xml:lang="pt-BR">finanças</keyword>
+  </keywords>
 
   <url type="homepage">https://github.com/hernique33comiitei/saldo</url>
   <url type="bugtracker">https://github.com/hernique33comiitei/saldo/issues</url>

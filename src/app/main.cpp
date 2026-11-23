@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
     KAboutData about(u"saldo"_s,
                      i18n("Saldo"),
                      QStringLiteral(SALDO_VERSION),
-                     i18n("Bank balances, credit card limits and transactions from Meu Pluggy"),
+                     i18n("Bank balances, card limits and transactions from Open Finance (Meu Pluggy)"),
                      KAboutLicense::MIT,
                      i18n("© 2026 Henrique Oliveira"));
     about.setDesktopFileName(QStringLiteral(SALDO_APP_ID));

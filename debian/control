@@ -31,8 +31,8 @@ Depends: ${shlibs:Depends},
  qml6-module-qtquick-window
 Recommends: plasma-workspace,
  qml6-module-org-kde-kcmutils
-Description: Personal finances from Meu Pluggy: KDE app and Plasma widget
+Description: Personal finances from Open Finance (Meu Pluggy): KDE app and Plasma widget
  Saldo shows bank balances, credit card limits, card bills, investments and
- transactions from the free Meu Pluggy personal-use API, as a Kirigami app and
- a Plasma 6 widget. Credentials stay in the system keyring and data is cached
- locally.
+ transactions from Open Finance Brasil, through the free Meu Pluggy
+ personal-use API, as a Kirigami app and a Plasma 6 widget. Brazilian banks
+ only. Credentials stay in the system keyring and data is cached locally.

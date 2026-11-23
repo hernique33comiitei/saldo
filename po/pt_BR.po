@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: saldo 0.0.1\n"
 "Report-Msgid-Bugs-To: https://github.com/hernique33comiitei/saldo/issues\n"
-"POT-Creation-Date: 2026-11-23 02:26-0300\n"
+"POT-Creation-Date: 2026-11-23 02:29-0300\n"
 "PO-Revision-Date: 2026-11-21 12:00-0300\n"
 "Last-Translator: Henrique Oliveira <henriik.dev@gmail.com>\n"
 "Language-Team: Brazilian Portuguese\n"
@@ -17,8 +17,9 @@ msgid "Saldo"
 msgstr "Saldo"
 
 #: src/app/main.cpp:56
-msgid "Bank balances, credit card limits and transactions from Meu Pluggy"
-msgstr "Saldos bancários, limites de cartão e transações do Meu Pluggy"
+msgid ""
+"Bank balances, card limits and transactions from Open Finance (Meu Pluggy)"
+msgstr "Saldos, limites de cartão e transações do Open Finance (Meu Pluggy)"
 
 #: src/app/main.cpp:58
 msgid "© 2026 Henrique Oliveira"
@@ -106,11 +107,11 @@ msgstr "O Client Secret é obrigatório."
 msgid "The Client Secret is a different value from the Client ID."
 msgstr "O Client Secret é um valor diferente do Client ID."
 
-#: src/core/financesummary.cpp:131
+#: src/core/financesummary.cpp:130
 msgid "%1 needs to be reconnected in the Pluggy dashboard (status %2)."
 msgstr "%1 precisa ser reconectado no painel da Pluggy (status %2)."
 
-#: src/core/financesummary.cpp:135
+#: src/core/financesummary.cpp:134
 msgid ""
 "The Meu Pluggy authorization for %2 expires in %1 day. Renew it in the "
 "Pluggy dashboard."
@@ -124,7 +125,7 @@ msgstr[1] ""
 "A autorização do Meu Pluggy para %2 expira em %1 dias. Renove no painel da "
 "Pluggy."
 
-#: src/core/financesummary.cpp:142
+#: src/core/financesummary.cpp:141
 msgid "%1 has not been updated by Pluggy for %2."
 msgstr "%1 não é atualizado pela Pluggy desde %2."
 
@@ -174,27 +175,27 @@ msgctxt "investment type"
 msgid "Other"
 msgstr "Outros"
 
-#: src/core/models/itemsmodel.cpp:20
+#: src/core/models/itemsmodel.cpp:19
 msgid "Not synced yet"
 msgstr "Ainda não sincronizada"
 
-#: src/core/models/itemsmodel.cpp:23
+#: src/core/models/itemsmodel.cpp:22
 msgid "Up to date"
 msgstr "Atualizada"
 
-#: src/core/models/itemsmodel.cpp:26
+#: src/core/models/itemsmodel.cpp:25
 msgid "Updating at Pluggy"
 msgstr "Atualizando na Pluggy"
 
-#: src/core/models/itemsmodel.cpp:29
+#: src/core/models/itemsmodel.cpp:28
 msgid "Authorization expired"
 msgstr "Autorização expirada"
 
-#: src/core/models/itemsmodel.cpp:32
+#: src/core/models/itemsmodel.cpp:31
 msgid "Outdated"
 msgstr "Desatualizada"
 
-#: src/core/models/itemsmodel.cpp:35
+#: src/core/models/itemsmodel.cpp:34
 msgid "Waiting for user action"
 msgstr "Aguardando ação do usuário"
 
@@ -1238,7 +1239,9 @@ msgstr "Idioma do app"
 msgid ""
 "Takes effect the next time Saldo starts. The Plasma widget follows the "
 "system language."
-msgstr "Vale a partir da próxima vez que o Saldo abrir. O widget do Plasma segue o idioma do sistema."
+msgstr ""
+"Vale a partir da próxima vez que o Saldo abrir. O widget do Plasma segue o "
+"idioma do sistema."
 
 #: src/app/pages/SettingsPage.qml:500
 msgid "System default"

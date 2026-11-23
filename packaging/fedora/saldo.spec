@@ -1,7 +1,7 @@
 Name:           saldo
 Version:        0.0.1
 Release:        1%{?dist}
-Summary:        Personal finances from Meu Pluggy: KDE app and Plasma widget
+Summary:        Personal finances from Open Finance (Meu Pluggy): KDE app and Plasma widget
 
 License:        MIT
 URL:            https://github.com/hernique33comiitei/saldo
@@ -36,9 +36,9 @@ Recommends:     kf6-kcmutils
 
 %description
 Saldo shows bank balances, credit card limits, card bills, investments and
-transactions from the free Meu Pluggy personal-use API, as a Kirigami app and a
-Plasma 6 widget. Credentials stay in the system keyring and data is cached
-locally.
+transactions from Open Finance Brasil, through the free Meu Pluggy personal-use
+API, as a Kirigami app and a Plasma 6 widget. Brazilian banks only. Credentials
+stay in the system keyring and data is cached locally.
 
 %prep
 %autosetup -n %{name}-%{version}

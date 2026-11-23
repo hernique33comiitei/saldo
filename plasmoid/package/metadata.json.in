@@ -8,8 +8,8 @@
             }
         ],
         "Category": "Online Services",
-        "Description": "Bank balances, credit card limits and transactions from Meu Pluggy",
-        "Description[pt_BR]": "Saldos, limites de cartão e transações do Meu Pluggy",
+        "Description": "Bank balances, card limits and transactions from Open Finance (Meu Pluggy)",
+        "Description[pt_BR]": "Saldos, limites de cartão e transações do Open Finance (Meu Pluggy)",
         "Icon": "saldo",
         "Id": "@SALDO_PLASMOID_ID@",
         "License": "MIT",
