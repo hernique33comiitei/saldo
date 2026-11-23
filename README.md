@@ -1,6 +1,7 @@
 # Saldo
 
-App KDE (Kirigami) e widget do Plasma 6 para as suas finanças pessoais. O Saldo lê os seus bancos
+App para **Linux** (KDE, com widget do Plasma 6) e para **Android** para as suas finanças pessoais.
+O Saldo lê os seus bancos
 pelo **Open Finance** do Brasil, através da API gratuita de uso pessoal do **Meu Pluggy**, e mostra
 saldos, limites de cartão (geral e por cartão), faturas, investimentos e transações, com gráficos.
 
@@ -12,9 +13,52 @@ com a Pluggy, guarda as credenciais no chaveiro do sistema e mantém um cache lo
 
 ![Visão geral](data/screenshots/overview.png)
 
-|  |  |  |
-| --- | --- | --- |
+|                                                     |                                                    |                                                  |
+| --------------------------------------------------- | -------------------------------------------------- | ------------------------------------------------ |
 | ![Cartões de crédito](data/screenshots/cards.png) | ![Transações](data/screenshots/transactions.png) | ![Widget do Plasma](data/screenshots/widget.png) |
+
+## Onde roda
+
+Cada [release](https://github.com/hernique33comiitei/saldo/releases/latest) traz três pacotes: o
+app para **Android** (`.apk`), e o app com o widget do Plasma para **Fedora** (`.rpm`) e
+**Ubuntu / Debian** (`.deb`).
+
+### Arquiteturas
+
+- **arm64** (ARM 64-bit, `arm64-v8a`): APK para Android
+- **x86_64 / amd64** (64-bit): RPM e DEB
+
+### Android (APK)
+
+| Versão do Android     | Saldo 0.0.x |
+| ---------------------- | :---------: |
+| Android 8 ou anterior  |     ❌     |
+| Android 9 ou mais novo |     ✅     |
+
+Só o app: o widget é do Plasma (desktop).
+
+### Fedora (RPM)
+
+| Distribuição        | Saldo 0.0.x |
+| --------------------- | :---------: |
+| Fedora 43 ou anterior |     ❌     |
+| Fedora 44             |     ✅     |
+| Fedora 45             |     ✅     |
+
+### Ubuntu / Kubuntu (DEB)
+
+| Distribuição               | Saldo 0.0.x |
+| ---------------------------- | :---------: |
+| Ubuntu 24.04 LTS ou anterior |     ❌     |
+| Ubuntu 26.04 LTS             |     ✅     |
+| Ubuntu 26.10                 |     ✅     |
+
+### Debian (DEB)
+
+| Distribuição                 | Saldo 0.0.x |
+| ------------------------------ | :---------: |
+| Debian 13 (Trixie) ou anterior |     ❌     |
+| Debian testing (Forky)         |     ✅     |
 
 ## Instalação
 
@@ -29,8 +73,8 @@ sudo dnf install ./saldo-*.x86_64.rpm
 
 ### Ubuntu / Debian (DEB)
 
-Compilado no Ubuntu 26.04 LTS (precisa de Qt 6.8 e KDE Frameworks 6). Baixe o `.deb` mais recente
-na [página de releases](https://github.com/hernique33comiitei/saldo/releases/latest) e instale (o
+Compilado no Ubuntu 26.04 LTS (as versões que instalam estão em [Onde roda](#onde-roda)). Baixe o
+`.deb` mais recente na [página de releases](https://github.com/hernique33comiitei/saldo/releases/latest) e instale (o
 apt baixa as dependências):
 
 ```sh
@@ -63,10 +107,8 @@ Para testar sem conta: `saldo --demo`.
 
 Instale as dependências de compilação e compile com o CMake:
 
-- Debian/Ubuntu: `cmake ninja-build extra-cmake-modules gettext qt6-base-dev qt6-declarative-dev
-  libqt6sql6-sqlite libkirigami-dev libkf6i18n-dev libkf6coreaddons-dev`
-- Fedora (o que o `install.sh` instala): `cmake ninja-build gcc-c++ extra-cmake-modules gettext
-  qt6-qtbase-devel qt6-qtdeclarative-devel kf6-kirigami-devel kf6-ki18n-devel kf6-kcoreaddons-devel`
+- Debian/Ubuntu: `cmake ninja-build extra-cmake-modules gettext qt6-base-dev qt6-declarative-dev libqt6sql6-sqlite libkirigami-dev libkf6i18n-dev libkf6coreaddons-dev`
+- Fedora (o que o `install.sh` instala): `cmake ninja-build gcc-c++ extra-cmake-modules gettext qt6-qtbase-devel qt6-qtdeclarative-devel kf6-kirigami-devel kf6-ki18n-devel kf6-kcoreaddons-devel`
 
 ```sh
 cmake -B build -G Ninja -DCMAKE_INSTALL_PREFIX=/usr && cmake --build build
@@ -94,7 +136,7 @@ existe um token único):
 4. Copie o **id** de cada item em “Itens Conectados” e cole no Saldo, junto com o Client ID e o
    Secret (pelo guia ou em *Configurações*).
 
-Guia oficial: <https://docs.pluggy.ai/pt/docs/guides/meu-pluggy-personal-use>
+Guia oficial: [https://docs.pluggy.ai/pt/docs/guides/meu-pluggy-personal-use](https://docs.pluggy.ai/pt/docs/guides/meu-pluggy-personal-use)
 
 - O Meu Pluggy atualiza os seus bancos **uma vez por dia** sozinho, e isso não pode ser forçado: o
   *Atualizar* relê o que a Pluggy já tem.

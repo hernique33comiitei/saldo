@@ -324,6 +324,14 @@ skill** (`.claude/skills/release/`) runs the whole flow. By hand:
   Without the secrets the job still ships an APK, signed with a throwaway key and named
   `*-debug-key.apk`; it installs, but can't update a previous install in place.
 
+### Supported platforms (README "Onde roda")
+
+The README tables come from installing the release packages in clean containers (`dnf install` /
+`apt install` of the `.rpm`/`.deb`, then `saldo --version`) and from the APK's `minSdkVersion`
+(`aapt2 dump badging`: 28 = Android 9). Re-run that check and update the tables whenever a build
+image changes (the Fedora pin, the Ubuntu container, Qt/KF versions). Checked with v0.0.3: Fedora
+44/45, Ubuntu 26.04/26.10 and Debian testing install; Fedora 43, Ubuntu 24.04 and Debian 13 do not.
+
 ### Install for users
 
 - Fedora: `sudo dnf install <release-url>/saldo-<ver>-1.fc<NN>.x86_64.rpm`
