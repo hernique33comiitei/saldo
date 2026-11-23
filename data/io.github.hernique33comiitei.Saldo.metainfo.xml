@@ -98,6 +98,15 @@
   <content_rating type="oars-1.1"/>
 
   <releases>
+    <release version="0.0.2" date="2026-11-23">
+      <description>
+        <ul>
+          <li>Choose the app language in Settings: system default, English or Português (Brasil)</li>
+          <li>Portuguese description in the software center, saying the data comes from Open Finance Brasil</li>
+          <li>Fixed the demo showing each example connection twice</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.0.1" date="2026-11-23">
       <description>
         <ul>

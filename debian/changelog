@@ -1,3 +1,11 @@
+saldo (0.0.2-1) unstable; urgency=medium
+
+  * Choose the app language in Settings: system default, English or Português (Brasil)
+  * Portuguese description in the software center, saying the data comes from Open Finance Brasil
+  * Fixed the demo showing each example connection twice
+
+ -- Henrique Oliveira <henriik.dev@gmail.com>  Mon, 23 Nov 2026 02:30:51 -0300
+
 saldo (0.0.1-1) unstable; urgency=medium
 
   * Bank balances, credit card limits, bills, investments and transactions from the free Meu Pluggy personal-use API

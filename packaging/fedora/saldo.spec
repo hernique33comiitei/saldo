@@ -1,5 +1,5 @@
 Name:           saldo
-Version:        0.0.1
+Version:        0.0.2
 Release:        1%{?dist}
 Summary:        Personal finances from Open Finance (Meu Pluggy): KDE app and Plasma widget
 
@@ -71,6 +71,11 @@ export QT_QPA_PLATFORM=offscreen
 %{_datadir}/icons/hicolor/scalable/apps/saldo-symbolic.svg
 
 %changelog
+* Mon Nov 23 2026 Henrique Oliveira <henriik.dev@gmail.com> - 0.0.2-1
+- Choose the app language in Settings: system default, English or Português (Brasil)
+- Portuguese description in the software center, saying the data comes from Open Finance Brasil
+- Fixed the demo showing each example connection twice
+
 * Mon Nov 23 2026 Henrique Oliveira <henriik.dev@gmail.com> - 0.0.1-1
 - Bank balances, credit card limits, bills, investments and transactions from the free Meu Pluggy personal-use API
 - Overview with next card bills, credit limit, spending by category, income and expenses and balance history, by month
