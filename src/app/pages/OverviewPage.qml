@@ -354,7 +354,12 @@ Kirigami.ScrollablePage {
                     parts.push(i18n("Pluggy updated your banks %1", Money.relativeTime(FinanceSummary.dataUpdatedAt)));
                 }
                 if (FinanceSummary.nextAutoSyncAt.getTime && !isNaN(FinanceSummary.nextAutoSyncAt.getTime())) {
-                    parts.push(i18n("next update %1", Money.relativeTime(FinanceSummary.nextAutoSyncAt)));
+                    // Pluggy's schedule can be in the past while its daily update
+                    // is still running or late: "next update 28 minutes ago" read
+                    // as if it were coming.
+                    parts.push(FinanceSummary.nextAutoSyncAt.getTime() > Date.now()
+                               ? i18n("next update %1", Money.relativeTime(FinanceSummary.nextAutoSyncAt))
+                               : i18n("next update soon"));
                 }
                 parts.push(i18n("last checked %1", Money.relativeTime(SyncManager.lastSyncAt)));
                 return parts.join(" · ");

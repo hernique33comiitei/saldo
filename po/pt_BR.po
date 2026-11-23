@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: saldo 0.0.2\n"
 "Report-Msgid-Bugs-To: https://github.com/hernique33comiitei/saldo/issues\n"
-"POT-Creation-Date: 2026-11-23 02:29-0300\n"
+"POT-Creation-Date: 2026-11-23 15:46-0300\n"
 "PO-Revision-Date: 2026-11-21 12:00-0300\n"
 "Last-Translator: Henrique Oliveira <henriik.dev@gmail.com>\n"
 "Language-Team: Brazilian Portuguese\n"
@@ -107,11 +107,11 @@ msgstr "O Client Secret é obrigatório."
 msgid "The Client Secret is a different value from the Client ID."
 msgstr "O Client Secret é um valor diferente do Client ID."
 
-#: src/core/financesummary.cpp:130
+#: src/core/financesummary.cpp:136
 msgid "%1 needs to be reconnected in the Pluggy dashboard (status %2)."
 msgstr "%1 precisa ser reconectado no painel da Pluggy (status %2)."
 
-#: src/core/financesummary.cpp:134
+#: src/core/financesummary.cpp:140
 msgid ""
 "The Meu Pluggy authorization for %2 expires in %1 day. Renew it in the "
 "Pluggy dashboard."
@@ -125,9 +125,10 @@ msgstr[1] ""
 "A autorização do Meu Pluggy para %2 expira em %1 dias. Renove no painel da "
 "Pluggy."
 
-#: src/core/financesummary.cpp:141
-msgid "%1 has not been updated by Pluggy for %2."
-msgstr "%1 não é atualizado pela Pluggy desde %2."
+#: src/core/financesummary.cpp:148
+msgctxt "%1 bank, %2 relative time such as '3 days ago'"
+msgid "%1: last updated by Pluggy %2."
+msgstr "%1: última atualização da Pluggy %2."
 
 #: src/core/models/accountsmodel.cpp:23
 msgid "Checking account"
@@ -1021,11 +1022,15 @@ msgstr "O Saldo registra o saldo uma vez por dia; o histórico começa em %1."
 msgid "Pluggy updated your banks %1"
 msgstr "A Pluggy atualizou seus bancos %1"
 
-#: src/app/pages/OverviewPage.qml:357
+#: src/app/pages/OverviewPage.qml:361
 msgid "next update %1"
 msgstr "próxima atualização %1"
 
-#: src/app/pages/OverviewPage.qml:359
+#: src/app/pages/OverviewPage.qml:362
+msgid "next update soon"
+msgstr "próxima atualização em breve"
+
+#: src/app/pages/OverviewPage.qml:364
 msgid "last checked %1"
 msgstr "última verificação %1"
 

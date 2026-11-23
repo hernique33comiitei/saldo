@@ -107,6 +107,7 @@ void FinanceSummary::reload()
     m_connectionCount = 0;
     m_dataUpdatedAt = {};
     m_nextAutoSyncAt = {};
+    QDateTime earliestNext; // may be in the past when Pluggy's daily update is late
     q.exec(u"SELECT id, connector_name, status, error_code, error_message, last_updated_at, consent_expires_at, next_auto_sync_at FROM items"_s);
     const QDateTime now = QDateTime::currentDateTimeUtc();
     while (q.next()) {
@@ -120,11 +121,16 @@ void FinanceSummary::reload()
         const QDateTime updated = QDateTime::fromString(q.value(5).toString(), Qt::ISODateWithMs);
         const QDateTime consent = QDateTime::fromString(q.value(6).toString(), Qt::ISODateWithMs);
         const QDateTime next = QDateTime::fromString(q.value(7).toString(), Qt::ISODateWithMs);
-        if (updated.isValid() && (!m_dataUpdatedAt.isValid() || updated < m_dataUpdatedAt)) {
+        // Most recent update, and the next one still to come: one late bank
+        // must not make every connection look a day old.
+        if (updated.isValid() && (!m_dataUpdatedAt.isValid() || updated > m_dataUpdatedAt)) {
             m_dataUpdatedAt = updated;
         }
-        if (next.isValid() && (!m_nextAutoSyncAt.isValid() || next < m_nextAutoSyncAt)) {
+        if (next.isValid() && next > now && (!m_nextAutoSyncAt.isValid() || next < m_nextAutoSyncAt)) {
             m_nextAutoSyncAt = next;
+        }
+        if (next.isValid() && (!earliestNext.isValid() || next < earliestNext)) {
+            earliestNext = next;
         }
         if (status == "LOGIN_ERROR"_L1 || status == "OUTDATED"_L1 || q.value(3).toString() == "USER_AUTHORIZATION_EXPIRED"_L1) {
             m_attention.append(i18n("%1 needs to be reconnected in the Pluggy dashboard (status %2).", name, status));
@@ -138,8 +144,12 @@ void FinanceSummary::reload()
             }
         }
         if (updated.isValid() && updated.secsTo(now) > 48 * 3600) {
-            m_attention.append(i18n("%1 has not been updated by Pluggy for %2.", name, MoneyFormat::relativeTime(updated)));
+            // %2 is a relative time ("3 days ago"), so the sentence is built around it.
+            m_attention.append(i18nc("%1 bank, %2 relative time such as '3 days ago'", "%1: last updated by Pluggy %2.", name, MoneyFormat::relativeTime(updated)));
         }
+    }
+    if (!m_nextAutoSyncAt.isValid()) {
+        m_nextAutoSyncAt = earliestNext; // every schedule passed: the footer says "soon"
     }
 
     m_months.clear();

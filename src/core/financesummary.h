@@ -33,7 +33,10 @@ class SALDOCORE_EXPORT FinanceSummary : public QObject
     Q_PROPERTY(int accountCount READ accountCount NOTIFY changed)
     Q_PROPERTY(int cardCount READ cardCount NOTIFY changed)
     Q_PROPERTY(int investmentCount READ investmentCount NOTIFY changed)
+    // Most recent Pluggy update among the connections.
     Q_PROPERTY(QDateTime dataUpdatedAt READ dataUpdatedAt NOTIFY changed)
+    // Next Pluggy update still to come; in the past only when every
+    // connection's daily update is late.
     Q_PROPERTY(QDateTime nextAutoSyncAt READ nextAutoSyncAt NOTIFY changed)
     Q_PROPERTY(QStringList attention READ attention NOTIFY changed)
     Q_PROPERTY(QVariantList months READ months NOTIFY changed)
