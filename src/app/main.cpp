@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: MIT
 
+#include "config.h"
 #include "paths.h"
 
 #include <KAboutData>
@@ -35,7 +36,17 @@ int main(int argc, char *argv[])
     }
 #endif
 
+    // --demo has its own files: switch before reading any of them (the
+    // language below included). The parser handles the option again later.
+    if (app.arguments().contains(u"--demo"_s)) {
+        Paths::setDemo(true);
+    }
+
     KLocalizedString::setApplicationDomain("saldo");
+    // The language picked in Settings, before the first i18n() call.
+    if (const QString language = Config::storedLanguage(); !language.isEmpty()) {
+        KLocalizedString::setLanguages({language});
+    }
     QCoreApplication::setOrganizationName(u"saldo"_s);
     QCoreApplication::setApplicationName(u"saldo"_s);
 

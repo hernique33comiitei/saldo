@@ -488,6 +488,27 @@ Kirigami.ScrollablePage {
 
             SectionCard {
                 Layout.fillWidth: true
+                title: i18n("Language")
+
+                SettingRow {
+                    text: i18n("App language")
+                    description: i18n("Takes effect the next time Saldo starts. The Plasma widget follows the system language.")
+                    QQC2.ComboBox {
+                        // Values of Config.language. Language names are written in
+                        // their own language, as language pickers do.
+                        readonly property var codes: ["", "en", "pt_BR"]
+                        model: [i18n("System default"), "English", "Português (Brasil)"]
+                        currentIndex: Math.max(0, codes.indexOf(Config.language))
+                        onActivated: {
+                            Config.language = codes[currentIndex];
+                            applicationWindow().showPassiveNotification(i18n("Restart Saldo to apply the language change."), "long");
+                        }
+                    }
+                }
+            }
+
+            SectionCard {
+                Layout.fillWidth: true
                 title: i18n("Local data")
 
                 SettingRow {

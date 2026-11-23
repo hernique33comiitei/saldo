@@ -26,6 +26,10 @@ class SALDOCORE_EXPORT Config : public QObject
     // Furthest step the user confirmed in the setup guide (steps without a
     // checkable outcome, such as "I connected MeuPluggy").
     Q_PROPERTY(int setupStep READ setupStep WRITE setSetupStep NOTIFY setupStepChanged)
+    // App language picked in Settings: "" = the system's, "en" or "pt_BR".
+    // Applied when the app starts (main.cpp); the Plasma widget follows the
+    // system language, since plasmashell's language is global.
+    Q_PROPERTY(QString language READ language WRITE setLanguage NOTIFY languageChanged)
 
 public:
     static constexpr int MaxItems = 5; // Meu Pluggy personal use allows up to 5 connections
@@ -45,6 +49,11 @@ public:
     int credentialsRevision() const;
     int setupStep() const;
     void setSetupStep(int step);
+    QString language() const;
+    void setLanguage(const QString &language);
+    // The stored language without creating the singleton: main.cpp needs it
+    // before the first i18n() call.
+    static QString storedLanguage();
 
     Q_INVOKABLE static bool isValidItemId(const QString &id);
     // Every UUID found in pasted text (lowercase, in order, without duplicates):
@@ -74,6 +83,7 @@ Q_SIGNALS:
     void excludedCardIdsChanged();
     void credentialsRevisionChanged();
     void setupStepChanged();
+    void languageChanged();
     void itemNamesChanged();
 
 private:
@@ -93,5 +103,6 @@ private:
     QStringList m_excludedCardIds;
     int m_credentialsRevision = 0;
     int m_setupStep = 0;
+    QString m_language;
     QHash<QString, QString> m_itemNames;
 };

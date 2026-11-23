@@ -103,6 +103,18 @@ private Q_SLOTS:
         QVERIFY(MoneyFormat::dayMonth(QDate()).isEmpty());
     }
 
+    void languagePreference()
+    {
+        Config *config = Config::instance();
+        config->setLanguage(u"pt_BR"_s);
+        QCOMPARE(config->language(), u"pt_BR"_s);
+        QCOMPARE(Config::storedLanguage(), u"pt_BR"_s); // what main.cpp reads at startup
+        config->setLanguage(u"xx"_s); // not offered: ignored
+        QCOMPARE(config->language(), u"pt_BR"_s);
+        config->setLanguage(QString());
+        QVERIFY(Config::storedLanguage().isEmpty());
+    }
+
     void parseAccounts()
     {
         const QList<AccountRecord> list = accounts();

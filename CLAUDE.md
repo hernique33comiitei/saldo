@@ -15,6 +15,10 @@ transactions. Desktop (KDE Plasma) first; the app (not the widget) also targets 
   - App QML (`src/app/`) uses `i18n()`. QML that also runs inside plasmashell (`src/core/qml/`,
     `plasmoid/`) uses `i18nd("saldo", …)`, because plasmashell has another default domain.
   - C++ in `src/core/` builds with `TRANSLATION_DOMAIN="saldo"` for the same reason.
+  - The app language can be overridden in Settings (`Config.language`: "", "en", "pt_BR").
+    `main.cpp` applies it with `KLocalizedString::setLanguages` before the first `i18n()` (it
+    spots `--demo` first, so the demo reads its own config). The widget always follows the
+    system language: `setLanguages` inside plasmashell would change every applet.
 - Git pushes go over SSH with the personal key. Author: Henrique Oliveira
   <henriik.dev@gmail.com> (already set in this repo's `git config`).
 - **No Claude attribution** in commits or PRs (no `Co-Authored-By`, no "Generated with…").

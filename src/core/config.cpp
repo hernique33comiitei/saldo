@@ -22,6 +22,8 @@ const auto KeyPrivacyMode = u"View/privacyMode"_s;
 const auto KeyExcludedCards = u"View/excludedCardIds"_s;
 const auto KeyCredentialsRevision = u"Pluggy/credentialsRevision"_s;
 const auto KeySetupStep = u"Setup/step"_s;
+const auto KeyLanguage = u"View/language"_s;
+const QStringList Languages = {QString(), u"en"_s, u"pt_BR"_s};
 const auto GroupItemNames = u"ItemNames"_s;
 
 const QRegularExpression &uuidPattern()
@@ -66,6 +68,10 @@ void Config::load()
     m_excludedCardIds = m_settings.value(KeyExcludedCards).toStringList();
     m_credentialsRevision = m_settings.value(KeyCredentialsRevision, 0).toInt();
     m_setupStep = m_settings.value(KeySetupStep, 0).toInt();
+    m_language = m_settings.value(KeyLanguage).toString();
+    if (!Languages.contains(m_language)) {
+        m_language.clear();
+    }
 
     m_itemNames.clear();
     m_settings.beginGroup(GroupItemNames);
@@ -107,6 +113,7 @@ void Config::onFileChanged()
     const QStringList oldExcluded = m_excludedCardIds;
     const int oldRevision = m_credentialsRevision;
     const int oldSetupStep = m_setupStep;
+    const QString oldLanguage = m_language;
     const QHash<QString, QString> oldNames = m_itemNames;
 
     load();
@@ -125,6 +132,9 @@ void Config::onFileChanged()
     }
     if (oldExcluded != m_excludedCardIds) {
         Q_EMIT excludedCardIdsChanged();
+    }
+    if (oldLanguage != m_language) {
+        Q_EMIT languageChanged();
     }
     if (oldRevision != m_credentialsRevision) {
         Q_EMIT credentialsRevisionChanged();
@@ -197,6 +207,27 @@ void Config::setPrivacyMode(bool enabled)
     m_privacyMode = enabled;
     write(KeyPrivacyMode, enabled);
     Q_EMIT privacyModeChanged();
+}
+
+QString Config::language() const
+{
+    return m_language;
+}
+
+void Config::setLanguage(const QString &language)
+{
+    if (!Languages.contains(language) || language == m_language) {
+        return;
+    }
+    m_language = language;
+    write(KeyLanguage, language);
+    Q_EMIT languageChanged();
+}
+
+QString Config::storedLanguage()
+{
+    const QString language = QSettings(Paths::configFile(), QSettings::IniFormat).value(KeyLanguage).toString();
+    return Languages.contains(language) ? language : QString();
 }
 
 QStringList Config::excludedCardIds() const

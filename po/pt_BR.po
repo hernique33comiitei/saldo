@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: saldo 0.0.1\n"
 "Report-Msgid-Bugs-To: https://github.com/hernique33comiitei/saldo/issues\n"
-"POT-Creation-Date: 2026-11-23 01:35-0300\n"
+"POT-Creation-Date: 2026-11-23 02:26-0300\n"
 "PO-Revision-Date: 2026-11-21 12:00-0300\n"
 "Last-Translator: Henrique Oliveira <henriik.dev@gmail.com>\n"
 "Language-Team: Brazilian Portuguese\n"
@@ -12,23 +12,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: src/app/main.cpp:43
+#: src/app/main.cpp:54
 msgid "Saldo"
 msgstr "Saldo"
 
-#: src/app/main.cpp:45
+#: src/app/main.cpp:56
 msgid "Bank balances, credit card limits and transactions from Meu Pluggy"
 msgstr "Saldos bancários, limites de cartão e transações do Meu Pluggy"
 
-#: src/app/main.cpp:47
+#: src/app/main.cpp:58
 msgid "© 2026 Henrique Oliveira"
 msgstr "© 2026 Henrique Oliveira"
 
-#: src/app/main.cpp:52
+#: src/app/main.cpp:63
 msgid "Author"
 msgstr "Autor"
 
-#: src/app/main.cpp:55
+#: src/app/main.cpp:66
 msgid ""
 "Data comes from the Meu Pluggy personal-use API. Saldo is an independent "
 "open source project, not affiliated with Pluggy."
@@ -36,18 +36,20 @@ msgstr ""
 "Os dados vêm da API de uso pessoal do Meu Pluggy. O Saldo é um projeto open "
 "source independente, sem vínculo com a Pluggy."
 
-#: src/app/main.cpp:63
+#: src/app/main.cpp:74
 msgid "Show fake demo data instead of your Meu Pluggy accounts."
 msgstr ""
 "Mostra dados fictícios de demonstração em vez das suas contas do Meu Pluggy."
 
-#: src/app/main.cpp:65
+#: src/app/main.cpp:76
 msgid ""
 "Page to open: overview, accounts, cards, transactions, investments, "
 "settings, setup or about."
-msgstr "Página a abrir: overview, accounts, cards, transactions, investments, settings, setup ou about."
+msgstr ""
+"Página a abrir: overview, accounts, cards, transactions, investments, "
+"settings, setup ou about."
 
-#: src/app/main.cpp:66
+#: src/app/main.cpp:77
 msgctxt "command line value name"
 msgid "page"
 msgstr "página"
@@ -56,7 +58,7 @@ msgstr "página"
 msgid "Uncategorized"
 msgstr "Sem categoria"
 
-#: src/core/config.cpp:251
+#: src/core/config.cpp:282
 msgid ""
 "This does not look like an item ID. It is a UUID such as 3fa85f64-5717-4562-"
 "b3fc-2c963f66afa6."
@@ -64,7 +66,7 @@ msgstr ""
 "Isto não parece um ID de item. Ele é um UUID como 3fa85f64-5717-4562-"
 "b3fc-2c963f66afa6."
 
-#: src/core/config.cpp:255
+#: src/core/config.cpp:286
 msgctxt "Itens Conectados is a label in the Pluggy dashboard; keep it as is"
 msgid ""
 "That is the Client ID. The item ID is on the demo page of the Pluggy "
@@ -73,17 +75,17 @@ msgstr ""
 "Esse é o Client ID. O ID do item fica na página do demo do painel da Pluggy, "
 "em \"Itens Conectados\"."
 
-#: src/core/config.cpp:258
+#: src/core/config.cpp:289
 msgid "This connection is already in the list."
 msgstr "Esta conexão já está na lista."
 
-#: src/core/config.cpp:261
+#: src/core/config.cpp:292
 msgid "Meu Pluggy personal use allows at most %1 connection."
 msgid_plural "Meu Pluggy personal use allows at most %1 connections."
 msgstr[0] "O uso pessoal do Meu Pluggy permite no máximo %1 conexão."
 msgstr[1] "O uso pessoal do Meu Pluggy permite no máximo %1 conexões."
 
-#: src/core/config.cpp:310
+#: src/core/config.cpp:341
 msgctxt "connection the user has not named yet; %1 is the start of its id"
 msgid "Meu Pluggy · %1"
 msgstr "Meu Pluggy · %1"
@@ -1048,7 +1050,9 @@ msgstr "%1 (%2)"
 
 #: src/app/pages/RawDataPage.qml:45
 msgid "Values are hidden. Turn off “Hide values” to see the raw data."
-msgstr "Os valores estão ocultos. Desligue “Ocultar valores” para ver os dados brutos."
+msgstr ""
+"Os valores estão ocultos. Desligue “Ocultar valores” para ver os dados "
+"brutos."
 
 #: src/app/pages/RawDataPage.qml:46
 msgid "No raw data stored for this account. Refresh to download it again."
@@ -1223,27 +1227,49 @@ msgid "Hides the amounts in the app and in the widget."
 msgstr "Esconde os valores no app e no widget."
 
 #: src/app/pages/SettingsPage.qml:491
+msgid "Language"
+msgstr "Idioma"
+
+#: src/app/pages/SettingsPage.qml:494
+msgid "App language"
+msgstr "Idioma do app"
+
+#: src/app/pages/SettingsPage.qml:495
+msgid ""
+"Takes effect the next time Saldo starts. The Plasma widget follows the "
+"system language."
+msgstr "Vale a partir da próxima vez que o Saldo abrir. O widget do Plasma segue o idioma do sistema."
+
+#: src/app/pages/SettingsPage.qml:500
+msgid "System default"
+msgstr "Padrão do sistema"
+
+#: src/app/pages/SettingsPage.qml:504
+msgid "Restart Saldo to apply the language change."
+msgstr "Reinicie o Saldo para aplicar a troca de idioma."
+
+#: src/app/pages/SettingsPage.qml:512
 msgid "Local data"
 msgstr "Dados locais"
 
-#: src/app/pages/SettingsPage.qml:494
+#: src/app/pages/SettingsPage.qml:515
 msgid "Raw data"
 msgstr "Dados brutos"
 
-#: src/app/pages/SettingsPage.qml:495
+#: src/app/pages/SettingsPage.qml:516
 msgid "What Pluggy returned for each account, to check amounts and signs."
 msgstr ""
 "O que a Pluggy devolveu para cada conta, para conferir valores e sinais."
 
-#: src/app/pages/SettingsPage.qml:497
+#: src/app/pages/SettingsPage.qml:518
 msgid "Raw Data…"
 msgstr "Dados brutos…"
 
-#: src/app/pages/SettingsPage.qml:508
+#: src/app/pages/SettingsPage.qml:529
 msgid "Local cache"
 msgstr "Cache local"
 
-#: src/app/pages/SettingsPage.qml:509
+#: src/app/pages/SettingsPage.qml:530
 msgid ""
 "Deletes the downloaded data; the next sync fetches it again. Settings, "
 "connection names, transfer choices and balance history are kept."
@@ -1252,15 +1278,15 @@ msgstr ""
 "Configurações, nomes das conexões, escolhas de transferência e histórico de "
 "saldo são mantidos."
 
-#: src/app/pages/SettingsPage.qml:511
+#: src/app/pages/SettingsPage.qml:532
 msgid "Clear Local Cache"
 msgstr "Limpar cache local"
 
-#: src/app/pages/SettingsPage.qml:527
+#: src/app/pages/SettingsPage.qml:548
 msgid "Remove Credentials?"
 msgstr "Remover credenciais?"
 
-#: src/app/pages/SettingsPage.qml:528
+#: src/app/pages/SettingsPage.qml:549
 msgid ""
 "The Client ID and Client Secret will be deleted from the system keyring. "
 "Cached data stays until you clear it."
