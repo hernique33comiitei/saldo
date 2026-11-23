@@ -8,11 +8,16 @@
 #include <KLocalizedString>
 
 #include <QCommandLineParser>
+#include <QDir>
+#include <QFileInfo>
 #include <QIcon>
+#include <QLibraryInfo>
 #include <QQmlApplicationEngine>
 #include <QQuickStyle>
 #include <QQuickWindow>
 #include <QTimer>
+
+#include <algorithm>
 
 #ifdef Q_OS_ANDROID
 #include <QGuiApplication>
@@ -24,6 +29,24 @@ using Application = QApplication; // native file dialogs / widgets
 
 using namespace Qt::StringLiterals;
 
+#ifndef Q_OS_ANDROID
+namespace
+{
+// The org.kde.desktop style comes from qqc2-desktop-style, which Plasma always
+// has but other desktops may not: forcing a missing style leaves the app with
+// no window at all, so it is only used when installed.
+bool kdeStyleInstalled()
+{
+    QStringList dirs = qEnvironmentVariable("QML_IMPORT_PATH").split(QDir::listSeparator(), Qt::SkipEmptyParts);
+    dirs += qEnvironmentVariable("QML2_IMPORT_PATH").split(QDir::listSeparator(), Qt::SkipEmptyParts);
+    dirs.append(QLibraryInfo::path(QLibraryInfo::QmlImportsPath));
+    return std::any_of(dirs.cbegin(), dirs.cend(), [](const QString &dir) {
+        return QFileInfo::exists(dir + u"/org/kde/desktop/qmldir"_s);
+    });
+}
+}
+#endif
+
 int main(int argc, char *argv[])
 {
     Application app(argc, argv);
@@ -31,7 +54,8 @@ int main(int argc, char *argv[])
 #ifdef Q_OS_ANDROID
     QQuickStyle::setStyle(u"org.kde.breeze"_s);
 #else
-    if (qEnvironmentVariableIsEmpty("QT_QUICK_CONTROLS_STYLE")) {
+    // Without it, Qt's default style (the app still opens).
+    if (qEnvironmentVariableIsEmpty("QT_QUICK_CONTROLS_STYLE") && kdeStyleInstalled()) {
         QQuickStyle::setStyle(u"org.kde.desktop"_s);
     }
 #endif
