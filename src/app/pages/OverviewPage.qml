@@ -272,8 +272,11 @@ Kirigami.ScrollablePage {
                         delegate: Item {
                             id: total
                             required property var modelData
-                            // Room after each total, like the gap between them.
-                            implicitWidth: totalColumn.implicitWidth + Kirigami.Units.gridUnit * 2
+                            required property int index
+                            // The gap goes after the first total only: room after
+                            // the last one made the pair wrap on phones although
+                            // both fit.
+                            implicitWidth: totalColumn.implicitWidth + (index === 0 ? Kirigami.Units.gridUnit * 2 : 0)
                             implicitHeight: totalColumn.implicitHeight
 
                             ColumnLayout {
