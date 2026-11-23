@@ -1,3 +1,10 @@
+saldo (0.0.3-1) unstable; urgency=medium
+
+  * The overview footer shows the latest Pluggy update and the next one to come, even when one bank is late
+  * Clearer warning when Pluggy has not updated a bank for two days
+
+ -- Henrique Oliveira <henriik.dev@gmail.com>  Mon, 23 Nov 2026 15:49:29 -0300
+
 saldo (0.0.2-1) unstable; urgency=medium
 
   * Choose the app language in Settings: system default, English or Português (Brasil)

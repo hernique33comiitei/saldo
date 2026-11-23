@@ -1,5 +1,5 @@
 Name:           saldo
-Version:        0.0.2
+Version:        0.0.3
 Release:        1%{?dist}
 Summary:        Personal finances from Open Finance (Meu Pluggy): KDE app and Plasma widget
 
@@ -71,6 +71,10 @@ export QT_QPA_PLATFORM=offscreen
 %{_datadir}/icons/hicolor/scalable/apps/saldo-symbolic.svg
 
 %changelog
+* Mon Nov 23 2026 Henrique Oliveira <henriik.dev@gmail.com> - 0.0.3-1
+- The overview footer shows the latest Pluggy update and the next one to come, even when one bank is late
+- Clearer warning when Pluggy has not updated a bank for two days
+
 * Mon Nov 23 2026 Henrique Oliveira <henriik.dev@gmail.com> - 0.0.2-1
 - Choose the app language in Settings: system default, English or Português (Brasil)
 - Portuguese description in the software center, saying the data comes from Open Finance Brasil

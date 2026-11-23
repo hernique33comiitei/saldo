@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.28)
 
-project(saldo VERSION 0.0.2 LANGUAGES CXX)
+project(saldo VERSION 0.0.3 LANGUAGES CXX)
 
 set(SALDO_APP_ID "io.github.hernique33comiitei.Saldo")
 set(SALDO_PLASMOID_ID "io.github.hernique33comiitei.saldo")
