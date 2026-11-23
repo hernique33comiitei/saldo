@@ -18,7 +18,7 @@ data locally.
 
 ### Fedora (RPM)
 
-Built for the current Fedora release. Download the latest `.rpm` from the
+Built on Fedora 44. Download the latest `.rpm` from the
 [Releases page](https://github.com/hernique33comiitei/saldo/releases/latest) and install it:
 
 ```sh

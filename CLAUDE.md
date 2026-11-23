@@ -280,10 +280,12 @@ skill** (`.claude/skills/release/`) runs the whole flow. By hand:
   `~/.local/` and the widget failed with `module "org.saldo.core" is not installed`.
 - The `.desktop` `Exec=` is the absolute binary path for non-`/usr` prefixes (`~/.local/bin` is
   not always in the Plasma session's PATH).
-- The RPM builds in `fedora:latest` (build deps from the spec via `dnf builddep`); the deb builds in
-  an `ubuntu:26.04` container (build deps from `debian/control` via `mk-build-deps`; the runner's
-  own Ubuntu lacks Qt 6.8/KF6). Pin LTS releases only, never interim ones (EOL mirrors vanish).
-  An RPM only installs on the Fedora it was built on (or newer).
+- The RPM builds in a pinned `fedora:44` container (build deps from the spec via `dnf builddep`):
+  an RPM only installs on the Fedora it was built on (or newer), and `fedora:latest` had already
+  moved past the Fedora the maintainer runs. Move the pin to the next Fedora before 44 reaches end
+  of life (~mid 2027). The deb builds in an `ubuntu:26.04` container (build deps from
+  `debian/control` via `mk-build-deps`; the runner's own Ubuntu lacks Qt 6.8/KF6). Never pin a
+  release that is already end of life (its mirrors vanish).
 - The deb's runtime package names (`qt6-svg-plugins`, `qml6-module-org-kde-quickcharts`,
   `libqt6sql6-sqlite`) were not verified locally; the first release run confirms them.
 - The RPM job only attaches the main `.rpm` + `.src.rpm`; `-debuginfo`/`-debugsource` are filtered out.

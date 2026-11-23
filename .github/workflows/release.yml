@@ -37,8 +37,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Build RPM in a Fedora container
+        # Pinned: an RPM only installs on the Fedora it was built on (or newer).
+        # Move to the next release before Fedora 44 reaches end of life.
         run: |
-          docker run --rm -v "$PWD":/src -w /src fedora:latest bash -euxc '
+          docker run --rm -v "$PWD":/src -w /src fedora:44 bash -euxc '
             dnf -y install rpm-build rpmdevtools git dnf-plugins-core
             dnf -y builddep packaging/fedora/saldo.spec
             git config --global --add safe.directory /src
