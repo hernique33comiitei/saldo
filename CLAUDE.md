@@ -1,8 +1,9 @@
 # Saldo — project guide
 
 Kirigami app (QML + C++20/Qt6, CMake+ECM) and Plasma 6 widget that show personal finances from
-the **Meu Pluggy personal-use API**: bank balances, credit card limits, bills, investments and
-transactions. Desktop (KDE Plasma) first; the app (not the widget) also targets Android.
+**Open Finance Brasil** through the **Meu Pluggy personal-use API**: bank balances, credit card
+limits, bills, investments and transactions. Brazilian banks only. Desktop (KDE Plasma) first; the
+app (not the widget) also targets Android.
 
 - Repo: [https://github.com/hernique33comiitei/saldo](https://github.com/hernique33comiitei/saldo) (push over SSH, personal account only)
 - App-id: `io.github.hernique33comiitei.Saldo` · binary / icon / gettext-domain: `saldo`
@@ -10,8 +11,12 @@ transactions. Desktop (KDE Plasma) first; the app (not the widget) also targets 
 
 ## Conventions (must follow)
 
-- **Code, comments and docs are English only.** The UI is localized via KI18n; Portuguese lives
-  **only** in `po/pt_BR.po` (compiled to `saldo.mo` by CMake).
+- **Code, comments, CLAUDE.md, the release skill and commit messages are English only.** The UI
+  is localized via KI18n: source strings in English, Portuguese **only** in `po/pt_BR.po`
+  (compiled to `saldo.mo` by CMake). The exception is what faces users on GitHub: `README.md`,
+  the repository description and the README screenshots are in **Brazilian Portuguese**, because
+  the app only works with Brazilian banks (Open Finance Brasil), so that is its audience.
+  Changelogs (spec, debian, metainfo, release notes) stay English.
   - App QML (`src/app/`) uses `i18n()`. QML that also runs inside plasmashell (`src/core/qml/`,
     `plasmoid/`) uses `i18nd("saldo", …)`, because plasmashell has another default domain.
   - C++ in `src/core/` builds with `TRANSLATION_DOMAIN="saldo"` for the same reason.
@@ -160,9 +165,10 @@ i18n: translate the new sync error messages
 - Qt logs go to journald when stderr is not a terminal; set `QT_FORCE_STDERR_LOGGING=1`.
 - Screenshots: `SALDO_SCREENSHOT=out.png SALDO_SCREENSHOT_SIZE=1100x820 QT_QUICK_BACKEND=rhi QT_QPA_PLATFORM=offscreen build/bin/saldo --demo --page cards`.
   Without `QT_QUICK_BACKEND=rhi` the offscreen software renderer draws no KQuickCharts charts.
-  AppStream/README screenshots live in `data/screenshots/`: English (`LANGUAGE=en
-  LC_ALL=en_US.UTF-8`), the dark Breeze colors (a scratch `XDG_CONFIG_HOME` holding only a copy
-  of `kdeglobals` + `plasmarc`) and a fresh demo cache. The widget shot is `FullRepresentation.qml`
+  AppStream/README screenshots live in `data/screenshots/`: Brazilian Portuguese (`LANGUAGE=pt_BR
+  LC_ALL=pt_BR.UTF-8`, run from a `cmake --install` prefix listed in `XDG_DATA_DIRS` so `saldo.mo`
+  is found), the dark Breeze colors (a scratch `XDG_CONFIG_HOME` holding only a copy of
+  `kdeglobals` + `plasmarc`) and a fresh demo cache. The widget shot is `FullRepresentation.qml`
   loaded in a plain `Window` whose id is `root` (with `expanded`, `showInvestments`,
   `needsAttention`), grabbed with `QQuickWindow::grabWindow()`.
 - Widget without touching the session: `cmake --install` into a temp prefix, then run

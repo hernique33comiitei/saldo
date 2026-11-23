@@ -1,25 +1,27 @@
 # Saldo
 
-A Kirigami app and Plasma 6 widget for your personal finances. Saldo reads your banks
-through the free **Meu Pluggy** personal-use API and shows bank balances, credit card
-limits (overall and per card), bills, investments and transactions, with charts.
+App KDE (Kirigami) e widget do Plasma 6 para as suas finanças pessoais. O Saldo lê os seus bancos
+pelo **Open Finance** do Brasil, através da API gratuita de uso pessoal do **Meu Pluggy**, e mostra
+saldos, limites de cartão (geral e por cartão), faturas, investimentos e transações, com gráficos.
 
-Built with Qt6 + QML + Kirigami (KDE Frameworks 6). No accounts, no servers: the app
-talks to Pluggy directly, keeps your credentials in the system keyring and caches the
-data locally.
+Feito com Qt6 + QML + Kirigami (KDE Frameworks 6). Sem contas nem servidores: o app conversa direto
+com a Pluggy, guarda as credenciais no chaveiro do sistema e mantém um cache local dos dados.
 
-![Overview](data/screenshots/overview.png)
+> Funciona só com bancos brasileiros: os dados vêm do Open Finance Brasil, com o Meu Pluggy como
+> intermediário.
+
+![Visão geral](data/screenshots/overview.png)
 
 |  |  |  |
 | --- | --- | --- |
-| ![Credit cards](data/screenshots/cards.png) | ![Transactions](data/screenshots/transactions.png) | ![Plasma widget](data/screenshots/widget.png) |
+| ![Cartões de crédito](data/screenshots/cards.png) | ![Transações](data/screenshots/transactions.png) | ![Widget do Plasma](data/screenshots/widget.png) |
 
-## Install
+## Instalação
 
 ### Fedora (RPM)
 
-Built on Fedora 44. Download the latest `.rpm` from the
-[Releases page](https://github.com/hernique33comiitei/saldo/releases/latest) and install it:
+Compilado no Fedora 44. Baixe o `.rpm` mais recente na
+[página de releases](https://github.com/hernique33comiitei/saldo/releases/latest) e instale:
 
 ```sh
 sudo dnf install ./saldo-*.x86_64.rpm
@@ -27,9 +29,9 @@ sudo dnf install ./saldo-*.x86_64.rpm
 
 ### Ubuntu / Debian (DEB)
 
-Built on Ubuntu 26.04 LTS (needs Qt 6.8 and KDE Frameworks 6). Download the latest `.deb` from
-the [Releases page](https://github.com/hernique33comiitei/saldo/releases/latest) and install it
-(apt pulls in the dependencies):
+Compilado no Ubuntu 26.04 LTS (precisa de Qt 6.8 e KDE Frameworks 6). Baixe o `.deb` mais recente
+na [página de releases](https://github.com/hernique33comiitei/saldo/releases/latest) e instale (o
+apt baixa as dependências):
 
 ```sh
 sudo apt install ./saldo_*_amd64.deb
@@ -37,32 +39,33 @@ sudo apt install ./saldo_*_amd64.deb
 
 ### Android (APK)
 
-Download `saldo-<version>-arm64-v8a.apk` from the [Releases page](https://github.com/hernique33comiitei/saldo/releases/latest)
-on your phone and open it (Android asks to allow installing apps from your browser once).
+Baixe `saldo-<versão>-arm64-v8a.apk` na
+[página de releases](https://github.com/hernique33comiitei/saldo/releases/latest) pelo celular e
+abra o arquivo (o Android pede, uma vez, para permitir instalar apps pelo navegador).
 
-### From source (Fedora)
+### A partir do código (Fedora)
 
-For development, or to build the current `main`:
+Para desenvolver, ou para usar o `main` atual:
 
 ```sh
-./install.sh                    # installs missing deps, builds, installs to ~/.local
-./install.sh --restart-plasma   # same, then reloads plasmashell so the widget appears
+./install.sh                    # instala o que faltar, compila e instala em ~/.local
+./install.sh --restart-plasma   # o mesmo e reinicia o plasmashell para o widget aparecer
 ```
 
-`install.sh` only asks for `sudo` the first time, to install missing packages. It also
-writes `~/.config/plasma-workspace/env/saldo.sh` so plasmashell finds the widget's QML
-plugin under `~/.local`. `./uninstall.sh` reverts it (`--purge` also deletes the cache,
-preferences and keyring entry).
+O `install.sh` só pede `sudo` na primeira vez, para instalar pacotes que faltam. Ele também cria
+`~/.config/plasma-workspace/env/saldo.sh`, para o plasmashell achar o plugin QML do widget em
+`~/.local`. O `./uninstall.sh` desfaz tudo (`--purge` também apaga o cache, as preferências e a
+entrada no chaveiro).
 
-Try it without an account: `saldo --demo`.
+Para testar sem conta: `saldo --demo`.
 
-### From source (other distributions)
+### A partir do código (outras distribuições)
 
-Install the build dependencies, then build and install with CMake:
+Instale as dependências de compilação e compile com o CMake:
 
 - Debian/Ubuntu: `cmake ninja-build extra-cmake-modules gettext qt6-base-dev qt6-declarative-dev
   libqt6sql6-sqlite libkirigami-dev libkf6i18n-dev libkf6coreaddons-dev`
-- Fedora (what `install.sh` installs): `cmake ninja-build gcc-c++ extra-cmake-modules gettext
+- Fedora (o que o `install.sh` instala): `cmake ninja-build gcc-c++ extra-cmake-modules gettext
   qt6-qtbase-devel qt6-qtdeclarative-devel kf6-kirigami-devel kf6-ki18n-devel kf6-kcoreaddons-devel`
 
 ```sh
@@ -70,75 +73,76 @@ cmake -B build -G Ninja -DCMAKE_INSTALL_PREFIX=/usr && cmake --build build
 sudo cmake --install build
 ```
 
-At runtime it also needs the Kirigami and KQuickCharts QML modules, Qt SVG and the Qt SQLite
-driver (the packages above pull most of them in) and `secret-tool`.
+Para rodar, também são necessários os módulos QML do Kirigami e do KQuickCharts, o Qt SVG, o driver
+SQLite do Qt (os pacotes acima já trazem a maioria) e o `secret-tool`.
 
-## Connect Meu Pluggy
+## Conectar o Meu Pluggy
 
-Saldo opens a step-by-step guide on first run (*Connect Meu Pluggy* in the sidebar) that
-walks through the steps below with the exact button names of Pluggy's dashboard.
+Na primeira vez, o Saldo abre um guia passo a passo (*Conectar o Meu Pluggy*, no menu lateral) com
+os nomes exatos dos botões do painel da Pluggy.
 
-Personal use gives you a **Client ID**, a **Client Secret** and one **item ID** per
-connected bank (there is no single token):
+O uso pessoal dá um **Client ID**, um **Client Secret** e um **ID de item** por banco conectado (não
+existe um token único):
 
-1. Create an account at [meu.pluggy.ai](https://meu.pluggy.ai) and connect your banks.
-2. At [dashboard.pluggy.ai](https://dashboard.pluggy.ai) (in Portuguese), open
-   “Aplicações”: copy your application's **Client ID**, and its **Client Secret** (shown only
-   once; otherwise “Credenciais” → “Gerar novo secret”).
-3. Press ▶ “Iniciar Demo”, click “Conectar Conta”, pick **MeuPluggy** (not your bank), sign in
-   and pick **one** bank under “Selecione a conta”. Each authorization shares a single bank:
-   repeat for every bank you want (up to 5).
-4. Copy the **id** of each item under “Itens Conectados” and paste it in Saldo, together with
-   the Client ID and Secret (the guide, or *Settings*).
+1. Crie uma conta em [meu.pluggy.ai](https://meu.pluggy.ai) e conecte os seus bancos.
+2. Em [dashboard.pluggy.ai](https://dashboard.pluggy.ai), abra “Aplicações” e copie o **Client ID**
+   da sua aplicação e o **Client Secret** (aparece só uma vez; se não tiver, “Credenciais” →
+   “Gerar novo secret”).
+3. Clique em ▶ “Iniciar Demo”, depois em “Conectar Conta”, escolha **MeuPluggy** (não o seu banco),
+   entre e marque **um** banco em “Selecione a conta”. Cada autorização compartilha um único banco:
+   repita para cada banco que quiser (até 5).
+4. Copie o **id** de cada item em “Itens Conectados” e cole no Saldo, junto com o Client ID e o
+   Secret (pelo guia ou em *Configurações*).
 
-Guide: <https://docs.pluggy.ai/pt/docs/guides/meu-pluggy-personal-use>
+Guia oficial: <https://docs.pluggy.ai/pt/docs/guides/meu-pluggy-personal-use>
 
-- Meu Pluggy refreshes your banks **once a day** on its own and can't be forced; *Refresh*
-  re-reads what Pluggy already has.
-- Authorizations last one year (Saldo warns 30 days before). Renewing may change the item ID.
+- O Meu Pluggy atualiza os seus bancos **uma vez por dia** sozinho, e isso não pode ser forçado: o
+  *Atualizar* relê o que a Pluggy já tem.
+- As autorizações duram um ano (o Saldo avisa 30 dias antes). Renovar pode mudar o ID do item.
 
-## Plasma widget
+## Widget do Plasma
 
-Right-click the panel → *Add or Manage Widgets* → **Saldo**, or *Configure System Tray →
-Entries → Saldo*. The panel shows the Saldo icon or, optionally, the money in your accounts
-(not in the system tray); the popup has Summary, Cards and Transactions tabs; middle-click
-hides the values.
-Credentials and connections are set in the app.
+Clique com o botão direito no painel → *Adicionar ou gerenciar widgets* → **Saldo**, ou *Configurar
+bandeja do sistema → Entradas → Saldo*. O painel mostra o ícone do Saldo ou, se você preferir, o
+dinheiro nas contas (fora da bandeja do sistema). O popup tem as abas Resumo, Cartões e Transações;
+o clique do meio esconde os valores. Credenciais e conexões ficam no app.
 
-## Requirements
+## Requisitos
 
-The app **never installs** anything. It needs `secret-tool` (libsecret) for the keyring and
-shows a warning when it is missing. The packages pull in everything else (Kirigami,
-KQuickCharts, Qt SVG/SQLite, libsecret).
+O app **nunca instala** nada. Ele precisa do `secret-tool` (libsecret) para o chaveiro e mostra um
+aviso quando ele falta. Os pacotes trazem todo o resto (Kirigami, KQuickCharts, Qt SVG/SQLite,
+libsecret).
 
-## How it works
+## Como funciona
 
-- **One core, two front-ends.** A C++ library (`saldocore`, QML module `org.saldo.core`)
-  holds the Pluggy client, the sync logic and an SQLite cache. The app and the widget both
-  load it in-process — there is no daemon. A lock file keeps one sync at a time and the
-  other process reloads when the cache changes.
-- **Pluggy API.** `POST /auth` turns the Client ID + Secret into an API key kept 2 hours in
-  memory. Accounts, bills, investments and categories are paged; transactions come from the
-  cursor-based `GET /v2/transactions`. Each sync re-fetches the last 7 days of every account
-  so pending transactions that changed or vanished are reconciled.
-- **Totals that add up.** Card amounts are normalized so negative always means money going
-  out; transfers between your own accounts and card bill payments are left out of income and
-  expenses; cards sharing one limit are counted once (and any card can be excluded).
-- **Your data.** Client ID/Secret in the system keyring (Secret Service/KWallet), never in
-  files. Cache in `~/.local/share/saldo/` (directory 0700, database 0600), preferences in
-  `~/.config/saldorc`.
-  Network traffic goes only to `https://api.pluggy.ai`.
+- **Um núcleo, duas interfaces.** Uma biblioteca C++ (`saldocore`, módulo QML `org.saldo.core`)
+  reúne o cliente da Pluggy, a sincronização e um cache SQLite. O app e o widget carregam essa
+  biblioteca no próprio processo: não há daemon. Um arquivo de trava garante uma sincronização por
+  vez, e o outro processo recarrega quando o cache muda.
+- **API da Pluggy.** `POST /auth` troca o Client ID + Secret por uma chave de API, mantida 2 horas
+  na memória. Contas, faturas, investimentos e categorias vêm paginados; as transações vêm do
+  `GET /v2/transactions`, com cursor. Cada sincronização busca de novo os últimos 7 dias de cada
+  conta, para acertar transações pendentes que mudaram ou sumiram.
+- **Totais que fecham.** Os valores dos cartões são normalizados para que negativo sempre seja
+  dinheiro saindo; transferências entre as suas próprias contas e pagamentos de fatura ficam fora
+  de entradas e saídas; cartões que dividem o mesmo limite contam uma vez só (e qualquer cartão pode
+  ser excluído).
+- **Seus dados.** Client ID e Secret no chaveiro do sistema (Secret Service/KWallet), nunca em
+  arquivos. Cache em `~/.local/share/saldo/` (pasta 0700, banco 0600), preferências em
+  `~/.config/saldorc`. O tráfego de rede vai só para `https://api.pluggy.ai`.
+- **Idioma.** Português ou inglês, em *Configurações → Idioma* (por padrão, o do sistema).
 
-> Pluggy's docs are ambiguous about amount units and the sign of card purchases; real data
-> showed amounts in reais and card purchases as positive numbers, which Saldo turns into money
-> going out. *Settings → Raw Data…* shows the raw account JSON to compare with your bank app.
+> A documentação da Pluggy é ambígua sobre a unidade dos valores e o sinal das compras no cartão;
+> os dados reais vieram em reais e com as compras do cartão positivas, que o Saldo converte em
+> dinheiro saindo. *Configurações → Dados brutos…* mostra o JSON de cada conta para comparar com o
+> app do banco.
 
 ## Android
 
-The app (not the widget) runs on Android, storing the credentials in the Android Keystore.
-APKs are built with KDE Craft in KDE's Android container: `tools/build-apk.sh --docker` builds
-one locally and `tools/sign-apk.sh` signs it. See `CLAUDE.md` for the signing setup.
+O app (não o widget) roda no Android, com as credenciais no Android Keystore. Os APKs são
+compilados com o KDE Craft no contêiner Android do KDE: `tools/build-apk.sh --docker` gera um
+localmente e `tools/sign-apk.sh` assina. A configuração da assinatura está no `CLAUDE.md`.
 
-## License
+## Licença
 
-MIT — see [LICENSE](LICENSE). Saldo is an independent project, not affiliated with Pluggy.
+MIT: veja [LICENSE](LICENSE). O Saldo é um projeto independente, sem vínculo com a Pluggy.

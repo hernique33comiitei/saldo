@@ -14,7 +14,8 @@
 #include <functional>
 
 // Asynchronous client for the Pluggy API (https://api.pluggy.ai), limited to
-// what the Meu Pluggy personal-use flow allows.
+// what the Meu Pluggy personal-use flow allows. Pluggy aggregates Brazilian
+// banks through Open Finance Brasil; Meu Pluggy is its free personal-use tier.
 //
 // - POST /auth exchanges Client ID + Secret for an API key valid for 2 hours;
 //   the key is kept in memory and renewed transparently (also on HTTP 401).
