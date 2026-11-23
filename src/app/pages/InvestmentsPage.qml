@@ -82,7 +82,7 @@ Kirigami.ScrollablePage {
                         text: [
                             delegate.model.institution,
                             delegate.model.dueLabel ? i18n("matures %1", delegate.model.dueLabel) : "",
-                            delegate.model.lastTwelveMonthsRate !== 0 ? i18n("%1% in 12 months", delegate.model.lastTwelveMonthsRate.toLocaleString(Qt.locale(), "f", 1)) : ""
+                            delegate.model.lastTwelveMonthsRate !== 0 ? i18n("%1% in 12 months", Money.number(delegate.model.lastTwelveMonthsRate, 1)) : ""
                         ].filter(part => part && part.length > 0).join(" · ")
                         elide: Text.ElideRight
                         font: Kirigami.Theme.smallFont

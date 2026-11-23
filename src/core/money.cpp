@@ -12,12 +12,12 @@ using namespace Qt::StringLiterals;
 
 namespace
 {
-QLocale localeFor(const QString &currency)
+// Numbers (money in any currency, percentages, numeric dates) are always
+// Brazilian, whatever the app's or the system's language: the app only works
+// with Brazilian banks. Names follow the app's language (uiLocale()).
+QLocale brazil()
 {
-    if (currency.isEmpty() || currency == "BRL"_L1) {
-        return QLocale(QLocale::Portuguese, QLocale::Brazil);
-    }
-    return QLocale::system();
+    return QLocale(QLocale::Portuguese, QLocale::Brazil);
 }
 
 QString symbolFor(const QString &currency)
@@ -38,10 +38,10 @@ QString symbolFor(const QString &currency)
 QString MoneyFormat::format(double value, const QString &currency)
 {
     if (std::abs(value) < 0.005) {
-        return localeFor(currency).toCurrencyString(0.0, symbolFor(currency)); // never "-R$ 0,00"
+        return brazil().toCurrencyString(0.0, symbolFor(currency)); // never "-R$ 0,00"
     }
     // "-R$ 1,00" rather than the locale's "R$ -1,00"
-    const QString text = localeFor(currency).toCurrencyString(std::abs(value), symbolFor(currency));
+    const QString text = brazil().toCurrencyString(std::abs(value), symbolFor(currency));
     return value < 0 ? u"-"_s + text : text;
 }
 
@@ -54,7 +54,7 @@ QString MoneyFormat::formatSigned(double value, const QString &currency)
 QString MoneyFormat::compact(double value, const QString &currency)
 {
     const double magnitude = std::abs(value);
-    const QLocale locale = localeFor(currency);
+    const QLocale locale = brazil();
     const QString symbol = symbolFor(currency);
     const QString sign = value < 0 ? u"-"_s : QString();
     if (magnitude >= 1e6) {
@@ -70,7 +70,7 @@ QString MoneyFormat::compact(double value, const QString &currency)
 QString MoneyFormat::axisLabel(double value, double step, const QString &currency)
 {
     const double magnitude = std::abs(value);
-    const QLocale locale = localeFor(currency);
+    const QLocale locale = brazil();
     const QString symbol = symbolFor(currency);
     const QString sign = value < -0.005 ? u"-"_s : QString();
     // One decimal only when the step needs it (2.5K steps).
@@ -95,7 +95,12 @@ QString MoneyFormat::percent(double ratio)
     if (!std::isfinite(ratio)) {
         ratio = 0;
     }
-    return i18nc("percentage", "%1%", QLocale::system().toString(std::lround(ratio * 100)));
+    return i18nc("percentage", "%1%", brazil().toString(std::lround(ratio * 100)));
+}
+
+QString MoneyFormat::number(double value, int decimals)
+{
+    return brazil().toString(value, 'f', decimals);
 }
 
 QString MoneyFormat::relativeTime(const QDateTime &when)
@@ -126,12 +131,19 @@ QString MoneyFormat::relativeTime(const QDateTime &when)
     return i18np("%1 day ago", "%1 days ago", secs / 86400);
 }
 
+QLocale MoneyFormat::uiLocale()
+{
+    // KI18n's languages: the one picked in Settings, else the system's list.
+    const QString language = KLocalizedString::languages().value(0);
+    return language.isEmpty() ? QLocale::system() : QLocale(language);
+}
+
 QString MoneyFormat::shortDate(const QDate &date)
 {
     if (!date.isValid()) {
         return QString();
     }
-    return QLocale::system().toString(date, QLocale::ShortFormat);
+    return brazil().toString(date, QLocale::ShortFormat);
 }
 
 QString MoneyFormat::dayMonth(const QDate &date)
@@ -139,11 +151,11 @@ QString MoneyFormat::dayMonth(const QDate &date)
     if (!date.isValid()) {
         return QString();
     }
-    // The locale's short format minus the year and the separator next to it:
-    // "dd/MM/yyyy" -> "dd/MM", "M/d/yy" -> "M/d", "yyyy-MM-dd" -> "MM-dd".
+    // The short format minus the year and the separator next to it
+    // ("dd/MM/yyyy" -> "dd/MM").
     static const QRegularExpression yearAtEnd(u"[^dM]*y+[^dM]*$"_s);
     static const QRegularExpression yearElsewhere(u"y+[^dM]*"_s);
-    const QLocale locale = QLocale::system();
+    const QLocale locale = brazil();
     QString format = locale.dateFormat(QLocale::ShortFormat);
     format.remove(yearAtEnd);
     format.remove(yearElsewhere);
@@ -159,7 +171,7 @@ QString MoneyFormat::dayLabel(const QDate &date)
     if (date == today.addDays(-1)) {
         return i18n("Yesterday");
     }
-    QString label = QLocale::system().toString(date, QLocale::LongFormat);
+    QString label = uiLocale().toString(date, QLocale::LongFormat);
     if (!label.isEmpty()) {
         label[0] = label[0].toUpper();
     }
@@ -168,7 +180,7 @@ QString MoneyFormat::dayLabel(const QDate &date)
 
 QString MoneyFormat::monthLabel(const QDate &month)
 {
-    QString label = QLocale::system().standaloneMonthName(month.month(), QLocale::LongFormat);
+    QString label = uiLocale().standaloneMonthName(month.month(), QLocale::LongFormat);
     if (!label.isEmpty()) {
         label[0] = label[0].toUpper();
     }
@@ -177,7 +189,7 @@ QString MoneyFormat::monthLabel(const QDate &month)
 
 QString MoneyFormat::shortMonthLabel(const QDate &month)
 {
-    QString label = QLocale::system().standaloneMonthName(month.month(), QLocale::ShortFormat);
+    QString label = uiLocale().standaloneMonthName(month.month(), QLocale::ShortFormat);
     label.remove(u'.');
     return label;
 }
@@ -215,6 +227,11 @@ QString Money::axisLabel(double value, double step, const QString &currency) con
 QString Money::percent(double ratio) const
 {
     return MoneyFormat::percent(ratio);
+}
+
+QString Money::number(double value, int decimals) const
+{
+    return MoneyFormat::number(value, decimals);
 }
 
 QString Money::relativeTime(const QDateTime &when) const

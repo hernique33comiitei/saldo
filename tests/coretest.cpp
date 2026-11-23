@@ -11,6 +11,8 @@
 #include "accountsmodel.h"
 #include "balancehistorymodel.h"
 
+#include <KLocalizedString>
+
 #include <QFile>
 #include <QJsonArray>
 #include <QJsonDocument>
@@ -92,6 +94,34 @@ private Q_SLOTS:
         QVERIFY2(!zero.contains(u'K') && zero.contains(u'0'), qPrintable(zero));
         const QString small = MoneyFormat::axisLabel(23600, 100);
         QVERIFY2(small.contains(u"23.600"_s) && !small.contains(u'K'), qPrintable(small));
+    }
+
+    void datesFollowTheAppNotTheSystem()
+    {
+        // A phone set to English (US) with the app in Portuguese showed
+        // 11/30/26 and "November de 2026".
+        const QLocale previous;
+        QLocale::setDefault(QLocale(QLocale::English, QLocale::UnitedStates));
+        const QDate day(2026, 11, 30);
+
+        KLocalizedString::setLanguages({u"pt_BR"_s});
+        QCOMPARE(MoneyFormat::shortDate(day), u"30/11/2026"_s);
+        QCOMPARE(MoneyFormat::dayMonth(day), u"30/11"_s);
+        QVERIFY2(MoneyFormat::monthLabel(day).startsWith(u"Novembro"_s), qPrintable(MoneyFormat::monthLabel(day)));
+        QCOMPARE(Categories::displayName(u"Groceries"_s, u"Supermercado"_s), u"Supermercado"_s);
+        QCOMPARE(MoneyFormat::number(12.34, 1), u"12,3"_s);
+        const QString dollars = MoneyFormat::format(1234.5, u"USD"_s);
+        QVERIFY2(dollars.startsWith(u"US$"_s) && dollars.endsWith(u"1.234,50"_s), qPrintable(dollars));
+
+        // In English the names change, the numbers stay Brazilian (like the money).
+        KLocalizedString::setLanguages({u"en"_s});
+        QCOMPARE(MoneyFormat::shortDate(day), u"30/11/2026"_s);
+        QVERIFY2(MoneyFormat::monthLabel(day).startsWith(u"November"_s), qPrintable(MoneyFormat::monthLabel(day)));
+        QCOMPARE(Categories::displayName(u"Groceries"_s, u"Supermercado"_s), u"Groceries"_s);
+        QCOMPARE(MoneyFormat::number(12.34, 1), u"12,3"_s);
+
+        KLocalizedString::clearLanguages();
+        QLocale::setDefault(previous);
     }
 
     void dayMonthLabels()

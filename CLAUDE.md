@@ -43,6 +43,12 @@ app (not the widget) also targets Android.
 - **Optional SQL filters:** a null `QString` binds as SQL `NULL`, and `NULL = ''` is never true,
   so `WHERE (? = '' OR col = ?)` returns nothing when the filter is unset (the raw data page came
   out empty that way). Write `COALESCE(?, '') = ''`.
+- **Numbers, dates and names:** numbers (money in any currency, `Money.percent`,
+  `Money.number`; never `toLocaleString(Qt.locale())` in QML) and numeric dates are always
+  Brazilian (`dd/MM/yyyy`, like the money), and month/day names and Pluggy's category names
+  follow the app's language (`MoneyFormat::uiLocale()`, from `KLocalizedString::languages()`).
+  Never `QLocale::system()`: a phone set to English (US) showed `11/30/26`, "November de 2026"
+  and English categories with the app in Portuguese.
 - **Money sign:** negative = money going out, everywhere. Only `PluggyParser::normalizedAmount`
   knows that Pluggy reports card movements with the opposite sign; never flip amounts elsewhere.
 - **Internal movements** (money moving between the user's own accounts) are neither income nor

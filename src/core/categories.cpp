@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 #include "categories.h"
 
+#include "money.h"
+
 #include <KLocalizedString>
 
 #include <QList>
@@ -65,7 +67,9 @@ QString Categories::displayName(const QString &description, const QString &trans
     if (description.isEmpty() && translated.isEmpty()) {
         return i18n("Uncategorized");
     }
-    if (!translated.isEmpty() && (description.isEmpty() || QLocale().language() == QLocale::Portuguese)) {
+    // The app's language, not the system's (a phone in English showed English
+    // categories with the app in Portuguese).
+    if (!translated.isEmpty() && (description.isEmpty() || MoneyFormat::uiLocale().language() == QLocale::Portuguese)) {
         return translated;
     }
     return description;
