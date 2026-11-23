@@ -98,6 +98,14 @@
   <content_rating type="oars-1.1"/>
 
   <releases>
+    <release version="0.0.4" date="2026-11-23">
+      <description>
+        <ul>
+          <li>Works on desktops without KDE Plasma, such as GNOME: the packages now bring the KDE style and the Breeze icons the app needs</li>
+          <li>The app opens even when the KDE style is missing, with Qt's default look</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.0.3" date="2026-11-23">
       <description>
         <ul>

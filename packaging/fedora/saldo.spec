@@ -1,5 +1,5 @@
 Name:           saldo
-Version:        0.0.3
+Version:        0.0.4
 Release:        1%{?dist}
 Summary:        Personal finances from Open Finance (Meu Pluggy): KDE app and Plasma widget
 
@@ -75,6 +75,10 @@ export QT_QPA_PLATFORM=offscreen
 %{_datadir}/icons/hicolor/scalable/apps/saldo-symbolic.svg
 
 %changelog
+* Mon Nov 23 2026 Henrique Oliveira <henriik.dev@gmail.com> - 0.0.4-1
+- Works on desktops without KDE Plasma, such as GNOME: the packages now bring the KDE style and the Breeze icons the app needs
+- The app opens even when the KDE style is missing, with Qt's default look
+
 * Mon Nov 23 2026 Henrique Oliveira <henriik.dev@gmail.com> - 0.0.3-1
 - The overview footer shows the latest Pluggy update and the next one to come, even when one bank is late
 - Clearer warning when Pluggy has not updated a bank for two days

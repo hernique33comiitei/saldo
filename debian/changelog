@@ -1,3 +1,10 @@
+saldo (0.0.4-1) unstable; urgency=medium
+
+  * Works on desktops without KDE Plasma, such as GNOME: the packages now bring the KDE style and the Breeze icons the app needs
+  * The app opens even when the KDE style is missing, with Qt's default look
+
+ -- Henrique Oliveira <henriik.dev@gmail.com>  Mon, 23 Nov 2026 18:31:14 -0300
+
 saldo (0.0.3-1) unstable; urgency=medium
 
   * The overview footer shows the latest Pluggy update and the next one to come, even when one bank is late
