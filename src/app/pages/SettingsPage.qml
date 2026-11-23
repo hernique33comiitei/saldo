@@ -548,6 +548,11 @@ Kirigami.ScrollablePage {
         title: i18n("Remove Credentials?")
         subtitle: i18n("The Client ID and Client Secret will be deleted from the system keyring. Cached data stays until you clear it.")
         standardButtons: Kirigami.Dialog.Ok | Kirigami.Dialog.Cancel
+        // Our own texts: Qt's follow the system language (see RenameConnectionDialog).
+        onAboutToShow: {
+            standardButton(Kirigami.Dialog.Ok).text = i18n("OK");
+            standardButton(Kirigami.Dialog.Cancel).text = i18n("Cancel");
+        }
         onAccepted: Credentials.clear()
     }
 

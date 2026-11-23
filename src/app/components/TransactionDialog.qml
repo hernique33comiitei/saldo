@@ -22,6 +22,9 @@ Kirigami.Dialog {
 
     title: tx.description ?? ""
     standardButtons: Kirigami.Dialog.Close
+    // Our own button texts: Qt's come from the platform (KDE's in Plasma) in
+    // the system's language, not the app's.
+    onAboutToShow: standardButton(Kirigami.Dialog.Close).text = i18n("Close")
     preferredWidth: Kirigami.Units.gridUnit * 24
     padding: Kirigami.Units.largeSpacing
 

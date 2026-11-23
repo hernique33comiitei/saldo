@@ -1,4 +1,4 @@
-qt_add_executable(saldo main.cpp)
+qt_add_executable(saldo main.cpp frameworkcatalogs.cpp)
 
 set(SALDO_APP_QML_FILES
     Main.qml

@@ -22,8 +22,13 @@ app (not the widget) also targets Android.
   - C++ in `src/core/` builds with `TRANSLATION_DOMAIN="saldo"` for the same reason.
   - The app language can be overridden in Settings (`Config.language`: "", "en", "pt_BR").
     `main.cpp` applies it with `KLocalizedString::setLanguages` before the first `i18n()` (it
-    spots `--demo` first, so the demo reads its own config). The widget always follows the
-    system language: `setLanguages` inside plasmashell would change every applet.
+    spots `--demo` first, so the demo reads its own config), and `useFrameworkCatalogs()`
+    (`frameworkcatalogs.cpp`) swaps the Qt catalogs KDE Frameworks and Qt load for the *system*
+    language (Kirigami's “Search…”/“Open drawer”, the style's menus) for the app's, including
+    those of libraries QML loads later. Dialog buttons get our own `i18n` texts
+    (`standardButton(…).text` in `onAboutToShow`): Qt's come from the platform in the system
+    language. The widget always follows the system language: `setLanguages` inside plasmashell
+    would change every applet.
 - Git pushes go over SSH with the personal key. Author: Henrique Oliveira
   <henriik.dev@gmail.com> (already set in this repo's `git config`).
 - **No Claude attribution** in commits or PRs (no `Co-Authored-By`, no "Generated with…").

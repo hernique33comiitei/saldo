@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 
 #include "config.h"
+#include "frameworkcatalogs.h"
 #include "paths.h"
 
 #include <KAboutData>
@@ -70,6 +71,7 @@ int main(int argc, char *argv[])
     // The language picked in Settings, before the first i18n() call.
     if (const QString language = Config::storedLanguage(); !language.isEmpty()) {
         KLocalizedString::setLanguages({language});
+        useFrameworkCatalogs(language); // Kirigami's own texts too
     }
     QCoreApplication::setOrganizationName(u"saldo"_s);
     QCoreApplication::setApplicationName(u"saldo"_s);

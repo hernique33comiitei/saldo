@@ -24,6 +24,12 @@ Kirigami.PromptDialog {
 
     title: i18n("Name This Connection")
     standardButtons: Kirigami.Dialog.Save | Kirigami.Dialog.Cancel
+    // Our own button texts: Qt's come from the platform (KDE's in Plasma) in
+    // the system's language, not the app's.
+    onAboutToShow: {
+        standardButton(Kirigami.Dialog.Save).text = i18n("Save");
+        standardButton(Kirigami.Dialog.Cancel).text = i18n("Cancel");
+    }
     onAccepted: Config.setItemName(itemId, nameField.text)
 
     ColumnLayout {
