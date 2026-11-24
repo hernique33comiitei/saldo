@@ -1,17 +1,20 @@
 #!/usr/bin/env bash
 # Builds Saldo and installs it into ~/.local (app, Plasma widget, QML plugin,
-# icons, translations). Run ./install.sh --restart-plasma to reload the panel.
+# icons, translations). Run ./install.sh --restart-plasma to reload the panel,
+# ./install.sh --deps-only to only install what building and running need.
 set -euo pipefail
 cd "$(dirname "$0")"
 
 PREFIX="$HOME/.local"
 BUILD_DIR="build-user"
 RESTART_PLASMA=0
+DEPS_ONLY=0
 for arg in "$@"; do
     case "$arg" in
         --restart-plasma) RESTART_PLASMA=1 ;;
+        --deps-only) DEPS_ONLY=1 ;;
         -h|--help)
-            echo "Usage: $0 [--restart-plasma]"
+            echo "Usage: $0 [--restart-plasma | --deps-only]"
             exit 0
             ;;
         *)
@@ -21,27 +24,26 @@ for arg in "$@"; do
     esac
 done
 
-# Dependencies installed together with the app: build tools, Qt/KF6 dev
-# packages, the runtime QML modules it dlopens and libsecret (secret-tool).
-DEPS=(
-  extra-cmake-modules cmake ninja-build gcc-c++ gettext
-  qt6-qtbase-devel qt6-qtdeclarative-devel qt6-qtsvg
-  kf6-kirigami-devel kf6-ki18n-devel kf6-kcoreaddons-devel kf6-kquickcharts
-  libsecret
-)
-
+# Dependencies come from the RPM spec, the one list for Fedora (debian/control
+# is Debian's): BuildRequires (build tools, -devel packages) and Requires (what
+# the app loads at runtime: QML modules, style, icons, secret-tool). Only the
+# missing ones are installed, so sudo is asked for only when something is new.
 if command -v dnf >/dev/null 2>&1; then
+    mapfile -t DEPS < <(sed -nE 's/^(Build)?Requires:[[:space:]]*([^[:space:]%]+).*/\2/p' packaging/fedora/saldo.spec)
     missing=()
     for pkg in "${DEPS[@]}"; do
-        rpm -q "$pkg" >/dev/null 2>&1 || missing+=("$pkg")
+        rpm -q --whatprovides "$pkg" >/dev/null 2>&1 || missing+=("$pkg")
     done
     if [ ${#missing[@]} -gt 0 ]; then
         echo "Installing dependencies (sudo): ${missing[*]}"
         sudo dnf install -y "${missing[@]}"
+    else
+        echo "Dependencies: all installed"
     fi
 else
-    echo "warning: not Fedora: install the build dependencies listed in README.md (\"From source (other distributions)\") and secret-tool (libsecret-tools)." >&2
+    echo "warning: not Fedora: install the dependencies from debian/control (sudo apt build-dep . on Debian/Ubuntu), see README.md." >&2
 fi
+[ "$DEPS_ONLY" = 1 ] && exit 0
 
 cmake -B "$BUILD_DIR" -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="$PREFIX" -DBUILD_TESTING=OFF
 cmake --build "$BUILD_DIR"

@@ -94,9 +94,11 @@ Para desenvolver, ou para usar o `main` atual:
 ```sh
 ./install.sh                    # instala o que faltar, compila e instala em ~/.local
 ./install.sh --restart-plasma   # o mesmo e reinicia o plasmashell para o widget aparecer
+./install.sh --deps-only        # só instala as dependências (para começar a desenvolver)
 ```
 
-O `install.sh` só pede `sudo` na primeira vez, para instalar pacotes que faltam. Ele também cria
+O `install.sh` lê as dependências do spec do Fedora (`packaging/fedora/saldo.spec`) e só pede
+`sudo` quando falta algum pacote. Ele também cria
 `~/.config/plasma-workspace/env/saldo.sh`, para o plasmashell achar o plugin QML do widget em
 `~/.local`. O `./uninstall.sh` desfaz tudo (`--purge` também apaga o cache, as preferências e a
 entrada no chaveiro).
@@ -105,18 +107,21 @@ Para testar sem conta: `saldo --demo`.
 
 ### A partir do código (outras distribuições)
 
-Instale as dependências de compilação e compile com o CMake:
-
-- Debian/Ubuntu: `cmake ninja-build extra-cmake-modules gettext qt6-base-dev qt6-declarative-dev libqt6sql6-sqlite libkirigami-dev libkf6i18n-dev libkf6coreaddons-dev`
-- Fedora (o que o `install.sh` instala): `cmake ninja-build gcc-c++ extra-cmake-modules gettext qt6-qtbase-devel qt6-qtdeclarative-devel kf6-kirigami-devel kf6-ki18n-devel kf6-kcoreaddons-devel`
+As dependências ficam nos arquivos de empacotamento, a mesma lista que o GitHub Actions usa:
+`debian/control` (Debian/Ubuntu) e `packaging/fedora/saldo.spec` (Fedora). Instale com o comando
+padrão da sua distribuição, na pasta do código, e compile com o CMake:
 
 ```sh
+sudo apt build-dep .                                # Debian/Ubuntu
+sudo dnf builddep packaging/fedora/saldo.spec       # Fedora (ou ./install.sh --deps-only)
+
 cmake -B build -G Ninja -DCMAKE_INSTALL_PREFIX=/usr && cmake --build build
 sudo cmake --install build
 ```
 
-Para rodar, também são necessários os módulos QML do Kirigami e do KQuickCharts, o Qt SVG, o driver
-SQLite do Qt (os pacotes acima já trazem a maioria) e o `secret-tool`.
+Se faltar algo, o CMake para e lista os pacotes que faltam. Para rodar, também são necessários os
+pacotes de execução (`Depends` do `debian/control`, `Requires` do spec): módulos QML do Kirigami e
+do KQuickCharts, estilo e ícones do KDE, Qt SVG, driver SQLite do Qt e `secret-tool`.
 
 ## Conectar o Meu Pluggy
 
@@ -173,13 +178,13 @@ libsecret).
   arquivos. Cache em `~/.local/share/saldo/` (pasta 0700, banco 0600), preferências em
   `~/.config/saldorc`. O tráfego de rede vai só para `https://api.pluggy.ai`.
 - **Idioma.** Português ou inglês, em *Configurações → Idioma* (por padrão, o do sistema).
+- **Tema.** Claro ou escuro, em *Configurações → Aparência* (por padrão, o do sistema: as cores do
+  Plasma, ou o modo escuro do GNOME ou do celular).
 
 > A documentação da Pluggy é ambígua sobre a unidade dos valores e o sinal das compras no cartão;
 > os dados reais vieram em reais e com as compras do cartão positivas, que o Saldo converte em
 > dinheiro saindo. *Configurações → Dados brutos…* mostra o JSON de cada conta para comparar com o
 > app do banco.
-- **Tema.** Claro ou escuro, em *Configurações → Aparência* (por padrão, o do sistema: as cores do
-  Plasma, ou o modo escuro do GNOME ou do celular).
 
 ## Android
 

@@ -186,9 +186,16 @@ i18n: translate the new sync error messages
 
 ## Build / run / test
 
-- Build + install to `~/.local`: `./install.sh` (installs missing deps with `dnf`, builds, installs,
-  and writes `~/.config/plasma-workspace/env/saldo.sh` so plasmashell finds the QML plugin).
-  `./install.sh --restart-plasma` also reloads the panel. `./uninstall.sh [--purge]` reverts it.
+- Build + install to `~/.local`: `./install.sh` (installs the missing deps of the spec with `dnf`,
+  builds, installs, and writes `~/.config/plasma-workspace/env/saldo.sh` so plasmashell finds the
+  QML plugin). `./install.sh --restart-plasma` also reloads the panel; `--deps-only` only installs
+  the deps (a new developer's setup). `./uninstall.sh [--purge]` reverts it.
+- **Dependencies live in the packaging files only:** `packaging/fedora/saldo.spec`
+  (`BuildRequires`, `Requires`) and `debian/control` (`Build-Depends`, `Depends`). CI installs from
+  them (`dnf builddep`, `mk-build-deps`), `install.sh` reads the spec, the README points to `dnf
+  builddep` / `apt build-dep .`, and CMake's `feature_summary` names whatever is missing. A new
+  dependency goes into both files (and `find_package` in CMake), nowhere else. On Android, Craft
+  builds what the blueprint (`craft/saldo/saldo.py`) lists.
 - Dev build + tests:
   `cmake -B build -G Ninja -DBUILD_TESTING=ON && cmake --build build && QT_QPA_PLATFORM=offscreen ctest --test-dir build --output-on-failure`
 - Demo data (no account needed): `build/bin/saldo --demo [--page overview|accounts|cards|transactions|investments|settings|setup|about]`.
