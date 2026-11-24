@@ -1,3 +1,11 @@
+saldo (0.0.8-1) unstable; urgency=medium
+
+  * On Android, the light and dark themes change only the colors: text sizes and layouts stay the same
+  * On Android, counts and times are translated ("5 contas", "há 3 dias" instead of "5 accounts", "3 days ago")
+  * The phone's header menu no longer draws a keyboard shortcut over the text
+
+ -- Henrique Oliveira <henriik.dev@gmail.com>  Mon, 23 Nov 2026 21:39:28 -0300
+
 saldo (0.0.7-1) unstable; urgency=medium
 
   * On phones, the sections are tabs at the bottom, and the page buttons stay at the top

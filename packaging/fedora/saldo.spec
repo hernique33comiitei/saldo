@@ -1,5 +1,5 @@
 Name:           saldo
-Version:        0.0.7
+Version:        0.0.8
 Release:        1%{?dist}
 Summary:        Personal finances from Open Finance (Meu Pluggy): KDE app and Plasma widget
 
@@ -75,6 +75,11 @@ export QT_QPA_PLATFORM=offscreen
 %{_datadir}/icons/hicolor/scalable/apps/saldo-symbolic.svg
 
 %changelog
+* Mon Nov 23 2026 Henrique Oliveira <henriik.dev@gmail.com> - 0.0.8-1
+- On Android, the light and dark themes change only the colors: text sizes and layouts stay the same
+- On Android, counts and times are translated ("5 contas", "há 3 dias" instead of "5 accounts", "3 days ago")
+- The phone's header menu no longer draws a keyboard shortcut over the text
+
 * Mon Nov 23 2026 Henrique Oliveira <henriik.dev@gmail.com> - 0.0.7-1
 - On phones, the sections are tabs at the bottom, and the page buttons stay at the top
 - Pull a page down to refresh it on the phone

@@ -98,6 +98,15 @@
   <content_rating type="oars-1.1"/>
 
   <releases>
+    <release version="0.0.8" date="2026-11-23">
+      <description>
+        <ul>
+          <li>On Android, the light and dark themes change only the colors: text sizes and layouts stay the same</li>
+          <li>On Android, counts and times are translated ("5 contas", "há 3 dias" instead of "5 accounts", "3 days ago")</li>
+          <li>The phone's header menu no longer draws a keyboard shortcut over the text</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.0.7" date="2026-11-23">
       <description>
         <ul>
