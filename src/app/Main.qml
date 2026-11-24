@@ -180,7 +180,13 @@ Kirigami.ApplicationWindow {
         ]
     }
 
-    footer: Kirigami.NavigationTabBar {
+    // No footer at all on the desktop: Kirigami makes the sidebar drawer shorter
+    // by the footer's height even when the footer is hidden (it ended 120 px
+    // above the window's bottom edge).
+    footer: root.tabs ? tabBar : null
+
+    Kirigami.NavigationTabBar {
+        id: tabBar
         visible: root.tabs
         actions: [
             Kirigami.Action {

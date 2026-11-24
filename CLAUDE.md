@@ -135,7 +135,9 @@ app (not the widget) also targets Android.
 - **Phones** (`Kirigami.Settings.isMobile`: Android; the desktop never changes with these): the
   five sections are tabs at the bottom (`NavigationTabBar` in `Main.qml`, labels of about 8
   characters, `@title:tab` contexts: "Resumo", "Extrato", "Investir"), and the drawer keeps only
-  the setup guide, Settings and About. Page actions stay in the header
+  the setup guide, Settings and About. The tab bar is the window's footer on phones only: on the
+  desktop there is no footer at all, because Kirigami shortens the sidebar drawer by the footer's
+  height even when the footer is hidden (it ended 120 px above the bottom). Page actions stay in the header
   (`pageStack.globalToolBar.style: ToolBar`; Kirigami's mobile default stacks a toolbar of
   their own on the tabs). The five main pages are `RefreshablePage` (pull-to-refresh runs
   `SyncManager.sync()`). No keyboard shortcuts on phones (`shortcut: Kirigami.Settings.isMobile
