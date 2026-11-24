@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: saldo 0.0.6\n"
 "Report-Msgid-Bugs-To: https://github.com/hernique33comiitei/saldo/issues\n"
-"POT-Creation-Date: 2026-11-23 19:10-0300\n"
+"POT-Creation-Date: 2026-11-23 20:39-0300\n"
 "PO-Revision-Date: 2026-11-21 12:00-0300\n"
 "Last-Translator: Henrique Oliveira <henriik.dev@gmail.com>\n"
 "Language-Team: Brazilian Portuguese\n"
@@ -12,24 +12,24 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: src/app/main.cpp:80
+#: src/app/main.cpp:119
 msgid "Saldo"
 msgstr "Saldo"
 
-#: src/app/main.cpp:82
+#: src/app/main.cpp:121
 msgid ""
 "Bank balances, card limits and transactions from Open Finance (Meu Pluggy)"
 msgstr "Saldos, limites de cartão e transações do Open Finance (Meu Pluggy)"
 
-#: src/app/main.cpp:84
+#: src/app/main.cpp:123
 msgid "© 2026 Henrique Oliveira"
 msgstr "© 2026 Henrique Oliveira"
 
-#: src/app/main.cpp:89
+#: src/app/main.cpp:128
 msgid "Author"
 msgstr "Autor"
 
-#: src/app/main.cpp:92
+#: src/app/main.cpp:131
 msgid ""
 "Data comes from the Meu Pluggy personal-use API. Saldo is an independent "
 "open source project, not affiliated with Pluggy."
@@ -37,12 +37,12 @@ msgstr ""
 "Os dados vêm da API de uso pessoal do Meu Pluggy. O Saldo é um projeto open "
 "source independente, sem vínculo com a Pluggy."
 
-#: src/app/main.cpp:100
+#: src/app/main.cpp:139
 msgid "Show fake demo data instead of your Meu Pluggy accounts."
 msgstr ""
 "Mostra dados fictícios de demonstração em vez das suas contas do Meu Pluggy."
 
-#: src/app/main.cpp:102
+#: src/app/main.cpp:141
 msgid ""
 "Page to open: overview, accounts, cards, transactions, investments, "
 "settings, setup or about."
@@ -50,7 +50,7 @@ msgstr ""
 "Página a abrir: overview, accounts, cards, transactions, investments, "
 "settings, setup ou about."
 
-#: src/app/main.cpp:103
+#: src/app/main.cpp:142
 msgctxt "command line value name"
 msgid "page"
 msgstr "página"
@@ -59,7 +59,7 @@ msgstr "página"
 msgid "Uncategorized"
 msgstr "Sem categoria"
 
-#: src/core/config.cpp:282
+#: src/core/config.cpp:307
 msgid ""
 "This does not look like an item ID. It is a UUID such as 3fa85f64-5717-4562-"
 "b3fc-2c963f66afa6."
@@ -67,7 +67,7 @@ msgstr ""
 "Isto não parece um ID de item. Ele é um UUID como 3fa85f64-5717-4562-"
 "b3fc-2c963f66afa6."
 
-#: src/core/config.cpp:286
+#: src/core/config.cpp:311
 msgctxt "Itens Conectados is a label in the Pluggy dashboard; keep it as is"
 msgid ""
 "That is the Client ID. The item ID is on the demo page of the Pluggy "
@@ -76,17 +76,17 @@ msgstr ""
 "Esse é o Client ID. O ID do item fica na página do demo do painel da Pluggy, "
 "em \"Itens Conectados\"."
 
-#: src/core/config.cpp:289
+#: src/core/config.cpp:314
 msgid "This connection is already in the list."
 msgstr "Esta conexão já está na lista."
 
-#: src/core/config.cpp:292
+#: src/core/config.cpp:317
 msgid "Meu Pluggy personal use allows at most %1 connection."
 msgid_plural "Meu Pluggy personal use allows at most %1 connections."
 msgstr[0] "O uso pessoal do Meu Pluggy permite no máximo %1 conexão."
 msgstr[1] "O uso pessoal do Meu Pluggy permite no máximo %1 conexões."
 
-#: src/core/config.cpp:341
+#: src/core/config.cpp:366
 msgctxt "connection the user has not named yet; %1 is the start of its id"
 msgid "Meu Pluggy · %1"
 msgstr "Meu Pluggy · %1"
@@ -256,63 +256,63 @@ msgctxt "percentage"
 msgid "%1%"
 msgstr "%1%"
 
-#: src/core/money.cpp:104
+#: src/core/money.cpp:109
 msgctxt "time of an event that never happened"
 msgid "never"
 msgstr "nunca"
 
-#: src/core/money.cpp:110
+#: src/core/money.cpp:115
 msgctxt "relative time in the future"
 msgid "in %1 minute"
 msgid_plural "in %1 minutes"
 msgstr[0] "em %1 minuto"
 msgstr[1] "em %1 minutos"
 
-#: src/core/money.cpp:113
+#: src/core/money.cpp:118
 msgctxt "relative time in the future"
 msgid "in %1 hour"
 msgid_plural "in %1 hours"
 msgstr[0] "em %1 hora"
 msgstr[1] "em %1 horas"
 
-#: src/core/money.cpp:115
+#: src/core/money.cpp:120
 msgctxt "relative time in the future"
 msgid "in %1 day"
 msgid_plural "in %1 days"
 msgstr[0] "em %1 dia"
 msgstr[1] "em %1 dias"
 
-#: src/core/money.cpp:118
+#: src/core/money.cpp:123
 msgid "just now"
 msgstr "agora mesmo"
 
-#: src/core/money.cpp:121
+#: src/core/money.cpp:126
 msgid "%1 minute ago"
 msgid_plural "%1 minutes ago"
 msgstr[0] "há %1 minuto"
 msgstr[1] "há %1 minutos"
 
-#: src/core/money.cpp:124
+#: src/core/money.cpp:129
 msgid "%1 hour ago"
 msgid_plural "%1 hours ago"
 msgstr[0] "há %1 hora"
 msgstr[1] "há %1 horas"
 
-#: src/core/money.cpp:126
+#: src/core/money.cpp:131
 msgid "%1 day ago"
 msgid_plural "%1 days ago"
 msgstr[0] "há %1 dia"
 msgstr[1] "há %1 dias"
 
-#: src/core/money.cpp:173
+#: src/core/money.cpp:169
 msgid "Today"
 msgstr "Hoje"
 
-#: src/core/money.cpp:176
+#: src/core/money.cpp:172
 msgid "Yesterday"
 msgstr "Ontem"
 
-#: src/core/money.cpp:191
+#: src/core/money.cpp:187
 msgctxt "%1 month name, %2 year"
 msgid "%1 %2"
 msgstr "%1 de %2"
@@ -550,7 +550,7 @@ msgstr "Resumo"
 msgid "Cards"
 msgstr "Cartões"
 
-#: plasmoid/package/contents/ui/FullRepresentation.qml:124 src/app/Main.qml:130
+#: plasmoid/package/contents/ui/FullRepresentation.qml:124 src/app/Main.qml:148
 #: src/app/pages/CardDetailPage.qml:70 src/app/pages/TransactionsPage.qml:14
 msgid "Transactions"
 msgstr "Transações"
@@ -686,7 +686,7 @@ msgid "Save"
 msgstr "Salvar"
 
 #: src/app/components/RenameConnectionDialog.qml:31
-#: src/app/pages/SettingsPage.qml:554
+#: src/app/pages/SettingsPage.qml:573
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -712,7 +712,7 @@ msgstr "%1."
 msgid "Syncing with Pluggy…"
 msgstr "Sincronizando com a Pluggy…"
 
-#: src/app/components/SyncBanner.qml:29 src/app/Main.qml:147
+#: src/app/components/SyncBanner.qml:29 src/app/Main.qml:168
 #: src/app/pages/SettingsPage.qml:72
 msgid "Settings"
 msgstr "Configurações"
@@ -772,29 +772,58 @@ msgstr "Conta como entrada ou saída."
 msgid "Use Automatic Detection"
 msgstr "Usar detecção automática"
 
-#: src/app/Main.qml:102 src/app/pages/SetupPage.qml:67
+#: src/app/Main.qml:117 src/app/pages/SetupPage.qml:67
 msgid "Connect Meu Pluggy"
 msgstr "Conectar o Meu Pluggy"
 
-#: src/app/Main.qml:109 src/app/pages/OverviewPage.qml:16
+#: src/app/Main.qml:124 src/app/pages/OverviewPage.qml:16
 msgid "Overview"
 msgstr "Visão geral"
 
-#: src/app/Main.qml:116 src/app/pages/AccountsPage.qml:11
+#: src/app/Main.qml:132 src/app/pages/AccountsPage.qml:11
 msgid "Accounts"
 msgstr "Contas"
 
-#: src/app/Main.qml:123 src/app/pages/CardsPage.qml:11
+#: src/app/Main.qml:140 src/app/pages/CardsPage.qml:11
 msgid "Credit Cards"
 msgstr "Cartões de crédito"
 
-#: src/app/Main.qml:137 src/app/pages/InvestmentsPage.qml:11
+#: src/app/Main.qml:156 src/app/pages/InvestmentsPage.qml:11
 msgid "Investments"
 msgstr "Investimentos"
 
-#: src/app/Main.qml:154 src/app/pages/AboutPage.qml:95
+#: src/app/Main.qml:175 src/app/pages/AboutPage.qml:95
 msgid "About Saldo"
 msgstr "Sobre o Saldo"
+
+#: src/app/Main.qml:187
+msgctxt "@title:tab short label, about 8 characters fit on phones"
+msgid "Overview"
+msgstr "Resumo"
+
+#: src/app/Main.qml:193
+msgctxt "@title:tab short label, about 8 characters fit on phones"
+msgid "Accounts"
+msgstr "Contas"
+
+#: src/app/Main.qml:199
+msgctxt "@title:tab short label, about 8 characters fit on phones"
+msgid "Cards"
+msgstr "Cartões"
+
+#: src/app/Main.qml:205
+msgctxt ""
+"@title:tab short label for the transactions list, about 8 characters fit on "
+"phones"
+msgid "Activity"
+msgstr "Extrato"
+
+#: src/app/Main.qml:211
+msgctxt ""
+"@title:tab short label for the investments page, about 8 characters fit on "
+"phones"
+msgid "Invest"
+msgstr "Investir"
 
 #: src/app/pages/AboutPage.qml:55
 msgid "Send an email to %1"
@@ -1258,7 +1287,7 @@ msgstr ""
 "Vale a partir da próxima vez que o Saldo abrir. O widget do Plasma segue o "
 "idioma do sistema."
 
-#: src/app/pages/SettingsPage.qml:500
+#: src/app/pages/SettingsPage.qml:500 src/app/pages/SettingsPage.qml:522
 msgid "System default"
 msgstr "Padrão do sistema"
 
@@ -1266,28 +1295,50 @@ msgstr "Padrão do sistema"
 msgid "Restart Saldo to apply the language change."
 msgstr "Reinicie o Saldo para aplicar a troca de idioma."
 
-#: src/app/pages/SettingsPage.qml:512
+#: src/app/pages/SettingsPage.qml:514
+msgid "Appearance"
+msgstr "Aparência"
+
+#: src/app/pages/SettingsPage.qml:517
+msgid "Theme"
+msgstr "Tema"
+
+#: src/app/pages/SettingsPage.qml:518
+msgid "“System default” follows the phone's dark mode."
+msgstr "“Padrão do sistema” segue o modo escuro do celular."
+
+#: src/app/pages/SettingsPage.qml:522
+msgctxt "color theme"
+msgid "Light"
+msgstr "Claro"
+
+#: src/app/pages/SettingsPage.qml:522
+msgctxt "color theme"
+msgid "Dark"
+msgstr "Escuro"
+
+#: src/app/pages/SettingsPage.qml:531
 msgid "Local data"
 msgstr "Dados locais"
 
-#: src/app/pages/SettingsPage.qml:515
+#: src/app/pages/SettingsPage.qml:534
 msgid "Raw data"
 msgstr "Dados brutos"
 
-#: src/app/pages/SettingsPage.qml:516
+#: src/app/pages/SettingsPage.qml:535
 msgid "What Pluggy returned for each account, to check amounts and signs."
 msgstr ""
 "O que a Pluggy devolveu para cada conta, para conferir valores e sinais."
 
-#: src/app/pages/SettingsPage.qml:518
+#: src/app/pages/SettingsPage.qml:537
 msgid "Raw Data…"
 msgstr "Dados brutos…"
 
-#: src/app/pages/SettingsPage.qml:529
+#: src/app/pages/SettingsPage.qml:548
 msgid "Local cache"
 msgstr "Cache local"
 
-#: src/app/pages/SettingsPage.qml:530
+#: src/app/pages/SettingsPage.qml:549
 msgid ""
 "Deletes the downloaded data; the next sync fetches it again. Settings, "
 "connection names, transfer choices and balance history are kept."
@@ -1296,15 +1347,15 @@ msgstr ""
 "Configurações, nomes das conexões, escolhas de transferência e histórico de "
 "saldo são mantidos."
 
-#: src/app/pages/SettingsPage.qml:532
+#: src/app/pages/SettingsPage.qml:551
 msgid "Clear Local Cache"
 msgstr "Limpar cache local"
 
-#: src/app/pages/SettingsPage.qml:548
+#: src/app/pages/SettingsPage.qml:567
 msgid "Remove Credentials?"
 msgstr "Remover credenciais?"
 
-#: src/app/pages/SettingsPage.qml:549
+#: src/app/pages/SettingsPage.qml:568
 msgid ""
 "The Client ID and Client Secret will be deleted from the system keyring. "
 "Cached data stays until you clear it."
@@ -1312,7 +1363,7 @@ msgstr ""
 "O Client ID e o Client Secret serão apagados do chaveiro do sistema. Os "
 "dados em cache continuam até você limpá-los."
 
-#: src/app/pages/SettingsPage.qml:553
+#: src/app/pages/SettingsPage.qml:572
 msgid "OK"
 msgstr "OK"
 
