@@ -132,6 +132,14 @@ app (not the widget) also targets Android.
   from the card's/page's width (never from the content's own implicit width, which would feed
   back), or use a `Flow`; labels take `fillWidth` and wrap or elide; long IDs use
   `Text.WrapAnywhere`; no fixed `Layout.minimumWidth` on fields. Check every page at 365 px.
+- **Phones** (`Kirigami.Settings.isMobile`: Android; the desktop never changes with these): the
+  five sections are tabs at the bottom (`NavigationTabBar` in `Main.qml`, labels of about 8
+  characters, `@title:tab` contexts: "Resumo", "Extrato", "Investir"), and the drawer keeps only
+  the setup guide, Settings and About. Page actions stay in the header
+  (`pageStack.globalToolBar.style: ToolBar`; Kirigami's mobile default stacks a toolbar of
+  their own on the tabs). The five main pages are `RefreshablePage` (pull-to-refresh runs
+  `SyncManager.sync()`). Check phones with `QT_QUICK_CONTROLS_MOBILE=1
+  QT_QUICK_CONTROLS_STYLE=org.kde.breeze QT_QPA_PLATFORMTHEME=none` at 360 px.
 - **About page** is ours (`pages/AboutPage.qml`), not `Kirigami.AboutPage`: that one always draws
   initials avatars for authors and opens the license in a sheet glued to the top. Ours has no
   avatars and no "Libraries in use" card, and shows the license in a centered `Kirigami.Dialog`
@@ -325,6 +333,13 @@ skill** (`.claude/skills/release/`) runs the whole flow. By hand:
   `QT_NO_GLOBAL_APK_TARGET_PART_OF_ALL ON` keeps `qt_add_executable`'s own APK step out of the
   build (it failed with "Cannot find application binary"); the container runs as uid 1001, so the
   script sets git `safe.directory` and `dist/` files end up owned by uid 1001 on the host.
+- **System bars and dark mode:** the window has `Qt.ExpandedClientAreaHint` on Android, so it is
+  drawn behind the status and navigation bars (transparent) and Kirigami pads its header and
+  tabs by the safe areas. `androidtheme.cpp` turns `Config.theme` ("", "light", "dark"; the
+  Settings card only shows on Android) into `QStyleHints::setColorScheme` (Unknown = the
+  system's) and activates Breeze Light or Dark (`KColorSchemeManager`, files bundled by Craft)
+  from the resulting color scheme; Qt sets the bars' icons from the same scheme. The splash
+  background is `@color/saldo_splash_background`, dark in `values-night`.
 - **Splash screen:** the manifest keeps Qt's splash (`android/res/drawable/splash.xml`, the app icon
   on the pages' background) up with `splash_screen_sticky`; `main.cpp` hides it after a frame drawn
   once `Main.qml`'s `pageReady` is true (5 s fallback). Without it the phone showed an empty header
