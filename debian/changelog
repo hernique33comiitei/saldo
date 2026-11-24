@@ -1,3 +1,10 @@
+saldo (0.0.10-1) unstable; urgency=medium
+
+  * Pick a light or dark theme on the desktop too (Settings, Appearance); by default the app follows Plasma's colors, or the desktop's dark mode elsewhere, such as GNOME
+  * The sidebar reaches the bottom of the window on the desktop
+
+ -- Henrique Oliveira <henriik.dev@gmail.com>  Mon, 23 Nov 2026 23:56:48 -0300
+
 saldo (0.0.9-1) unstable; urgency=medium
 
   * On Android, text keeps its normal size in the light and dark themes (0.0.8 made everything too big)

@@ -1,5 +1,5 @@
 Name:           saldo
-Version:        0.0.9
+Version:        0.0.10
 Release:        1%{?dist}
 Summary:        Personal finances from Open Finance (Meu Pluggy): KDE app and Plasma widget
 
@@ -79,6 +79,10 @@ export QT_QPA_PLATFORM=offscreen
 %{_datadir}/icons/hicolor/scalable/apps/saldo-symbolic.svg
 
 %changelog
+* Mon Nov 23 2026 Henrique Oliveira <henriik.dev@gmail.com> - 0.0.10-1
+- Pick a light or dark theme on the desktop too (Settings, Appearance); by default the app follows Plasma's colors, or the desktop's dark mode elsewhere, such as GNOME
+- The sidebar reaches the bottom of the window on the desktop
+
 * Mon Nov 23 2026 Henrique Oliveira <henriik.dev@gmail.com> - 0.0.9-1
 - On Android, text keeps its normal size in the light and dark themes (0.0.8 made everything too big)
 
