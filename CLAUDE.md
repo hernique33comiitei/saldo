@@ -138,7 +138,8 @@ app (not the widget) also targets Android.
   the setup guide, Settings and About. Page actions stay in the header
   (`pageStack.globalToolBar.style: ToolBar`; Kirigami's mobile default stacks a toolbar of
   their own on the tabs). The five main pages are `RefreshablePage` (pull-to-refresh runs
-  `SyncManager.sync()`). Check phones with `QT_QUICK_CONTROLS_MOBILE=1
+  `SyncManager.sync()`). No keyboard shortcuts on phones (`shortcut: Kirigami.Settings.isMobile
+  ? "" : …`): the header's overflow menu drew "Ctrl+H" over the item's text. Check phones with `QT_QUICK_CONTROLS_MOBILE=1
   QT_QUICK_CONTROLS_STYLE=org.kde.breeze QT_QPA_PLATFORMTHEME=none` at 360 px.
 - **About page** is ours (`pages/AboutPage.qml`), not `Kirigami.AboutPage`: that one always draws
   initials avatars for authors and opens the license in a sheet glued to the top. Ours has no
@@ -340,6 +341,18 @@ skill** (`.claude/skills/release/`) runs the whole flow. By hand:
   system's) and activates Breeze Light or Dark (`KColorSchemeManager`, files bundled by Craft)
   from the resulting color scheme; Qt sets the bars' icons from the same scheme. The splash
   background is `@color/saldo_splash_background`, dark in `values-night`.
+- **Same fonts in light and dark:** the manifest has `extract_android_style` = `none`. Qt's
+  copy of the Android theme gave the Qt Quick controls Android's own, larger fonts (Kirigami's
+  stayed, so tabs did not change), and only for the mode the system was in when it was
+  extracted: the app in light had bigger text and other layouts than in dark. `main.cpp` removes
+  the `style.json` copies earlier versions left in `ANDROID_STYLE_PATH` (Qt never deletes them
+  and reads them whenever they exist).
+- **Plurals:** Craft builds KI18n on Android with libintl-lite, which has no plural forms
+  (`ngettext` looks up the singular or the plural msgid by `n == 1` and never finds a `.mo`
+  plural entry), so every `i18np` came out in English ("5 accounts"). On Android
+  `SaldoTranslations.cmake` compiles the `.po` through `cmake/split_plurals.py`, which turns each
+  plural entry into two plain ones (singular → `msgstr[0]`, plural msgid → `msgstr[1]`).
+  Checked against libintl-lite itself (commit `ba15146`, the one Craft pins).
 - **Splash screen:** the manifest keeps Qt's splash (`android/res/drawable/splash.xml`, the app icon
   on the pages' background) up with `splash_screen_sticky`; `main.cpp` hides it after a frame drawn
   once `Main.qml`'s `pageReady` is true (5 s fallback). Without it the phone showed an empty header
