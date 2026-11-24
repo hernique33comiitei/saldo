@@ -91,15 +91,22 @@ bool kdeStyleInstalled()
 int main(int argc, char *argv[])
 {
 #ifdef Q_OS_ANDROID
-    // Qt's copy of the Android theme (extract_android_style) gives the Qt Quick
-    // controls Android's own fonts, larger than Kirigami's, and only for the mode
-    // the system was in when it was extracted: switching the app between light
-    // and dark changed text sizes and layouts. The app is all Breeze, so the
-    // manifest no longer extracts it; remove the copies earlier versions left,
-    // which Qt reads when it starts (QGuiApplication) whenever they exist.
+    // Qt's copy of the Android theme (extract_android_style) gives the text its
+    // Android sizes; without it Qt falls back to much larger fonts. There is one
+    // copy per mode (style.json, darkUiMode/style.json), and Qt only extracts the
+    // phone's mode (before main()): with the app set to the other mode in
+    // Settings, Qt found no copy and the text grew. Sizes do not depend on the
+    // mode (the colors come from Breeze), so the other mode gets the same copy.
     if (const QString stylePath = qEnvironmentVariable("ANDROID_STYLE_PATH"); !stylePath.isEmpty()) {
-        QFile::remove(QDir(stylePath).filePath(u"style.json"_s));
-        QFile::remove(QDir(stylePath).filePath(u"darkUiMode/style.json"_s));
+        const QDir dir(stylePath);
+        const QString light = dir.filePath(u"style.json"_s);
+        const QString dark = dir.filePath(u"darkUiMode/style.json"_s);
+        if (QFile::exists(light) && !QFile::exists(dark)) {
+            dir.mkpath(u"darkUiMode"_s);
+            QFile::copy(light, dark);
+        } else if (QFile::exists(dark) && !QFile::exists(light)) {
+            QFile::copy(dark, light);
+        }
     }
 #endif
     Application app(argc, argv);

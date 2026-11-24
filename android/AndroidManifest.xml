@@ -32,10 +32,10 @@
             <meta-data android:name="android.app.repository" android:value="default"/>
             <meta-data android:name="android.app.qt_libs_resource_id" android:resource="@array/qt_libs"/>
             <meta-data android:name="android.app.bundled_libs_resource_id" android:resource="@array/bundled_libs"/>
-            <!-- none: the app is all Breeze. Qt's copy of the Android theme gave the
-                 controls Android's own, larger fonts, only in the mode it was
-                 extracted for (main.cpp removes copies earlier versions left). -->
-            <meta-data android:name="android.app.extract_android_style" android:value="none"/>
+            <!-- Qt's copy of the Android theme gives the text its Android sizes (without
+                 it Qt falls back to much larger fonts). Only the phone's mode is
+                 extracted; main.cpp copies it for the other mode. -->
+            <meta-data android:name="android.app.extract_android_style" android:value="minimal"/>
             <meta-data android:name="android.app.bundle_local_qt_libs" android:value="-- %%BUNDLE_LOCAL_QT_LIBS%% --"/>
             <meta-data android:name="android.app.load_local_libs_resource_id" android:resource="@array/load_local_libs"/>
             <meta-data android:name="android.app.use_local_qt_libs" android:value="-- %%USE_LOCAL_QT_LIBS%% --"/>

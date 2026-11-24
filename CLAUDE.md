@@ -341,12 +341,14 @@ skill** (`.claude/skills/release/`) runs the whole flow. By hand:
   system's) and activates Breeze Light or Dark (`KColorSchemeManager`, files bundled by Craft)
   from the resulting color scheme; Qt sets the bars' icons from the same scheme. The splash
   background is `@color/saldo_splash_background`, dark in `values-night`.
-- **Same fonts in light and dark:** the manifest has `extract_android_style` = `none`. Qt's
-  copy of the Android theme gave the Qt Quick controls Android's own, larger fonts (Kirigami's
-  stayed, so tabs did not change), and only for the mode the system was in when it was
-  extracted: the app in light had bigger text and other layouts than in dark. `main.cpp` removes
-  the `style.json` copies earlier versions left in `ANDROID_STYLE_PATH` (Qt never deletes them
-  and reads them whenever they exist).
+- **Same fonts in light and dark:** Qt's copy of the Android theme (`extract_android_style` =
+  `minimal`) gives the text its Android sizes; without it Qt falls back to much larger fonts
+  (`none` made everything, tabs included, too big). Qt keeps one copy per mode in
+  `ANDROID_STYLE_PATH` (`style.json`, `darkUiMode/style.json`) and only extracts the phone's mode,
+  before `main()`. With the app set to the other mode in Settings, Qt found no copy: the controls
+  grew while Kirigami's text (tabs), read at startup, did not. `main.cpp` copies the existing one
+  to the missing mode before `QGuiApplication` (sizes do not depend on the mode; colors come from
+  Breeze).
 - **Plurals:** Craft builds KI18n on Android with libintl-lite, which has no plural forms
   (`ngettext` looks up the singular or the plural msgid by `n == 1` and never finds a `.mo`
   plural entry), so every `i18np` came out in English ("5 accounts"). On Android
