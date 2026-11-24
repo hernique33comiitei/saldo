@@ -15,6 +15,9 @@ Kirigami.ApplicationWindow {
     // after a frame with it (main.cpp).
     readonly property bool pageReady: pageStack.currentItem !== null
                                       && pageStack.currentItem.width > 0 && pageStack.currentItem.height > 0
+    // Phones: the five sections as tabs at the bottom, as current Android apps
+    // do; the drawer keeps the setup guide, settings and about.
+    readonly property bool tabs: Kirigami.Settings.isMobile
 
     // First run: open the setup guide instead of an empty overview.
     function checkFirstRun() {
@@ -54,6 +57,9 @@ Kirigami.ApplicationWindow {
     minimumHeight: Kirigami.Units.gridUnit * 24
 
     pageStack.columnView.columnResizeMode: Kirigami.ColumnView.SingleColumn
+    // Page actions in the header on phones too (Kirigami's mobile default is
+    // a toolbar of their own at the bottom, stacked on the tabs).
+    pageStack.globalToolBar.style: Kirigami.ApplicationHeaderStyle.ToolBar
     pageStack.globalToolBar.showNavigationButtons: Kirigami.ApplicationHeaderStyle.ShowBackButton
 
     Component.onCompleted: {
@@ -112,6 +118,7 @@ Kirigami.ApplicationWindow {
             Kirigami.Action {
                 text: i18n("Overview")
                 icon.name: "view-statistics"
+                visible: !root.tabs
                 checked: root.currentPage === "overview"
                 shortcut: "Ctrl+1"
                 onTriggered: root.showPage("overview")
@@ -119,6 +126,7 @@ Kirigami.ApplicationWindow {
             Kirigami.Action {
                 text: i18n("Accounts")
                 icon.name: "view-bank"
+                visible: !root.tabs
                 checked: root.currentPage === "accounts"
                 shortcut: "Ctrl+2"
                 onTriggered: root.showPage("accounts")
@@ -126,6 +134,7 @@ Kirigami.ApplicationWindow {
             Kirigami.Action {
                 text: i18n("Credit Cards")
                 icon.name: "view-financial-account-credit-card"
+                visible: !root.tabs
                 checked: root.currentPage === "cards"
                 shortcut: "Ctrl+3"
                 onTriggered: root.showPage("cards")
@@ -133,6 +142,7 @@ Kirigami.ApplicationWindow {
             Kirigami.Action {
                 text: i18n("Transactions")
                 icon.name: "view-financial-list"
+                visible: !root.tabs
                 checked: root.currentPage === "transactions"
                 shortcut: "Ctrl+4"
                 onTriggered: root.showPage("transactions")
@@ -140,12 +150,14 @@ Kirigami.ApplicationWindow {
             Kirigami.Action {
                 text: i18n("Investments")
                 icon.name: "view-financial-account-investment"
+                visible: !root.tabs
                 checked: root.currentPage === "investments"
                 shortcut: "Ctrl+5"
                 onTriggered: root.showPage("investments")
             },
             Kirigami.Action {
                 separator: true
+                visible: !root.tabs
             },
             Kirigami.Action {
                 text: i18n("Settings")
@@ -159,6 +171,42 @@ Kirigami.ApplicationWindow {
                 icon.name: "help-about"
                 checked: root.currentPage === "about"
                 onTriggered: root.showPage("about")
+            }
+        ]
+    }
+
+    footer: Kirigami.NavigationTabBar {
+        visible: root.tabs
+        actions: [
+            Kirigami.Action {
+                text: i18nc("@title:tab short label, about 8 characters fit on phones", "Overview")
+                icon.name: "view-statistics"
+                checked: root.currentPage === "overview"
+                onTriggered: root.showPage("overview")
+            },
+            Kirigami.Action {
+                text: i18nc("@title:tab short label, about 8 characters fit on phones", "Accounts")
+                icon.name: "view-bank"
+                checked: root.currentPage === "accounts"
+                onTriggered: root.showPage("accounts")
+            },
+            Kirigami.Action {
+                text: i18nc("@title:tab short label, about 8 characters fit on phones", "Cards")
+                icon.name: "view-financial-account-credit-card"
+                checked: root.currentPage === "cards"
+                onTriggered: root.showPage("cards")
+            },
+            Kirigami.Action {
+                text: i18nc("@title:tab short label for the transactions list, about 8 characters fit on phones", "Activity")
+                icon.name: "view-financial-list"
+                checked: root.currentPage === "transactions"
+                onTriggered: root.showPage("transactions")
+            },
+            Kirigami.Action {
+                text: i18nc("@title:tab short label for the investments page, about 8 characters fit on phones", "Invest")
+                icon.name: "view-financial-account-investment"
+                checked: root.currentPage === "investments"
+                onTriggered: root.showPage("investments")
             }
         ]
     }
