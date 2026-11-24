@@ -14,6 +14,7 @@ set(SALDO_APP_QML_FILES
     pages/AboutPage.qml
     components/StatCard.qml
     components/SectionCard.qml
+    components/RefreshablePage.qml
     components/SyncBanner.qml
     components/SetupStep.qml
     components/SetupInstructions.qml

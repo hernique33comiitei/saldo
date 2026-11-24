@@ -5,7 +5,7 @@ import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
 import org.saldo.core
 
-Kirigami.ScrollablePage {
+RefreshablePage {
     id: page
 
     readonly property bool wide: width > Kirigami.Units.gridUnit * 40
