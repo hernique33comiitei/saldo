@@ -56,6 +56,11 @@ Kirigami.ApplicationWindow {
     minimumWidth: Kirigami.Units.gridUnit * 20
     minimumHeight: Kirigami.Units.gridUnit * 24
 
+    // Android: draw behind the status and navigation bars, which turn
+    // transparent, as current apps do; Kirigami pads the header and the tabs
+    // by the safe areas.
+    flags: Qt.platform.os === "android" ? Qt.Window | Qt.ExpandedClientAreaHint : Qt.Window
+
     pageStack.columnView.columnResizeMode: Kirigami.ColumnView.SingleColumn
     // Page actions in the header on phones too (Kirigami's mobile default is
     // a toolbar of their own at the bottom, stacked on the tabs).
