@@ -23,6 +23,9 @@ triggers the RPM + DEB + APK builds in `.github/workflows/release.yml`.
 - Build and run the tests once:
   `cmake -B build -G Ninja -DBUILD_TESTING=ON && cmake --build build && QT_QPA_PLATFORM=offscreen ctest --test-dir build --output-on-failure`.
   Do not release on red tests.
+- If the release changes anything the Android app shows (QML, Android files, the core), check it
+  on the phone first: `tools/phone-test.sh install`, `smoke` and `matrix` (CLAUDE.md, "Phone
+  tests"). Ask the user to connect the phone and sign the APK if `adb devices` shows nothing.
 
 ## Steps
 

@@ -9,7 +9,7 @@
 
 using namespace Qt::StringLiterals;
 
-void followColorScheme()
+void followColorScheme(const QString &forced)
 {
     auto *hints = QGuiApplication::styleHints();
     auto *schemes = KColorSchemeManager::instance();
@@ -17,8 +17,8 @@ void followColorScheme()
 
     // Settings -> the color scheme Qt reports and gives the system bars'
     // icons (Unknown = the system's, updated when it changes).
-    auto request = [hints]() {
-        const QString theme = Config::instance()->theme();
+    auto request = [hints, forced]() {
+        const QString theme = forced.isEmpty() ? Config::instance()->theme() : forced;
         hints->setColorScheme(theme == "dark"_L1        ? Qt::ColorScheme::Dark
                                   : theme == "light"_L1 ? Qt::ColorScheme::Light
                                                         : Qt::ColorScheme::Unknown);

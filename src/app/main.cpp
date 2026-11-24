@@ -162,6 +162,13 @@ int main(int argc, char *argv[])
                                         i18nc("command line value name", "page"));
     parser.addOption(demoOption);
     parser.addOption(pageOption);
+#ifdef Q_OS_ANDROID
+    // For tools/phone-test.sh: one run in a given theme, Settings untouched.
+    const QCommandLineOption themeOption(u"theme"_s,
+                                         i18n("Color theme for this run only: system, light or dark."),
+                                         i18nc("command line value name", "theme"));
+    parser.addOption(themeOption);
+#endif
     parser.process(app);
     about.processCommandLine(&parser);
 
@@ -171,7 +178,7 @@ int main(int argc, char *argv[])
     }
 
 #ifdef Q_OS_ANDROID
-    followColorScheme(); // after the demo switch: it reads Config
+    followColorScheme(parser.value(themeOption)); // after the demo switch: it reads Config
 #endif
 
     QQmlApplicationEngine engine;

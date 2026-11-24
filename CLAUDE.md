@@ -195,6 +195,34 @@ i18n: translate the new sync error messages
   `plasmawindowed io.github.hernique33comiitei.saldo` with `QML_IMPORT_PATH=<prefix>/lib64/qml`,
   `XDG_DATA_DIRS=<prefix>/share:/usr/share`, `SALDO_DEMO=1`, offscreen; write the log to a file
   and grep it (load errors appear as `kf.plasma.quick: error when loading applet`).
+- **Phone tests (adb): the standard check for anything that runs on Android.** The desktop's
+  mobile mode (`QT_QUICK_CONTROLS_MOBILE=1`, see Phones) is only a first look: Android-only
+  behavior (Qt's Android theme fonts, the system bars, libintl-lite's plurals) shows on the device
+  alone, and 0.0.7/0.0.8 shipped font bugs no desktop check could see.
+  - One-time setup: `sudo dnf install android-tools`; on the phone, Developer options → USB
+    debugging (Xiaomi/MIUI also needs "Install via USB", which asks for a Mi account, and
+    "USB debugging (Security settings)"; MIUI also asks on the screen to confirm each install);
+    connect it, accept the prompt; `adb devices` lists it as `device`.
+  - Build the test app: `tools/build-apk.sh --docker --dev` →
+    `dist/saldo-<ver>-arm64-v8a-dev.apk`, "Saldo (dev)", id
+    `io.github.hernique33comiitei.saldo.dev` (`SALDO_APK_DEV=1` in `android/build.gradle`). It
+    installs next to the real app and never touches it or its data, and it is already signed
+    with a dev key kept in the Craft cache (no password, the next dev build updates it). Anyone
+    can test this way; the release key only signs releases (GitHub Actions). It is debuggable:
+    Qt only passes an adb start's `applicationArguments` (`--demo`, `--page`, `--theme`) to
+    debuggable apps (a release build silently ignores them), and `adb shell run-as` reaches its
+    files (`lang` writes the demo config; `qt-reserved-files/android-style/` holds the theme
+    copies).
+  - `tools/phone-test.sh install` → `smoke` (demo run, no QML warnings in the app's log) →
+    `matrix` (overview and transactions with demo data, in Portuguese, for phone light/dark × app
+    system/light/dark, in `dist/phone-shots/`): look at every shot; the six of a page differ in
+    colors only, never in text sizes or layout. `smoke` only flags warnings from Qt and the app
+    (logcat tags `default`, `qml`, `saldo`, `kf.*`, `qt.*`), minus Kirigami's expected PageRow line. For anything else: `run --demo --page <p>
+    [--theme system|light|dark]`, then `shot <png>` (scroll with `adb shell input swipe`);
+    `night yes|no|auto` sets the phone's dark mode; `lang pt_BR|en|system` the demo runs'
+    language; `log` prints the app's messages. `--theme` (Android only) applies to that run and
+    leaves Settings alone.
+  - Shots use `--demo` (made-up numbers): the real data never goes into files.
 - Translations: `po/Messages.sh` regenerates `po/saldo.pot` and merges into `po/pt_BR.po`;
   translate the new entries and check with `msgfmt --check --statistics -o /dev/null po/pt_BR.po`.
 
@@ -222,7 +250,8 @@ i18n: translate the new sync error messages
 - `packaging/fedora/` — `.spec`. `debian/` — deb packaging. `po/` — translations.
 - `android/` — APK manifest, `build.gradle` and adaptive icon (used by `ecm_add_android_apk`).
   `craft/saldo/` + `.craft.ini` — KDE Craft blueprint and overrides for the Android build.
-- `tools/bump-version.sh` — version sync (see Releases).
+- `tools/bump-version.sh` — version sync (see Releases). `tools/phone-test.sh` — tests on the
+  phone over adb (see Build / run / test).
 
 ## Meu Pluggy facts the code relies on
 
