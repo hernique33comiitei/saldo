@@ -17,6 +17,10 @@ repositories {
 apply plugin: 'com.android.application'
 apply from: '../ecm-version.gradle'
 
+// SALDO_APK_DEV=1 (tools/build-apk.sh --dev): a test build that installs next
+// to the real app, under its own id, name and data.
+def saldoDev = System.getenv('SALDO_APK_DEV') == '1'
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
 }
@@ -51,14 +55,23 @@ android {
     lintOptions {
         abortOnError false
     }
+    buildTypes {
+        release {
+            // The test build is debuggable: Qt only passes the arguments of an
+            // adb start (applicationArguments: --demo, --page, --theme) to
+            // debuggable apps, and `adb shell run-as` can read its files.
+            debuggable saldoDev
+        }
+    }
 
     defaultConfig {
         minSdkVersion qtMinSdkVersion
         targetSdkVersion qtTargetSdkVersion
-        applicationId "io.github.hernique33comiitei.saldo"
+        applicationId "io.github.hernique33comiitei.saldo" + (saldoDev ? ".dev" : "")
         namespace "io.github.hernique33comiitei.saldo"
         versionName ecmVersionName
         versionCode ecmVersionCode
-        manifestPlaceholders = [versionName: ecmVersionName, versionCode: ecmVersionCode]
+        manifestPlaceholders = [versionName: ecmVersionName, versionCode: ecmVersionCode,
+                                appLabel: saldoDev ? "Saldo (dev)" : "Saldo"]
     }
 }

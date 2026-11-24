@@ -8,13 +8,28 @@
 #   tools/build-apk.sh
 #
 # Output: dist/saldo-<version>-arm64-v8a-unsigned.apk  (sign it with tools/sign-apk.sh)
+#
+# --dev: a test build for tools/phone-test.sh, installed next to the real app
+# ("Saldo (dev)", id io.github.hernique33comiitei.saldo.dev, its own data) and
+# already signed with a dev key kept in the Craft cache, so it needs no release
+# key and the next dev build updates it in place:
+#   dist/saldo-<version>-arm64-v8a-dev.apk
 set -euo pipefail
 
 SRC="$(cd "$(dirname "$0")/.." && pwd)"
 IMAGE="invent-registry.kde.org/sysadmin/ci-images/android-qt611:latest"
 TARGET="${CRAFT_TARGET:-android-arm64-clang}"
 
-if [ "${1:-}" = "--docker" ]; then
+docker=0
+for arg in "$@"; do
+    case "$arg" in
+    --docker) docker=1 ;;
+    --dev) export SALDO_APK_DEV=1 ;; # read by android/build.gradle
+    *) echo "usage: $0 [--docker] [--dev]" >&2; exit 1 ;;
+    esac
+done
+
+if [ "$docker" = 1 ]; then
     # Craft's downloads and cache persist between runs in this host folder.
     CACHE="${CRAFT_CACHE_DIR:-$HOME/.cache/saldo-craft}"
     mkdir -p "$CACHE" "$SRC/dist"
@@ -24,6 +39,7 @@ if [ "${1:-}" = "--docker" ]; then
         -v "$SRC":/src \
         -v "$CACHE":/home/user/craft \
         -e CRAFT_WORK=/home/user/craft \
+        -e SALDO_APK_DEV="${SALDO_APK_DEV:-}" \
         "$IMAGE" bash /src/tools/build-apk.sh
 fi
 
@@ -70,4 +86,19 @@ esac
 
 mkdir -p "$SRC/dist"
 apk=$(ls -t "$packageDir"/*.apk | head -1)
-cp -v "$apk" "$SRC/dist/saldo-$version-$abi-unsigned.apk"
+if [ "${SALDO_APK_DEV:-}" = 1 ]; then
+    unsigned="$SRC/dist/saldo-$version-$abi-dev-unsigned.apk"
+    cp -v "$apk" "$unsigned"
+    # A dev key (no secret: it only signs test builds) that stays in the Craft
+    # cache, so each dev build updates the previous one on the phone.
+    devkey="$WORK/saldo-dev.keystore"
+    if [ ! -f "$devkey" ]; then
+        keytool -genkeypair -keystore "$devkey" -alias saldo-dev -storepass android -keypass android \
+            -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Saldo dev" >/dev/null 2>&1
+    fi
+    ANDROID_KEYSTORE_FILE="$devkey" ANDROID_KEYSTORE_PASSWORD=android ANDROID_KEY_ALIAS=saldo-dev \
+        "$SRC/tools/sign-apk.sh" "$unsigned"
+    rm -f "$unsigned"
+else
+    cp -v "$apk" "$SRC/dist/saldo-$version-$abi-unsigned.apk"
+fi

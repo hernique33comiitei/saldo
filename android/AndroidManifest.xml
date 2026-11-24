@@ -12,13 +12,13 @@
 
     <!-- allowBackup=false: financial data must not end up in cloud backups. -->
     <application android:name="org.qtproject.qt.android.bindings.QtApplication"
-                 android:label="Saldo"
+                 android:label="${appLabel}"
                  android:icon="@mipmap/ic_launcher"
                  android:allowBackup="false"
                  android:fullBackupContent="false">
         <activity android:name="org.qtproject.qt.android.bindings.QtActivity"
                   android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|layoutDirection|locale|fontScale|keyboard|keyboardHidden|navigation"
-                  android:label="Saldo"
+                  android:label="${appLabel}"
                   android:windowSoftInputMode="adjustResize"
                   android:launchMode="singleTop"
                   android:exported="true">
