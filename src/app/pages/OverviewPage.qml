@@ -19,14 +19,15 @@ RefreshablePage {
         Kirigami.Action {
             text: i18n("Refresh")
             icon.name: "view-refresh"
-            shortcut: StandardKey.Refresh
+            // No shortcuts on phones: a menu showed them over the text ("Ctrl+H").
+            shortcut: Kirigami.Settings.isMobile ? "" : StandardKey.Refresh
             enabled: Credentials.configured && !SyncManager.running
             onTriggered: SyncManager.sync()
         },
         Kirigami.Action {
             text: Config.privacyMode ? i18n("Show Values") : i18n("Hide Values")
             icon.name: Config.privacyMode ? "view-visible" : "view-hidden"
-            shortcut: "Ctrl+H"
+            shortcut: Kirigami.Settings.isMobile ? "" : "Ctrl+H"
             onTriggered: Config.privacyMode = !Config.privacyMode
         }
     ]

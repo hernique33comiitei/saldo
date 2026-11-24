@@ -17,7 +17,8 @@ RefreshablePage {
         Kirigami.Action {
             text: i18n("Refresh")
             icon.name: "view-refresh"
-            shortcut: StandardKey.Refresh
+            // No shortcuts on phones: a menu showed them over the text ("Ctrl+H").
+            shortcut: Kirigami.Settings.isMobile ? "" : StandardKey.Refresh
             enabled: Credentials.configured && !SyncManager.running
             onTriggered: SyncManager.sync()
         }
