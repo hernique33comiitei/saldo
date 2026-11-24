@@ -10,6 +10,7 @@
 
 #include <QCommandLineParser>
 #include <QDir>
+#include <QFile>
 #include <QFileInfo>
 #include <QIcon>
 #include <QLibraryInfo>
@@ -89,6 +90,18 @@ bool kdeStyleInstalled()
 
 int main(int argc, char *argv[])
 {
+#ifdef Q_OS_ANDROID
+    // Qt's copy of the Android theme (extract_android_style) gives the Qt Quick
+    // controls Android's own fonts, larger than Kirigami's, and only for the mode
+    // the system was in when it was extracted: switching the app between light
+    // and dark changed text sizes and layouts. The app is all Breeze, so the
+    // manifest no longer extracts it; remove the copies earlier versions left,
+    // which Qt reads when it starts (QGuiApplication) whenever they exist.
+    if (const QString stylePath = qEnvironmentVariable("ANDROID_STYLE_PATH"); !stylePath.isEmpty()) {
+        QFile::remove(QDir(stylePath).filePath(u"style.json"_s));
+        QFile::remove(QDir(stylePath).filePath(u"darkUiMode/style.json"_s));
+    }
+#endif
     Application app(argc, argv);
 
 #ifdef Q_OS_ANDROID
