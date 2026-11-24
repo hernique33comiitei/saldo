@@ -53,6 +53,10 @@ craftmaster() {
 craftmaster --setup
 craftmaster -c -i craft
 craftmaster -c --install-deps saldo
+# With a cache from an earlier build Craft says "saldo is up to date" and only
+# repackages: the code is recompiled for the APK, but files installed by the
+# build (translations, icons) stay stale. Start from a clean install.
+craftmaster -c --unmerge saldo || true
 craftmaster -c --no-cache --options "saldo.srcDir=$SRC" saldo
 craftmaster -c --package --options "saldo.srcDir=$SRC" saldo
 
