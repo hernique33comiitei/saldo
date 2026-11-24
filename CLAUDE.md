@@ -243,6 +243,9 @@ i18n: translate the new sync error messages
     `night yes|no|auto` sets the phone's dark mode; `lang pt_BR|en|system` the demo runs'
     language; `log` prints the app's messages. `--theme` (Android only) applies to that run and
     leaves Settings alone.
+  - The phone must be unlocked (a PIN lock cannot be passed): the script wakes it, stops with a
+    message when it is locked (instead of black screenshots), and `matrix` keeps the screen on
+    while it runs (`svc power stayon usb`), restoring the setting and the dark mode afterwards.
   - Shots use `--demo` (made-up numbers): the real data never goes into files.
 - Translations: `po/Messages.sh` regenerates `po/saldo.pot` and merges into `po/pt_BR.po`;
   translate the new entries and check with `msgfmt --check --statistics -o /dev/null po/pt_BR.po`.

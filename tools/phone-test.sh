@@ -54,8 +54,23 @@ need_app() {
     fi
 }
 
+# An asleep or locked phone gives black screenshots: wake it, dismiss a swipe
+# lock screen, and stop if it needs the PIN.
+screen_ready() {
+    adb shell input keyevent KEYCODE_WAKEUP
+    if adb shell dumpsys window | grep -q 'isKeyguardShowing=true'; then
+        adb shell wm dismiss-keyguard >/dev/null 2>&1 || true
+        sleep 1
+        if adb shell dumpsys window | grep -q 'isKeyguardShowing=true'; then
+            echo "The phone is locked: unlock it and run this again" >&2
+            exit 1
+        fi
+    fi
+}
+
 # Restart the app; Qt passes the intent's applicationArguments to main().
 run_app() {
+    screen_ready
     adb shell am force-stop "$PKG"
     if [ $# -gt 0 ]; then
         adb shell am start -W -n "$ACTIVITY" -e applicationArguments "'$*'" >/dev/null
@@ -125,6 +140,7 @@ run)
 shot)
     need_phone
     [ $# -eq 1 ] || { echo "Usage: $0 shot <file.png>" >&2; exit 1; }
+    screen_ready
     adb exec-out screencap -p >"$1"
     echo "$1"
     ;;
@@ -168,7 +184,10 @@ matrix)
     mkdir -p "$dir"
     set_demo_language "${SALDO_PHONE_LANG:-pt_BR}" # the users' language
     old=$(adb shell cmd uimode night | sed -n 's/^Night mode: //p' | tr -d '\r')
-    trap 'adb shell cmd uimode night "${old:-auto}" >/dev/null; adb shell am force-stop "$PKG"' EXIT
+    # Keep the screen on during the run (it sleeps between shots otherwise).
+    stay=$(adb shell settings get global stay_on_while_plugged_in | tr -d '\r')
+    adb shell svc power stayon usb
+    trap 'adb shell cmd uimode night "${old:-auto}" >/dev/null; adb shell settings put global stay_on_while_plugged_in "${stay:-0}"; adb shell am force-stop "$PKG"' EXIT
     for night in no yes; do
         adb shell cmd uimode night "$night" >/dev/null
         sleep 2
