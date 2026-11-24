@@ -30,8 +30,8 @@ class SALDOCORE_EXPORT Config : public QObject
     // Applied when the app starts (main.cpp); the Plasma widget follows the
     // system language, since plasmashell's language is global.
     Q_PROPERTY(QString language READ language WRITE setLanguage NOTIFY languageChanged)
-    // Color scheme on Android: "" = the system's (light or dark), "light" or
-    // "dark". The desktop follows the Plasma color scheme instead.
+    // App color theme: "" = the system's, "light" or "dark" (Breeze Light or
+    // Dark; src/app/colorscheme.cpp). The Plasma widget follows Plasma.
     Q_PROPERTY(QString theme READ theme WRITE setTheme NOTIFY themeChanged)
 
 public:

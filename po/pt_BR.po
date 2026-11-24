@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: saldo 0.0.9\n"
 "Report-Msgid-Bugs-To: https://github.com/hernique33comiitei/saldo/issues\n"
-"POT-Creation-Date: 2026-11-23 20:39-0300\n"
+"POT-Creation-Date: 2026-11-23 23:27-0300\n"
 "PO-Revision-Date: 2026-11-21 12:00-0300\n"
 "Last-Translator: Henrique Oliveira <henriik.dev@gmail.com>\n"
 "Language-Team: Brazilian Portuguese\n"
@@ -12,24 +12,24 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: src/app/main.cpp:119
+#: src/app/main.cpp:139
 msgid "Saldo"
 msgstr "Saldo"
 
-#: src/app/main.cpp:121
+#: src/app/main.cpp:141
 msgid ""
 "Bank balances, card limits and transactions from Open Finance (Meu Pluggy)"
 msgstr "Saldos, limites de cartão e transações do Open Finance (Meu Pluggy)"
 
-#: src/app/main.cpp:123
+#: src/app/main.cpp:143
 msgid "© 2026 Henrique Oliveira"
 msgstr "© 2026 Henrique Oliveira"
 
-#: src/app/main.cpp:128
+#: src/app/main.cpp:148
 msgid "Author"
 msgstr "Autor"
 
-#: src/app/main.cpp:131
+#: src/app/main.cpp:151
 msgid ""
 "Data comes from the Meu Pluggy personal-use API. Saldo is an independent "
 "open source project, not affiliated with Pluggy."
@@ -37,12 +37,12 @@ msgstr ""
 "Os dados vêm da API de uso pessoal do Meu Pluggy. O Saldo é um projeto open "
 "source independente, sem vínculo com a Pluggy."
 
-#: src/app/main.cpp:139
+#: src/app/main.cpp:159
 msgid "Show fake demo data instead of your Meu Pluggy accounts."
 msgstr ""
 "Mostra dados fictícios de demonstração em vez das suas contas do Meu Pluggy."
 
-#: src/app/main.cpp:141
+#: src/app/main.cpp:161
 msgid ""
 "Page to open: overview, accounts, cards, transactions, investments, "
 "settings, setup or about."
@@ -50,10 +50,19 @@ msgstr ""
 "Página a abrir: overview, accounts, cards, transactions, investments, "
 "settings, setup ou about."
 
-#: src/app/main.cpp:142
+#: src/app/main.cpp:162
 msgctxt "command line value name"
 msgid "page"
 msgstr "página"
+
+#: src/app/main.cpp:167
+msgid "Color theme for this run only: system, light or dark."
+msgstr "Tema de cores só desta execução: system, light ou dark."
+
+#: src/app/main.cpp:168
+msgctxt "command line value name"
+msgid "theme"
+msgstr "tema"
 
 #: src/core/categories.cpp:68
 msgid "Uncategorized"
@@ -527,12 +536,12 @@ msgid "Refresh"
 msgstr "Atualizar"
 
 #: plasmoid/package/contents/ui/FullRepresentation.qml:87
-#: plasmoid/package/contents/ui/main.qml:60 src/app/pages/OverviewPage.qml:27
+#: plasmoid/package/contents/ui/main.qml:60 src/app/pages/OverviewPage.qml:28
 msgid "Show Values"
 msgstr "Mostrar valores"
 
 #: plasmoid/package/contents/ui/FullRepresentation.qml:87
-#: plasmoid/package/contents/ui/main.qml:60 src/app/pages/OverviewPage.qml:27
+#: plasmoid/package/contents/ui/main.qml:60 src/app/pages/OverviewPage.qml:28
 msgid "Hide Values"
 msgstr "Ocultar valores"
 
@@ -546,7 +555,7 @@ msgid "Summary"
 msgstr "Resumo"
 
 #: plasmoid/package/contents/ui/FullRepresentation.qml:121
-#: src/app/pages/OverviewPage.qml:146
+#: src/app/pages/OverviewPage.qml:147
 msgid "Cards"
 msgstr "Cartões"
 
@@ -565,17 +574,17 @@ msgid "Saldo is not set up"
 msgstr "O Saldo não está configurado"
 
 #: plasmoid/package/contents/ui/FullRepresentation.qml:171
-#: src/app/pages/OverviewPage.qml:48
+#: src/app/pages/OverviewPage.qml:49
 msgid "Downloading your data…"
 msgstr "Baixando seus dados…"
 
 #: plasmoid/package/contents/ui/FullRepresentation.qml:171
-#: plasmoid/package/contents/ui/main.qml:35 src/app/pages/OverviewPage.qml:48
+#: plasmoid/package/contents/ui/main.qml:35 src/app/pages/OverviewPage.qml:49
 msgid "No data yet"
 msgstr "Ainda sem dados"
 
 #: plasmoid/package/contents/ui/FullRepresentation.qml:174
-#: src/app/pages/OverviewPage.qml:51
+#: src/app/pages/OverviewPage.qml:52
 msgid "Your accounts appear here as soon as the first sync finishes."
 msgstr "Suas contas aparecem aqui assim que a primeira sincronização terminar."
 
@@ -584,7 +593,7 @@ msgid "Add your Meu Pluggy credentials and connections in the Saldo app."
 msgstr "Adicione as credenciais e conexões do Meu Pluggy no app Saldo."
 
 #: plasmoid/package/contents/ui/FullRepresentation.qml:178
-#: src/app/pages/AccountsPage.qml:111 src/app/pages/OverviewPage.qml:55
+#: src/app/pages/AccountsPage.qml:112 src/app/pages/OverviewPage.qml:56
 #: src/app/pages/SettingsPage.qml:466 src/app/pages/SetupPage.qml:526
 msgid "Sync Now"
 msgstr "Sincronizar agora"
@@ -594,37 +603,37 @@ msgid "Set Up Saldo"
 msgstr "Configurar o Saldo"
 
 #: plasmoid/package/contents/ui/FullRepresentation.qml:215
-#: src/app/pages/OverviewPage.qml:99
+#: src/app/pages/OverviewPage.qml:100
 msgid "In accounts"
 msgstr "Em contas"
 
 #: plasmoid/package/contents/ui/FullRepresentation.qml:236
-#: src/app/pages/OverviewPage.qml:109
+#: src/app/pages/OverviewPage.qml:110
 msgid "Invested"
 msgstr "Investido"
 
 #: plasmoid/package/contents/ui/FullRepresentation.qml:243
-#: src/app/pages/OverviewPage.qml:118
+#: src/app/pages/OverviewPage.qml:119
 msgid "Next bills"
 msgstr "Próxima fatura"
 
 #: plasmoid/package/contents/ui/FullRepresentation.qml:251
-#: src/app/pages/OverviewPage.qml:142
+#: src/app/pages/OverviewPage.qml:143
 msgid "Credit limit"
 msgstr "Limite de crédito"
 
 #: plasmoid/package/contents/ui/FullRepresentation.qml:271
-#: src/app/pages/OverviewPage.qml:188
+#: src/app/pages/OverviewPage.qml:189
 msgid "Total limit"
 msgstr "Limite total"
 
 #: plasmoid/package/contents/ui/FullRepresentation.qml:277
-#: src/app/pages/OverviewPage.qml:197
+#: src/app/pages/OverviewPage.qml:198
 msgid "Used"
 msgstr "Usado"
 
 #: plasmoid/package/contents/ui/FullRepresentation.qml:282
-#: src/app/pages/OverviewPage.qml:204
+#: src/app/pages/OverviewPage.qml:205
 msgid "Available"
 msgstr "Disponível"
 
@@ -643,12 +652,12 @@ msgid "Expenses"
 msgstr "Saídas"
 
 #: plasmoid/package/contents/ui/FullRepresentation.qml:364
-#: src/app/pages/CardsPage.qml:106
+#: src/app/pages/CardsPage.qml:107
 msgid "No credit cards"
 msgstr "Nenhum cartão de crédito"
 
 #: plasmoid/package/contents/ui/FullRepresentation.qml:415
-#: src/app/pages/TransactionsPage.qml:138
+#: src/app/pages/TransactionsPage.qml:139
 msgid "No transactions"
 msgstr "Nenhuma transação"
 
@@ -862,25 +871,25 @@ msgstr "Créditos"
 msgid "Translators"
 msgstr "Tradutores"
 
-#: src/app/pages/AccountsPage.qml:28
+#: src/app/pages/AccountsPage.qml:29
 msgid "Total in accounts"
 msgstr "Total em contas"
 
-#: src/app/pages/AccountsPage.qml:106
+#: src/app/pages/AccountsPage.qml:107
 msgid "No bank accounts"
 msgstr "Nenhuma conta bancária"
 
-#: src/app/pages/AccountsPage.qml:108
+#: src/app/pages/AccountsPage.qml:109
 msgid "Accounts from your Meu Pluggy connections show up here after a sync."
 msgstr ""
 "As contas das suas conexões do Meu Pluggy aparecem aqui depois de uma "
 "sincronização."
 
-#: src/app/pages/AccountsPage.qml:109
+#: src/app/pages/AccountsPage.qml:110
 msgid "Set up Meu Pluggy to see your accounts."
 msgstr "Configure o Meu Pluggy para ver suas contas."
 
-#: src/app/pages/AccountsPage.qml:111 src/app/pages/OverviewPage.qml:55
+#: src/app/pages/AccountsPage.qml:112 src/app/pages/OverviewPage.qml:56
 msgid "Set Up Meu Pluggy"
 msgstr "Configurar o Meu Pluggy"
 
@@ -952,54 +961,54 @@ msgstr "Fechou %1 · venceu %2"
 msgid "This institution does not share past bills through Pluggy."
 msgstr "Esta instituição não compartilha faturas anteriores pela Pluggy."
 
-#: src/app/pages/CardsPage.qml:31
+#: src/app/pages/CardsPage.qml:32
 msgid "Overall limit"
 msgstr "Limite geral"
 
-#: src/app/pages/CardsPage.qml:43
+#: src/app/pages/CardsPage.qml:44
 msgid "%1 used (%2)"
 msgstr "%1 usado (%2)"
 
-#: src/app/pages/CardsPage.qml:48 src/core/qml/CardContent.qml:76
+#: src/app/pages/CardsPage.qml:49 src/core/qml/CardContent.qml:76
 msgid "%1 available"
 msgstr "%1 disponível"
 
-#: src/app/pages/CardsPage.qml:107
+#: src/app/pages/CardsPage.qml:108
 msgid ""
 "Credit cards from your Meu Pluggy connections show up here after a sync."
 msgstr ""
 "Os cartões das suas conexões do Meu Pluggy aparecem aqui depois de uma "
 "sincronização."
 
-#: src/app/pages/InvestmentsPage.qml:28
+#: src/app/pages/InvestmentsPage.qml:29
 msgid "Total invested (net)"
 msgstr "Total investido (líquido)"
 
-#: src/app/pages/InvestmentsPage.qml:84
+#: src/app/pages/InvestmentsPage.qml:85
 msgid "matures %1"
 msgstr "vence %1"
 
-#: src/app/pages/InvestmentsPage.qml:85
+#: src/app/pages/InvestmentsPage.qml:86
 #, javascript-format
 msgid "%1% in 12 months"
 msgstr "%1% em 12 meses"
 
-#: src/app/pages/InvestmentsPage.qml:118
+#: src/app/pages/InvestmentsPage.qml:119
 msgid "No investments"
 msgstr "Nenhum investimento"
 
-#: src/app/pages/InvestmentsPage.qml:119
+#: src/app/pages/InvestmentsPage.qml:120
 msgid ""
 "Investments appear here when your institutions share them through Meu Pluggy."
 msgstr ""
 "Os investimentos aparecem aqui quando suas instituições os compartilham pelo "
 "Meu Pluggy."
 
-#: src/app/pages/OverviewPage.qml:46
+#: src/app/pages/OverviewPage.qml:47
 msgid "Connect your Meu Pluggy account"
 msgstr "Conecte sua conta do Meu Pluggy"
 
-#: src/app/pages/OverviewPage.qml:52
+#: src/app/pages/OverviewPage.qml:53
 msgid ""
 "Saldo reads your banks through the free Meu Pluggy personal-use API. You "
 "need a Client ID, a Client Secret and the item ID of each connection."
@@ -1007,73 +1016,73 @@ msgstr ""
 "O Saldo lê seus bancos pela API gratuita de uso pessoal do Meu Pluggy. Você "
 "precisa de um Client ID, um Client Secret e o ID de item de cada conexão."
 
-#: src/app/pages/OverviewPage.qml:67
+#: src/app/pages/OverviewPage.qml:68
 msgid "Month:"
 msgstr "Mês:"
 
-#: src/app/pages/OverviewPage.qml:103 src/app/pages/SetupPage.qml:509
+#: src/app/pages/OverviewPage.qml:104 src/app/pages/SetupPage.qml:509
 msgid "%1 account"
 msgid_plural "%1 accounts"
 msgstr[0] "%1 conta"
 msgstr[1] "%1 contas"
 
-#: src/app/pages/OverviewPage.qml:112 src/app/pages/SetupPage.qml:511
+#: src/app/pages/OverviewPage.qml:113 src/app/pages/SetupPage.qml:511
 msgid "%1 investment"
 msgid_plural "%1 investments"
 msgstr[0] "%1 investimento"
 msgstr[1] "%1 investimentos"
 
-#: src/app/pages/OverviewPage.qml:122
+#: src/app/pages/OverviewPage.qml:123
 msgid "due %1"
 msgstr "vence %1"
 
-#: src/app/pages/OverviewPage.qml:123 src/app/pages/SetupPage.qml:510
+#: src/app/pages/OverviewPage.qml:124 src/app/pages/SetupPage.qml:510
 msgid "%1 card"
 msgid_plural "%1 cards"
 msgstr[0] "%1 cartão"
 msgstr[1] "%1 cartões"
 
-#: src/app/pages/OverviewPage.qml:224
+#: src/app/pages/OverviewPage.qml:225
 msgid "Spending by category"
 msgstr "Gastos por categoria"
 
-#: src/app/pages/OverviewPage.qml:239
+#: src/app/pages/OverviewPage.qml:240
 msgid "No expenses in this month."
 msgstr "Nenhum gasto neste mês."
 
-#: src/app/pages/OverviewPage.qml:257 src/app/pages/TransactionsPage.qml:54
+#: src/app/pages/OverviewPage.qml:258 src/app/pages/TransactionsPage.qml:55
 msgid "Income and expenses"
 msgstr "Entradas e saídas"
 
-#: src/app/pages/OverviewPage.qml:269
+#: src/app/pages/OverviewPage.qml:270
 msgid "Income in the month"
 msgstr "Entradas no mês"
 
-#: src/app/pages/OverviewPage.qml:270
+#: src/app/pages/OverviewPage.qml:271
 msgid "Expenses in the month"
 msgstr "Saídas no mês"
 
-#: src/app/pages/OverviewPage.qml:324
+#: src/app/pages/OverviewPage.qml:325
 msgid "Balance in accounts, last 90 days"
 msgstr "Saldo em contas, últimos 90 dias"
 
-#: src/app/pages/OverviewPage.qml:338
+#: src/app/pages/OverviewPage.qml:339
 msgid "Saldo records the balance once a day; the history starts on %1."
 msgstr "O Saldo registra o saldo uma vez por dia; o histórico começa em %1."
 
-#: src/app/pages/OverviewPage.qml:357
+#: src/app/pages/OverviewPage.qml:358
 msgid "Pluggy updated your banks %1"
 msgstr "A Pluggy atualizou seus bancos %1"
 
-#: src/app/pages/OverviewPage.qml:364
+#: src/app/pages/OverviewPage.qml:365
 msgid "next update %1"
 msgstr "próxima atualização %1"
 
-#: src/app/pages/OverviewPage.qml:365
+#: src/app/pages/OverviewPage.qml:366
 msgid "next update soon"
 msgstr "próxima atualização em breve"
 
-#: src/app/pages/OverviewPage.qml:367
+#: src/app/pages/OverviewPage.qml:368
 msgid "last checked %1"
 msgstr "última verificação %1"
 
@@ -1295,17 +1304,25 @@ msgstr "Padrão do sistema"
 msgid "Restart Saldo to apply the language change."
 msgstr "Reinicie o Saldo para aplicar a troca de idioma."
 
-#: src/app/pages/SettingsPage.qml:514
+#: src/app/pages/SettingsPage.qml:512
 msgid "Appearance"
 msgstr "Aparência"
 
-#: src/app/pages/SettingsPage.qml:517
+#: src/app/pages/SettingsPage.qml:515
 msgid "Theme"
 msgstr "Tema"
 
-#: src/app/pages/SettingsPage.qml:518
+#: src/app/pages/SettingsPage.qml:517
 msgid "“System default” follows the phone's dark mode."
 msgstr "“Padrão do sistema” segue o modo escuro do celular."
+
+#: src/app/pages/SettingsPage.qml:518
+msgid ""
+"“System default” follows the system: Plasma's colors, or the desktop's dark "
+"mode elsewhere. The Plasma widget follows Plasma."
+msgstr ""
+"“Padrão do sistema” segue o sistema: as cores do Plasma ou, fora dele, o "
+"modo escuro do desktop. O widget do Plasma segue o Plasma."
 
 #: src/app/pages/SettingsPage.qml:522
 msgctxt "color theme"
@@ -1606,31 +1623,31 @@ msgstr "Ver minhas finanças"
 msgid "Sync Again"
 msgstr "Sincronizar de novo"
 
-#: src/app/pages/TransactionsPage.qml:43
+#: src/app/pages/TransactionsPage.qml:44
 msgid "All months"
 msgstr "Todos os meses"
 
-#: src/app/pages/TransactionsPage.qml:55
+#: src/app/pages/TransactionsPage.qml:56
 msgid "Income only"
 msgstr "Só entradas"
 
-#: src/app/pages/TransactionsPage.qml:56
+#: src/app/pages/TransactionsPage.qml:57
 msgid "Expenses only"
 msgstr "Só saídas"
 
-#: src/app/pages/TransactionsPage.qml:70
+#: src/app/pages/TransactionsPage.qml:71
 msgid "Income %1 · Expenses %2"
 msgstr "Entradas %1 · Saídas %2"
 
-#: src/app/pages/TransactionsPage.qml:138
+#: src/app/pages/TransactionsPage.qml:139
 msgid "No matching transactions"
 msgstr "Nenhuma transação encontrada"
 
-#: src/app/pages/TransactionsPage.qml:140
+#: src/app/pages/TransactionsPage.qml:141
 msgid "Try another search or month."
 msgstr "Tente outra busca ou outro mês."
 
-#: src/app/pages/TransactionsPage.qml:141
+#: src/app/pages/TransactionsPage.qml:142
 msgid "Transactions appear here after a sync."
 msgstr "As transações aparecem aqui depois de uma sincronização."
 

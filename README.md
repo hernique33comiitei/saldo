@@ -178,6 +178,8 @@ libsecret).
 > os dados reais vieram em reais e com as compras do cartão positivas, que o Saldo converte em
 > dinheiro saindo. *Configurações → Dados brutos…* mostra o JSON de cada conta para comparar com o
 > app do banco.
+- **Tema.** Claro ou escuro, em *Configurações → Aparência* (por padrão, o do sistema: as cores do
+  Plasma, ou o modo escuro do GNOME ou do celular).
 
 ## Android
 

@@ -92,6 +92,18 @@ app (not the widget) also targets Android.
   from the edges and the line continues flat from there to the edges. The continuation's line is
   antialiased (same sub-pixel height as `LineChart`), its fill is not, and x positions are whole
   pixels; otherwise a step or a darker column shows at the junction.
+- **Color theme** (Settings → Appearance → Theme, `Config.theme`: "", "light", "dark";
+  `src/app/colorscheme.cpp`, every platform, the app only; `--theme` overrides it for one run):
+  Light/Dark activate Breeze Light/Dark with `KColorSchemeManager` (the KColorScheme library
+  carries both schemes, so no Plasma files are needed), and Kirigami's theme follows the active
+  scheme, icons included. "" (System) is: on Plasma (`XDG_CURRENT_DESKTOP` has KDE), Plasma's own
+  scheme, untouched and followed live by KDE's platform theme, so `KColorSchemeManager` is not
+  even created then (when created outside KDE's platform theme it picks a Breeze scheme by
+  itself); elsewhere (GNOME, Android) Breeze Light or Dark from `QStyleHints::colorScheme`.
+  Off Plasma the choice also goes to `QStyleHints::setColorScheme` (Android's bar icons, window
+  decorations), but Light/Dark never depend on it: not every platform theme honors the request.
+  The widget follows Plasma. Check with `--demo --theme …` and `XDG_CURRENT_DESKTOP=KDE` (with a
+  `kdeglobals`) or `GNOME` (without), and on the phone with `tools/phone-test.sh matrix`.
 - **Overview month:** the select at the top of the overview drives everything there that depends
   on a month: `CategorySpendModel.month` and `CashflowModel.endMonth` (the chart's last pair of
   bars and the "in the month" totals). Stat cards, limit and balance history are not per month.
@@ -365,12 +377,9 @@ skill** (`.claude/skills/release/`) runs the whole flow. By hand:
   `QT_NO_GLOBAL_APK_TARGET_PART_OF_ALL ON` keeps `qt_add_executable`'s own APK step out of the
   build (it failed with "Cannot find application binary"); the container runs as uid 1001, so the
   script sets git `safe.directory` and `dist/` files end up owned by uid 1001 on the host.
-- **System bars and dark mode:** the window has `Qt.ExpandedClientAreaHint` on Android, so it is
-  drawn behind the status and navigation bars (transparent) and Kirigami pads its header and
-  tabs by the safe areas. `androidtheme.cpp` turns `Config.theme` ("", "light", "dark"; the
-  Settings card only shows on Android) into `QStyleHints::setColorScheme` (Unknown = the
-  system's) and activates Breeze Light or Dark (`KColorSchemeManager`, files bundled by Craft)
-  from the resulting color scheme; Qt sets the bars' icons from the same scheme. The splash
+- **System bars:** the window has `Qt.ExpandedClientAreaHint` on Android, so it is drawn behind
+  the status and navigation bars (transparent) and Kirigami pads its header and tabs by the safe
+  areas; Qt sets the bars' icons from the app's color scheme (see Color theme). The splash
   background is `@color/saldo_splash_background`, dark in `values-night`.
 - **Same fonts in light and dark:** Qt's copy of the Android theme (`extract_android_style` =
   `minimal`) gives the text its Android sizes; without it Qt falls back to much larger fonts

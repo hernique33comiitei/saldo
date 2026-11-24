@@ -19,6 +19,10 @@ BuildRequires:  qt6-qtdeclarative-devel
 BuildRequires:  kf6-kirigami-devel
 BuildRequires:  kf6-ki18n-devel
 BuildRequires:  kf6-kcoreaddons-devel
+BuildRequires:  kf6-kcolorscheme-devel
+# KColorScheme's CMake config needs these; its -devel package does not pull them.
+BuildRequires:  kf6-kconfig-devel
+BuildRequires:  kf6-kguiaddons-devel
 
 # Runtime libraries (Qt6/KF6) are picked up automatically from the ELF, but the
 # QML modules and image plugins are dlopened, so require them explicitly.
