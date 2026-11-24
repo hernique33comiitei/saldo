@@ -1,3 +1,9 @@
+saldo (0.0.9-1) unstable; urgency=medium
+
+  * On Android, text keeps its normal size in the light and dark themes (0.0.8 made everything too big)
+
+ -- Henrique Oliveira <henriik.dev@gmail.com>  Mon, 23 Nov 2026 22:44:20 -0300
+
 saldo (0.0.8-1) unstable; urgency=medium
 
   * On Android, the light and dark themes change only the colors: text sizes and layouts stay the same
