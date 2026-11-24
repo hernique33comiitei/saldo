@@ -509,6 +509,25 @@ Kirigami.ScrollablePage {
 
             SectionCard {
                 Layout.fillWidth: true
+                // Android only: the desktop follows the Plasma color scheme.
+                visible: Qt.platform.os === "android"
+                title: i18n("Appearance")
+
+                SettingRow {
+                    text: i18n("Theme")
+                    description: i18n("“System default” follows the phone's dark mode.")
+                    QQC2.ComboBox {
+                        // Values of Config.theme; applied right away (androidtheme.cpp).
+                        readonly property var codes: ["", "light", "dark"]
+                        model: [i18n("System default"), i18nc("color theme", "Light"), i18nc("color theme", "Dark")]
+                        currentIndex: Math.max(0, codes.indexOf(Config.theme))
+                        onActivated: Config.theme = codes[currentIndex]
+                    }
+                }
+            }
+
+            SectionCard {
+                Layout.fillWidth: true
                 title: i18n("Local data")
 
                 SettingRow {

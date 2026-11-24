@@ -24,6 +24,8 @@ const auto KeyCredentialsRevision = u"Pluggy/credentialsRevision"_s;
 const auto KeySetupStep = u"Setup/step"_s;
 const auto KeyLanguage = u"View/language"_s;
 const QStringList Languages = {QString(), u"en"_s, u"pt_BR"_s};
+const auto KeyTheme = u"View/theme"_s;
+const QStringList Themes = {QString(), u"light"_s, u"dark"_s};
 const auto GroupItemNames = u"ItemNames"_s;
 
 const QRegularExpression &uuidPattern()
@@ -72,6 +74,10 @@ void Config::load()
     if (!Languages.contains(m_language)) {
         m_language.clear();
     }
+    m_theme = m_settings.value(KeyTheme).toString();
+    if (!Themes.contains(m_theme)) {
+        m_theme.clear();
+    }
 
     m_itemNames.clear();
     m_settings.beginGroup(GroupItemNames);
@@ -114,6 +120,7 @@ void Config::onFileChanged()
     const int oldRevision = m_credentialsRevision;
     const int oldSetupStep = m_setupStep;
     const QString oldLanguage = m_language;
+    const QString oldTheme = m_theme;
     const QHash<QString, QString> oldNames = m_itemNames;
 
     load();
@@ -135,6 +142,9 @@ void Config::onFileChanged()
     }
     if (oldLanguage != m_language) {
         Q_EMIT languageChanged();
+    }
+    if (oldTheme != m_theme) {
+        Q_EMIT themeChanged();
     }
     if (oldRevision != m_credentialsRevision) {
         Q_EMIT credentialsRevisionChanged();
@@ -222,6 +232,21 @@ void Config::setLanguage(const QString &language)
     m_language = language;
     write(KeyLanguage, language);
     Q_EMIT languageChanged();
+}
+
+QString Config::theme() const
+{
+    return m_theme;
+}
+
+void Config::setTheme(const QString &theme)
+{
+    if (!Themes.contains(theme) || theme == m_theme) {
+        return;
+    }
+    m_theme = theme;
+    write(KeyTheme, theme);
+    Q_EMIT themeChanged();
 }
 
 QString Config::storedLanguage()

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Splash screen while the app starts (manifest: splash_screen_drawable; main.cpp
      hides it once the first page is drawn): the app icon, as on the launcher, on
-     the pages' background (Breeze light). -->
+     the pages' background (values/saldo_colors.xml, dark in values-night). -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="#EFF0F1"/>
+            <solid android:color="@color/saldo_splash_background"/>
         </shape>
     </item>
     <!-- Tile with the corners of data/icons/saldo.svg (rx 9 of 40). -->

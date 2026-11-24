@@ -72,7 +72,8 @@ if(ANDROID)
         view-financial-account-savings
         view-financial-category-income view-financial-list view-hidden view-pim-tasks view-refresh
         view-statistics view-visible wallet-open)
-    target_link_libraries(saldo PRIVATE Qt6::Svg OpenSSL::SSL)
+    target_sources(saldo PRIVATE androidtheme.cpp)
+    target_link_libraries(saldo PRIVATE Qt6::Svg OpenSSL::SSL KF6::ColorScheme)
     # create-apk target (used by KDE Craft): manifest, gradle and icon from android/.
     ecm_add_android_apk(saldo ANDROID_DIR ${CMAKE_SOURCE_DIR}/android)
 else()

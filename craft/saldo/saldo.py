@@ -29,6 +29,7 @@ class subinfo(info.infoclass):
         self.runtimeDependencies["qt-libs/qtkeychain"] = None
         if CraftCore.compiler.platform.isAndroid:
             self.runtimeDependencies["kde/plasma/qqc2-breeze-style"] = None
+            self.runtimeDependencies["kde/frameworks/tier2/kcolorscheme"] = None
         else:
             self.runtimeDependencies["kde/frameworks/tier1/breeze-icons"] = None
             self.runtimeDependencies["kde/frameworks/tier3/qqc2-desktop-style"] = None

@@ -39,6 +39,8 @@ if(ANDROID)
     # SVG icons (Kirigami) and HTTPS (Qt loads OpenSSL at runtime) must be bundled.
     find_package(Qt6 ${QT_MIN_VERSION} REQUIRED COMPONENTS Svg)
     find_package(OpenSSL REQUIRED)
+    # Breeze Light/Dark following the system's dark mode (androidtheme.cpp).
+    find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS ColorScheme)
 else()
     find_package(Qt6 ${QT_MIN_VERSION} REQUIRED COMPONENTS Widgets)
 endif()

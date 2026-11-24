@@ -30,6 +30,9 @@ class SALDOCORE_EXPORT Config : public QObject
     // Applied when the app starts (main.cpp); the Plasma widget follows the
     // system language, since plasmashell's language is global.
     Q_PROPERTY(QString language READ language WRITE setLanguage NOTIFY languageChanged)
+    // Color scheme on Android: "" = the system's (light or dark), "light" or
+    // "dark". The desktop follows the Plasma color scheme instead.
+    Q_PROPERTY(QString theme READ theme WRITE setTheme NOTIFY themeChanged)
 
 public:
     static constexpr int MaxItems = 5; // Meu Pluggy personal use allows up to 5 connections
@@ -54,6 +57,8 @@ public:
     // The stored language without creating the singleton: main.cpp needs it
     // before the first i18n() call.
     static QString storedLanguage();
+    QString theme() const;
+    void setTheme(const QString &theme);
 
     Q_INVOKABLE static bool isValidItemId(const QString &id);
     // Every UUID found in pasted text (lowercase, in order, without duplicates):
@@ -84,6 +89,7 @@ Q_SIGNALS:
     void credentialsRevisionChanged();
     void setupStepChanged();
     void languageChanged();
+    void themeChanged();
     void itemNamesChanged();
 
 private:
@@ -104,5 +110,6 @@ private:
     int m_credentialsRevision = 0;
     int m_setupStep = 0;
     QString m_language;
+    QString m_theme;
     QHash<QString, QString> m_itemNames;
 };

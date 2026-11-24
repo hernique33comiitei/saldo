@@ -22,6 +22,7 @@
 
 #ifdef Q_OS_ANDROID
 #include <QGuiApplication>
+#include "androidtheme.h"
 #include <QtCore/qcoreapplication_platform.h>
 #include <memory>
 using Application = QGuiApplication;
@@ -148,6 +149,10 @@ int main(int argc, char *argv[])
     if (parser.isSet(demoOption)) {
         Paths::setDemo(true);
     }
+
+#ifdef Q_OS_ANDROID
+    followColorScheme(); // after the demo switch: it reads Config
+#endif
 
     QQmlApplicationEngine engine;
     KLocalization::setupLocalizedContext(&engine);
