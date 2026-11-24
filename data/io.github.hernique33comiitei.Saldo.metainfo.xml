@@ -98,6 +98,16 @@
   <content_rating type="oars-1.1"/>
 
   <releases>
+    <release version="0.0.7" date="2026-11-23">
+      <description>
+        <ul>
+          <li>On phones, the sections are tabs at the bottom, and the page buttons stay at the top</li>
+          <li>Pull a page down to refresh it on the phone</li>
+          <li>On Android, the app follows the phone's dark mode, with a Light/Dark choice in Settings</li>
+          <li>On Android, the app is drawn behind the status and navigation bars, without black strips</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.0.6" date="2026-11-23">
       <description>
         <ul>

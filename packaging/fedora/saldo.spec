@@ -1,5 +1,5 @@
 Name:           saldo
-Version:        0.0.6
+Version:        0.0.7
 Release:        1%{?dist}
 Summary:        Personal finances from Open Finance (Meu Pluggy): KDE app and Plasma widget
 
@@ -75,6 +75,12 @@ export QT_QPA_PLATFORM=offscreen
 %{_datadir}/icons/hicolor/scalable/apps/saldo-symbolic.svg
 
 %changelog
+* Mon Nov 23 2026 Henrique Oliveira <henriik.dev@gmail.com> - 0.0.7-1
+- On phones, the sections are tabs at the bottom, and the page buttons stay at the top
+- Pull a page down to refresh it on the phone
+- On Android, the app follows the phone's dark mode, with a Light/Dark choice in Settings
+- On Android, the app is drawn behind the status and navigation bars, without black strips
+
 * Mon Nov 23 2026 Henrique Oliveira <henriik.dev@gmail.com> - 0.0.6-1
 - On Android, the app opens on its icon until the overview is ready, instead of showing an empty screen first
 
