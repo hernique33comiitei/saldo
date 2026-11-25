@@ -212,7 +212,11 @@ in `main.cpp`), imported as `import org.saldo.ui as UI`.
   outside its parent", and the parent is the whole window). Sheets (and `Select`'s) sit on `UI.Platform.keyboardTop(window)`: on
   top of the on-screen keyboard while it shows, so a field in a sheet stays visible (Qt reports
   the keyboard in physical pixels on Android, scaled by the ratio of its width to the window's),
-  with a gridUnit gap above it instead of the gesture bar's room (the keyboard covers the bar). `Banner` keeps its icon centered on
+  with a gridUnit gap above it instead of the gesture bar's room (the keyboard covers the bar). Buttons Kirigami draws itself get the design
+  system's pressed states too: `UI.PhoneChrome` (in `Main.qml`) gives the page headers' tool
+  buttons (actions, back, overflow) and the drawer's ☰ handle `RoundButtonBackground`, again after
+  every page change (headers are built per page, their buttons late), and `SheetStyle` does the
+  same for a sheet's close button. `Banner` keeps its icon centered on
   wrapped text (Kirigami pins it to the top). Phone-only parts are created on an item
   (a Popup is no item: visual objects created on one warn they are not in the scene). App compositions that know the data (`BalanceHero`, `PhoneDrawerContent`,
   `PhoneCardRow`, `SetupStep`) stay in `src/app/components/` and are built from `UI.*`.

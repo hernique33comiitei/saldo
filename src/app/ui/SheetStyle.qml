@@ -38,6 +38,7 @@ QtObject {
         target: Platform.isPhone ? style.sheet : null
         function onAboutToShow() {
             style.styleButtons(style.sheet.footer);
+            style.styleIconButtons(style.sheet.header);
         }
         function onOpened() {
             style.anchorBottom();
@@ -79,6 +80,26 @@ QtObject {
         button.rightPadding = Kirigami.Units.gridUnit;
         button.topPadding = Kirigami.Units.smallSpacing;
         button.bottomPadding = Kirigami.Units.smallSpacing;
+    }
+    // Phones: the header's buttons (Kirigami's close button) with the design
+    // system's round pressed state instead of Breeze's framed one.
+    function styleIconButtons(item) {
+        if (!item) {
+            return;
+        }
+        for (const child of item.children) {
+            if (child instanceof T.AbstractButton) {
+                if (child.objectName !== "saldoRound") {
+                    child.objectName = "saldoRound";
+                    child.background = roundBackgroundComponent.createObject(child, { control: child });
+                }
+            } else {
+                styleIconButtons(child);
+            }
+        }
+    }
+    property Component roundBackgroundComponent: Component {
+        RoundButtonBackground {}
     }
     property Component pillBackgroundComponent: Component {
         PillBackground {}

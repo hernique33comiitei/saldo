@@ -23,6 +23,8 @@ set(SALDO_UI_QML_FILES
     PillBackground.qml
     PillContent.qml
     IconButton.qml
+    RoundButtonBackground.qml
+    PhoneChrome.qml
     Switch.qml
     Select.qml
     NumberField.qml

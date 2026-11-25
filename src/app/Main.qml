@@ -94,6 +94,12 @@ Kirigami.ApplicationWindow {
         }
     }
 
+    // Phones: Kirigami's own header and drawer buttons in the design
+    // system's look.
+    UI.PhoneChrome {
+        window: root
+    }
+
     Connections {
         target: Credentials
         function onConfiguredChanged() {

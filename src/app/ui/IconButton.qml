@@ -10,18 +10,11 @@ QQC2.ToolButton {
 
     Component.onCompleted: {
         if (Platform.isPhone) {
-            background = phoneBackground.createObject(button);
+            background = roundBackground.createObject(button, { control: button });
         }
     }
     Component {
-        id: phoneBackground
-        Rectangle {
-            implicitWidth: Tokens.touchTarget
-            implicitHeight: Tokens.touchTarget
-            radius: height / 2
-            color: button.down || button.checked
-                   ? Tokens.tint(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, Tokens.tintPressed)
-                   : "transparent"
-        }
+        id: roundBackground
+        RoundButtonBackground {}
     }
 }
