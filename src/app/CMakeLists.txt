@@ -20,6 +20,8 @@ set(SALDO_APP_QML_FILES
     components/SetupInstructions.qml
     components/RenameConnectionDialog.qml
     components/TransactionDialog.qml
+    components/NoDataMessage.qml
+    components/SyncStatusLabel.qml
 )
 # Serve every QML file from the module root so they see each other.
 foreach(_file ${SALDO_APP_QML_FILES})
