@@ -1,11 +1,12 @@
 // SPDX-License-Identifier: MIT
 import QtQuick
 import org.kde.kirigami as Kirigami
+import org.saldo.ui as UI
 import org.saldo.core
 
 // The overview with nothing to show yet: what to do next (set up Meu Pluggy,
 // wait for the first sync, or sync).
-Kirigami.PlaceholderMessage {
+UI.EmptyState {
     visible: !FinanceSummary.hasData
     icon.name: Credentials.configured ? "view-refresh" : "wallet-open"
     text: {

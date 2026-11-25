@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: MIT
 import QtQuick
+import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
 
@@ -27,6 +28,11 @@ QQC2.SpinBox {
                 indicator.x = Qt.binding(() => stepX(plus));
                 indicator.y = Qt.binding(() => Math.round((spin.height - Tokens.touchTarget) / 2));
                 stepButton.createObject(spin, { plus: plus });
+            }
+            // Room for the value between the − and + buttons, whatever width
+            // the page asked for.
+            if (!(Layout.preferredWidth >= Tokens.numberFieldWidth)) {
+                Layout.preferredWidth = Tokens.numberFieldWidth;
             }
             leftPadding = Tokens.touchTarget + Kirigami.Units.smallSpacing * 2;
             rightPadding = Tokens.touchTarget + Kirigami.Units.smallSpacing * 2;

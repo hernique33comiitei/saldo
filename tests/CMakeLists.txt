@@ -11,6 +11,6 @@ ecm_add_test(pluggyclienttest.cpp
     TEST_NAME pluggyclienttest
     LINK_LIBRARIES saldocore Qt6::Test Qt6::Network)
 
-# Pages and components use the design system (org.saldo.ui); report-only until
-# every page is migrated, then --strict (see tools/check-ui.sh).
-add_test(NAME check-ui COMMAND ${CMAKE_SOURCE_DIR}/tools/check-ui.sh)
+# Pages and components use the design system (org.saldo.ui), never the
+# controls it wraps (see tools/check-ui.sh and CLAUDE.md, "Design system").
+add_test(NAME check-ui COMMAND ${CMAKE_SOURCE_DIR}/tools/check-ui.sh --strict)

@@ -11,6 +11,9 @@ set(SALDO_UI_QML_FILES
     DrawerItem.qml
     PageTitle.qml
     SectionHeader.qml
+    Menu.qml
+    ListRow.qml
+    FormLayout.qml
     SummaryHeader.qml
     FieldBackground.qml
     SheetBackground.qml

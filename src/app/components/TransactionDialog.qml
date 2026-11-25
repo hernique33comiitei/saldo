@@ -3,11 +3,12 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
+import org.saldo.ui as UI
 import org.saldo.core
 
 // Details of one transaction, with the switch that decides whether it is a
 // movement between the user's own accounts (not counted as income/expense).
-Kirigami.Dialog {
+UI.Sheet {
     id: dialog
 
     // TransactionsModel the row came from, and a copy of the row (its roles).
@@ -41,7 +42,7 @@ Kirigami.Dialog {
             font.weight: Font.DemiBold
         }
 
-        Kirigami.FormLayout {
+        UI.FormLayout {
             Layout.fillWidth: true
 
             QQC2.Label {
@@ -77,7 +78,7 @@ Kirigami.Dialog {
             Layout.fillWidth: true
         }
 
-        QQC2.Switch {
+        UI.Switch {
             Layout.fillWidth: true
             text: i18n("Transfer between my accounts")
             checked: dialog.tx.internal ?? false
@@ -111,7 +112,7 @@ Kirigami.Dialog {
             opacity: 0.7
         }
 
-        QQC2.Button {
+        UI.Button {
             visible: dialog.tx.internalManual ?? false
             text: i18n("Use Automatic Detection")
             icon.name: "edit-undo"

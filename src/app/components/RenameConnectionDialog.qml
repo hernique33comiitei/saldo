@@ -3,11 +3,12 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
+import org.saldo.ui as UI
 import org.saldo.core
 
 // Names a connection ("Nubank"). Pluggy calls every Meu Pluggy item
 // "MeuPluggy", so this is how the user tells banks apart.
-Kirigami.PromptDialog {
+UI.ConfirmSheet {
     id: dialog
 
     property string itemId
@@ -44,7 +45,7 @@ Kirigami.PromptDialog {
             wrapMode: Text.Wrap
             opacity: 0.8
         }
-        QQC2.TextField {
+        UI.TextField {
             id: nameField
             Layout.fillWidth: true
             placeholderText: i18nc("example name for a bank connection", "e.g. Nubank")

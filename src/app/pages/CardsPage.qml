@@ -61,7 +61,7 @@ RefreshablePage {
 
     Component {
         id: desktopRow
-        QQC2.ItemDelegate {
+        UI.ListRow {
             id: delegate
             required property var model
             required property int index
@@ -90,7 +90,7 @@ RefreshablePage {
     }
     Component {
         id: phoneRow
-        QQC2.ItemDelegate {
+        UI.ListRow {
             id: delegate
             required property var model
             required property int index
@@ -131,7 +131,7 @@ RefreshablePage {
 
         delegate: page.phone ? phoneRow : desktopRow
 
-        Kirigami.PlaceholderMessage {
+        UI.EmptyState {
             anchors.centerIn: parent
             width: parent.width - Kirigami.Units.gridUnit * 4
             visible: list.count === 0

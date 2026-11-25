@@ -96,48 +96,35 @@ Kirigami.ScrollablePage {
     ColumnLayout {
         spacing: Kirigami.Units.gridUnit
 
-        // Which card, and how much of its limit is taken. Same wrapper as
-        // SectionCard (keeps the column at its own height).
-        Kirigami.AbstractCard {
+        // Which card, and how much of its limit is taken: a card with no title.
+        UI.Card {
             Layout.fillWidth: true
-            padding: Kirigami.Units.gridUnit
 
-            contentItem: Item {
-                implicitWidth: limitColumn.implicitWidth
-                implicitHeight: limitColumn.implicitHeight
-
-                ColumnLayout {
-                    id: limitColumn
-                    width: parent.width
-                    spacing: Kirigami.Units.largeSpacing
-
-                    CardContent {
-                        Layout.fillWidth: true
-                        name: page.card.name ?? ""
-                        numberLabel: page.card.numberLabel ?? ""
-                        cardLabel: page.card.cardLabel ?? ""
-                        institution: page.card.institution ?? ""
-                        limit: page.card.creditLimit ?? 0
-                        used: page.card.usedCredit ?? 0
-                        available: page.card.availableCreditLimit ?? 0
-                        ratio: page.card.usedRatio ?? 0
-                        sharedLimit: page.card.sharedLimit ?? false
-                        included: Config.excludedCardIds.indexOf(page.accountId) < 0
-                    }
-                    QQC2.Label {
-                        Layout.fillWidth: true
-                        visible: (page.card.creditLimit ?? 0) > 0
-                        text: i18n("“Used” is everything not paid yet, future installments included.")
-                        wrapMode: Text.Wrap
-                        font: Kirigami.Theme.smallFont
-                        opacity: 0.7
-                    }
-                    QQC2.Switch {
-                        text: i18n("Count this card in the overall limit")
-                        checked: Config.excludedCardIds.indexOf(page.accountId) < 0
-                        onToggled: Config.setCardIncluded(page.accountId, checked)
-                    }
-                }
+            CardContent {
+                Layout.fillWidth: true
+                name: page.card.name ?? ""
+                numberLabel: page.card.numberLabel ?? ""
+                cardLabel: page.card.cardLabel ?? ""
+                institution: page.card.institution ?? ""
+                limit: page.card.creditLimit ?? 0
+                used: page.card.usedCredit ?? 0
+                available: page.card.availableCreditLimit ?? 0
+                ratio: page.card.usedRatio ?? 0
+                sharedLimit: page.card.sharedLimit ?? false
+                included: Config.excludedCardIds.indexOf(page.accountId) < 0
+            }
+            QQC2.Label {
+                Layout.fillWidth: true
+                visible: (page.card.creditLimit ?? 0) > 0
+                text: i18n("“Used” is everything not paid yet, future installments included.")
+                wrapMode: Text.Wrap
+                font: Kirigami.Theme.smallFont
+                opacity: 0.7
+            }
+            UI.Switch {
+                text: i18n("Count this card in the overall limit")
+                checked: Config.excludedCardIds.indexOf(page.accountId) < 0
+                onToggled: Config.setCardIncluded(page.accountId, checked)
             }
         }
 

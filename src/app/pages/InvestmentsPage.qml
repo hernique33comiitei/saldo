@@ -37,19 +37,6 @@ RefreshablePage {
         }
     }
 
-    Component {
-        id: desktopSection
-        Kirigami.ListSectionHeader {
-            required property string section
-            width: ListView.view.width
-            text: section
-        }
-    }
-    Component {
-        id: phoneSection
-        UI.SectionHeader {}
-    }
-
     ListView {
         id: list
 
@@ -58,9 +45,9 @@ RefreshablePage {
         }
 
         section.property: "typeLabel"
-        section.delegate: page.phone ? phoneSection : desktopSection
+        section.delegate: UI.SectionHeader {}
 
-        delegate: QQC2.ItemDelegate {
+        delegate: UI.ListRow {
             id: delegate
             required property var model
 
@@ -132,7 +119,7 @@ RefreshablePage {
             }
         }
 
-        Kirigami.PlaceholderMessage {
+        UI.EmptyState {
             anchors.centerIn: parent
             width: parent.width - Kirigami.Units.gridUnit * 4
             visible: list.count === 0

@@ -157,12 +157,12 @@ Kirigami.ScrollablePage {
                 Flow {
                     Layout.fillWidth: true
                     spacing: Kirigami.Units.smallSpacing
-                    QQC2.Button {
+                    UI.Button {
                         text: i18n("Open meu.pluggy.ai")
                         icon.name: "internet-services-symbolic"
                         onClicked: Qt.openUrlExternally(page.meuPluggyUrl)
                     }
-                    QQC2.Button {
+                    UI.Button {
                         text: i18n("My Banks Are Connected")
                         icon.name: "go-next-symbolic"
                         onClicked: page.advance(1)
@@ -190,7 +190,7 @@ Kirigami.ScrollablePage {
                               "The <b>Client Secret</b> is shown only once, when it is created. If you don't have it, open the application's gear and, under <b>“Credenciais”</b>, click <b>“Gerar novo secret”</b>.")
                     ]
                 }
-                QQC2.Button {
+                UI.Button {
                     text: i18n("Open the Pluggy Dashboard")
                     icon.name: "internet-services-symbolic"
                     onClicked: Qt.openUrlExternally(page.dashboardUrl)
@@ -207,7 +207,7 @@ Kirigami.ScrollablePage {
                     }
                     RowLayout {
                         Layout.fillWidth: true
-                        QQC2.TextField {
+                        UI.TextField {
                             id: clientIdField
                             Layout.fillWidth: true
                             text: Credentials.clientId
@@ -221,7 +221,7 @@ Kirigami.ScrollablePage {
                                 }
                             }
                         }
-                        QQC2.Button {
+                        UI.Button {
                             icon.name: "edit-paste"
                             text: i18n("Paste")
                             display: QQC2.AbstractButton.IconOnly
@@ -242,13 +242,13 @@ Kirigami.ScrollablePage {
                     }
                     RowLayout {
                         Layout.fillWidth: true
-                        Kirigami.PasswordField {
+                        UI.PasswordField {
                             id: secretField
                             Layout.fillWidth: true
                             placeholderText: Credentials.configured ? i18n("Stored in the system keyring") : "pluggy_sk_…"
                             onAccepted: if (testButton.enabled) testButton.clicked()
                         }
-                        QQC2.Button {
+                        UI.Button {
                             icon.name: "edit-paste"
                             text: i18n("Paste")
                             display: QQC2.AbstractButton.IconOnly
@@ -266,7 +266,7 @@ Kirigami.ScrollablePage {
                     RowLayout {
                         Layout.topMargin: Kirigami.Units.smallSpacing
                         spacing: Kirigami.Units.smallSpacing
-                        QQC2.Button {
+                        UI.Button {
                             id: testButton
                             text: i18n("Connect and Save")
                             icon.name: "network-connect"
@@ -282,7 +282,7 @@ Kirigami.ScrollablePage {
                                 SyncManager.testConnection(clientIdField.text, secretField.text);
                             }
                         }
-                        QQC2.BusyIndicator {
+                        UI.BusyIndicator {
                             visible: SyncManager.testing || Credentials.busy
                             running: visible
                             Layout.preferredWidth: Kirigami.Units.iconSizes.smallMedium
@@ -329,7 +329,7 @@ Kirigami.ScrollablePage {
                         i18n("Each authorization shares one bank. <b>Repeat these steps for every bank</b> you want in Saldo (up to 5). Authorizations last one year.")
                     ]
                 }
-                Kirigami.InlineMessage {
+                UI.Banner {
                     Layout.fillWidth: true
                     type: Kirigami.MessageType.Information
                     visible: true
@@ -339,12 +339,12 @@ Kirigami.ScrollablePage {
                 Flow {
                     Layout.fillWidth: true
                     spacing: Kirigami.Units.smallSpacing
-                    QQC2.Button {
+                    UI.Button {
                         text: i18n("Open the Pluggy Dashboard")
                         icon.name: "internet-services-symbolic"
                         onClicked: Qt.openUrlExternally(page.dashboardUrl)
                     }
-                    QQC2.Button {
+                    UI.Button {
                         text: i18n("All My Banks Are Connected")
                         icon.name: "go-next-symbolic"
                         onClicked: page.advance(3)
@@ -374,7 +374,7 @@ Kirigami.ScrollablePage {
                     Layout.fillWidth: true
                     spacing: Kirigami.Units.smallSpacing
                     enabled: Config.itemIds.length < 5
-                    QQC2.TextField {
+                    UI.TextField {
                         id: itemField
                         Layout.fillWidth: true
                         placeholderText: i18n("Item ID")
@@ -382,7 +382,7 @@ Kirigami.ScrollablePage {
                         font.family: Kirigami.Theme.fixedWidthFont.family
                         onAccepted: page.addItems(text)
                     }
-                    QQC2.Button {
+                    UI.Button {
                         icon.name: "edit-paste"
                         text: i18n("Paste")
                         display: QQC2.AbstractButton.IconOnly
@@ -395,7 +395,7 @@ Kirigami.ScrollablePage {
                             page.addItems(itemField.text);
                         }
                     }
-                    QQC2.Button {
+                    UI.Button {
                         text: i18n("Add")
                         icon.name: "list-add"
                         enabled: itemField.text.trim().length > 0
@@ -440,7 +440,7 @@ Kirigami.ScrollablePage {
                                 opacity: 0.7
                             }
                         }
-                        QQC2.ToolButton {
+                        UI.IconButton {
                             icon.name: "document-edit"
                             text: i18n("Name this connection")
                             display: QQC2.AbstractButton.IconOnly
@@ -449,7 +449,7 @@ Kirigami.ScrollablePage {
                             QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
                             onClicked: renameDialog.openFor(itemRow.model.itemId, itemRow.model.nickname, itemRow.model.accountsSummary)
                         }
-                        QQC2.ToolButton {
+                        UI.IconButton {
                             icon.name: "list-remove"
                             text: i18n("Remove connection")
                             display: QQC2.AbstractButton.IconOnly
@@ -461,7 +461,7 @@ Kirigami.ScrollablePage {
                     }
                 }
 
-                QQC2.Button {
+                UI.Button {
                     text: i18n("Continue")
                     icon.name: "go-next-symbolic"
                     enabled: Config.itemIds.length > 0
@@ -487,7 +487,7 @@ Kirigami.ScrollablePage {
                     Layout.fillWidth: true
                     visible: SyncManager.running
                     spacing: Kirigami.Units.largeSpacing
-                    QQC2.BusyIndicator {
+                    UI.BusyIndicator {
                         running: SyncManager.running
                         Layout.preferredWidth: Kirigami.Units.iconSizes.medium
                         Layout.preferredHeight: Kirigami.Units.iconSizes.medium
@@ -499,7 +499,7 @@ Kirigami.ScrollablePage {
                     }
                 }
 
-                Kirigami.InlineMessage {
+                UI.Banner {
                     Layout.fillWidth: true
                     type: Kirigami.MessageType.Error
                     visible: !SyncManager.running && SyncManager.lastError.length > 0
@@ -534,13 +534,13 @@ Kirigami.ScrollablePage {
                 Flow {
                     Layout.fillWidth: true
                     spacing: Kirigami.Units.smallSpacing
-                    QQC2.Button {
+                    UI.Button {
                         visible: page.step5Done
                         text: i18n("See My Finances")
                         icon.name: "view-statistics"
                         onClicked: applicationWindow().showPage("overview")
                     }
-                    QQC2.Button {
+                    UI.Button {
                         text: page.step5Done ? i18n("Sync Again") : i18n("Sync Now")
                         icon.name: "view-refresh"
                         enabled: !SyncManager.running && Credentials.configured && Config.itemIds.length > 0

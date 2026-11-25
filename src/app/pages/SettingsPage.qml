@@ -98,7 +98,7 @@ Kirigami.ScrollablePage {
 
     header: ColumnLayout {
         spacing: 0
-        Kirigami.InlineMessage {
+        UI.Banner {
             Layout.fillWidth: true
             position: Kirigami.InlineMessage.Header
             type: Kirigami.MessageType.Information
@@ -112,14 +112,14 @@ Kirigami.ScrollablePage {
                 }
             ]
         }
-        Kirigami.InlineMessage {
+        UI.Banner {
             Layout.fillWidth: true
             position: Kirigami.InlineMessage.Header
             type: Kirigami.MessageType.Warning
             visible: !Credentials.keyringAvailable
             text: Credentials.keyringUnavailableReason
         }
-        Kirigami.InlineMessage {
+        UI.Banner {
             Layout.fillWidth: true
             position: Kirigami.InlineMessage.Header
             type: Kirigami.MessageType.Error
@@ -178,7 +178,7 @@ Kirigami.ScrollablePage {
                     QQC2.Label {
                         text: i18n("Client ID")
                     }
-                    QQC2.TextField {
+                    UI.TextField {
                         id: clientIdField
                         Layout.fillWidth: true
                         text: Credentials.clientId
@@ -193,7 +193,7 @@ Kirigami.ScrollablePage {
                     QQC2.Label {
                         text: i18n("Client Secret")
                     }
-                    Kirigami.PasswordField {
+                    UI.PasswordField {
                         id: secretField
                         Layout.fillWidth: true
                         placeholderText: Credentials.configured ? i18n("Stored in the system keyring") : "pluggy_sk_…"
@@ -214,14 +214,14 @@ Kirigami.ScrollablePage {
                     columnSpacing: Kirigami.Units.smallSpacing
                     rowSpacing: Kirigami.Units.smallSpacing
 
-                    QQC2.Button {
+                    UI.Button {
                         id: saveButton
                         text: i18n("Save")
                         icon.name: "document-save"
                         enabled: !Credentials.busy && clientIdField.text.length > 0 && (secretField.text.length > 0 || Credentials.configured)
                         onClicked: Credentials.save(clientIdField.text, secretField.text)
                     }
-                    QQC2.Button {
+                    UI.Button {
                         id: testButton
                         text: i18n("Test Connection")
                         icon.name: "network-connect"
@@ -237,7 +237,7 @@ Kirigami.ScrollablePage {
                         Layout.fillWidth: true
                         implicitWidth: credentialsBusy.implicitWidth
                         implicitHeight: credentialsBusy.implicitHeight
-                        QQC2.BusyIndicator {
+                        UI.BusyIndicator {
                             id: credentialsBusy
                             anchors.verticalCenter: parent.verticalCenter
                             implicitWidth: Kirigami.Units.iconSizes.smallMedium
@@ -246,7 +246,7 @@ Kirigami.ScrollablePage {
                             opacity: running ? 1 : 0
                         }
                     }
-                    QQC2.Button {
+                    UI.Button {
                         id: removeButton
                         Layout.columnSpan: credentialButtons.oneRow ? 1 : 3
                         Layout.alignment: credentialButtons.oneRow ? Qt.AlignRight : Qt.AlignLeft
@@ -339,7 +339,7 @@ Kirigami.ScrollablePage {
                                     opacity: 0.6
                                 }
                             }
-                            QQC2.ToolButton {
+                            UI.IconButton {
                                 Layout.alignment: Qt.AlignTop
                                 icon.name: "document-edit"
                                 text: i18n("Name this connection")
@@ -349,7 +349,7 @@ Kirigami.ScrollablePage {
                                 QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
                                 onClicked: renameDialog.openFor(itemRow.model.itemId, itemRow.model.nickname, itemRow.model.accountsSummary)
                             }
-                            QQC2.ToolButton {
+                            UI.IconButton {
                                 Layout.alignment: Qt.AlignTop
                                 icon.name: "edit-delete"
                                 text: i18n("Remove connection")
@@ -379,14 +379,14 @@ Kirigami.ScrollablePage {
                         Layout.fillWidth: true
                         spacing: Kirigami.Units.smallSpacing
 
-                        QQC2.TextField {
+                        UI.TextField {
                             id: newItemField
                             Layout.fillWidth: true
                             placeholderText: i18n("Item ID from the Pluggy dashboard")
                             inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
                             onAccepted: if (addButton.enabled) addButton.clicked()
                         }
-                        QQC2.Button {
+                        UI.Button {
                             id: addButton
                             text: i18n("Add")
                             icon.name: "list-add"
@@ -438,7 +438,7 @@ Kirigami.ScrollablePage {
                 SettingRow {
                     text: i18n("Transaction history")
                     description: i18n("How far back the first sync goes.")
-                    QQC2.SpinBox {
+                    UI.NumberField {
                         Layout.preferredWidth: Kirigami.Units.gridUnit * 8
                         from: 1
                         to: 24
@@ -455,7 +455,7 @@ Kirigami.ScrollablePage {
                 SettingRow {
                     text: i18n("Check for new data every")
                     description: i18n("Meu Pluggy refreshes your banks once a day on its own; checking more often only picks up that daily update sooner.")
-                    QQC2.SpinBox {
+                    UI.NumberField {
                         Layout.preferredWidth: Kirigami.Units.gridUnit * 8
                         from: 15
                         to: 24 * 60
@@ -473,13 +473,13 @@ Kirigami.ScrollablePage {
                 SettingRow {
                     text: i18n("Last sync")
                     description: Money.relativeTime(SyncManager.lastSyncAt)
-                    QQC2.BusyIndicator {
+                    UI.BusyIndicator {
                         visible: SyncManager.running
                         running: visible
                         Layout.preferredHeight: Kirigami.Units.iconSizes.smallMedium
                         Layout.preferredWidth: Kirigami.Units.iconSizes.smallMedium
                     }
-                    QQC2.Button {
+                    UI.Button {
                         text: i18n("Sync Now")
                         icon.name: "view-refresh"
                         enabled: Credentials.configured && !SyncManager.running && Config.itemIds.length > 0
@@ -495,7 +495,7 @@ Kirigami.ScrollablePage {
                 SettingRow {
                     text: i18n("Hide values")
                     description: i18n("Hides the amounts in the app and in the widget.")
-                    QQC2.Switch {
+                    UI.Switch {
                         checked: Config.privacyMode
                         onToggled: Config.privacyMode = checked
                         Accessible.name: i18n("Hide values")
@@ -510,7 +510,7 @@ Kirigami.ScrollablePage {
                 SettingRow {
                     text: i18n("App language")
                     description: i18n("Takes effect the next time Saldo starts. The Plasma widget follows the system language.")
-                    QQC2.ComboBox {
+                    UI.Select {
                         // Values of Config.language. Language names are written in
                         // their own language, as language pickers do.
                         readonly property var codes: ["", "en", "pt_BR"]
@@ -533,7 +533,7 @@ Kirigami.ScrollablePage {
                     description: Qt.platform.os === "android"
                                  ? i18n("“System default” follows the phone's dark mode.")
                                  : i18n("“System default” follows the system: Plasma's colors, or the desktop's dark mode elsewhere. The Plasma widget follows Plasma.")
-                    QQC2.ComboBox {
+                    UI.Select {
                         // Values of Config.theme; applied right away (colorscheme.cpp).
                         readonly property var codes: ["", "light", "dark"]
                         model: [i18n("System default"), i18nc("color theme", "Light"), i18nc("color theme", "Dark")]
@@ -550,7 +550,7 @@ Kirigami.ScrollablePage {
                 SettingRow {
                     text: i18n("Raw data")
                     description: i18n("What Pluggy returned for each account, to check amounts and signs.")
-                    QQC2.Button {
+                    UI.Button {
                         text: i18n("Raw Data…")
                         icon.name: "documentinfo"
                         onClicked: applicationWindow().pageStack.push(rawDataComponent)
@@ -564,7 +564,7 @@ Kirigami.ScrollablePage {
                 SettingRow {
                     text: i18n("Local cache")
                     description: i18n("Deletes the downloaded data; the next sync fetches it again. Settings, connection names, transfer choices and balance history are kept.")
-                    QQC2.Button {
+                    UI.Button {
                         text: i18n("Clear Local Cache")
                         icon.name: "edit-clear-history"
                         enabled: !SyncManager.running
@@ -579,7 +579,7 @@ Kirigami.ScrollablePage {
         id: renameDialog
     }
 
-    Kirigami.PromptDialog {
+    UI.ConfirmSheet {
         id: removeDialog
         title: i18n("Remove Credentials?")
         subtitle: i18n("The Client ID and Client Secret will be deleted from the system keyring. Cached data stays until you clear it.")

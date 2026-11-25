@@ -2,6 +2,7 @@
 import QtQuick
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
+import org.saldo.ui as UI
 import org.saldo.core
 
 // Page header with sync progress, sync errors and connection warnings.
@@ -10,7 +11,7 @@ ColumnLayout {
 
     spacing: 0
 
-    Kirigami.InlineMessage {
+    UI.Banner {
         Layout.fillWidth: true
         position: Kirigami.InlineMessage.Header
         type: Kirigami.MessageType.Information
@@ -18,7 +19,7 @@ ColumnLayout {
         text: SyncManager.progressText.length > 0 ? SyncManager.progressText : i18n("Syncing with Pluggy…")
     }
 
-    Kirigami.InlineMessage {
+    UI.Banner {
         Layout.fillWidth: true
         position: Kirigami.InlineMessage.Header
         type: Kirigami.MessageType.Error
@@ -40,7 +41,7 @@ ColumnLayout {
 
     Repeater {
         model: FinanceSummary.attention
-        delegate: Kirigami.InlineMessage {
+        delegate: UI.Banner {
             required property string modelData
             Layout.fillWidth: true
             position: Kirigami.InlineMessage.Header
@@ -50,7 +51,7 @@ ColumnLayout {
         }
     }
 
-    Kirigami.InlineMessage {
+    UI.Banner {
         Layout.fillWidth: true
         position: Kirigami.InlineMessage.Header
         type: Kirigami.MessageType.Warning

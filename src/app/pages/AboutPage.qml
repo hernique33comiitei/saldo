@@ -56,7 +56,7 @@ Kirigami.ScrollablePage {
                 opacity: 0.7
             }
         }
-        QQC2.ToolButton {
+        UI.IconButton {
             visible: (person.modelData.webAddress ?? "").length > 0
             icon.name: "globe"
             text: person.modelData.webAddress ?? ""
@@ -66,7 +66,7 @@ Kirigami.ScrollablePage {
             QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
             onClicked: Qt.openUrlExternally(person.modelData.webAddress)
         }
-        QQC2.ToolButton {
+        UI.IconButton {
             visible: (person.modelData.emailAddress ?? "").length > 0
             icon.name: "mail-sent"
             text: i18n("Send an email to %1", person.modelData.emailAddress ?? "")
@@ -79,7 +79,7 @@ Kirigami.ScrollablePage {
     }
 
     // A row that opens something (license text, a web page).
-    component LinkRow: QQC2.ItemDelegate {
+    component LinkRow: UI.ListRow {
         id: link
 
         property string trailingIcon: "go-next-symbolic"
@@ -120,61 +120,48 @@ Kirigami.ScrollablePage {
             Layout.alignment: Qt.AlignHCenter
             spacing: Kirigami.Units.gridUnit
 
-            // Name, version, description and copyright. Same content wrapper
-            // as SectionCard (keeps the column at its own height).
-            Kirigami.AbstractCard {
+            // Name, version, description and copyright: a card with no title.
+            UI.Card {
                 Layout.fillWidth: true
-                padding: Kirigami.Units.gridUnit
 
-                contentItem: Item {
-                    implicitWidth: headerColumn.implicitWidth
-                    implicitHeight: headerColumn.implicitHeight
+                RowLayout {
+                    Layout.fillWidth: true
+                    spacing: Kirigami.Units.gridUnit
 
+                    Image {
+                        source: "qrc:/icons/saldo.svg"
+                        sourceSize.width: Kirigami.Units.iconSizes.huge
+                        sourceSize.height: Kirigami.Units.iconSizes.huge
+                        Layout.preferredWidth: Kirigami.Units.iconSizes.huge
+                        Layout.preferredHeight: Kirigami.Units.iconSizes.huge
+                    }
                     ColumnLayout {
-                        id: headerColumn
-                        width: parent.width
-                        spacing: Kirigami.Units.largeSpacing
-
-                        RowLayout {
+                        Layout.fillWidth: true
+                        spacing: Kirigami.Units.smallSpacing
+                        Kirigami.Heading {
                             Layout.fillWidth: true
-                            spacing: Kirigami.Units.gridUnit
-
-                            Image {
-                                source: "qrc:/icons/saldo.svg"
-                                sourceSize.width: Kirigami.Units.iconSizes.huge
-                                sourceSize.height: Kirigami.Units.iconSizes.huge
-                                Layout.preferredWidth: Kirigami.Units.iconSizes.huge
-                                Layout.preferredHeight: Kirigami.Units.iconSizes.huge
-                            }
-                            ColumnLayout {
-                                Layout.fillWidth: true
-                                spacing: Kirigami.Units.smallSpacing
-                                Kirigami.Heading {
-                                    Layout.fillWidth: true
-                                    text: i18nc("application name and version", "%1 %2", page.aboutData.displayName, page.aboutData.version)
-                                    wrapMode: Text.Wrap
-                                }
-                                QQC2.Label {
-                                    Layout.fillWidth: true
-                                    text: page.aboutData.shortDescription
-                                    wrapMode: Text.Wrap
-                                    opacity: 0.8
-                                }
-                            }
-                        }
-
-                        Kirigami.Separator {
-                            Layout.fillWidth: true
-                            visible: copyright.text.length > 0
-                        }
-                        QQC2.Label {
-                            id: copyright
-                            Layout.fillWidth: true
-                            visible: text.length > 0
-                            text: page.aboutData.copyrightStatement
+                            text: i18nc("application name and version", "%1 %2", page.aboutData.displayName, page.aboutData.version)
                             wrapMode: Text.Wrap
                         }
+                        QQC2.Label {
+                            Layout.fillWidth: true
+                            text: page.aboutData.shortDescription
+                            wrapMode: Text.Wrap
+                            opacity: 0.8
+                        }
                     }
+                }
+
+                Kirigami.Separator {
+                    Layout.fillWidth: true
+                    visible: copyright.text.length > 0
+                }
+                QQC2.Label {
+                    id: copyright
+                    Layout.fillWidth: true
+                    visible: text.length > 0
+                    text: page.aboutData.copyrightStatement
+                    wrapMode: Text.Wrap
                 }
             }
 
@@ -265,7 +252,7 @@ Kirigami.ScrollablePage {
     }
 
     // Kirigami.Dialog sits centered in the window.
-    Kirigami.Dialog {
+    UI.Sheet {
         id: licenseDialog
 
         property alias text: licenseText.text

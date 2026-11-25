@@ -29,7 +29,7 @@ Kirigami.ScrollablePage {
 
     title: i18n("Raw Data")
 
-    header: Kirigami.InlineMessage {
+    header: UI.Banner {
         position: Kirigami.InlineMessage.Header
         type: Kirigami.MessageType.Information
         visible: true
@@ -49,9 +49,9 @@ Kirigami.ScrollablePage {
             width: ListView.view.width
             spacing: Kirigami.Units.smallSpacing
 
-            Kirigami.ListSectionHeader {
+            UI.SectionHeader {
                 Layout.fillWidth: true
-                text: i18nc("account name (account type)", "%1 (%2)", delegate.model.name, delegate.model.subtypeLabel || delegate.model.type)
+                section: i18nc("account name (account type)", "%1 (%2)", delegate.model.name, delegate.model.subtypeLabel || delegate.model.type)
             }
 
             QQC2.Label {
@@ -65,7 +65,7 @@ Kirigami.ScrollablePage {
                 opacity: 0.7
             }
 
-            QQC2.TextArea {
+            UI.TextArea {
                 id: json
                 Layout.fillWidth: true
                 visible: !Config.privacyMode && (delegate.model.raw ?? "").length > 0
@@ -83,7 +83,7 @@ Kirigami.ScrollablePage {
                 }
             }
 
-            QQC2.Button {
+            UI.Button {
                 Layout.leftMargin: Kirigami.Units.largeSpacing
                 visible: json.visible
                 text: i18n("Copy")
@@ -96,7 +96,7 @@ Kirigami.ScrollablePage {
             }
         }
 
-        Kirigami.PlaceholderMessage {
+        UI.EmptyState {
             anchors.centerIn: parent
             visible: list.count === 0
             icon.name: "documentinfo"

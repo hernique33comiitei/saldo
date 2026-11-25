@@ -16,6 +16,7 @@ QtObject {
     // How much of a color goes over the background (tint()).
     readonly property real tintBar: 0.05        // tab bar
     readonly property real tintSurface: 0.06    // cards
+    readonly property real tintField: 0.08      // text fields (with a hairline: they also sit on cards)
     readonly property real tintChip: 0.12       // info chips, colored tiles, the open setup step
     readonly property real tintBadge: 0.18      // icon circles
     readonly property real tintSelected: 0.25   // a checked chip
@@ -44,6 +45,7 @@ QtObject {
     readonly property real tabBarMaxWidth: Kirigami.Units.gridUnit * 30
     readonly property real heroPadding: Kirigami.Units.gridUnit * 1.25
     readonly property real fieldHeight: Kirigami.Units.gridUnit * 2.5
+    readonly property real numberFieldWidth: Kirigami.Units.gridUnit * 11
     readonly property real buttonHeight: Kirigami.Units.gridUnit * 2.25
     readonly property real switchWidth: Kirigami.Units.gridUnit * 2.75
     readonly property real switchHeight: Kirigami.Units.gridUnit * 1.6

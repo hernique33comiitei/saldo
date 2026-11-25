@@ -45,13 +45,13 @@ RefreshablePage {
                 Layout.fillWidth: true
                 spacing: Kirigami.Units.smallSpacing
 
-                Kirigami.SearchField {
+                UI.SearchField {
                     id: search
                     width: page.phone ? parent.width : Math.min(Kirigami.Units.gridUnit * 16, parent.width)
                     delaySearch: true
                     onAccepted: transactions.searchText = text
                 }
-                QQC2.ComboBox {
+                UI.Select {
                     id: monthBox
                     visible: !page.phone
                     model: [{ text: i18n("All months"), value: "" }].concat(FinanceSummary.months)
@@ -62,7 +62,7 @@ RefreshablePage {
                     // reloads; stay on the month the list is filtered by.
                     onModelChanged: Qt.callLater(() => currentIndex = Math.max(0, indexOfValue(transactions.month)))
                 }
-                QQC2.ComboBox {
+                UI.Select {
                     id: kindBox
                     visible: !page.phone
                     model: [
@@ -207,7 +207,7 @@ RefreshablePage {
     }
 
     // Phones: the months of the month chip.
-    QQC2.Menu {
+    UI.Menu {
         id: monthMenu
 
         Instantiator {
@@ -223,17 +223,8 @@ RefreshablePage {
     }
 
     Component {
-        id: desktopSection
-        Kirigami.ListSectionHeader {
-            required property string section
-            width: ListView.view.width
-            text: section
-        }
-    }
-
-    Component {
         id: desktopRow
-        QQC2.ItemDelegate {
+        UI.ListRow {
             id: delegate
             required property var model
             required property int index
@@ -255,16 +246,11 @@ RefreshablePage {
         }
     }
 
-    Component {
-        id: phoneSection
-        UI.SectionHeader {}
-    }
-
     // Phones: round category icon (green for money in, grey between the
     // user's own accounts), bold description, the amount with its state below.
     Component {
         id: phoneRow
-        QQC2.ItemDelegate {
+        UI.ListRow {
             id: row
             required property var model
             required property int index
@@ -342,7 +328,7 @@ RefreshablePage {
         }
 
         section.property: "dateLabel"
-        section.delegate: page.phone ? phoneSection : desktopSection
+        section.delegate: UI.SectionHeader {}
 
         onAtYEndChanged: {
             if (atYEnd && transactions.canLoadMore) {
@@ -352,7 +338,7 @@ RefreshablePage {
 
         delegate: page.phone ? phoneRow : desktopRow
 
-        Kirigami.PlaceholderMessage {
+        UI.EmptyState {
             anchors.centerIn: parent
             width: parent.width - Kirigami.Units.gridUnit * 4
             visible: list.count === 0

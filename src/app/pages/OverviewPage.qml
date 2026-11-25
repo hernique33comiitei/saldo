@@ -51,7 +51,7 @@ RefreshablePage {
             QQC2.Label {
                 text: i18n("Month:")
             }
-            QQC2.ComboBox {
+            UI.Select {
                 id: monthBox
 
                 // The list is rebuilt after every sync; keep the month the
@@ -81,7 +81,7 @@ RefreshablePage {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.preferredWidth: 1
-                title: i18n("In accounts")
+                label: i18n("In accounts")
                 iconName: "view-bank"
                 value: FinanceSummary.totalCash
                 warnNegative: true
@@ -91,7 +91,7 @@ RefreshablePage {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.preferredWidth: 1
-                title: i18n("Invested")
+                label: i18n("Invested")
                 iconName: "view-financial-account-investment"
                 value: FinanceSummary.totalInvested
                 caption: i18np("%1 investment", "%1 investments", FinanceSummary.investmentCount)
@@ -100,7 +100,7 @@ RefreshablePage {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.preferredWidth: 1
-                title: i18n("Next bills")
+                label: i18n("Next bills")
                 iconName: "view-financial-account-credit-card"
                 value: FinanceSummary.nextBills
                 caption: FinanceSummary.nextBillDue.getTime && !isNaN(FinanceSummary.nextBillDue.getTime())

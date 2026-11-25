@@ -124,12 +124,14 @@ QtObject {
         // Clear of the gesture bar: a dialog's footer sits outside its
         // padding, at the very bottom, so the room goes into the footer
         // (or the padding when there is none).
+        // A Kirigami footer with no buttons (bufferMode) is a thin strip that
+        // ignores its padding: the room goes into the sheet's padding then.
+        const footerless = () => !s.footer || s.footer.bufferMode === true;
         if (s.footer) {
             const base = s.footer.bottomPadding;
-            s.footer.bottomPadding = Qt.binding(() => base + style.safeBottom());
-        } else {
-            s.bottomPadding = Qt.binding(() => style.safeBottom());
+            s.footer.bottomPadding = Qt.binding(() => base + (footerless() ? 0 : style.safeBottom()));
         }
+        s.bottomPadding = Qt.binding(() => footerless() ? style.safeBottom() : 0);
         // Created on the popup's item: a Popup is no item, and visual objects
         // created on it warned they were not in the scene.
         s.background = backgroundComponent.createObject(s.contentItem.parent);
