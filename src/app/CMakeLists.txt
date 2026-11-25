@@ -23,6 +23,7 @@ set(SALDO_APP_QML_FILES
     components/TransactionDialog.qml
     components/NoDataMessage.qml
     components/SyncStatusLabel.qml
+    components/ListSummaryHeader.qml
     components/Surface.qml
     components/IconBadge.qml
     components/FilterChip.qml
@@ -32,6 +33,7 @@ set(SALDO_APP_QML_FILES
     components/PhoneDrawerContent.qml
     components/PhoneTitle.qml
     components/PhoneSectionHeader.qml
+    components/PhoneCardRow.qml
 )
 # Serve every QML file from the module root so they see each other.
 foreach(_file ${SALDO_APP_QML_FILES})

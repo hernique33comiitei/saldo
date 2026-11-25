@@ -8,6 +8,9 @@ import org.saldo.core
 RefreshablePage {
     id: page
 
+    // Phones: round icons and bold names in the rows.
+    readonly property bool phone: Kirigami.Settings.isMobile
+
     title: i18n("Investments")
 
     actions: [
@@ -16,30 +19,34 @@ RefreshablePage {
             icon.name: "view-refresh"
             // No shortcuts on phones: a menu showed them over the text ("Ctrl+H").
             shortcut: Kirigami.Settings.isMobile ? "" : StandardKey.Refresh
+            displayHint: page.phone ? Kirigami.DisplayHint.IconOnly : Kirigami.DisplayHint.NoPreference
             enabled: Credentials.configured && !SyncManager.running
             onTriggered: SyncManager.sync()
         }
     ]
 
-    header: QQC2.Control {
+    header: ListSummaryHeader {
         visible: list.count > 0
-        padding: Kirigami.Units.largeSpacing
-        contentItem: SummaryRow {
+        SummaryRow {
+            Layout.fillWidth: true
             iconName: "view-financial-account-investment"
             label: i18n("Total invested (net)")
             value: investments.total
             emphasized: true
         }
-        background: Rectangle {
-            color: Kirigami.Theme.alternateBackgroundColor
-            Kirigami.Separator {
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                    bottom: parent.bottom
-                }
-            }
+    }
+
+    Component {
+        id: desktopSection
+        Kirigami.ListSectionHeader {
+            required property string section
+            width: ListView.view.width
+            text: section
         }
+    }
+    Component {
+        id: phoneSection
+        PhoneSectionHeader {}
     }
 
     ListView {
@@ -50,25 +57,36 @@ RefreshablePage {
         }
 
         section.property: "typeLabel"
-        section.delegate: Kirigami.ListSectionHeader {
-            required property string section
-            width: ListView.view.width
-            text: section
-        }
+        section.delegate: page.phone ? phoneSection : desktopSection
 
         delegate: QQC2.ItemDelegate {
             id: delegate
             required property var model
 
             width: ListView.view.width
+            // Phones: the page's side margins, more room between rows. Set
+            // here, not bound, so the desktop keeps the style's own paddings.
+            Component.onCompleted: {
+                if (page.phone) {
+                    leftPadding = Kirigami.Units.gridUnit;
+                    rightPadding = Kirigami.Units.gridUnit;
+                    topPadding = Kirigami.Units.largeSpacing;
+                    bottomPadding = Kirigami.Units.largeSpacing;
+                }
+            }
             hoverEnabled: false
             down: false
             contentItem: RowLayout {
                 spacing: Kirigami.Units.largeSpacing
                 Kirigami.Icon {
+                    visible: !page.phone
                     source: "view-financial-account-investment"
                     implicitWidth: Kirigami.Units.iconSizes.medium
                     implicitHeight: Kirigami.Units.iconSizes.medium
+                }
+                IconBadge {
+                    visible: page.phone
+                    source: "view-financial-account-investment"
                 }
                 ColumnLayout {
                     Layout.fillWidth: true
@@ -76,6 +94,7 @@ RefreshablePage {
                     QQC2.Label {
                         Layout.fillWidth: true
                         text: delegate.model.name
+                        font.weight: page.phone ? Font.DemiBold : Font.Normal
                         elide: Text.ElideRight
                     }
                     QQC2.Label {
@@ -96,6 +115,7 @@ RefreshablePage {
                         Layout.alignment: Qt.AlignRight
                         value: delegate.model.balance
                         currency: delegate.model.currency
+                        font.weight: page.phone ? Font.DemiBold : Font.Normal
                     }
                     MoneyLabel {
                         Layout.alignment: Qt.AlignRight

@@ -8,6 +8,9 @@ import org.saldo.core
 RefreshablePage {
     id: page
 
+    // Phones: PhoneCardRow rows.
+    readonly property bool phone: Kirigami.Settings.isMobile
+
     title: i18n("Credit Cards")
 
     actions: [
@@ -16,63 +19,48 @@ RefreshablePage {
             icon.name: "view-refresh"
             // No shortcuts on phones: a menu showed them over the text ("Ctrl+H").
             shortcut: Kirigami.Settings.isMobile ? "" : StandardKey.Refresh
+            displayHint: page.phone ? Kirigami.DisplayHint.IconOnly : Kirigami.DisplayHint.NoPreference
             enabled: Credentials.configured && !SyncManager.running
             onTriggered: SyncManager.sync()
         }
     ]
 
-    header: QQC2.Control {
+    header: ListSummaryHeader {
         visible: list.count > 0
-        padding: Kirigami.Units.largeSpacing
-        contentItem: ColumnLayout {
-            spacing: Kirigami.Units.smallSpacing
-            SummaryRow {
-                Layout.fillWidth: true
-                iconName: "view-financial-account-credit-card"
-                label: i18n("Overall limit")
-                value: FinanceSummary.cardLimit
-                emphasized: true
-            }
-            LimitBar {
-                Layout.fillWidth: true
-                ratio: FinanceSummary.cardUsedRatio
-            }
-            RowLayout {
-                Layout.fillWidth: true
-                QQC2.Label {
-                    Layout.fillWidth: true
-                    text: i18n("%1 used (%2)", Config.privacyMode ? Money.masked : Money.format(FinanceSummary.cardUsed), Money.percent(FinanceSummary.cardUsedRatio))
-                    font: Kirigami.Theme.smallFont
-                    elide: Text.ElideRight
-                }
-                QQC2.Label {
-                    text: i18n("%1 available", Config.privacyMode ? Money.masked : Money.format(FinanceSummary.cardAvailable))
-                    font: Kirigami.Theme.smallFont
-                }
-            }
+        SummaryRow {
+            Layout.fillWidth: true
+            iconName: "view-financial-account-credit-card"
+            label: i18n("Overall limit")
+            value: FinanceSummary.cardLimit
+            emphasized: true
         }
-        background: Rectangle {
-            color: Kirigami.Theme.alternateBackgroundColor
-            Kirigami.Separator {
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                    bottom: parent.bottom
-                }
+        LimitBar {
+            Layout.fillWidth: true
+            ratio: FinanceSummary.cardUsedRatio
+        }
+        GridLayout {
+            Layout.fillWidth: true
+            // Phones: one under the other when both do not fit side by side
+            // (decided from the header's width, set by the page).
+            columns: page.phone && width < usedLabel.implicitWidth + availableLabel.implicitWidth + columnSpacing ? 1 : 2
+            QQC2.Label {
+                id: usedLabel
+                Layout.fillWidth: true
+                text: i18n("%1 used (%2)", Config.privacyMode ? Money.masked : Money.format(FinanceSummary.cardUsed), Money.percent(FinanceSummary.cardUsedRatio))
+                font: Kirigami.Theme.smallFont
+                elide: Text.ElideRight
+            }
+            QQC2.Label {
+                id: availableLabel
+                text: i18n("%1 available", Config.privacyMode ? Money.masked : Money.format(FinanceSummary.cardAvailable))
+                font: Kirigami.Theme.smallFont
             }
         }
     }
 
-    ListView {
-        id: list
-
-        spacing: 0
-        model: AccountsModel {
-            id: cards
-            type: "CREDIT"
-        }
-
-        delegate: QQC2.ItemDelegate {
+    Component {
+        id: desktopRow
+        QQC2.ItemDelegate {
             id: delegate
             required property var model
             required property int index
@@ -98,6 +86,49 @@ RefreshablePage {
                 included: delegate.model.included
             }
         }
+    }
+    Component {
+        id: phoneRow
+        QQC2.ItemDelegate {
+            id: delegate
+            required property var model
+            required property int index
+
+            width: ListView.view.width
+            leftPadding: Kirigami.Units.gridUnit
+            rightPadding: Kirigami.Units.gridUnit
+            topPadding: Kirigami.Units.largeSpacing
+            bottomPadding: Kirigami.Units.largeSpacing
+            onClicked: applicationWindow().pageStack.push(detailComponent, {
+                accountId: model.accountId,
+                card: cards.get(index)
+            })
+
+            contentItem: PhoneCardRow {
+                name: delegate.model.name
+                numberLabel: delegate.model.numberLabel
+                cardLabel: delegate.model.cardLabel
+                institution: delegate.model.institution
+                limit: delegate.model.creditLimit
+                used: delegate.model.usedCredit
+                available: delegate.model.availableCreditLimit
+                ratio: delegate.model.usedRatio
+                sharedLimit: delegate.model.sharedLimit
+                included: delegate.model.included
+            }
+        }
+    }
+
+    ListView {
+        id: list
+
+        spacing: 0
+        model: AccountsModel {
+            id: cards
+            type: "CREDIT"
+        }
+
+        delegate: page.phone ? phoneRow : desktopRow
 
         Kirigami.PlaceholderMessage {
             anchors.centerIn: parent
