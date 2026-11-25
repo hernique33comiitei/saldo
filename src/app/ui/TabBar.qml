@@ -13,7 +13,7 @@ QQC2.ToolBar {
     id: bar
 
     property list<T.Action> actions
-    property real maximumContentWidth: Kirigami.Units.gridUnit * 30
+    property real maximumContentWidth: Tokens.tabBarMaxWidth
 
     position: QQC2.ToolBar.Footer
     // The pages' colors on phones (they use View there).
@@ -25,7 +25,7 @@ QQC2.ToolBar {
     rightPadding: Math.floor(Math.max(0, width - maximumContentWidth) / 2) + (parent ? parent.SafeArea.margins.right : 0)
 
     background: Rectangle {
-        color: Kirigami.ColorUtils.tintWithAlpha(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, 0.05)
+        color: Tokens.tint(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, Tokens.tintBar)
     }
 
     contentItem: RowLayout {
@@ -56,11 +56,11 @@ QQC2.ToolBar {
 
                         Rectangle {
                             Layout.alignment: Qt.AlignHCenter
-                            implicitWidth: Kirigami.Units.gridUnit * 3.5
-                            implicitHeight: Kirigami.Units.gridUnit * 1.75
+                            implicitWidth: Tokens.tabPillWidth
+                            implicitHeight: Tokens.tabPillHeight
                             radius: height / 2
-                            color: tab.checked ? Kirigami.ColorUtils.tintWithAlpha(Kirigami.Theme.backgroundColor, Kirigami.Theme.highlightColor, 0.28)
-                                 : tab.down ? Kirigami.ColorUtils.tintWithAlpha(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, 0.1)
+                            color: tab.checked ? Tokens.tint(Kirigami.Theme.backgroundColor, Kirigami.Theme.highlightColor, Tokens.tintActive)
+                                 : tab.down ? Tokens.tint(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, Tokens.tintPressed)
                                  : "transparent"
 
                             Kirigami.Icon {
@@ -70,7 +70,7 @@ QQC2.ToolBar {
                                 source: tab.modelData.icon.name
                                 isMask: true
                                 color: tab.checked ? Kirigami.Theme.textColor
-                                                   : Kirigami.ColorUtils.tintWithAlpha(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, 0.75)
+                                                   : Tokens.tint(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, Tokens.tintIconIdle)
                             }
                         }
                         QQC2.Label {
@@ -78,7 +78,7 @@ QQC2.ToolBar {
                             Layout.maximumWidth: tab.width
                             text: tab.text
                             elide: Text.ElideRight
-                            font.pointSize: Kirigami.Theme.defaultFont.pointSize * 0.85
+                            font.pointSize: Kirigami.Theme.defaultFont.pointSize * Tokens.fontCaption
                             font.weight: tab.checked ? Font.Bold : Font.Normal
                             opacity: tab.checked ? 1 : 0.8
                         }

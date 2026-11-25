@@ -3,6 +3,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
+import org.saldo.ui as UI
 import org.saldo.core
 
 // Guided setup of the Meu Pluggy connection, step by step. Labels in quotes are
@@ -21,7 +22,7 @@ Kirigami.ScrollablePage {
     }
     Component {
         id: phoneTitle
-        PhoneTitle {
+        UI.PageTitle {
             text: page.title
         }
     }

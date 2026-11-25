@@ -3,6 +3,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
+import org.saldo.ui as UI
 import org.saldo.core
 
 // Phones: one credit card row (CardContent's counterpart): round icon, bold
@@ -33,7 +34,7 @@ ColumnLayout {
         Layout.fillWidth: true
         spacing: Kirigami.Units.largeSpacing
 
-        IconBadge {
+        UI.IconBadge {
             source: "view-financial-account-credit-card"
             tint: Kirigami.Theme.neutralTextColor
         }
@@ -69,7 +70,7 @@ ColumnLayout {
 
         LimitBar {
             Layout.fillWidth: true
-            Layout.preferredHeight: Kirigami.Units.smallSpacing * 2.5
+            Layout.preferredHeight: UI.Tokens.barThickness
             ratio: card.ratio
         }
         RowLayout {

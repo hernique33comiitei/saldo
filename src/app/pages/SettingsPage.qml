@@ -3,6 +3,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
+import org.saldo.ui as UI
 import org.saldo.core
 
 Kirigami.ScrollablePage {
@@ -19,7 +20,7 @@ Kirigami.ScrollablePage {
     }
     Component {
         id: phoneTitle
-        PhoneTitle {
+        UI.PageTitle {
             text: page.title
         }
     }
@@ -166,7 +167,7 @@ Kirigami.ScrollablePage {
             Layout.alignment: Qt.AlignTop
             spacing: Kirigami.Units.gridUnit
 
-            SectionCard {
+            UI.Card {
                 id: credentialsCard
                 Layout.fillWidth: true
                 title: i18n("Meu Pluggy credentials")
@@ -263,7 +264,7 @@ Kirigami.ScrollablePage {
                 }
             }
 
-            SectionCard {
+            UI.Card {
                 Layout.fillWidth: true
                 title: i18n("Connections")
 
@@ -430,7 +431,7 @@ Kirigami.ScrollablePage {
             Layout.alignment: Qt.AlignTop
             spacing: Kirigami.Units.gridUnit
 
-            SectionCard {
+            UI.Card {
                 Layout.fillWidth: true
                 title: i18n("Sync")
 
@@ -487,7 +488,7 @@ Kirigami.ScrollablePage {
                 }
             }
 
-            SectionCard {
+            UI.Card {
                 Layout.fillWidth: true
                 title: i18n("Privacy")
 
@@ -502,7 +503,7 @@ Kirigami.ScrollablePage {
                 }
             }
 
-            SectionCard {
+            UI.Card {
                 Layout.fillWidth: true
                 title: i18n("Language")
 
@@ -523,7 +524,7 @@ Kirigami.ScrollablePage {
                 }
             }
 
-            SectionCard {
+            UI.Card {
                 Layout.fillWidth: true
                 title: i18n("Appearance")
 
@@ -542,7 +543,7 @@ Kirigami.ScrollablePage {
                 }
             }
 
-            SectionCard {
+            UI.Card {
                 Layout.fillWidth: true
                 title: i18n("Local data")
 

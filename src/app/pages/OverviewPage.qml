@@ -3,6 +3,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
+import org.saldo.ui as UI
 import org.saldo.core
 
 RefreshablePage {
@@ -118,7 +119,7 @@ RefreshablePage {
             columnSpacing: Kirigami.Units.gridUnit
             rowSpacing: Kirigami.Units.gridUnit
 
-            SectionCard {
+            UI.Card {
                 id: limitCard
                 Layout.fillWidth: true
                 Layout.fillHeight: true
@@ -201,7 +202,7 @@ RefreshablePage {
                 }
             }
 
-            SectionCard {
+            UI.Card {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.preferredWidth: 1
@@ -234,7 +235,7 @@ RefreshablePage {
             columnSpacing: Kirigami.Units.gridUnit
             rowSpacing: Kirigami.Units.gridUnit
 
-            SectionCard {
+            UI.Card {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.preferredWidth: 1
@@ -301,7 +302,7 @@ RefreshablePage {
                 }
             }
 
-            SectionCard {
+            UI.Card {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.preferredWidth: 1

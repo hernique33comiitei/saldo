@@ -3,6 +3,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
+import org.saldo.ui as UI
 import org.kde.quickcharts as Charts
 import org.saldo.core
 
@@ -81,7 +82,7 @@ RefreshablePage {
             rightMargin: page.rightPadding
             clip: true
             model: FinanceSummary.months
-            delegate: FilterChip {
+            delegate: UI.Chip {
                 required property var modelData
                 text: modelData.text
                 checked: modelData.value === page.month
@@ -116,7 +117,7 @@ RefreshablePage {
                         tint: Kirigami.Theme.neutralTextColor
                     }
                 ]
-                delegate: Surface {
+                delegate: UI.Card {
                     id: tile
                     required property var modelData
 
@@ -125,7 +126,7 @@ RefreshablePage {
                     Layout.preferredWidth: 1
                     padding: Kirigami.Units.largeSpacing * 1.5
 
-                    IconBadge {
+                    UI.IconBadge {
                         source: tile.modelData.icon
                         tint: tile.modelData.tint
                     }
@@ -141,7 +142,7 @@ RefreshablePage {
                         MoneyLabel {
                             Layout.fillWidth: true
                             value: tile.modelData.value
-                            font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.3
+                            font.pointSize: Kirigami.Theme.defaultFont.pointSize * UI.Tokens.fontMoneyMedium
                             font.weight: Font.Bold
                             fontSizeMode: Text.HorizontalFit
                             minimumPointSize: Kirigami.Theme.defaultFont.pointSize * 0.8
@@ -160,12 +161,17 @@ RefreshablePage {
 
         // Credit limit as a bar: used and available above it, the share and
         // the total below.
-        Surface {
+        UI.Card {
             Layout.fillWidth: true
             visible: FinanceSummary.hasData && FinanceSummary.cardCount > 0
             title: i18n("Credit limit")
-            actionText: i18n("Cards")
-            onActionTriggered: applicationWindow().showPage("cards")
+            headerActions: [
+                Kirigami.Action {
+                    text: i18n("Cards")
+                    icon.name: "go-next-symbolic"
+                    onTriggered: applicationWindow().showPage("cards")
+                }
+            ]
 
             RowLayout {
                 Layout.fillWidth: true
@@ -192,7 +198,7 @@ RefreshablePage {
                             Layout.fillWidth: true
                             horizontalAlignment: limitPart.modelData.alignment === Qt.AlignRight ? Text.AlignRight : Text.AlignLeft
                             value: limitPart.modelData.value
-                            font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.3
+                            font.pointSize: Kirigami.Theme.defaultFont.pointSize * UI.Tokens.fontMoneyMedium
                             font.weight: Font.Bold
                             fontSizeMode: Text.HorizontalFit
                             minimumPointSize: Kirigami.Theme.defaultFont.pointSize * 0.8
@@ -202,7 +208,7 @@ RefreshablePage {
             }
             LimitBar {
                 Layout.fillWidth: true
-                Layout.preferredHeight: Kirigami.Units.smallSpacing * 2.5
+                Layout.preferredHeight: UI.Tokens.barThickness
                 ratio: FinanceSummary.cardUsedRatio
             }
             RowLayout {
@@ -229,7 +235,7 @@ RefreshablePage {
         }
 
         // Spending: one row per category, its share as a bar.
-        Surface {
+        UI.Card {
             Layout.fillWidth: true
             visible: FinanceSummary.hasData
             title: i18n("Spending by category")
@@ -257,7 +263,7 @@ RefreshablePage {
                     Layout.fillWidth: true
                     spacing: Kirigami.Units.largeSpacing
 
-                    IconBadge {
+                    UI.IconBadge {
                         source: category.iconName
                         tint: category.tint
                     }
@@ -289,7 +295,7 @@ RefreshablePage {
                             Rectangle {
                                 anchors.fill: parent
                                 radius: height / 2
-                                color: Kirigami.ColorUtils.tintWithAlpha(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, 0.1)
+                                color: UI.Tokens.tint(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, UI.Tokens.tintTrack)
                             }
                             Rectangle {
                                 width: Math.max(height, parent.width * category.ratio)
@@ -312,7 +318,7 @@ RefreshablePage {
             }
         }
 
-        Surface {
+        UI.Card {
             Layout.fillWidth: true
             visible: FinanceSummary.hasData
             title: i18n("Income and expenses")
@@ -323,7 +329,7 @@ RefreshablePage {
             }
         }
 
-        Surface {
+        UI.Card {
             Layout.fillWidth: true
             visible: FinanceSummary.hasData && FinanceSummary.accountCount > 0
             title: i18n("Balance in accounts, last 90 days")

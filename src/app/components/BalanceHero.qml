@@ -3,12 +3,13 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
+import org.saldo.ui as UI
 import org.saldo.core
 
 // Phones: the overview's headline card, balance in accounts plus the month's
 // income and expenses on the app icon's green. The only place with colors of
 // its own (CLAUDE.md): greens dark enough for white text at 4.5:1 or more
-// (#17845a 4.7:1, the darker band 5.9:1); the icon's own #1b9e6b gave 3.4:1.
+// (UI.Tokens.brandStart/brandEnd; the darker band 5.9:1).
 Rectangle {
     id: hero
 
@@ -21,11 +22,11 @@ Rectangle {
     readonly property color textColor: "white"
 
     implicitHeight: column.implicitHeight + Kirigami.Units.gridUnit * 2.5
-    radius: Kirigami.Units.gridUnit * 1.25
+    radius: UI.Tokens.radiusHero
     gradient: Gradient {
         orientation: Gradient.Horizontal
-        GradientStop { position: 0; color: "#136b49" }
-        GradientStop { position: 1; color: "#17845a" }
+        GradientStop { position: 0; color: UI.Tokens.brandStart }
+        GradientStop { position: 1; color: UI.Tokens.brandEnd }
     }
 
     ColumnLayout {
@@ -34,8 +35,8 @@ Rectangle {
             left: parent.left
             right: parent.right
             verticalCenter: parent.verticalCenter
-            leftMargin: Kirigami.Units.gridUnit * 1.25
-            rightMargin: Kirigami.Units.gridUnit * 1.25
+            leftMargin: UI.Tokens.heroPadding
+            rightMargin: UI.Tokens.heroPadding
         }
         spacing: Kirigami.Units.smallSpacing
 
@@ -49,7 +50,7 @@ Rectangle {
             Layout.fillWidth: true
             value: hero.balance
             color: hero.textColor
-            font.pointSize: Kirigami.Theme.defaultFont.pointSize * 2.4
+            font.pointSize: Kirigami.Theme.defaultFont.pointSize * UI.Tokens.fontMoneyLarge
             font.weight: Font.Bold
             // Large balances shrink instead of running past the card.
             fontSizeMode: Text.HorizontalFit
@@ -60,7 +61,7 @@ Rectangle {
             visible: hero.caption.length > 0
             text: hero.caption
             color: hero.textColor
-            font.pointSize: Kirigami.Theme.defaultFont.pointSize * 0.9
+            font.pointSize: Kirigami.Theme.defaultFont.pointSize * UI.Tokens.fontSection
             elide: Text.ElideRight
         }
 
@@ -69,7 +70,7 @@ Rectangle {
             Layout.fillWidth: true
             Layout.topMargin: Kirigami.Units.largeSpacing
             implicitHeight: flows.implicitHeight + Kirigami.Units.largeSpacing * 2
-            radius: Kirigami.Units.gridUnit * 0.75
+            radius: UI.Tokens.radiusInner
             color: Qt.rgba(0, 0, 0, 0.14)
 
             RowLayout {
@@ -114,7 +115,7 @@ Rectangle {
                                 Layout.fillWidth: true
                                 text: flow.modelData.name
                                 color: hero.textColor
-                                font.pointSize: Kirigami.Theme.defaultFont.pointSize * 0.85
+                                font.pointSize: Kirigami.Theme.defaultFont.pointSize * UI.Tokens.fontCaption
                                 elide: Text.ElideRight
                             }
                             MoneyLabel {

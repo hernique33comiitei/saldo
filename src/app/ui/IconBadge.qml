@@ -2,7 +2,7 @@
 import QtQuick
 import org.kde.kirigami as Kirigami
 
-// Phones: an icon inside a tinted circle (list rows, tiles).
+// An icon inside a tinted circle (phone list rows and tiles).
 Rectangle {
     id: badge
 
@@ -12,7 +12,7 @@ Rectangle {
     implicitWidth: Kirigami.Units.iconSizes.smallMedium + Kirigami.Units.largeSpacing * 2
     implicitHeight: implicitWidth
     radius: width / 2
-    color: Kirigami.ColorUtils.tintWithAlpha(Kirigami.Theme.backgroundColor, tint, 0.18)
+    color: Tokens.tint(Kirigami.Theme.backgroundColor, tint, Tokens.tintBadge)
     Accessible.ignored: true
 
     Kirigami.Icon {

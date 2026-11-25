@@ -10,7 +10,7 @@ import org.kde.kirigami as Kirigami
 QQC2.Control {
     id: band
 
-    readonly property bool phone: Kirigami.Settings.isMobile
+    readonly property bool phone: Platform.isPhone
     default property alias content: column.data
 
     padding: Kirigami.Units.largeSpacing
@@ -32,8 +32,8 @@ QQC2.Control {
         Rectangle {
             anchors.fill: parent
             visible: band.phone
-            radius: Kirigami.Units.gridUnit
-            color: Kirigami.ColorUtils.tintWithAlpha(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, 0.06)
+            radius: Tokens.radiusCard
+            color: Tokens.tint(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, Tokens.tintSurface)
         }
         ColumnLayout {
             id: column

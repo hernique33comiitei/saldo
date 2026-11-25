@@ -10,3 +10,7 @@ target_compile_definitions(coretest PRIVATE FIXTURES_DIR="${CMAKE_CURRENT_SOURCE
 ecm_add_test(pluggyclienttest.cpp
     TEST_NAME pluggyclienttest
     LINK_LIBRARIES saldocore Qt6::Test Qt6::Network)
+
+# Pages and components use the design system (org.saldo.ui); report-only until
+# every page is migrated, then --strict (see tools/check-ui.sh).
+add_test(NAME check-ui COMMAND ${CMAKE_SOURCE_DIR}/tools/check-ui.sh)

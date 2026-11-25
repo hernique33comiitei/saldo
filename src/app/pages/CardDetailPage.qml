@@ -3,6 +3,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
+import org.saldo.ui as UI
 import org.saldo.core
 
 Kirigami.ScrollablePage {
@@ -19,7 +20,7 @@ Kirigami.ScrollablePage {
     }
     Component {
         id: phoneTitle
-        PhoneTitle {
+        UI.PageTitle {
             text: page.title
         }
     }
@@ -147,7 +148,7 @@ Kirigami.ScrollablePage {
             rowSpacing: Kirigami.Units.gridUnit
 
             // Purchases not on any closed bill yet.
-            SectionCard {
+            UI.Card {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.preferredWidth: Kirigami.Units.gridUnit * 10
@@ -174,7 +175,7 @@ Kirigami.ScrollablePage {
                 }
             }
 
-            SectionCard {
+            UI.Card {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.preferredWidth: Kirigami.Units.gridUnit * 10
@@ -202,7 +203,7 @@ Kirigami.ScrollablePage {
             }
         }
 
-        SectionCard {
+        UI.Card {
             Layout.fillWidth: true
             title: i18n("Previous bills")
 

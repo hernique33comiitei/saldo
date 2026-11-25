@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 import QtQuick
 import org.kde.kirigami as Kirigami
+import org.saldo.ui as UI
 import org.saldo.core
 
 // A main page with pull-to-refresh on phones: pulling the page down syncs,
@@ -19,7 +20,7 @@ Kirigami.ScrollablePage {
     }
     Component {
         id: phoneTitle
-        PhoneTitle {
+        UI.PageTitle {
             text: page.title
         }
     }

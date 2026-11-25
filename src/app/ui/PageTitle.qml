@@ -3,7 +3,7 @@ import QtQuick
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 
-// Phones: a page's title in the header, large and bold as current Android
+// A page's title on phones in the header, large and bold as current Android
 // apps show it. Pages use it as their titleDelegate on phones only; sized like
 // Kirigami's own DefaultPageTitleDelegate.
 Item {

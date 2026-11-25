@@ -3,6 +3,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
+import org.saldo.ui as UI
 import org.saldo.core
 
 // Phones: the drawer's content (its sections are tabs there): the app, when
@@ -49,7 +50,7 @@ ColumnLayout {
                       ? i18n("Pluggy updated your banks %1", Money.relativeTime(FinanceSummary.dataUpdatedAt))
                       : ""
                 wrapMode: Text.Wrap
-                font.pointSize: Kirigami.Theme.defaultFont.pointSize * 0.85
+                font.pointSize: Kirigami.Theme.defaultFont.pointSize * UI.Tokens.fontCaption
                 opacity: 0.75
             }
         }
@@ -75,12 +76,12 @@ ColumnLayout {
                 implicitWidth: chipText.implicitWidth + Kirigami.Units.largeSpacing * 2
                 implicitHeight: chipText.implicitHeight + Kirigami.Units.smallSpacing * 2
                 radius: height / 2
-                color: Kirigami.ColorUtils.tintWithAlpha(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, 0.12)
+                color: UI.Tokens.tint(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, UI.Tokens.tintChip)
                 QQC2.Label {
                     id: chipText
                     anchors.centerIn: parent
                     text: chip.modelData
-                    font.pointSize: Kirigami.Theme.defaultFont.pointSize * 0.85
+                    font.pointSize: Kirigami.Theme.defaultFont.pointSize * UI.Tokens.fontCaption
                 }
             }
         }
@@ -93,20 +94,20 @@ ColumnLayout {
         opacity: 0.5
     }
 
-    DrawerItem {
+    UI.DrawerItem {
         visible: !content.setupComplete
         text: i18n("Connect Meu Pluggy")
         iconName: "wallet-open"
         active: content.currentPage === "setup"
         onClicked: content.pageRequested("setup")
     }
-    DrawerItem {
+    UI.DrawerItem {
         text: i18n("Settings")
         iconName: "configure"
         active: content.currentPage === "settings"
         onClicked: content.pageRequested("settings")
     }
-    DrawerItem {
+    UI.DrawerItem {
         text: i18n("About Saldo")
         iconName: "help-about"
         active: content.currentPage === "about"

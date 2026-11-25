@@ -3,6 +3,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
+import org.saldo.ui as UI
 import org.saldo.core
 
 // Diagnostics: the account JSON exactly as Pluggy returned it, to check
@@ -21,7 +22,7 @@ Kirigami.ScrollablePage {
     }
     Component {
         id: phoneTitle
-        PhoneTitle {
+        UI.PageTitle {
             text: page.title
         }
     }

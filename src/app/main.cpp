@@ -16,6 +16,7 @@
 #include <QIcon>
 #include <QLibraryInfo>
 #include <QQmlApplicationEngine>
+#include <QQmlExtensionPlugin>
 #include <QQuickStyle>
 #include <QQuickWindow>
 #include <QTimer>
@@ -69,6 +70,9 @@ using Application = QApplication; // native file dialogs / widgets
 #endif
 
 using namespace Qt::StringLiterals;
+
+// The design system (org.saldo.ui) is a static QML module linked into the app.
+Q_IMPORT_QML_PLUGIN(org_saldo_uiPlugin)
 
 #ifndef Q_OS_ANDROID
 namespace

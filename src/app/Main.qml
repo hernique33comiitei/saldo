@@ -2,6 +2,7 @@
 import QtQuick
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
+import org.saldo.ui as UI
 import org.saldo.core
 
 Kirigami.ApplicationWindow {
@@ -39,7 +40,9 @@ Kirigami.ApplicationWindow {
             "investments": investmentsPage,
             "settings": settingsPage,
             "setup": setupPage,
-            "about": aboutPage
+            "about": aboutPage,
+            // The design system's catalog: --page gallery only, no menu entry.
+            "gallery": galleryPage
         };
         const page = pages[name] ?? overviewPage;
         currentPage = pages[name] ? name : "overview";
@@ -223,7 +226,7 @@ Kirigami.ApplicationWindow {
     // above the window's bottom edge).
     footer: root.tabs ? tabBar : null
 
-    PhoneTabBar {
+    UI.TabBar {
         id: tabBar
         visible: root.tabs
         actions: [
@@ -265,6 +268,10 @@ Kirigami.ApplicationWindow {
         OverviewPage {}
     }
     Component {
+        id: galleryPage
+        GalleryPage {}
+    }
+    Component {
         id: phoneOverviewPage
         PhoneOverviewPage {}
     }
@@ -280,8 +287,8 @@ Kirigami.ApplicationWindow {
         id: phoneDrawerBackground
         Rectangle {
             color: Kirigami.Theme.backgroundColor
-            topRightRadius: Kirigami.Units.gridUnit * 1.25
-            bottomRightRadius: Kirigami.Units.gridUnit * 1.25
+            topRightRadius: UI.Tokens.radiusHero
+            bottomRightRadius: UI.Tokens.radiusHero
         }
     }
     Component {

@@ -1,3 +1,5 @@
+add_subdirectory(ui)
+
 qt_add_executable(saldo main.cpp colorscheme.cpp frameworkcatalogs.cpp)
 
 set(SALDO_APP_QML_FILES
@@ -13,8 +15,8 @@ set(SALDO_APP_QML_FILES
     pages/SetupPage.qml
     pages/AboutPage.qml
     pages/PhoneOverviewPage.qml
+    pages/GalleryPage.qml
     components/StatCard.qml
-    components/SectionCard.qml
     components/RefreshablePage.qml
     components/SyncBanner.qml
     components/SetupStep.qml
@@ -23,16 +25,8 @@ set(SALDO_APP_QML_FILES
     components/TransactionDialog.qml
     components/NoDataMessage.qml
     components/SyncStatusLabel.qml
-    components/ListSummaryHeader.qml
-    components/Surface.qml
-    components/IconBadge.qml
-    components/FilterChip.qml
     components/BalanceHero.qml
-    components/PhoneTabBar.qml
-    components/DrawerItem.qml
     components/PhoneDrawerContent.qml
-    components/PhoneTitle.qml
-    components/PhoneSectionHeader.qml
     components/PhoneCardRow.qml
 )
 # Serve every QML file from the module root so they see each other.
@@ -65,6 +59,7 @@ target_compile_definitions(saldo PRIVATE
 
 target_link_libraries(saldo PRIVATE
     saldocore
+    saldouiplugin
     Qt6::Gui
     Qt6::Qml
     Qt6::Quick

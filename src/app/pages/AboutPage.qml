@@ -3,6 +3,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
+import org.saldo.ui as UI
 
 // About Saldo, from the application's KAboutData. Our own page instead of
 // Kirigami.AboutPage: that one always draws an initials avatar per author and
@@ -21,7 +22,7 @@ Kirigami.ScrollablePage {
     }
     Component {
         id: phoneTitle
-        PhoneTitle {
+        UI.PageTitle {
             text: page.title
         }
     }
@@ -177,7 +178,7 @@ Kirigami.ScrollablePage {
                 }
             }
 
-            SectionCard {
+            UI.Card {
                 Layout.fillWidth: true
                 visible: licenses.count > 0
                 title: i18n("License")
@@ -201,7 +202,7 @@ Kirigami.ScrollablePage {
                 }
             }
 
-            SectionCard {
+            UI.Card {
                 Layout.fillWidth: true
                 visible: page.aboutData.homepage.toString().length > 0 || page.aboutData.bugAddress.length > 0
                 title: i18n("Links")
@@ -225,7 +226,7 @@ Kirigami.ScrollablePage {
                 }
             }
 
-            SectionCard {
+            UI.Card {
                 Layout.fillWidth: true
                 visible: authors.count > 0
                 title: i18n("Authors")
@@ -237,7 +238,7 @@ Kirigami.ScrollablePage {
                 }
             }
 
-            SectionCard {
+            UI.Card {
                 Layout.fillWidth: true
                 visible: credits.count > 0
                 title: i18n("Credits")
@@ -249,7 +250,7 @@ Kirigami.ScrollablePage {
                 }
             }
 
-            SectionCard {
+            UI.Card {
                 Layout.fillWidth: true
                 visible: translators.count > 0
                 title: i18n("Translators")

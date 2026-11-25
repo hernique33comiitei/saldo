@@ -3,6 +3,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
+import org.saldo.ui as UI
 import org.saldo.core
 
 RefreshablePage {
@@ -25,7 +26,7 @@ RefreshablePage {
         }
     ]
 
-    header: ListSummaryHeader {
+    header: UI.SummaryHeader {
         visible: list.count > 0
         SummaryRow {
             Layout.fillWidth: true

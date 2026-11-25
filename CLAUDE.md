@@ -125,20 +125,20 @@ app (not the widget) also targets Android.
 - **UI vocabulary**: Kirigami pages/actions/FormLayout, colors from `Kirigami.Theme`, sizes from
   `Kirigami.Units`, Breeze icon names (prefer `-symbolic` in lists; no bundled images besides
   the app icon). Widget-only controls come from `org.kde.plasma.components`. The one exception
-  to theme colors is the phone overview's `BalanceHero`: the app icon's green, darkened so its
-  white text keeps a 4.5:1 contrast (the icon's own `#1b9e6b` gave 3.4:1).
-- **Cards:** use `SectionCard`/`StatCard` (`Surface` on phones, see Phones). `Kirigami.AbstractCard` stretches its `contentItem` to
+  to theme colors is the phone overview's `BalanceHero`: the app icon's green (`UI.Tokens.brandStart`/
+  `brandEnd`), darkened so its white text keeps a 4.5:1 contrast (the icon's own `#1b9e6b` gave 3.4:1).
+- **Cards:** use `UI.Card`/`StatCard` (see Design system; `UI.Card` is borderless and tonal on phones). `Kirigami.AbstractCard` stretches its `contentItem` to
   the whole card minus padding (the header is not subtracted), so a layout used directly as
   `contentItem` spreads its nested layouts and pushes the last rows past the card's edge.
-  `SectionCard` keeps its column at its own height inside a wrapper `Item`; do the same for any
+  `UI.Card` keeps its column at its own height inside a wrapper `Item`; do the same for any
   other `AbstractCard`. Detail and settings pages use cards with "label … value" rows, not a
-  centered `FormLayout` next to full-width content. Settings: two columns of `SectionCard`s on
+  centered `FormLayout` next to full-width content. Settings: two columns of `UI.Card`s on
   wide windows (one on narrow ones), a `SettingRow` per option (name + description left,
   control right), field labels above the fields.
 - **Spacing:** page margins (Kirigami's default `Page` padding), card padding and gaps between
   cards are all `Kirigami.Units.gridUnit`; rows inside a card `largeSpacing`; a label and its
   value `smallSpacing`. `AbstractCard`'s own default padding (`largeSpacing`) is too tight, so
-  `SectionCard`/`StatCard` set `gridUnit`. A card's header height comes from its title only
+  `UI.Card`/`StatCard` set `gridUnit`. A card's header height comes from its title only
   (header buttons overhang it), so titles of cards side by side line up.
 - **Narrow windows** (the window minimum is 20 grid units, ~360 px; Android is narrow too): in Qt
   layouts an item with `Layout.fillWidth: false` (buttons, amounts, a donut) keeps its implicit
@@ -148,7 +148,7 @@ app (not the widget) also targets Android.
   back), or use a `Flow`; labels take `fillWidth` and wrap or elide; long IDs use
   `Text.WrapAnywhere`; no fixed `Layout.minimumWidth` on fields. Check every page at 365 px.
 - **Phones** (`Kirigami.Settings.isMobile`: Android; the desktop never changes with these): the
-  five sections are tabs at the bottom (`PhoneTabBar` in `Main.qml`, labels of about 8
+  five sections are tabs at the bottom (`UI.TabBar` in `Main.qml`, labels of about 8
   characters, `@title:tab` contexts: "Resumo", "Extrato", "Investir"), and the drawer keeps only
   the setup guide, Settings and About. The tab bar is the window's footer on phones only: on the
   desktop there is no footer at all, because Kirigami shortens the sidebar drawer by the footer's
@@ -159,15 +159,15 @@ app (not the widget) also targets Android.
   ? "" : …`): the header's overflow menu drew "Ctrl+H" over the item's text. Check phones with `QT_QUICK_CONTROLS_MOBILE=1
   QT_QUICK_CONTROLS_STYLE=org.kde.breeze QT_QPA_PLATFORMTHEME=none` at 360 px, then on the phone (adb).
   - **Phone look** (current Android apps): one surface color everywhere, Kirigami's View colors
-    (every page sets them on phones, and the header, `PhoneTabBar` and the drawer use them too:
+    (every page sets them on phones, and the header, `UI.TabBar` and the drawer use them too:
     list pages took View and the others Window, two greys side by side). The header is flat (no
-    separator, a bit taller) and pages use `PhoneTitle` (large, bold) as their `titleDelegate`.
-    `PhoneTabBar` replaces `Kirigami.NavigationTabBar` (a framed button for the current tab) with
+    separator, a bit taller) and pages use `UI.PageTitle` (large, bold) as their `titleDelegate`.
+    `UI.TabBar` replaces `Kirigami.NavigationTabBar` (a framed button for the current tab) with
     a pill behind the icon, and pads itself by `SafeArea` like Kirigami's own bars. The drawer is
     wider and rounded, with `PhoneDrawerContent` (app, last update, what is connected, then
-    `DrawerItem` pills) instead of Kirigami's action list. Cards are `Surface` (borderless, tonal),
-    icons in rows and tiles sit in an `IconBadge`, filters are `FilterChip`s, list sections use
-    `PhoneSectionHeader`, and the setup guide's steps (`SetupStep`, a template `T.Control` so the
+    `UI.DrawerItem` pills) instead of Kirigami's action list. Cards are `UI.Card` (borderless, tonal
+    on phones), icons in rows and tiles sit in a `UI.IconBadge`, filters are `UI.Chip`s, list
+    sections use `UI.SectionHeader`, and the setup guide's steps (`SetupStep`, a template `T.Control` so the
     desktop keeps the bare rail) become cards, the open one tinted. The overview is its own page (`PhoneOverviewPage`, picked in
     `showPage()`); the list pages (transactions, accounts, cards, investments) stay one page with
     phone delegates/headers inside, since some are also pushed (an account's transactions).
@@ -182,6 +182,34 @@ app (not the widget) also targets Android.
   (`maximumWidth` set, or the unwrapped text stretches it to the window).
 - Card rows (list, widget) show only the card and its limit; bills live on the detail page and
   in the overview's "Next bills".
+
+## Design system (`org.saldo.ui`)
+
+The UI is built from our own design system, organized like a web `@company/ui` package:
+`src/app/ui/` is the static QML module `org.saldo.ui` (linked into the app, `Q_IMPORT_QML_PLUGIN`
+in `main.cpp`), imported as `import org.saldo.ui as UI`.
+
+- **Tokens** (`UI.Tokens`, singleton): every radius, tint amount, type scale step, size and the
+  brand greens, by role (`radiusCard`, `tintSurface`, `fontMoneyLarge`, `chipHeight`…), plus
+  `UI.Tokens.tint(background, color, amount)`. Spacing stays `Kirigami.Units`, colors come from
+  `Kirigami.Theme` tinted by token amounts. No literal tints, radii or hex colors outside the module.
+- **`UI.Platform.isPhone`**: the one place that decides phone vs. desktop.
+- **Components** are adaptive: one component per control, the KDE control untouched on the desktop
+  (its code is what the pages used before, so the desktop stays pixel-identical) and the design
+  system's look on phones, applied in `Component.onCompleted` (never `? : undefined` bindings).
+  Today: `Card`, `IconBadge`, `Chip`, `TabBar`, `DrawerItem`, `PageTitle`, `SectionHeader`,
+  `SummaryHeader`. App compositions that know the data (`BalanceHero`, `PhoneDrawerContent`,
+  `PhoneCardRow`, `SetupStep`) stay in `src/app/components/` and are built from `UI.*`.
+- **Catalog** (the Storybook): `pages/GalleryPage.qml`, `saldo --demo --page gallery` (phone:
+  `tools/phone-test.sh run --demo --page gallery`). Every component, in its states; a new
+  component goes there first. Its texts are samples, not translated.
+- **Rule:** pages and app components use `UI.*`, never the controls the design system wraps
+  (`QQC2.Button/TextField/ComboBox/Switch/SpinBox…`, `Kirigami.Dialog/InlineMessage/
+  PlaceholderMessage/AbstractCard/…`) nor literal looks. `tools/check-ui.sh` lists what still
+  bypasses it (ctest `check-ui`; report-only until every page is migrated, then `--strict`).
+- **Checking a change:** desktop screenshots of every page (light/dark, wide/narrow) against the
+  previous commit must be identical (`magick compare -metric AE` = 0); phone screenshots of the
+  touched pages and of the gallery, in the desktop's phone mode first, then on the phone (adb).
 
 ## Commits
 
@@ -285,7 +313,8 @@ i18n: translate the new sync error messages
   `RowListModel`).
   `src/core/qml/` — components shared with the widget (`MoneyLabel`, `LimitBar`, charts, rows) and
   `chartscale.js` (round value axes).
-- `src/app/` — Kirigami app: `main.cpp`, `Main.qml`, `pages/`, `components/`, QML module `org.saldo`.
+- `src/app/` — Kirigami app: `main.cpp`, `Main.qml`, `pages/`, `components/`, QML module `org.saldo`;
+  `src/app/ui/` — the design system, QML module `org.saldo.ui` (see Design system).
   `SetupPage` is the step-by-step Meu Pluggy guide; it opens by itself on first run (no
   credentials/items) and from the drawer, Settings and the widget (`Launcher.openApp("setup")`).
   Step progress that can't be inferred lives in `Config.setupStep`.

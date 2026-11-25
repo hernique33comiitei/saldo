@@ -13,15 +13,15 @@ QQC2.ItemDelegate {
     property bool active: false
 
     Layout.fillWidth: true
-    implicitHeight: Kirigami.Units.gridUnit * 2.75
+    implicitHeight: Tokens.drawerItemHeight
     leftPadding: Kirigami.Units.gridUnit
     rightPadding: Kirigami.Units.gridUnit
     Accessible.name: text
 
     background: Rectangle {
         radius: height / 2
-        color: item.active ? Kirigami.ColorUtils.tintWithAlpha(Kirigami.Theme.backgroundColor, Kirigami.Theme.highlightColor, 0.28)
-             : item.down ? Kirigami.ColorUtils.tintWithAlpha(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, 0.1)
+        color: item.active ? Tokens.tint(Kirigami.Theme.backgroundColor, Kirigami.Theme.highlightColor, Tokens.tintActive)
+             : item.down ? Tokens.tint(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, Tokens.tintPressed)
              : "transparent"
     }
 

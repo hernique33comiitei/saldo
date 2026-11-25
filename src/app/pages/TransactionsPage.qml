@@ -3,6 +3,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
+import org.saldo.ui as UI
 import org.saldo.core
 
 RefreshablePage {
@@ -90,7 +91,7 @@ RefreshablePage {
                     id: chips
                     spacing: Kirigami.Units.smallSpacing
 
-                    FilterChip {
+                    UI.Chip {
                         id: monthChip
                         dropDown: true
                         checked: transactions.month.length > 0
@@ -107,7 +108,7 @@ RefreshablePage {
                             { text: i18n("Income"), value: TransactionsModel.Income },
                             { text: i18n("Expenses"), value: TransactionsModel.Expense }
                         ]
-                        delegate: FilterChip {
+                        delegate: UI.Chip {
                             required property var modelData
                             text: modelData.text
                             checked: transactions.kind === modelData.value
@@ -135,8 +136,8 @@ RefreshablePage {
                         Layout.fillWidth: true
                         Layout.preferredWidth: 1
                         implicitHeight: totalRow.implicitHeight + Kirigami.Units.largeSpacing * 2
-                        radius: Kirigami.Units.gridUnit * 0.75
-                        color: Kirigami.ColorUtils.tintWithAlpha(Kirigami.Theme.backgroundColor, total.modelData.color, 0.12)
+                        radius: UI.Tokens.radiusInner
+                        color: UI.Tokens.tint(Kirigami.Theme.backgroundColor, total.modelData.color, UI.Tokens.tintChip)
 
                         RowLayout {
                             id: totalRow
@@ -256,7 +257,7 @@ RefreshablePage {
 
     Component {
         id: phoneSection
-        PhoneSectionHeader {}
+        UI.SectionHeader {}
     }
 
     // Phones: round category icon (green for money in, grey between the
@@ -279,7 +280,7 @@ RefreshablePage {
                 spacing: Kirigami.Units.largeSpacing
                 opacity: row.model.pending ? 0.75 : 1
 
-                IconBadge {
+                UI.IconBadge {
                     source: row.model.internal ? "exchange-positions" : row.model.categoryIcon
                     tint: row.model.internal ? Kirigami.Theme.disabledTextColor
                         : row.model.amount > 0.005 ? Kirigami.Theme.positiveTextColor

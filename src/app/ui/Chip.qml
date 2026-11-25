@@ -4,7 +4,7 @@ import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
 
-// Phones: a filter chip. `checked` only shows the state (the user of the chip
+// A filter chip (phones). `checked` only shows the state (the user of the chip
 // sets it), so a binding to it is never broken by a click. `dropDown` shows an
 // arrow instead of the check mark (the chip opens a menu).
 QQC2.AbstractButton {
@@ -13,18 +13,18 @@ QQC2.AbstractButton {
     property bool dropDown: false
 
     implicitWidth: row.implicitWidth + Kirigami.Units.largeSpacing * 3
-    implicitHeight: Math.max(row.implicitHeight + Kirigami.Units.smallSpacing * 2, Kirigami.Units.gridUnit * 2)
+    implicitHeight: Math.max(row.implicitHeight + Kirigami.Units.smallSpacing * 2, Tokens.chipHeight)
     Accessible.role: chip.dropDown ? Accessible.ButtonMenu : Accessible.CheckBox
     Accessible.checkable: !chip.dropDown
     Accessible.checked: chip.checked
 
     background: Rectangle {
         radius: height / 2
-        color: chip.checked ? Kirigami.ColorUtils.tintWithAlpha(Kirigami.Theme.backgroundColor, Kirigami.Theme.highlightColor, 0.25)
-             : chip.down ? Kirigami.ColorUtils.tintWithAlpha(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, 0.1)
+        color: chip.checked ? Tokens.tint(Kirigami.Theme.backgroundColor, Kirigami.Theme.highlightColor, Tokens.tintSelected)
+             : chip.down ? Tokens.tint(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, Tokens.tintPressed)
              : "transparent"
         border.width: chip.checked ? 0 : 1
-        border.color: Kirigami.ColorUtils.tintWithAlpha(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, 0.25)
+        border.color: Tokens.tint(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, Tokens.tintOutline)
     }
 
     contentItem: Item {

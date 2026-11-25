@@ -4,10 +4,11 @@ import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 import QtQuick.Templates as T
 import org.kde.kirigami as Kirigami
+import org.saldo.ui as UI
 
 // One step of the setup guide: numbered badge on a vertical rail, a title,
 // a one-line summary when collapsed and its content when it is the open step.
-// Phones: each step is a card (Surface's look, tinted while open) instead of
+// Phones: each step is a card (UI.Card's look, tinted while open) instead of
 // the rail. A template Control: no style paddings or background, so the
 // desktop draws just the row, as before.
 T.Control {
@@ -29,7 +30,7 @@ T.Control {
     property bool last: false
     default property alias content: body.data
 
-    readonly property bool phone: Kirigami.Settings.isMobile
+    readonly property bool phone: UI.Platform.isPhone
 
     signal headerClicked()
 
@@ -46,10 +47,10 @@ T.Control {
 
     background: Rectangle {
         visible: step.phone
-        radius: Kirigami.Units.gridUnit
-        color: Kirigami.ColorUtils.tintWithAlpha(Kirigami.Theme.backgroundColor,
-                                                 step.expanded ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor,
-                                                 step.expanded ? 0.12 : 0.06)
+        radius: UI.Tokens.radiusCard
+        color: UI.Tokens.tint(Kirigami.Theme.backgroundColor,
+                              step.expanded ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor,
+                              step.expanded ? UI.Tokens.tintChip : UI.Tokens.tintSurface)
     }
 
     contentItem: RowLayout {

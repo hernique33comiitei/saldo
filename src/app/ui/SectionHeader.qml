@@ -16,7 +16,7 @@ QQC2.Label {
     text: section
     elide: Text.ElideRight
     font.weight: Font.Bold
-    font.pointSize: Kirigami.Theme.defaultFont.pointSize * 0.9
+    font.pointSize: Kirigami.Theme.defaultFont.pointSize * Tokens.fontSection
     opacity: 0.65
     Accessible.role: Accessible.Heading
 }
