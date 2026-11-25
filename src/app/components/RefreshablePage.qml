@@ -8,6 +8,22 @@ import org.saldo.core
 Kirigami.ScrollablePage {
     id: page
 
+    // Phones: a large bold title in the header (PhoneTitle), and the View
+    // colors, which the header, the tabs and the drawer share there (list
+    // pages took them and the others the Window ones: two greys).
+    Component.onCompleted: {
+        if (Kirigami.Settings.isMobile) {
+            titleDelegate = phoneTitle;
+            Kirigami.Theme.colorSet = Kirigami.Theme.View;
+        }
+    }
+    Component {
+        id: phoneTitle
+        PhoneTitle {
+            text: page.title
+        }
+    }
+
     supportsRefreshing: Kirigami.Settings.isMobile && Credentials.configured && Config.itemIds.length > 0
     onRefreshingChanged: {
         if (!refreshing) {

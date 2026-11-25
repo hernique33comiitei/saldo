@@ -10,6 +10,22 @@ import org.saldo.core
 Kirigami.ScrollablePage {
     id: page
 
+    // Phones: a large bold title in the header (PhoneTitle), and the View
+    // colors, which the header, the tabs and the drawer share there (list
+    // pages took them and the others the Window ones: two greys).
+    Component.onCompleted: {
+        if (Kirigami.Settings.isMobile) {
+            titleDelegate = phoneTitle;
+            Kirigami.Theme.colorSet = Kirigami.Theme.View;
+        }
+    }
+    Component {
+        id: phoneTitle
+        PhoneTitle {
+            text: page.title
+        }
+    }
+
     readonly property string meuPluggyUrl: "https://meu.pluggy.ai"
     readonly property string dashboardUrl: "https://dashboard.pluggy.ai"
     readonly property string guideUrl: "https://docs.pluggy.ai/pt/docs/guides/meu-pluggy-personal-use"
@@ -70,6 +86,7 @@ Kirigami.ScrollablePage {
         Kirigami.Action {
             text: i18n("Pluggy Guide")
             icon.name: "help-contents"
+            displayHint: Kirigami.Settings.isMobile ? Kirigami.DisplayHint.IconOnly : Kirigami.DisplayHint.NoPreference
             onTriggered: Qt.openUrlExternally(page.guideUrl)
         }
     ]

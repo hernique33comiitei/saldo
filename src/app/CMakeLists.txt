@@ -12,6 +12,7 @@ set(SALDO_APP_QML_FILES
     pages/RawDataPage.qml
     pages/SetupPage.qml
     pages/AboutPage.qml
+    pages/PhoneOverviewPage.qml
     components/StatCard.qml
     components/SectionCard.qml
     components/RefreshablePage.qml
@@ -22,6 +23,14 @@ set(SALDO_APP_QML_FILES
     components/TransactionDialog.qml
     components/NoDataMessage.qml
     components/SyncStatusLabel.qml
+    components/Surface.qml
+    components/IconBadge.qml
+    components/FilterChip.qml
+    components/BalanceHero.qml
+    components/PhoneTabBar.qml
+    components/DrawerItem.qml
+    components/PhoneDrawerContent.qml
+    components/PhoneTitle.qml
 )
 # Serve every QML file from the module root so they see each other.
 foreach(_file ${SALDO_APP_QML_FILES})
@@ -65,9 +74,9 @@ target_link_libraries(saldo PRIVATE
 if(ANDROID)
     # No icon theme on Android: bundle the Breeze icons the UI uses.
     kirigami_package_breeze_icons(ICONS
-        amarok_cart_view-symbolic bookmarks-symbolic car configure data-information data-warning
+        amarok_cart_view-symbolic arrow-down bookmarks-symbolic car checkmark configure data-information data-warning
         dialog-ok-apply document-edit document-save documentinfo edit-clear-history edit-copy edit-delete edit-paste edit-find edit-undo
-        emblem-ok-symbolic exchange-positions firewall-applet-shields_up-symbolic food globe go-home-symbolic
+        emblem-ok-symbolic exchange-positions firewall-applet-shields_up-symbolic food globe go-down-symbolic go-home-symbolic go-up-symbolic
         go-next-symbolic help-about help-contents help-donate input-gamepad-symbolic internet-services-symbolic list-add list-remove love mail-sent
         network-connect open-link-symbolic phone-symbolic tag-symbolic taxes-finances tools-report-bug video-symbolic view-bank
         view-financial-account-checking view-financial-account-credit-card

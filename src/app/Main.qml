@@ -32,7 +32,7 @@ Kirigami.ApplicationWindow {
 
     function showPage(name: string) {
         const pages = {
-            "overview": overviewPage,
+            "overview": tabs ? phoneOverviewPage : overviewPage,
             "accounts": accountsPage,
             "cards": cardsPage,
             "transactions": transactionsPage,
@@ -68,8 +68,27 @@ Kirigami.ApplicationWindow {
     pageStack.globalToolBar.showNavigationButtons: Kirigami.ApplicationHeaderStyle.ShowBackButton
 
     Component.onCompleted: {
+        if (tabs) {
+            // Phones: a flat header in the pages' own (View) colors, no
+            // separator, a bit taller, as current Android apps (pages also take
+            // PhoneTitle and the View colors).
+            // Set here so the desktop keeps Kirigami's defaults untouched.
+            const bar = pageStack.globalToolBar;
+            bar.colorSet = Kirigami.Theme.View;
+            bar.separatorVisible = false;
+            bar.preferredHeight = Qt.binding(() => Kirigami.Units.gridUnit * 3.5 + (bar.safeArea ? bar.safeArea.margins.top : 0));
+        }
         showPage(initialPage.length > 0 ? initialPage : "overview");
         checkFirstRun();
+    }
+
+    // Phones: Android's back closes an open drawer (nothing else handles it
+    // there, so the app closed instead).
+    onClosing: close => {
+        if (tabs && globalDrawer.drawerOpen) {
+            close.accepted = false;
+            globalDrawer.close();
+        }
     }
 
     Connections {
@@ -84,10 +103,27 @@ Kirigami.ApplicationWindow {
 
         isMenu: false
         modal: !root.wideScreen
-        handleVisible: modal
+        // Phones: the header's menu button opens it; no close button beside it.
+        handleVisible: modal && !(root.tabs && drawerOpen)
         onModalChanged: drawerOpen = !modal
 
+        // Phones: wider, rounded on its open side, with PhoneDrawerContent as
+        // its header (the sections are tabs there). Set here so the desktop
+        // keeps the style's drawer untouched.
+        Component.onCompleted: {
+            if (!root.tabs) {
+                return;
+            }
+            Kirigami.Theme.colorSet = Kirigami.Theme.View;
+            width = Qt.binding(() => Math.min(root.width * 0.82, Kirigami.Units.gridUnit * 17));
+            leftPadding = Qt.binding(() => (drawer.parent ? drawer.parent.SafeArea.margins.left : 0) + Kirigami.Units.largeSpacing);
+            rightPadding = Kirigami.Units.largeSpacing;
+            background = phoneDrawerBackground.createObject(drawer);
+            header = phoneDrawerHeader.createObject(drawer);
+        }
+
         header: Kirigami.AbstractApplicationHeader {
+            visible: !root.tabs
             contentItem: RowLayout {
                 anchors {
                     fill: parent
@@ -116,7 +152,7 @@ Kirigami.ApplicationWindow {
             Kirigami.Action {
                 text: i18n("Connect Meu Pluggy")
                 icon.name: "wallet-open"
-                visible: !root.setupComplete
+                visible: !root.setupComplete && !root.tabs
                 checked: root.currentPage === "setup"
                 onTriggered: root.showPage("setup")
             },
@@ -167,6 +203,7 @@ Kirigami.ApplicationWindow {
             Kirigami.Action {
                 text: i18n("Settings")
                 icon.name: "configure"
+                visible: !root.tabs
                 checked: root.currentPage === "settings"
                 shortcut: StandardKey.Preferences
                 onTriggered: root.showPage("settings")
@@ -174,6 +211,7 @@ Kirigami.ApplicationWindow {
             Kirigami.Action {
                 text: i18n("About Saldo")
                 icon.name: "help-about"
+                visible: !root.tabs
                 checked: root.currentPage === "about"
                 onTriggered: root.showPage("about")
             }
@@ -185,7 +223,7 @@ Kirigami.ApplicationWindow {
     // above the window's bottom edge).
     footer: root.tabs ? tabBar : null
 
-    Kirigami.NavigationTabBar {
+    PhoneTabBar {
         id: tabBar
         visible: root.tabs
         actions: [
@@ -225,6 +263,26 @@ Kirigami.ApplicationWindow {
     Component {
         id: overviewPage
         OverviewPage {}
+    }
+    Component {
+        id: phoneOverviewPage
+        PhoneOverviewPage {}
+    }
+    Component {
+        id: phoneDrawerHeader
+        PhoneDrawerContent {
+            currentPage: root.currentPage
+            setupComplete: root.setupComplete
+            onPageRequested: name => root.showPage(name)
+        }
+    }
+    Component {
+        id: phoneDrawerBackground
+        Rectangle {
+            color: Kirigami.Theme.backgroundColor
+            topRightRadius: Kirigami.Units.gridUnit * 1.25
+            bottomRightRadius: Kirigami.Units.gridUnit * 1.25
+        }
     }
     Component {
         id: accountsPage

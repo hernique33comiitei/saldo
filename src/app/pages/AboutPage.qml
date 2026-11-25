@@ -10,6 +10,22 @@ import org.kde.kirigami as Kirigami
 Kirigami.ScrollablePage {
     id: page
 
+    // Phones: a large bold title in the header (PhoneTitle), and the View
+    // colors, which the header, the tabs and the drawer share there (list
+    // pages took them and the others the Window ones: two greys).
+    Component.onCompleted: {
+        if (Kirigami.Settings.isMobile) {
+            titleDelegate = phoneTitle;
+            Kirigami.Theme.colorSet = Kirigami.Theme.View;
+        }
+    }
+    Component {
+        id: phoneTitle
+        PhoneTitle {
+            text: page.title
+        }
+    }
+
     readonly property var aboutData: About.aboutData
 
     // An author, credit or translator: name, role, website and email buttons.
