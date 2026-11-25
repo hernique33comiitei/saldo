@@ -31,6 +31,7 @@ set(SALDO_APP_QML_FILES
     components/DrawerItem.qml
     components/PhoneDrawerContent.qml
     components/PhoneTitle.qml
+    components/PhoneSectionHeader.qml
 )
 # Serve every QML file from the module root so they see each other.
 foreach(_file ${SALDO_APP_QML_FILES})

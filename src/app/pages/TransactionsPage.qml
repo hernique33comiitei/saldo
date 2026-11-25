@@ -10,6 +10,8 @@ RefreshablePage {
 
     // Optional: only this account's transactions.
     property string accountId: ""
+    // Phones: filters as chips, totals as tiles, rows with round icons.
+    readonly property bool phone: Kirigami.Settings.isMobile
 
     title: i18n("Transactions")
 
@@ -19,6 +21,7 @@ RefreshablePage {
             icon.name: "view-refresh"
             // No shortcuts on phones: a menu showed them over the text ("Ctrl+H").
             shortcut: Kirigami.Settings.isMobile ? "" : StandardKey.Refresh
+            displayHint: page.phone ? Kirigami.DisplayHint.IconOnly : Kirigami.DisplayHint.NoPreference
             enabled: Credentials.configured && !SyncManager.running
             onTriggered: SyncManager.sync()
         }
@@ -26,8 +29,16 @@ RefreshablePage {
 
     header: QQC2.Control {
         padding: Kirigami.Units.largeSpacing
+        // Phones: the page's side margins. Set here, not bound, so the
+        // desktop keeps the style's own paddings.
+        Component.onCompleted: {
+            if (page.phone) {
+                leftPadding = Kirigami.Units.gridUnit;
+                rightPadding = Kirigami.Units.gridUnit;
+            }
+        }
         contentItem: ColumnLayout {
-            spacing: Kirigami.Units.smallSpacing
+            spacing: page.phone ? Kirigami.Units.largeSpacing : Kirigami.Units.smallSpacing
 
             Flow {
                 Layout.fillWidth: true
@@ -35,12 +46,13 @@ RefreshablePage {
 
                 Kirigami.SearchField {
                     id: search
-                    width: Math.min(Kirigami.Units.gridUnit * 16, parent.width)
+                    width: page.phone ? parent.width : Math.min(Kirigami.Units.gridUnit * 16, parent.width)
                     delaySearch: true
                     onAccepted: transactions.searchText = text
                 }
                 QQC2.ComboBox {
                     id: monthBox
+                    visible: !page.phone
                     model: [{ text: i18n("All months"), value: "" }].concat(FinanceSummary.months)
                     textRole: "text"
                     valueRole: "value"
@@ -51,6 +63,7 @@ RefreshablePage {
                 }
                 QQC2.ComboBox {
                     id: kindBox
+                    visible: !page.phone
                     model: [
                         { text: i18n("Income and expenses"), value: TransactionsModel.All },
                         { text: i18n("Income only"), value: TransactionsModel.Income },
@@ -62,9 +75,110 @@ RefreshablePage {
                 }
             }
 
+            // Phones: the month (a menu) and the kind as chips, scrolling
+            // sideways when they do not fit.
+            Flickable {
+                Layout.fillWidth: true
+                visible: page.phone
+                implicitHeight: chips.implicitHeight
+                contentWidth: chips.implicitWidth
+                flickableDirection: Flickable.HorizontalFlick
+                boundsBehavior: Flickable.StopAtBounds
+                clip: true
+
+                Row {
+                    id: chips
+                    spacing: Kirigami.Units.smallSpacing
+
+                    FilterChip {
+                        id: monthChip
+                        dropDown: true
+                        checked: transactions.month.length > 0
+                        text: {
+                            const month = transactions.month;
+                            const entry = FinanceSummary.months.find(candidate => candidate.value === month);
+                            return month.length > 0 && entry ? entry.text : i18n("All months");
+                        }
+                        onClicked: monthMenu.popup(monthChip, 0, monthChip.height)
+                    }
+                    Repeater {
+                        model: [
+                            { text: i18nc("@option:check transaction filter chip: income and expenses", "All"), value: TransactionsModel.All },
+                            { text: i18n("Income"), value: TransactionsModel.Income },
+                            { text: i18n("Expenses"), value: TransactionsModel.Expense }
+                        ]
+                        delegate: FilterChip {
+                            required property var modelData
+                            text: modelData.text
+                            checked: transactions.kind === modelData.value
+                            onClicked: transactions.kind = modelData.value
+                        }
+                    }
+                }
+            }
+
+            // Phones: the totals of what the list shows, as two tiles.
+            RowLayout {
+                Layout.fillWidth: true
+                visible: page.phone && list.count > 0
+                spacing: Kirigami.Units.largeSpacing
+
+                Repeater {
+                    model: [
+                        { name: i18n("Income"), value: transactions.totalIncome, color: Kirigami.Theme.positiveTextColor, icon: "go-down-symbolic" },
+                        { name: i18n("Expenses"), value: Math.abs(transactions.totalExpense), color: Kirigami.Theme.negativeTextColor, icon: "go-up-symbolic" }
+                    ]
+                    delegate: Rectangle {
+                        id: total
+                        required property var modelData
+
+                        Layout.fillWidth: true
+                        Layout.preferredWidth: 1
+                        implicitHeight: totalRow.implicitHeight + Kirigami.Units.largeSpacing * 2
+                        radius: Kirigami.Units.gridUnit * 0.75
+                        color: Kirigami.ColorUtils.tintWithAlpha(Kirigami.Theme.backgroundColor, total.modelData.color, 0.12)
+
+                        RowLayout {
+                            id: totalRow
+                            anchors {
+                                fill: parent
+                                margins: Kirigami.Units.largeSpacing
+                            }
+                            spacing: Kirigami.Units.smallSpacing
+
+                            Kirigami.Icon {
+                                source: total.modelData.icon
+                                implicitWidth: Kirigami.Units.iconSizes.small
+                                implicitHeight: Kirigami.Units.iconSizes.small
+                                isMask: true
+                                color: total.modelData.color
+                            }
+                            ColumnLayout {
+                                Layout.fillWidth: true
+                                spacing: 0
+                                QQC2.Label {
+                                    Layout.fillWidth: true
+                                    text: total.modelData.name
+                                    elide: Text.ElideRight
+                                    font: Kirigami.Theme.smallFont
+                                }
+                                MoneyLabel {
+                                    Layout.fillWidth: true
+                                    value: total.modelData.value
+                                    color: total.modelData.color
+                                    font.weight: Font.Bold
+                                    fontSizeMode: Text.HorizontalFit
+                                    minimumPointSize: Kirigami.Theme.defaultFont.pointSize * 0.7
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
             QQC2.Label {
                 Layout.fillWidth: true
-                visible: list.count > 0
+                visible: !page.phone && list.count > 0
                 font: Kirigami.Theme.smallFont
                 opacity: 0.8
                 elide: Text.ElideRight
@@ -74,8 +188,10 @@ RefreshablePage {
             }
         }
         background: Rectangle {
-            color: Kirigami.Theme.alternateBackgroundColor
+            // Phones: flat, in the page's color.
+            color: page.phone ? Kirigami.Theme.backgroundColor : Kirigami.Theme.alternateBackgroundColor
             Kirigami.Separator {
+                visible: !page.phone
                 anchors {
                     left: parent.left
                     right: parent.right
@@ -89,28 +205,34 @@ RefreshablePage {
         id: transactionDialog
     }
 
-    ListView {
-        id: list
+    // Phones: the months of the month chip.
+    QQC2.Menu {
+        id: monthMenu
 
-        model: TransactionsModel {
-            id: transactions
-            accountId: page.accountId
+        Instantiator {
+            model: [{ text: i18n("All months"), value: "" }].concat(FinanceSummary.months)
+            delegate: QQC2.MenuItem {
+                required property var modelData
+                text: modelData.text
+                onTriggered: transactions.month = modelData.value
+            }
+            onObjectAdded: (index, object) => monthMenu.insertItem(index, object)
+            onObjectRemoved: (index, object) => monthMenu.removeItem(object)
         }
+    }
 
-        section.property: "dateLabel"
-        section.delegate: Kirigami.ListSectionHeader {
+    Component {
+        id: desktopSection
+        Kirigami.ListSectionHeader {
             required property string section
             width: ListView.view.width
             text: section
         }
+    }
 
-        onAtYEndChanged: {
-            if (atYEnd && transactions.canLoadMore) {
-                transactions.loadMore();
-            }
-        }
-
-        delegate: QQC2.ItemDelegate {
+    Component {
+        id: desktopRow
+        QQC2.ItemDelegate {
             id: delegate
             required property var model
             required property int index
@@ -130,6 +252,104 @@ RefreshablePage {
                 showAccount: page.accountId.length === 0
             }
         }
+    }
+
+    Component {
+        id: phoneSection
+        PhoneSectionHeader {}
+    }
+
+    // Phones: round category icon (green for money in, grey between the
+    // user's own accounts), bold description, the amount with its state below.
+    Component {
+        id: phoneRow
+        QQC2.ItemDelegate {
+            id: row
+            required property var model
+            required property int index
+
+            width: ListView.view.width
+            leftPadding: Kirigami.Units.gridUnit
+            rightPadding: Kirigami.Units.gridUnit
+            topPadding: Kirigami.Units.largeSpacing
+            bottomPadding: Kirigami.Units.largeSpacing
+            onClicked: transactionDialog.openFor(transactions, transactions.get(index))
+
+            contentItem: RowLayout {
+                spacing: Kirigami.Units.largeSpacing
+                opacity: row.model.pending ? 0.75 : 1
+
+                IconBadge {
+                    source: row.model.internal ? "exchange-positions" : row.model.categoryIcon
+                    tint: row.model.internal ? Kirigami.Theme.disabledTextColor
+                        : row.model.amount > 0.005 ? Kirigami.Theme.positiveTextColor
+                        : Kirigami.Theme.highlightColor
+                }
+                ColumnLayout {
+                    Layout.fillWidth: true
+                    spacing: 0
+                    QQC2.Label {
+                        Layout.fillWidth: true
+                        text: row.model.description
+                        font.weight: Font.DemiBold
+                        elide: Text.ElideRight
+                        maximumLineCount: 1
+                    }
+                    QQC2.Label {
+                        Layout.fillWidth: true
+                        text: [
+                            row.model.internal ? i18n("Between your accounts") : row.model.categoryLabel,
+                            page.accountId.length === 0 ? row.model.accountName : ""
+                        ].filter(part => part && part.length > 0).join(" · ")
+                        elide: Text.ElideRight
+                        maximumLineCount: 1
+                        font: Kirigami.Theme.smallFont
+                        opacity: 0.7
+                    }
+                }
+                ColumnLayout {
+                    spacing: 0
+                    MoneyLabel {
+                        Layout.alignment: Qt.AlignRight
+                        value: row.model.amount
+                        currency: row.model.currency
+                        signed: true
+                        colored: !row.model.internal
+                        font.weight: Font.DemiBold
+                        opacity: row.model.internal ? 0.55 : 1
+                    }
+                    QQC2.Label {
+                        Layout.alignment: Qt.AlignRight
+                        visible: text.length > 0
+                        text: row.model.pending ? i18n("pending")
+                            : row.model.installment.length > 0 ? i18n("installment %1", row.model.installment)
+                            : ""
+                        font: Kirigami.Theme.smallFont
+                        opacity: 0.7
+                    }
+                }
+            }
+        }
+    }
+
+    ListView {
+        id: list
+
+        model: TransactionsModel {
+            id: transactions
+            accountId: page.accountId
+        }
+
+        section.property: "dateLabel"
+        section.delegate: page.phone ? phoneSection : desktopSection
+
+        onAtYEndChanged: {
+            if (atYEnd && transactions.canLoadMore) {
+                transactions.loadMore();
+            }
+        }
+
+        delegate: page.phone ? phoneRow : desktopRow
 
         Kirigami.PlaceholderMessage {
             anchors.centerIn: parent
