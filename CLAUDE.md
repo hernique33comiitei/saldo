@@ -104,9 +104,10 @@ app (not the widget) also targets Android.
   decorations), but Light/Dark never depend on it: not every platform theme honors the request.
   The widget follows Plasma. Check with `--demo --theme …` and `XDG_CURRENT_DESKTOP=KDE` (with a
   `kdeglobals`) or `GNOME` (without), and on the phone with `tools/phone-test.sh matrix`.
-- **Overview month:** the select at the top of the overview drives everything there that depends
-  on a month: `CategorySpendModel.month` and `CashflowModel.endMonth` (the chart's last pair of
-  bars and the "in the month" totals). Stat cards, limit and balance history are not per month.
+- **Overview month:** the select at the top of the overview (the month chips on phones) drives
+  everything there that depends on a month: `CategorySpendModel.month` and `CashflowModel.endMonth`
+  (the chart's last pair of bars and the "in the month" totals). Stat cards, limit and balance
+  history are not per month. Both keep the picked month when a sync rebuilds the list.
 - **Cache schema changes:** bump `SchemaVersion` *and* list the new column in `SentinelColumns`
   (`database.cpp`). `ensureSchema()` runs under `BEGIN IMMEDIATE` and rebuilds the cache when the
   version differs or a sentinel column is missing; a DB with a newer version is never touched.
@@ -123,8 +124,10 @@ app (not the widget) also targets Android.
   Keep the setup guide (`SetupPage.qml`) in sync with the dashboard if Pluggy renames things.
 - **UI vocabulary**: Kirigami pages/actions/FormLayout, colors from `Kirigami.Theme`, sizes from
   `Kirigami.Units`, Breeze icon names (prefer `-symbolic` in lists; no bundled images besides
-  the app icon). Widget-only controls come from `org.kde.plasma.components`.
-- **Cards:** use `SectionCard`/`StatCard`. `Kirigami.AbstractCard` stretches its `contentItem` to
+  the app icon). Widget-only controls come from `org.kde.plasma.components`. The one exception
+  to theme colors is the phone overview's `BalanceHero`: the app icon's green, darkened so its
+  white text keeps a 4.5:1 contrast (the icon's own `#1b9e6b` gave 3.4:1).
+- **Cards:** use `SectionCard`/`StatCard` (`Surface` on phones, see Phones). `Kirigami.AbstractCard` stretches its `contentItem` to
   the whole card minus padding (the header is not subtracted), so a layout used directly as
   `contentItem` spreads its nested layouts and pushes the last rows past the card's edge.
   `SectionCard` keeps its column at its own height inside a wrapper `Item`; do the same for any
@@ -145,16 +148,34 @@ app (not the widget) also targets Android.
   back), or use a `Flow`; labels take `fillWidth` and wrap or elide; long IDs use
   `Text.WrapAnywhere`; no fixed `Layout.minimumWidth` on fields. Check every page at 365 px.
 - **Phones** (`Kirigami.Settings.isMobile`: Android; the desktop never changes with these): the
-  five sections are tabs at the bottom (`NavigationTabBar` in `Main.qml`, labels of about 8
+  five sections are tabs at the bottom (`PhoneTabBar` in `Main.qml`, labels of about 8
   characters, `@title:tab` contexts: "Resumo", "Extrato", "Investir"), and the drawer keeps only
   the setup guide, Settings and About. The tab bar is the window's footer on phones only: on the
   desktop there is no footer at all, because Kirigami shortens the sidebar drawer by the footer's
   height even when the footer is hidden (it ended 120 px above the bottom). Page actions stay in the header
   (`pageStack.globalToolBar.style: ToolBar`; Kirigami's mobile default stacks a toolbar of
-  their own on the tabs). The five main pages are `RefreshablePage` (pull-to-refresh runs
+  their own on the tabs), icon-only there (`displayHint: IconOnly`). The five main pages are `RefreshablePage` (pull-to-refresh runs
   `SyncManager.sync()`). No keyboard shortcuts on phones (`shortcut: Kirigami.Settings.isMobile
   ? "" : …`): the header's overflow menu drew "Ctrl+H" over the item's text. Check phones with `QT_QUICK_CONTROLS_MOBILE=1
-  QT_QUICK_CONTROLS_STYLE=org.kde.breeze QT_QPA_PLATFORMTHEME=none` at 360 px.
+  QT_QUICK_CONTROLS_STYLE=org.kde.breeze QT_QPA_PLATFORMTHEME=none` at 360 px, then on the phone (adb).
+  - **Phone look** (current Android apps): one surface color everywhere, Kirigami's View colors
+    (every page sets them on phones, and the header, `PhoneTabBar` and the drawer use them too:
+    list pages took View and the others Window, two greys side by side). The header is flat (no
+    separator, a bit taller) and pages use `PhoneTitle` (large, bold) as their `titleDelegate`.
+    `PhoneTabBar` replaces `Kirigami.NavigationTabBar` (a framed button for the current tab) with
+    a pill behind the icon, and pads itself by `SafeArea` like Kirigami's own bars. The drawer is
+    wider and rounded, with `PhoneDrawerContent` (app, last update, what is connected, then
+    `DrawerItem` pills) instead of Kirigami's action list. Cards are `Surface` (borderless, tonal),
+    icons in rows and tiles sit in an `IconBadge`, filters are `FilterChip`s, list sections use
+    `PhoneSectionHeader`, and the setup guide's steps (`SetupStep`, a template `T.Control` so the
+    desktop keeps the bare rail) become cards, the open one tinted. The overview is its own page (`PhoneOverviewPage`, picked in
+    `showPage()`); the list pages (transactions, accounts, cards, investments) stay one page with
+    phone delegates/headers inside, since some are also pushed (an account's transactions).
+  - **The desktop must stay pixel-identical**: phone-only values go in `Component.onCompleted`
+    under `isMobile` (paddings, the drawer's width and background, the header's colors), never as
+    `phone ? x : undefined` bindings — `undefined` resets to Qt's base value, not the KDE style's
+    (rows and headers grew on the desktop that way). Compare desktop screenshots of every page
+    before and after (`magick compare -metric AE` must print 0).
 - **About page** is ours (`pages/AboutPage.qml`), not `Kirigami.AboutPage`: that one always draws
   initials avatars for authors and opens the license in a sheet glued to the top. Ours has no
   avatars and no "Libraries in use" card, and shows the license in a centered `Kirigami.Dialog`
