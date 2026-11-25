@@ -91,8 +91,10 @@ QQC2.ComboBox {
             topPadding: Kirigami.Units.gridUnit * 1.5
             leftPadding: Kirigami.Units.largeSpacing
             rightPadding: Kirigami.Units.largeSpacing
+            // Room for the gesture bar, or a gap above the on-screen keyboard.
             bottomPadding: Kirigami.Units.largeSpacing
-                           + (parent && Platform.keyboardTop(parent) >= parent.height ? parent.SafeArea.margins.bottom : 0)
+                           + (!parent ? 0 : Platform.keyboardTop(parent) < parent.height ? Kirigami.Units.gridUnit
+                                                                                         : parent.SafeArea.margins.bottom)
             Kirigami.Theme.colorSet: Kirigami.Theme.View
             Kirigami.Theme.inherit: false
 

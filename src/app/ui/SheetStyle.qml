@@ -17,11 +17,16 @@ QtObject {
     function anchorBottom() {
         sheet.y = Qt.binding(() => sheet.parent ? Platform.keyboardTop(sheet.parent) - sheet.height : 0);
     }
-    // The on-screen keyboard covers the gesture bar: no room kept for it then.
+    // Room under the sheet's last row: the gesture bar's, or a gap above
+    // the on-screen keyboard while it shows (it covers the gesture bar; with
+    // no gap the buttons touched it).
     function safeBottom(): real {
         const s = sheet;
-        if (!s || !s.parent || Platform.keyboardTop(s.parent) < s.parent.height) {
+        if (!s || !s.parent) {
             return 0;
+        }
+        if (Platform.keyboardTop(s.parent) < s.parent.height) {
+            return Kirigami.Units.gridUnit;
         }
         return s.parent.SafeArea.margins.bottom;
     }
