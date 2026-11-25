@@ -178,8 +178,8 @@ app (not the widget) also targets Android.
     before and after (`magick compare -metric AE` must print 0).
 - **About page** is ours (`pages/AboutPage.qml`), not `Kirigami.AboutPage`: that one always draws
   initials avatars for authors and opens the license in a sheet glued to the top. Ours has no
-  avatars and no "Libraries in use" card, and shows the license in a centered `Kirigami.Dialog`
-  (`maximumWidth` set, or the unwrapped text stretches it to the window).
+  avatars and no "Libraries in use" card, and shows the license in a `UI.Sheet`, centered on the desktop
+  (`maximumWidth` set, or the unwrapped text stretches it to the window), a bottom sheet on phones.
 - Card rows (list, widget) show only the card and its limit; bills live on the detail page and
   in the overview's "Next bills".
 
@@ -187,49 +187,73 @@ app (not the widget) also targets Android.
 
 The UI is built from our own design system, organized like a web `@company/ui` package:
 `src/app/ui/` is the static QML module `org.saldo.ui` (linked into the app, `Q_IMPORT_QML_PLUGIN`
-in `main.cpp`), imported as `import org.saldo.ui as UI`.
+in `main.cpp`), imported as `import org.saldo.ui as UI`. Every page and app component is built
+from it (enforced, see Rule).
 
 - **Tokens** (`UI.Tokens`, singleton): every radius, tint amount, type scale step, size and the
-  brand greens, by role (`radiusCard`, `tintSurface`, `fontMoneyLarge`, `chipHeight`…), plus
-  `UI.Tokens.tint(background, color, amount)`. Spacing stays `Kirigami.Units`, colors come from
-  `Kirigami.Theme` tinted by token amounts. No literal tints, radii or hex colors outside the module.
-- **`UI.Platform.isPhone`**: the one place that decides phone vs. desktop.
-- **Components** are adaptive: one component per control, the KDE control untouched on the desktop
-  (its code is what the pages used before, so the desktop stays pixel-identical) and the design
-  system's look on phones, applied in `Component.onCompleted` (never `? : undefined` bindings).
-  Layout: `Card`, `SummaryHeader`, `SectionHeader`, `PageTitle`, `IconBadge`, `Chip`, `TabBar`,
-  `DrawerItem`. Controls: `Button` (`variant`: Secondary/Primary/Flat), `IconButton`, `TextField`
-  (`error`), `PasswordField`, `SearchField`, `TextArea`, `Select` (options in a bottom sheet on
-  phones), `NumberField`, `Switch`, `BusyIndicator`. Feedback: `Banner`, `EmptyState`. Overlays:
-  `Sheet` and `ConfirmSheet` (Kirigami's dialogs; bottom sheets on phones through `SheetStyle`:
-  margins cleared, since Breeze's gridUnit margin made Qt shrink a sheet at the bottom edge and
-  cut its content; the footer, outside a dialog's padding, takes the gesture bar's room; drag
-  down on a strip over the top to close, using the distance kept while dragging, since the handler
-  resets its translation before reporting the release; the dialog's own footer buttons get the
-  `Button` pill look through `PillBackground`/`PillContent`, text only: accept Primary, reject
-  Flat). `Select` keeps its control's delegate (replacing it reset the current index) and sets its
-  sheet's close policy after installing it (the ComboBox gives a new popup "close on a press
-  outside its parent", and the parent is the whole window). Sheets (and `Select`'s) sit on `UI.Platform.keyboardTop(window)`: on
-  top of the on-screen keyboard while it shows, so a field in a sheet stays visible (Qt reports
-  the keyboard in physical pixels on Android, scaled by the ratio of its width to the window's),
-  with a gridUnit gap above it instead of the gesture bar's room (the keyboard covers the bar). Buttons Kirigami draws itself get the design
-  system's pressed states too: `UI.PhoneChrome` (in `Main.qml`) gives the page headers' tool
-  buttons (actions, back, overflow) and the drawer's ☰ handle `RoundButtonBackground`, again after
-  every page change (headers are built per page, their buttons late), and `SheetStyle` does the
-  same for a sheet's close button. `Banner` keeps its icon centered on
-  wrapped text (Kirigami pins it to the top). Phone-only parts are created on an item
-  (a Popup is no item: visual objects created on one warn they are not in the scene). App compositions that know the data (`BalanceHero`, `PhoneDrawerContent`,
-  `PhoneCardRow`, `SetupStep`) stay in `src/app/components/` and are built from `UI.*`.
+  brand greens, by role (`radiusCard`, `tintSurface`, `tintField`, `fontMoneyLarge`,
+  `chipHeight`…), plus `UI.Tokens.tint(background, color, amount)`. Spacing stays `Kirigami.Units`,
+  colors come from `Kirigami.Theme` tinted by token amounts. No literal tints, radii or hex colors
+  outside the module.
+- **`UI.Platform`**: `isPhone`, the one place that decides phone vs. desktop, and
+  `keyboardTop(window)`, where the on-screen keyboard starts (Qt reports it in physical pixels on
+  Android, scaled by the ratio of its width to the window's).
+- **Components are adaptive**: one component per control, based on the KDE control itself
+  (`UI.TextField` is a `QQC2.TextField`, `UI.Sheet` a `Kirigami.Dialog`…). On the desktop it is
+  that control untouched, so the desktop stays pixel-identical; on phones it gets the design
+  system's look in `Component.onCompleted` (never `phone ? x : undefined` bindings, see Phones).
+  - Layout: `Card` (a `Kirigami.AbstractCard`; no title → no header), `SummaryHeader`,
+    `SectionHeader` (a `ListSectionHeader`; the `section.delegate` of lists), `ListRow` (an
+    `ItemDelegate`: list rows and links in cards), `PageTitle`, `IconBadge`, `Chip`, `TabBar`,
+    `DrawerItem`, `FormLayout`.
+  - Controls: `Button` (`variant`: Secondary/Primary/Flat), `IconButton`, `TextField` (`error`),
+    `PasswordField`, `SearchField`, `TextArea`, `Select`, `NumberField`, `Switch`, `Menu`,
+    `BusyIndicator`. Feedback: `Banner`, `EmptyState`. Overlays: `Sheet`, `ConfirmSheet`.
+  - Shared phone parts: `FieldBackground` (filled + hairline: a fill alone vanished on cards),
+    `PillBackground`/`PillContent` (buttons), `RoundButtonBackground` (icon buttons),
+    `SheetBackground` + `SheetStyle` (bottom sheets).
+- **Phone gotchas met** (each fixed in the component, keep them):
+  - A KDE style sets some paddings side by side (`leftPadding`…), which win over `padding`: set
+    each side (TextArea, PasswordField).
+  - Visual objects created on a Popup (not an item) warn "not placed in the graphics scene":
+    create them on an item (`popup.contentItem.parent`, `drawer.contentItem`).
+  - Bottom sheets (`SheetStyle`, for `Sheet`, `ConfirmSheet`): Breeze's gridUnit dialog margin
+    made Qt shrink a sheet at the bottom edge and cut its content (margins cleared, top margin kept
+    for the status bar); a dialog's footer sits outside its padding, so the gesture bar's room goes
+    into it, or into the sheet when the footer has no buttons (Kirigami's `bufferMode` strip
+    ignores padding); while the keyboard shows, sheets sit on it with a gridUnit gap; drag down on
+    a strip over the top to close (the handler resets its translation before reporting the
+    release, so the distance is kept while dragging); the enter transition leaves a fixed `y`,
+    bound again on `opened` (a `Connections`: the popup's `opened` property hides the signal).
+    Kirigami's own footer buttons get the pill look (accept Primary, reject Flat, text only) and
+    its close button the round one.
+  - `Select` keeps the ComboBox's delegate (replacing it reset the current index to -1) and sets
+    its sheet's close policy after installing it (the ComboBox gives a new popup "close on a press
+    outside its parent", and the parent is the whole window).
+  - `NumberField` keeps the style's step indicators (the SpinBox hit-tests them) see-through under
+    its round − / + (replacing them left the old ones computing on a null parent), and asks for a
+    width that leaves the value room.
+  - `Banner` keeps its icon centered on wrapped text (Kirigami pins it to the top).
+  - Buttons Kirigami draws itself (page headers' actions, back and overflow, the drawer's ☰) get
+    the round pressed state from `UI.PhoneChrome` (in `Main.qml`), again after every page change:
+    headers are built per page, their buttons late.
+- **App compositions** that know the data (`BalanceHero`, `StatCard`, `PhoneDrawerContent`,
+  `PhoneCardRow`, `SetupStep`, `NoDataMessage`, `SyncStatusLabel`) stay in `src/app/components/`,
+  built from `UI.*`: the design system never imports the app's data.
 - **Catalog** (the Storybook): `pages/GalleryPage.qml`, `saldo --demo --page gallery` (phone:
-  `tools/phone-test.sh run --demo --page gallery`). Every component, in its states; a new
+  `tools/phone-test.sh run --demo --page gallery`). Every component in its states; the
+  interactive ones (sheets, select) come first, so adb can tap them without scrolling. A new
   component goes there first. Its texts are samples, not translated.
-- **Rule:** pages and app components use `UI.*`, never the controls the design system wraps
-  (`QQC2.Button/TextField/ComboBox/Switch/SpinBox…`, `Kirigami.Dialog/InlineMessage/
-  PlaceholderMessage/AbstractCard/…`) nor literal looks. `tools/check-ui.sh` lists what still
-  bypasses it (ctest `check-ui`; report-only until every page is migrated, then `--strict`).
+- **Rule:** pages and app components use `UI.*`, never create the controls the design system
+  wraps (`QQC2.Button/TextField/ComboBox/Switch/SpinBox/ToolButton/ItemDelegate/Menu…`,
+  `Kirigami.Dialog/PromptDialog/InlineMessage/PlaceholderMessage/AbstractCard/ListSectionHeader/
+  FormLayout…`), nor use literal looks. `tools/check-ui.sh` lists what bypasses it; the ctest
+  `check-ui` runs it `--strict`, so the tests fail.
 - **Checking a change:** desktop screenshots of every page (light/dark, wide/narrow) against the
-  previous commit must be identical (`magick compare -metric AE` = 0); phone screenshots of the
-  touched pages and of the gallery, in the desktop's phone mode first, then on the phone (adb).
+  previous commit built in a worktree, taken the same day (the demo data is dated from today: a
+  baseline from yesterday differs everywhere), must be identical (`magick compare -metric AE` =
+  0); phone screenshots of the touched pages and of the gallery, in the desktop's phone mode first,
+  then on the phone (adb). In adb taps, scale coordinates by the shot's real size (720 px wide).
 
 ## Commits
 

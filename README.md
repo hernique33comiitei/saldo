@@ -180,6 +180,10 @@ libsecret).
 - **Idioma.** Português ou inglês, em *Configurações → Idioma* (por padrão, o do sistema).
 - **Tema.** Claro ou escuro, em *Configurações → Aparência* (por padrão, o do sistema: as cores do
   Plasma, ou o modo escuro do GNOME ou do celular).
+- **Interface.** No desktop, os controles do KDE, que seguem o tema do Plasma. No celular, um visual
+  próprio: cartões, abas com destaque, painéis que sobem de baixo e campos preenchidos. Os dois vêm
+  do design system do app (`src/app/ui/`, módulo QML `org.saldo.ui`); `saldo --demo --page gallery`
+  mostra o catálogo dos componentes.
 
 > A documentação da Pluggy é ambígua sobre a unidade dos valores e o sinal das compras no cartão;
 > os dados reais vieram em reais e com as compras do cartão positivas, que o Saldo converte em
