@@ -24,6 +24,8 @@ QtObject {
     readonly property real tintPressed: 0.1
     readonly property real tintTrack: 0.1       // the empty part of a bar
     readonly property real tintIconIdle: 0.75   // a tab's icon when not current
+    readonly property real tintSwitchOff: 0.25  // a switch's track when off
+    readonly property real tintScrim: 0.4       // the dark layer behind a sheet
 
     // Type scale, multipliers of the default font's point size.
     readonly property real fontMoneyLarge: 2.4
@@ -41,6 +43,13 @@ QtObject {
     readonly property real barThickness: Kirigami.Units.smallSpacing * 2.5
     readonly property real tabBarMaxWidth: Kirigami.Units.gridUnit * 30
     readonly property real heroPadding: Kirigami.Units.gridUnit * 1.25
+    readonly property real fieldHeight: Kirigami.Units.gridUnit * 2.5
+    readonly property real buttonHeight: Kirigami.Units.gridUnit * 2.25
+    readonly property real switchWidth: Kirigami.Units.gridUnit * 2.75
+    readonly property real switchHeight: Kirigami.Units.gridUnit * 1.6
+    readonly property real focusBorder: 2
+    readonly property real sheetHandleWidth: Kirigami.Units.gridUnit * 2
+    readonly property real sheetHandleHeight: 4
 
     // The app icon's green, darkened for white text at 4.5:1 or more
     // (#17845a 4.7:1; the icon's own #1b9e6b gave 3.4:1). BalanceHero only.

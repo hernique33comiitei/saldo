@@ -47,6 +47,26 @@ Kirigami.ScrollablePage {
         spacing: Kirigami.Units.gridUnit
 
         Section {
+            title: "Interactive (first, for adb taps): UI.Sheet · UI.ConfirmSheet · UI.Select"
+            Flow {
+                Layout.fillWidth: true
+                spacing: Kirigami.Units.smallSpacing
+                UI.Button {
+                    text: "Open sheet"
+                    onClicked: sampleSheet.open()
+                }
+                UI.Button {
+                    text: "Open confirmation"
+                    onClicked: sampleConfirm.open()
+                }
+            }
+            UI.Select {
+                Layout.fillWidth: true
+                model: ["System default", "English", "Português (Brasil)"]
+            }
+        }
+
+        Section {
             title: "UI.Card: title + action · title · tile (no title)"
             UI.Card {
                 Layout.fillWidth: true
@@ -172,8 +192,175 @@ Kirigami.ScrollablePage {
             }
         }
 
+        Section {
+            title: "UI.Button: primary · secondary · flat · icon · disabled"
+            Flow {
+                Layout.fillWidth: true
+                spacing: Kirigami.Units.smallSpacing
+                UI.Button {
+                    text: "Save"
+                    variant: UI.Button.Primary
+                }
+                UI.Button {
+                    text: "Test Connection"
+                }
+                UI.Button {
+                    text: "Cancel"
+                    variant: UI.Button.Flat
+                }
+                UI.Button {
+                    text: "Sync Now"
+                    icon.name: "view-refresh"
+                }
+                UI.Button {
+                    text: "Disabled"
+                    variant: UI.Button.Primary
+                    enabled: false
+                }
+            }
+        }
+
+        Section {
+            title: "UI.IconButton"
+            Row {
+                spacing: Kirigami.Units.smallSpacing
+                UI.IconButton {
+                    icon.name: "document-edit"
+                    display: QQC2.AbstractButton.IconOnly
+                    text: "Rename"
+                }
+                UI.IconButton {
+                    icon.name: "edit-delete"
+                    display: QQC2.AbstractButton.IconOnly
+                    text: "Remove"
+                }
+            }
+        }
+
+        Section {
+            title: "UI.TextField: empty · filled · error · disabled"
+            UI.TextField {
+                Layout.fillWidth: true
+                placeholderText: "Client ID"
+            }
+            UI.TextField {
+                Layout.fillWidth: true
+                text: "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+            }
+            UI.TextField {
+                Layout.fillWidth: true
+                text: "not an id"
+                error: true
+            }
+            UI.TextField {
+                Layout.fillWidth: true
+                placeholderText: "Disabled"
+                enabled: false
+            }
+        }
+
+        Section {
+            title: "UI.PasswordField · UI.SearchField · UI.TextArea"
+            UI.PasswordField {
+                Layout.fillWidth: true
+                placeholderText: "Client Secret"
+            }
+            UI.SearchField {
+                Layout.fillWidth: true
+            }
+            UI.TextArea {
+                Layout.fillWidth: true
+                text: "{\n  \"id\": \"3fa85f64\"\n}"
+            }
+        }
+
+        Section {
+            title: "UI.NumberField"
+            UI.NumberField {
+                from: 1
+                to: 24
+                value: 12
+            }
+        }
+
+        Section {
+            title: "UI.Switch: off · on · with text · disabled"
+            Flow {
+                Layout.fillWidth: true
+                spacing: Kirigami.Units.largeSpacing
+                UI.Switch {}
+                UI.Switch {
+                    checked: true
+                }
+                UI.Switch {
+                    text: "Count this card"
+                    checked: true
+                }
+                UI.Switch {
+                    enabled: false
+                }
+            }
+        }
+
+        Section {
+            title: "UI.Banner: information · positive · warning · error"
+            Repeater {
+                model: [
+                    { type: Kirigami.MessageType.Information, text: "Pluggy updates your banks once a day." },
+                    { type: Kirigami.MessageType.Positive, text: "Connected and saved in the system keyring." },
+                    { type: Kirigami.MessageType.Warning, text: "The authorization of Banco Exemplo ends in 12 days." },
+                    { type: Kirigami.MessageType.Error, text: "Pluggy refused the credentials." }
+                ]
+                delegate: UI.Banner {
+                    required property var modelData
+                    Layout.fillWidth: true
+                    visible: true
+                    type: modelData.type
+                    text: modelData.text
+                }
+            }
+        }
+
+        Section {
+            title: "UI.EmptyState · UI.BusyIndicator"
+            UI.EmptyState {
+                Layout.fillWidth: true
+                icon.name: "view-financial-list"
+                text: "No transactions"
+                explanation: "Transactions appear here after a sync."
+            }
+            UI.BusyIndicator {
+                Layout.alignment: Qt.AlignHCenter
+                running: true
+            }
+        }
+
         Item {
             implicitHeight: Kirigami.Units.gridUnit
         }
+    }
+
+    UI.Sheet {
+        id: sampleSheet
+        title: "Rename connection"
+        standardButtons: Kirigami.Dialog.Ok | Kirigami.Dialog.Cancel
+        padding: Kirigami.Units.gridUnit
+        ColumnLayout {
+            spacing: Kirigami.Units.smallSpacing
+            QQC2.Label {
+                text: "Name"
+            }
+            UI.TextField {
+                Layout.fillWidth: true
+                text: "Banco Exemplo"
+            }
+        }
+    }
+
+    UI.ConfirmSheet {
+        id: sampleConfirm
+        title: "Remove the connection?"
+        subtitle: "Its accounts and transactions leave Saldo; you can add it again later."
+        standardButtons: Kirigami.Dialog.Ok | Kirigami.Dialog.Cancel
     }
 }

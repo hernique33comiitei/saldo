@@ -197,8 +197,16 @@ in `main.cpp`), imported as `import org.saldo.ui as UI`.
 - **Components** are adaptive: one component per control, the KDE control untouched on the desktop
   (its code is what the pages used before, so the desktop stays pixel-identical) and the design
   system's look on phones, applied in `Component.onCompleted` (never `? : undefined` bindings).
-  Today: `Card`, `IconBadge`, `Chip`, `TabBar`, `DrawerItem`, `PageTitle`, `SectionHeader`,
-  `SummaryHeader`. App compositions that know the data (`BalanceHero`, `PhoneDrawerContent`,
+  Layout: `Card`, `SummaryHeader`, `SectionHeader`, `PageTitle`, `IconBadge`, `Chip`, `TabBar`,
+  `DrawerItem`. Controls: `Button` (`variant`: Secondary/Primary/Flat), `IconButton`, `TextField`
+  (`error`), `PasswordField`, `SearchField`, `TextArea`, `Select` (options in a bottom sheet on
+  phones), `NumberField`, `Switch`, `BusyIndicator`. Feedback: `Banner`, `EmptyState`. Overlays:
+  `Sheet` and `ConfirmSheet` (Kirigami's dialogs; bottom sheets on phones through `SheetStyle`:
+  margins cleared, since Breeze's gridUnit margin made Qt shrink a sheet at the bottom edge and
+  cut its content; the footer, outside a dialog's padding, takes the gesture bar's room; drag
+  down on a strip over the top to close, using the distance kept while dragging, since the handler
+  resets its translation before reporting the release). Phone-only parts are created on an item
+  (a Popup is no item: visual objects created on one warn they are not in the scene). App compositions that know the data (`BalanceHero`, `PhoneDrawerContent`,
   `PhoneCardRow`, `SetupStep`) stay in `src/app/components/` and are built from `UI.*`.
 - **Catalog** (the Storybook): `pages/GalleryPage.qml`, `saldo --demo --page gallery` (phone:
   `tools/phone-test.sh run --demo --page gallery`). Every component, in its states; a new

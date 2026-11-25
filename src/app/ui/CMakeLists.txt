@@ -12,6 +12,23 @@ set(SALDO_UI_QML_FILES
     PageTitle.qml
     SectionHeader.qml
     SummaryHeader.qml
+    FieldBackground.qml
+    SheetBackground.qml
+    SheetStyle.qml
+    TextField.qml
+    TextArea.qml
+    PasswordField.qml
+    SearchField.qml
+    Button.qml
+    IconButton.qml
+    Switch.qml
+    Select.qml
+    NumberField.qml
+    Banner.qml
+    EmptyState.qml
+    BusyIndicator.qml
+    Sheet.qml
+    ConfirmSheet.qml
 )
 set_source_files_properties(Tokens.qml Platform.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
 

@@ -1,0 +1,138 @@
+// SPDX-License-Identifier: MIT
+import QtQuick
+import QtQuick.Templates as T
+import org.kde.kirigami as Kirigami
+
+// Phones: turns a Kirigami dialog into a bottom sheet (UI.Sheet,
+// UI.ConfirmSheet): full width at the bottom, rounded on top with a handle,
+// sliding in and out, closed by dragging the handle down (or tapping outside,
+// or Android's back), clear of the gesture bar. Does nothing on the desktop.
+QtObject {
+    id: style
+
+    property T.Popup sheet
+
+    // At the bottom of the window, following the sheet's height.
+    function anchorBottom() {
+        sheet.y = Qt.binding(() => sheet.parent ? sheet.parent.height - sheet.height : 0);
+    }
+
+    // The enter transition leaves a fixed y: bound again once open, so the
+    // sheet stays at the bottom if its content changes height. (A Connections:
+    // the popup's `opened` property hides its opened() signal from .connect.)
+    property Connections whenOpened: Connections {
+        target: Platform.isPhone ? style.sheet : null
+        function onOpened() {
+            style.anchorBottom();
+        }
+    }
+
+    function apply() {
+        if (!Platform.isPhone || !sheet) {
+            return;
+        }
+        const s = sheet;
+        // Breeze gives dialogs a gridUnit margin all around: at the bottom
+        // edge Qt shrank the sheet by it and cut its content. Only the top one
+        // stays, clear of the status bar.
+        s.margins = 0;
+        s.topMargin = Qt.binding(() => (s.parent ? s.parent.SafeArea.margins.top : 0) + Kirigami.Units.gridUnit);
+        s.x = 0;
+        s.width = Qt.binding(() => s.parent ? s.parent.width : 0);
+        anchorBottom();
+        // Clear of the gesture bar: a dialog's footer sits outside its
+        // padding, at the very bottom, so the room goes into the footer
+        // (or the padding when there is none).
+        const safeBottom = () => s.parent ? s.parent.SafeArea.margins.bottom : 0;
+        if (s.footer) {
+            const base = s.footer.bottomPadding;
+            s.footer.bottomPadding = Qt.binding(() => base + safeBottom());
+        } else {
+            s.bottomPadding = Qt.binding(safeBottom);
+        }
+        // Created on the popup's item: a Popup is no item, and visual objects
+        // created on it warned they were not in the scene.
+        s.background = backgroundComponent.createObject(s.contentItem.parent);
+        // The title below the handle, its sides in line with the content.
+        if (s.header) {
+            s.header.topPadding = Kirigami.Units.gridUnit * 1.5;
+            s.header.leftPadding = Kirigami.Units.gridUnit;
+            s.header.rightPadding = Kirigami.Units.largeSpacing;
+        }
+        // Drag down to close: a strip over the sheet's top (handle and title),
+        // above the header, which took the touches before.
+        dragComponent.createObject(s.contentItem.parent);
+        s.enter = enterComponent.createObject(s);
+        s.exit = exitComponent.createObject(s);
+    }
+
+    property Component backgroundComponent: Component {
+        SheetBackground {
+            Kirigami.Theme.colorSet: Kirigami.Theme.View
+            Kirigami.Theme.inherit: false
+        }
+    }
+    // Drag down to close; let go early and it springs back. Taps still reach
+    // the header's buttons (a drag only starts past the threshold).
+    property Component dragComponent: Component {
+        Item {
+            anchors {
+                top: parent.top
+                left: parent.left
+                right: parent.right
+            }
+            height: Kirigami.Units.gridUnit * 3
+            z: 1000
+
+            // How far the sheet was dragged: the handler has already reset
+            // its translation when it reports the release.
+            property real dragged: 0
+
+            DragHandler {
+                target: null
+                xAxis.enabled: false
+                onTranslationChanged: {
+                    if (!active) {
+                        return;
+                    }
+                    const s = style.sheet;
+                    parent.dragged = Math.max(0, translation.y);
+                    s.y = s.parent.height - s.height + parent.dragged;
+                }
+                onActiveChanged: {
+                    if (active) {
+                        return;
+                    }
+                    const s = style.sheet;
+                    if (parent.dragged > s.height / 4) {
+                        s.close();
+                    } else {
+                        s.y = Qt.binding(() => s.parent ? s.parent.height - s.height : 0);
+                    }
+                    parent.dragged = 0;
+                }
+            }
+        }
+    }
+    property Component enterComponent: Component {
+        Transition {
+            NumberAnimation {
+                property: "y"
+                from: style.sheet.parent ? style.sheet.parent.height : 0
+                to: style.sheet.parent ? style.sheet.parent.height - style.sheet.height : 0
+                duration: Kirigami.Units.longDuration
+                easing.type: Easing.OutCubic
+            }
+        }
+    }
+    property Component exitComponent: Component {
+        Transition {
+            NumberAnimation {
+                property: "y"
+                to: style.sheet.parent ? style.sheet.parent.height : 0
+                duration: Kirigami.Units.shortDuration
+                easing.type: Easing.InCubic
+            }
+        }
+    }
+}

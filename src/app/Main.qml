@@ -121,8 +121,10 @@ Kirigami.ApplicationWindow {
             width = Qt.binding(() => Math.min(root.width * 0.82, Kirigami.Units.gridUnit * 17));
             leftPadding = Qt.binding(() => (drawer.parent ? drawer.parent.SafeArea.margins.left : 0) + Kirigami.Units.largeSpacing);
             rightPadding = Kirigami.Units.largeSpacing;
-            background = phoneDrawerBackground.createObject(drawer);
-            header = phoneDrawerHeader.createObject(drawer);
+            // Created on the drawer's item: a Popup is no item, and visual
+            // objects created on it warned they were not in the scene.
+            background = phoneDrawerBackground.createObject(drawer.contentItem);
+            header = phoneDrawerHeader.createObject(drawer.contentItem);
         }
 
         header: Kirigami.AbstractApplicationHeader {
