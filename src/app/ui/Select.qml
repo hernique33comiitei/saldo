@@ -86,13 +86,18 @@ QQC2.ComboBox {
             x: 0
             width: parent ? parent.width : 0
             height: Math.min(implicitHeight, parent ? parent.height * 0.7 : implicitHeight)
-            y: parent ? parent.height - height : 0
+            // On the window's bottom or on top of the on-screen keyboard.
+            y: parent ? Platform.keyboardTop(parent) - height : 0
             topPadding: Kirigami.Units.gridUnit * 1.5
             leftPadding: Kirigami.Units.largeSpacing
             rightPadding: Kirigami.Units.largeSpacing
-            bottomPadding: Kirigami.Units.largeSpacing + (parent ? parent.SafeArea.margins.bottom : 0)
+            bottomPadding: Kirigami.Units.largeSpacing
+                           + (parent && Platform.keyboardTop(parent) >= parent.height ? parent.SafeArea.margins.bottom : 0)
             Kirigami.Theme.colorSet: Kirigami.Theme.View
             Kirigami.Theme.inherit: false
+
+            // The enter transition leaves a fixed y: bound again once open.
+            onOpened: y = Qt.binding(() => parent ? Platform.keyboardTop(parent) - height : 0)
 
             QQC2.Overlay.modal: Rectangle {
                 color: Qt.rgba(0, 0, 0, Tokens.tintScrim)

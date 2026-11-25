@@ -12,9 +12,18 @@ QtObject {
 
     property T.Popup sheet
 
-    // At the bottom of the window, following the sheet's height.
+    // At the bottom of the window, or on top of the on-screen keyboard,
+    // following the sheet's height.
     function anchorBottom() {
-        sheet.y = Qt.binding(() => sheet.parent ? sheet.parent.height - sheet.height : 0);
+        sheet.y = Qt.binding(() => sheet.parent ? Platform.keyboardTop(sheet.parent) - sheet.height : 0);
+    }
+    // The on-screen keyboard covers the gesture bar: no room kept for it then.
+    function safeBottom(): real {
+        const s = sheet;
+        if (!s || !s.parent || Platform.keyboardTop(s.parent) < s.parent.height) {
+            return 0;
+        }
+        return s.parent.SafeArea.margins.bottom;
     }
 
     // The enter transition leaves a fixed y: bound again once open, so the
@@ -89,12 +98,11 @@ QtObject {
         // Clear of the gesture bar: a dialog's footer sits outside its
         // padding, at the very bottom, so the room goes into the footer
         // (or the padding when there is none).
-        const safeBottom = () => s.parent ? s.parent.SafeArea.margins.bottom : 0;
         if (s.footer) {
             const base = s.footer.bottomPadding;
-            s.footer.bottomPadding = Qt.binding(() => base + safeBottom());
+            s.footer.bottomPadding = Qt.binding(() => base + style.safeBottom());
         } else {
-            s.bottomPadding = Qt.binding(safeBottom);
+            s.bottomPadding = Qt.binding(() => style.safeBottom());
         }
         // Created on the popup's item: a Popup is no item, and visual objects
         // created on it warned they were not in the scene.
@@ -143,7 +151,7 @@ QtObject {
                     }
                     const s = style.sheet;
                     parent.dragged = Math.max(0, translation.y);
-                    s.y = s.parent.height - s.height + parent.dragged;
+                    s.y = Platform.keyboardTop(s.parent) - s.height + parent.dragged;
                 }
                 onActiveChanged: {
                     if (active) {
@@ -153,7 +161,7 @@ QtObject {
                     if (parent.dragged > s.height / 4) {
                         s.close();
                     } else {
-                        s.y = Qt.binding(() => s.parent ? s.parent.height - s.height : 0);
+                        style.anchorBottom();
                     }
                     parent.dragged = 0;
                 }

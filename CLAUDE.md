@@ -209,7 +209,10 @@ in `main.cpp`), imported as `import org.saldo.ui as UI`.
   `Button` pill look through `PillBackground`/`PillContent`, text only: accept Primary, reject
   Flat). `Select` keeps its control's delegate (replacing it reset the current index) and sets its
   sheet's close policy after installing it (the ComboBox gives a new popup "close on a press
-  outside its parent", and the parent is the whole window). `Banner` keeps its icon centered on
+  outside its parent", and the parent is the whole window). Sheets (and `Select`'s) sit on `UI.Platform.keyboardTop(window)`: on
+  top of the on-screen keyboard while it shows, so a field in a sheet stays visible (Qt reports
+  the keyboard in physical pixels on Android, scaled by the ratio of its width to the window's),
+  and the gesture bar's room is dropped then (the keyboard covers it). `Banner` keeps its icon centered on
   wrapped text (Kirigami pins it to the top). Phone-only parts are created on an item
   (a Popup is no item: visual objects created on one warn they are not in the scene). App compositions that know the data (`BalanceHero`, `PhoneDrawerContent`,
   `PhoneCardRow`, `SetupStep`) stay in `src/app/components/` and are built from `UI.*`.
