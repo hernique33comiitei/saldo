@@ -11,7 +11,11 @@ QQC2.TextArea {
     Component.onCompleted: {
         if (Platform.isPhone) {
             background = areaBackground.createObject(area);
-            padding = Kirigami.Units.largeSpacing * 1.5;
+            // Each side: Breeze sets them one by one, which win over `padding`.
+            leftPadding = Kirigami.Units.largeSpacing * 1.5;
+            rightPadding = Kirigami.Units.largeSpacing * 1.5;
+            topPadding = Kirigami.Units.largeSpacing;
+            bottomPadding = Kirigami.Units.largeSpacing;
         }
     }
     Component {
