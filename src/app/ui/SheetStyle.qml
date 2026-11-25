@@ -22,9 +22,55 @@ QtObject {
     // the popup's `opened` property hides its opened() signal from .connect.)
     property Connections whenOpened: Connections {
         target: Platform.isPhone ? style.sheet : null
+        function onAboutToShow() {
+            style.styleButtons(style.sheet.footer);
+        }
         function onOpened() {
             style.anchorBottom();
         }
+    }
+
+    // Phones: the dialog's footer buttons (Kirigami creates them from
+    // standardButtons and customFooterActions) as the design system's pills,
+    // text only: the accepting one Primary, Cancel/No/Close/Discard Flat, a
+    // custom action Secondary. Done before each opening: some are created late.
+    function styleButtons(item) {
+        if (!item) {
+            return;
+        }
+        for (const child of item.children) {
+            if (child instanceof T.AbstractButton && child.visible !== undefined) {
+                styleButton(child);
+            } else {
+                styleButtons(child);
+            }
+        }
+    }
+    function styleButton(button) {
+        if (button.objectName === "saldoPill") {
+            return;
+        }
+        button.objectName = "saldoPill";
+        const dialog = sheet;
+        const standard = role => dialog.standardButton ? dialog.standardButton(role) : null;
+        const accept = [T.Dialog.Ok, T.Dialog.Save, T.Dialog.Yes, T.Dialog.Apply, T.Dialog.Open, T.Dialog.YesToAll]
+            .some(role => standard(role) === button);
+        const reject = [T.Dialog.Cancel, T.Dialog.No, T.Dialog.Close, T.Dialog.Discard, T.Dialog.Abort, T.Dialog.NoToAll]
+            .some(role => standard(role) === button);
+        const variant = accept ? Button.Primary : reject ? Button.Flat : Button.Secondary;
+        button.display = T.AbstractButton.TextOnly;
+        button.background = pillBackgroundComponent.createObject(button, { control: button, variant: variant });
+        button.contentItem = pillContentComponent.createObject(button, { control: button, variant: variant });
+        button.leftPadding = Kirigami.Units.gridUnit;
+        button.rightPadding = Kirigami.Units.gridUnit;
+        button.topPadding = Kirigami.Units.smallSpacing;
+        button.bottomPadding = Kirigami.Units.smallSpacing;
+    }
+    property Component pillBackgroundComponent: Component {
+        PillBackground {}
+    }
+    property Component pillContentComponent: Component {
+        PillContent {}
     }
 
     function apply() {

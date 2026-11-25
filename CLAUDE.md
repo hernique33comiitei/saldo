@@ -205,7 +205,12 @@ in `main.cpp`), imported as `import org.saldo.ui as UI`.
   margins cleared, since Breeze's gridUnit margin made Qt shrink a sheet at the bottom edge and
   cut its content; the footer, outside a dialog's padding, takes the gesture bar's room; drag
   down on a strip over the top to close, using the distance kept while dragging, since the handler
-  resets its translation before reporting the release). Phone-only parts are created on an item
+  resets its translation before reporting the release; the dialog's own footer buttons get the
+  `Button` pill look through `PillBackground`/`PillContent`, text only: accept Primary, reject
+  Flat). `Select` keeps its control's delegate (replacing it reset the current index) and sets its
+  sheet's close policy after installing it (the ComboBox gives a new popup "close on a press
+  outside its parent", and the parent is the whole window). `Banner` keeps its icon centered on
+  wrapped text (Kirigami pins it to the top). Phone-only parts are created on an item
   (a Popup is no item: visual objects created on one warn they are not in the scene). App compositions that know the data (`BalanceHero`, `PhoneDrawerContent`,
   `PhoneCardRow`, `SetupStep`) stay in `src/app/components/` and are built from `UI.*`.
 - **Catalog** (the Storybook): `pages/GalleryPage.qml`, `saldo --demo --page gallery` (phone:

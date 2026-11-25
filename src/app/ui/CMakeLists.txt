@@ -20,6 +20,8 @@ set(SALDO_UI_QML_FILES
     PasswordField.qml
     SearchField.qml
     Button.qml
+    PillBackground.qml
+    PillContent.qml
     IconButton.qml
     Switch.qml
     Select.qml

@@ -17,6 +17,11 @@ QQC2.ComboBox {
             // with a delegate of its own.
             background = phoneBackground.createObject(combo);
             popup = phonePopup.createObject(combo);
+            // The ComboBox gives a new popup "close on a press outside its
+            // parent": the parent is the whole window here, so tapping outside
+            // never closed the sheet. (On release outside, tapping an option
+            // closed it before the option took the click.)
+            popup.closePolicy = QQC2.Popup.CloseOnEscape | QQC2.Popup.CloseOnPressOutside;
             leftPadding = Kirigami.Units.largeSpacing * 1.5;
         }
     }

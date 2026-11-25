@@ -20,6 +20,20 @@ Kirigami.InlineMessage {
             rightPadding = Kirigami.Units.largeSpacing;
             topPadding = Kirigami.Units.largeSpacing;
             bottomPadding = Kirigami.Units.largeSpacing;
+            centerIcon();
+        }
+    }
+
+    // Phones: the icon centered on the text even when it wraps (Kirigami
+    // pins it to the top from two lines on, a little above the first line);
+    // still at the top when the actions sit below the text.
+    function centerIcon() {
+        const layout = contentItem;
+        for (const child of layout ? layout.children : []) {
+            if (child instanceof Kirigami.Icon && child.states.length > 0) {
+                child.states[0].when = Qt.binding(() => layout.atBottom === true);
+                return;
+            }
         }
     }
     Component {
