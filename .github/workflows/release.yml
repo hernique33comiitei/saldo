@@ -30,56 +30,67 @@ jobs:
             echo "::error::Tag $GITHUB_REF_NAME does not match version $cmake_v"; exit 1
           fi
 
+  # One package per distribution release, each built in a clean container of
+  # it (a package installs on the release it was built on, or newer) by
+  # tools/build-packages.sh, the same script used to check them locally.
   rpm:
-    name: Build RPM
+    name: Build RPM (${{ matrix.image }})
     needs: check
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # Fedora 44's RPM also installs on 45 and newer.
+        image: ['fedora:42', 'fedora:43', 'fedora:44']
     steps:
       - uses: actions/checkout@v4
-      - name: Build RPM in a Fedora container
-        # Pinned: an RPM only installs on the Fedora it was built on (or newer).
-        # Move to the next release before Fedora 44 reaches end of life.
-        run: |
-          docker run --rm -v "$PWD":/src -w /src fedora:44 bash -euxc '
-            dnf -y install rpm-build rpmdevtools git dnf-plugins-core
-            dnf -y builddep packaging/fedora/saldo.spec
-            git config --global --add safe.directory /src
-            V=$(rpmspec -q --qf "%{version}\n" packaging/fedora/saldo.spec | head -1)
-            rpmdev-setuptree
-            git archive --format=tar.gz --prefix=saldo-$V/ \
-              -o ~/rpmbuild/SOURCES/saldo-$V.tar.gz HEAD
-            rpmbuild -ba packaging/fedora/saldo.spec
-            mkdir -p /src/dist
-            find ~/rpmbuild/RPMS ~/rpmbuild/SRPMS -name "*.rpm" ! -name "*-debug*" -exec cp {} /src/dist/ \;
-          '
+      - name: Build RPM
+        run: tools/build-packages.sh "${{ matrix.image }}"
       - uses: actions/upload-artifact@v4
         with:
-          name: rpm
+          name: rpm-${{ strategy.job-index }}
           path: dist/*.rpm
           if-no-files-found: error
 
   deb:
-    name: Build DEB
+    name: Build DEB (${{ matrix.image }})
     needs: check
     runs-on: ubuntu-latest
-    # An LTS with Qt >= 6.8 and KDE Frameworks 6 (the runner's own Ubuntu may be older).
-    container: ubuntu:26.04
+    strategy:
+      matrix:
+        # Debian 13's DEB also installs on testing; Ubuntu 26.04's on 26.10.
+        # Older releases lack KDE Frameworks 6 (Debian 12, Ubuntu 24.04).
+        image: ['debian:13', 'ubuntu:26.04']
     steps:
       - uses: actions/checkout@v4
-      - name: Install build deps (from debian/control)
-        run: |
-          apt-get update
-          DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends devscripts equivs
-          mk-build-deps -i -r -t "apt-get -y --no-install-recommends" debian/control
       - name: Build DEB
-        run: |
-          dpkg-buildpackage -us -uc -b
-          mkdir -p dist && cp ../*.deb dist/
+        run: tools/build-packages.sh "${{ matrix.image }}"
       - uses: actions/upload-artifact@v4
         with:
-          name: deb
+          name: deb-${{ strategy.job-index }}
           path: dist/*.deb
           if-no-files-found: error
+
+  # Smoke test on every supported release before publishing: the right package
+  # installs, `saldo --version` answers and the demo shows every page with no
+  # QML warning (tools/test-package.sh; CLAUDE.md, "Packaging").
+  test:
+    name: Test on ${{ matrix.image }}
+    needs: [rpm, deb]
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        image: ['fedora:42', 'fedora:43', 'fedora:44', 'fedora:45',
+                'debian:13', 'debian:testing', 'ubuntu:26.04', 'ubuntu:26.10']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          pattern: '{rpm,deb}-*'
+          merge-multiple: true
+      - name: Install and run the demo on every page
+        run: tools/test-package.sh "${{ matrix.image }}" dist
 
   apk:
     name: Build APK
@@ -111,11 +122,12 @@ jobs:
           path: dist/*.apk
           if-no-files-found: error
 
-  # One release, created only when all three packages built (every release
-  # carries RPM + DEB + APK), with the curated changelog as its text.
+  # One release, created only when every package built and passed its tests
+  # (every release carries the RPMs, the DEBs and the APK), with the curated
+  # changelog as its text.
   publish:
     name: Publish release
-    needs: [rpm, deb, apk]
+    needs: [test, apk]
     if: startsWith(github.ref, 'refs/tags/')
     runs-on: ubuntu-latest
     permissions:
