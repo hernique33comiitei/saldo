@@ -23,6 +23,15 @@ triggers the RPM + DEB + APK builds in `.github/workflows/release.yml`.
 - Build and run the tests once:
   `cmake -B build -G Ninja -DBUILD_TESTING=ON && cmake --build build && QT_QPA_PLATFORM=offscreen ctest --test-dir build --output-on-failure`.
   Do not release on red tests.
+- Check the distribution packages: `tools/build-packages.sh fedora:42 fedora:43 fedora:44 debian:13
+  ubuntu:26.04`, then `tools/test-package.sh <image> dist` for each supported release (Fedora
+  42–45, Debian 13 and testing, Ubuntu 26.04 and 26.10). The release workflow runs the same test
+  and refuses to publish on a failure; locally it catches it before the tag (a tag is never
+  reused). Fix any QML warning it prints.
+- **New series (X.Y.0) only:** a short manual check in a virtual machine (GNOME Boxes or
+  virt-manager) with the KDE images of Fedora, Debian and Kubuntu, what no container covers:
+  install the package, open the demo, switch the theme, add the widget to the panel, save fake
+  credentials in the keyring. Ask the user to do it (or to skip it) and wait for the answer.
 - If the release changes anything the Android app shows (QML, Android files, the core), check it
   on the phone first: `tools/phone-test.sh install`, `smoke` and `matrix` (CLAUDE.md, "Phone
   tests"). Ask the user to connect the phone and sign the APK if `adb devices` shows nothing.
@@ -46,12 +55,24 @@ triggers the RPM + DEB + APK builds in `.github/workflows/release.yml`.
 5. **Tag + push:** `git tag vX.Y.Z` then `git push origin main vX.Y.Z`.
    Pushing is over SSH with the personal account (`hernique33comiitei`) — never the work account.
    This publishes the release, so only do it after the user confirmed in step 3.
-6. **Report:** the tag push started the `Release` workflow. Watch it
+6. **Report:** the tag push started the `Release` workflow (build per distribution → test on
+   every supported release → publish). Watch it
    (`gh run watch "$(gh run list -R hernique33comiitei/saldo --limit 1 --json databaseId --jq '.[0].databaseId')"`)
-   and confirm **Build RPM**, **Build DEB** and **Build APK** pass and the `.rpm`, `.deb` and `.apk`
-   are attached to the GitHub Release. If the APK is named `*-debug-key.apk`, the signing secrets
+   and confirm every **Build RPM**, **Build DEB**, **Test on …** and **Build APK** job passes and
+   the `.rpm`s (one per Fedora), `.deb`s (Debian and Ubuntu) and the `.apk` are attached to the
+   GitHub Release. If the APK is named `*-debug-key.apk`, the signing secrets
    are missing: tell the user (see `tools/create-android-keystore.sh`). If a job fails, read its log,
    fix it in a new commit and cut the next patch version (tags are never moved or reused).
+
+7. **Supported platforms (each new series, X.Y.0; or whenever a build image changed):** once the
+   release is published, run `tools/check-platforms.sh X.Y.Z`. It downloads the release's packages,
+   installs the `.rpm` and the `.deb` in clean containers of every distribution the README lists
+   ("Onde roda") and runs `saldo --version` there, and reads the APK's minimum Android version.
+   Add a column `Saldo X.Y.x` to each README table (keep the older series' columns: they tell
+   users on an older distribution which series still runs there), with what the script printed,
+   commit it as `docs: list where X.Y.x runs` and push. A distribution the previous series ran on
+   that now fails is a bug: read the log the script printed, fix it and cut the next patch
+   version. Patch releases (X.Y.Z with Z > 0) skip this step unless a build image changed.
 
 ## Notes
 
