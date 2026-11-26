@@ -44,35 +44,42 @@ instalação limpa de cada versão da tabela abaixo.
 
 ### Android (APK)
 
-| Versão do Android     | Saldo 0.0.x |
-| ---------------------- | :---------: |
-| Android 8 ou anterior  |     ❌     |
-| Android 9 ou mais novo |     ✅     |
+| Versão do Android      | Saldo 0.0.x | Saldo 0.1.x |
+| ---------------------- | :---------: | :---------: |
+| Android 8 ou anterior  |     ❌      |     ❌      |
+| Android 9 ou mais novo |     ✅      |     ✅      |
 
 Só o app: o widget é do Plasma (desktop).
 
 ### Fedora (RPM)
 
-| Distribuição        | Saldo 0.0.x |
-| --------------------- | :---------: |
-| Fedora 43 ou anterior |     ❌     |
-| Fedora 44             |     ✅     |
-| Fedora 45             |     ✅     |
+| Distribuição          | Saldo 0.0.x | Saldo 0.1.x |
+| --------------------- | :---------: | :---------: |
+| Fedora 41 ou anterior |     ❌      |     ❌      |
+| Fedora 42             |     ❌      |     ✅      |
+| Fedora 43             |     ❌      |     ✅      |
+| Fedora 44             |     ✅      |     ✅      |
+| Fedora 45             |     ✅      |     ✅      |
 
 ### Ubuntu / Kubuntu (DEB)
 
-| Distribuição               | Saldo 0.0.x |
-| ---------------------------- | :---------: |
-| Ubuntu 24.04 LTS ou anterior |     ❌     |
-| Ubuntu 26.04 LTS             |     ✅     |
-| Ubuntu 26.10                 |     ✅     |
+| Distribuição                 | Saldo 0.0.x | Saldo 0.1.x |
+| ---------------------------- | :---------: | :---------: |
+| Ubuntu 24.04 LTS ou anterior |     ❌      |     ❌      |
+| Ubuntu 26.04 LTS             |     ✅      |     ✅      |
+| Ubuntu 26.10                 |     ✅      |     ✅      |
+
+Ubuntu 24.04 e anteriores não têm o KDE Frameworks 6.
 
 ### Debian (DEB)
 
-| Distribuição                 | Saldo 0.0.x |
-| ------------------------------ | :---------: |
-| Debian 13 (Trixie) ou anterior |     ❌     |
-| Debian testing (Forky)         |     ✅     |
+| Distribuição             | Saldo 0.0.x | Saldo 0.1.x |
+| ------------------------ | :---------: | :---------: |
+| Debian 12 ou anterior    |     ❌      |     ❌      |
+| Debian 13 (Trixie)       |     ❌      |     ✅      |
+| Debian testing (Forky)   |     ✅      |     ✅      |
+
+Debian 12 e anteriores não têm o KDE Frameworks 6.
 
 ## Instalação
 

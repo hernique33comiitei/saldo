@@ -46,7 +46,7 @@ if [ -n "$apk" ]; then
     chmod a+r "$apk"
     sdk=$(docker run --rm -v "$(dirname "$apk")":/pkgs:ro --entrypoint sh "$ANDROID_IMAGE" \
           -c "/opt/android-sdk/build-tools/*/aapt2 dump badging /pkgs/$(basename "$apk")" \
-          | grep -oP "^sdkVersion:'\K[0-9]+" || true)
+          | grep -oP "^(minSdkVersion|sdkVersion):'\K[0-9]+" | head -1 || true)
 fi
 
 echo
