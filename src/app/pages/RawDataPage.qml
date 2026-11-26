@@ -73,7 +73,7 @@ Kirigami.ScrollablePage {
                 Layout.rightMargin: Kirigami.Units.largeSpacing
                 readOnly: true
                 wrapMode: TextEdit.WrapAnywhere
-                font: Kirigami.Theme.fixedWidthFont
+                font: Kirigami.Theme.fixedWidthFont ?? Qt.font({ family: UI.Tokens.monospaceFamily })
                 text: {
                     try {
                         return JSON.stringify(JSON.parse(delegate.model.raw), null, 2);

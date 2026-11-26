@@ -334,7 +334,7 @@ Kirigami.ScrollablePage {
                                     // Breaks anywhere so a long ID never widens the card.
                                     wrapMode: Text.WrapAnywhere
                                     text: itemRow.model.itemId
-                                    font.family: Kirigami.Theme.fixedWidthFont.family
+                                    font.family: Kirigami.Theme.fixedWidthFont?.family ?? UI.Tokens.monospaceFamily
                                     font.pointSize: Kirigami.Theme.smallFont.pointSize
                                     opacity: 0.6
                                 }

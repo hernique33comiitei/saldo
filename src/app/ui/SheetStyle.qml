@@ -28,7 +28,7 @@ QtObject {
         if (Platform.keyboardTop(s.parent) < s.parent.height) {
             return Kirigami.Units.gridUnit;
         }
-        return s.parent.SafeArea.margins.bottom;
+        return (s.parent?.SafeArea?.margins.bottom ?? 0);
     }
 
     // The enter transition leaves a fixed y: bound again once open, so the
@@ -117,7 +117,7 @@ QtObject {
         // edge Qt shrank the sheet by it and cut its content. Only the top one
         // stays, clear of the status bar.
         s.margins = 0;
-        s.topMargin = Qt.binding(() => (s.parent ? s.parent.SafeArea.margins.top : 0) + Kirigami.Units.gridUnit);
+        s.topMargin = Qt.binding(() => (s.parent?.SafeArea?.margins.top ?? 0) + Kirigami.Units.gridUnit);
         s.x = 0;
         s.width = Qt.binding(() => s.parent ? s.parent.width : 0);
         anchorBottom();

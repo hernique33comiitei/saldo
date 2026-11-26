@@ -125,7 +125,7 @@ Kirigami.ApplicationWindow {
             }
             Kirigami.Theme.colorSet = Kirigami.Theme.View;
             width = Qt.binding(() => Math.min(root.width * 0.82, Kirigami.Units.gridUnit * 17));
-            leftPadding = Qt.binding(() => (drawer.parent ? drawer.parent.SafeArea.margins.left : 0) + Kirigami.Units.largeSpacing);
+            leftPadding = Qt.binding(() => (drawer.parent?.SafeArea?.margins.left ?? 0) + Kirigami.Units.largeSpacing);
             rightPadding = Kirigami.Units.largeSpacing;
             // Created on the drawer's item: a Popup is no item, and visual
             // objects created on it warned they were not in the scene.

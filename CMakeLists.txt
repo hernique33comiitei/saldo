@@ -43,8 +43,9 @@ else()
     find_package(Qt6 ${QT_MIN_VERSION} REQUIRED COMPONENTS Widgets)
 endif()
 find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS Kirigami I18n CoreAddons)
-# The app's light/dark theme (src/app/colorscheme.cpp): activateSchemeId is 6.19.
-find_package(KF6ColorScheme 6.19 REQUIRED)
+# The app's light/dark theme (src/app/colorscheme.cpp). 6.13: Debian 13's
+# (activateSchemeId, 6.19, is used when present).
+find_package(KF6ColorScheme 6.13 REQUIRED)
 
 if(SALDO_USE_QTKEYCHAIN)
     find_package(Qt6Keychain REQUIRED)

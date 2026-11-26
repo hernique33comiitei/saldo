@@ -20,9 +20,9 @@ QQC2.ToolBar {
     Kirigami.Theme.colorSet: Kirigami.Theme.View
     Kirigami.Theme.inherit: false
     topPadding: Kirigami.Units.smallSpacing * 2
-    bottomPadding: Kirigami.Units.smallSpacing * 2 + (parent ? parent.SafeArea.margins.bottom : 0)
-    leftPadding: Math.floor(Math.max(0, width - maximumContentWidth) / 2) + (parent ? parent.SafeArea.margins.left : 0)
-    rightPadding: Math.floor(Math.max(0, width - maximumContentWidth) / 2) + (parent ? parent.SafeArea.margins.right : 0)
+    bottomPadding: Kirigami.Units.smallSpacing * 2 + (parent?.SafeArea?.margins.bottom ?? 0)
+    leftPadding: Math.floor(Math.max(0, width - maximumContentWidth) / 2) + (parent?.SafeArea?.margins.left ?? 0)
+    rightPadding: Math.floor(Math.max(0, width - maximumContentWidth) / 2) + (parent?.SafeArea?.margins.right ?? 0)
 
     background: Rectangle {
         color: Tokens.tint(Kirigami.Theme.backgroundColor, Kirigami.Theme.textColor, Tokens.tintBar)

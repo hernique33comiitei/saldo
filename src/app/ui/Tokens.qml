@@ -28,6 +28,10 @@ QtObject {
     readonly property real tintSwitchOff: 0.25  // a switch's track when off
     readonly property real tintScrim: 0.4       // the dark layer behind a sheet
 
+    // A fixed-width font where Kirigami has none: Theme.fixedWidthFont is
+    // newer than Debian 13's Kirigami 6.13 (use `fixedWidthFont?.family ??`).
+    readonly property string monospaceFamily: "monospace"
+
     // Type scale, multipliers of the default font's point size.
     readonly property real fontMoneyLarge: 2.4
     readonly property real fontMoneyMedium: 1.3

@@ -213,7 +213,7 @@ Kirigami.ScrollablePage {
                             text: Credentials.clientId
                             placeholderText: "00000000-0000-0000-0000-000000000000"
                             inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
-                            font.family: Kirigami.Theme.fixedWidthFont.family
+                            font.family: Kirigami.Theme.fixedWidthFont?.family ?? UI.Tokens.monospaceFamily
                             onEditingFinished: {
                                 const ids = Config.findIds(text);
                                 if (ids.length === 1 && ids[0] !== text) {
@@ -379,7 +379,7 @@ Kirigami.ScrollablePage {
                         Layout.fillWidth: true
                         placeholderText: i18n("Item ID")
                         inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhNoPredictiveText
-                        font.family: Kirigami.Theme.fixedWidthFont.family
+                        font.family: Kirigami.Theme.fixedWidthFont?.family ?? UI.Tokens.monospaceFamily
                         onAccepted: page.addItems(text)
                     }
                     UI.Button {

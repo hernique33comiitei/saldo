@@ -94,7 +94,7 @@ QQC2.ComboBox {
             // Room for the gesture bar, or a gap above the on-screen keyboard.
             bottomPadding: Kirigami.Units.largeSpacing
                            + (!parent ? 0 : Platform.keyboardTop(parent) < parent.height ? Kirigami.Units.gridUnit
-                                                                                         : parent.SafeArea.margins.bottom)
+                                                                                         : (parent?.SafeArea?.margins.bottom ?? 0))
             Kirigami.Theme.colorSet: Kirigami.Theme.View
             Kirigami.Theme.inherit: false
 

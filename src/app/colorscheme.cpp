@@ -4,13 +4,39 @@
 #include "config.h"
 
 #include <KColorSchemeManager>
+#include <QAbstractItemModel>
+#include <QFileInfo>
 #include <QGuiApplication>
 #include <QModelIndex>
 #include <QStyleHints>
+#include <kcolorscheme_version.h>
 
 #include <memory>
 
 using namespace Qt::StringLiterals;
+
+namespace
+{
+// Activates a bundled scheme by its id (the .colors file's name, e.g.
+// "BreezeDark"). activateSchemeId is KColorScheme 6.19; Debian 13 has 6.13,
+// where the scheme is found in the manager's model by its file (Qt::UserRole
+// holds the path) and activated by index.
+void activateScheme(KColorSchemeManager *manager, const QString &id)
+{
+#if KCOLORSCHEME_VERSION >= QT_VERSION_CHECK(6, 19, 0)
+    manager->activateSchemeId(id);
+#else
+    QAbstractItemModel *model = manager->model();
+    for (int row = 0; row < model->rowCount(); ++row) {
+        const QModelIndex index = model->index(row, 0);
+        if (QFileInfo(index.data(Qt::UserRole).toString()).completeBaseName() == id) {
+            manager->activateScheme(index);
+            return;
+        }
+    }
+#endif
+}
+}
 
 void followColorScheme(const QString &forced)
 {
@@ -63,7 +89,7 @@ void followColorScheme(const QString &forced)
         // Light or Dark as picked (not every platform theme takes Qt's
         // request); "System" asks Qt, which reports the desktop's dark mode.
         const bool dark = forcedDark || (!forcedLight && hints->colorScheme() == Qt::ColorScheme::Dark);
-        schemes()->activateSchemeId(dark ? u"BreezeDark"_s : u"BreezeLight"_s);
+        activateScheme(schemes(), dark ? u"BreezeDark"_s : u"BreezeLight"_s);
         *replaced = true;
     };
     QObject::connect(hints, &QStyleHints::colorSchemeChanged, qApp, apply);
