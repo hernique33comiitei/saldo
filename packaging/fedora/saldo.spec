@@ -1,5 +1,5 @@
 Name:           saldo
-Version:        0.0.10
+Version:        0.1.0
 Release:        1%{?dist}
 Summary:        Personal finances from Open Finance (Meu Pluggy): KDE app and Plasma widget
 
@@ -79,6 +79,14 @@ export QT_QPA_PLATFORM=offscreen
 %{_datadir}/icons/hicolor/scalable/apps/saldo-symbolic.svg
 
 %changelog
+* Thu Nov 26 2026 Henrique Oliveira <henriik.dev@gmail.com> - 0.1.0-1
+- A new look on Android: a flat header with large titles, tabs with a highlighted pill, a wider drawer and borderless cards
+- On Android, the overview starts with your balance and the month's income and expenses, picks the month from chips and shows spending per category as bars
+- On Android, Transactions filters with chips and shows the totals as tiles; accounts, cards, investments, settings and the setup guide follow the new look
+- On Android, dialogs slide up from the bottom, close by dragging down, tapping outside or pressing back, and stay above the keyboard
+- New packages for Fedora 42 and 43 and for Debian 13 (and testing), next to Fedora 44 and newer and Ubuntu 26.04 and newer; each release is now installed and opened on every one of them before it is published
+- The desktop looks the same as before
+
 * Mon Nov 23 2026 Henrique Oliveira <henriik.dev@gmail.com> - 0.0.10-1
 - Pick a light or dark theme on the desktop too (Settings, Appearance); by default the app follows Plasma's colors, or the desktop's dark mode elsewhere, such as GNOME
 - The sidebar reaches the bottom of the window on the desktop

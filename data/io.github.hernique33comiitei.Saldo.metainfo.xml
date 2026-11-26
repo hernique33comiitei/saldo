@@ -98,6 +98,18 @@
   <content_rating type="oars-1.1"/>
 
   <releases>
+    <release version="0.1.0" date="2026-11-26">
+      <description>
+        <ul>
+          <li>A new look on Android: a flat header with large titles, tabs with a highlighted pill, a wider drawer and borderless cards</li>
+          <li>On Android, the overview starts with your balance and the month's income and expenses, picks the month from chips and shows spending per category as bars</li>
+          <li>On Android, Transactions filters with chips and shows the totals as tiles; accounts, cards, investments, settings and the setup guide follow the new look</li>
+          <li>On Android, dialogs slide up from the bottom, close by dragging down, tapping outside or pressing back, and stay above the keyboard</li>
+          <li>New packages for Fedora 42 and 43 and for Debian 13 (and testing), next to Fedora 44 and newer and Ubuntu 26.04 and newer; each release is now installed and opened on every one of them before it is published</li>
+          <li>The desktop looks the same as before</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.0.10" date="2026-11-23">
       <description>
         <ul>
