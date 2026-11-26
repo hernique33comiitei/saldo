@@ -340,6 +340,17 @@ i18n: translate the new sync error messages
     message when it is locked (instead of black screenshots), and `matrix` keeps the screen on
     while it runs (`svc power stayon usb`), restoring the setting and the dark mode afterwards.
   - Shots use `--demo` (made-up numbers): the real data never goes into files.
+- **Package smoke test per distribution (always, for every release):** `tools/test-package.sh
+  <image> [dir]` installs the package built for that release (`tools/build-packages.sh`) in a clean
+  container, checks `saldo --version`, then runs `QT_QPA_PLATFORM=offscreen
+  QT_FORCE_STDERR_LOGGING=1 timeout 10 saldo --demo --page <p>` for every page (and the gallery),
+  failing on any QML warning but Kirigami's known PageRow line. It loads all the QML with that
+  release's Qt and Kirigami: the first run caught `Kirigami.Theme.fixedWidthFont` missing in
+  Debian 13's Kirigami 6.13 (Settings and the setup guide). `SALDO_TEST_SHOTS=<dir>` also saves a
+  screenshot of each page. The release workflow runs it on every supported release (`test` job)
+  and only publishes when all pass; run it locally before tagging when packaging, dependencies,
+  QML or the C++ APIs used change. The Plasma widget is not in it yet (it would need Plasma in
+  the container; see "Widget without touching the session").
 - Translations: `po/Messages.sh` regenerates `po/saldo.pot` and merges into `po/pt_BR.po`;
   translate the new entries and check with `msgfmt --check --statistics -o /dev/null po/pt_BR.po`.
 
@@ -369,7 +380,10 @@ i18n: translate the new sync error messages
 - `android/` — APK manifest, `build.gradle` and adaptive icon (used by `ecm_add_android_apk`).
   `craft/saldo/` + `.craft.ini` — KDE Craft blueprint and overrides for the Android build.
 - `tools/bump-version.sh` — version sync (see Releases). `tools/phone-test.sh` — tests on the
-  phone over adb (see Build / run / test).
+  phone over adb (see Build / run / test). `tools/build-packages.sh` — RPM/DEB per distribution
+  release, `tools/test-package.sh` — their smoke test, `tools/check-platforms.sh` — the README's
+  platform tables (see Packaging gotchas, Supported platforms). `tools/check-ui.sh` — the design
+  system rule.
 
 ## Meu Pluggy facts the code relies on
 
@@ -457,15 +471,23 @@ skill** (`.claude/skills/release/`) runs the whole flow. By hand:
   `~/.local/` and the widget failed with `module "org.saldo.core" is not installed`.
 - The `.desktop` `Exec=` is the absolute binary path for non-`/usr` prefixes (`~/.local/bin` is
   not always in the Plasma session's PATH).
-- The RPM builds in a pinned `fedora:44` container (build deps from the spec via `dnf builddep`):
-  an RPM only installs on the Fedora it was built on (or newer), and `fedora:latest` had already
-  moved past the Fedora the maintainer runs. Move the pin to the next Fedora before 44 reaches end
-  of life (~mid 2027). The deb builds in an `ubuntu:26.04` container (build deps from
-  `debian/control` via `mk-build-deps`; the runner's own Ubuntu lacks Qt 6.8/KF6). Never pin a
-  release that is already end of life (its mirrors vanish).
+- **One package per distribution release**, built in a clean container of it by
+  `tools/build-packages.sh <image>…` (the release workflow runs it once per matrix entry, and it
+  is the way to check a target locally): RPMs for `fedora:42`, `fedora:43`, `fedora:44` (build deps
+  from the spec via `dnf builddep`; an RPM only installs on the Fedora it was built on or newer, so
+  Fedora 44's also covers 45), DEBs for `debian:13` and `ubuntu:26.04` (build deps from
+  `debian/control` via `mk-build-deps`), named with the distribution
+  (`saldo_X.Y.Z-1-debian13_amd64.deb`) since each one gets its own; Debian 13's also installs on
+  testing, Ubuntu 26.04's on 26.10. The floor is Qt 6.8 and KDE Frameworks 6.13 (Debian 13):
+  KColorScheme 6.19's `activateSchemeId` has a fallback (`colorscheme.cpp`), and QML reads
+  `SafeArea` (Qt 6.9) through `?.`/`??`. Debian 12 and Ubuntu 22.04/24.04 have no KDE Frameworks
+  6 (Qt 6.2–6.4): not supported. Drop a release from the matrix when it reaches end of life
+  (its mirrors move to the archive and the build breaks); add the new one when it comes out.
+  Fedora 42 was already end of life when added (0.1.0, on request, while its mirrors last); 43
+  follows about a month after Fedora 45's release. Debug packages (`-debuginfo`, `-dbgsym`) are
+  left out.
 - The deb's runtime package names (`qt6-svg-plugins`, `qml6-module-org-kde-quickcharts`,
   `libqt6sql6-sqlite`) were not verified locally; the first release run confirms them.
-- The RPM job only attaches the main `.rpm` + `.src.rpm`; `-debuginfo`/`-debugsource` are filtered out.
 
 ### Android APK
 
@@ -517,8 +539,10 @@ skill** (`.claude/skills/release/`) runs the whole flow. By hand:
 
 The README tables come from installing the release packages in clean containers (`dnf install` /
 `apt install` of the `.rpm`/`.deb`, then `saldo --version`) and from the APK's `minSdkVersion`
-(`aapt2 dump badging`: 28 = Android 9). Re-run that check and update the tables whenever a build
-image changes (the Fedora pin, the Ubuntu container, Qt/KF versions). Checked with v0.0.3: Fedora
+(`aapt2 dump badging`: 28 = Android 9): `tools/check-platforms.sh X.Y.Z` does it all from the
+published release. One column per series (`Saldo 0.1.x`…), added by the release skill for each new
+X.Y.0; re-run it and update the tables whenever a build image changes (the Fedora pin, the Ubuntu
+container, Qt/KF versions). Checked with v0.0.3: Fedora
 44/45, Ubuntu 26.04/26.10 and Debian testing install; Fedora 43, Ubuntu 24.04 and Debian 13 do not.
 
 ### Install for users

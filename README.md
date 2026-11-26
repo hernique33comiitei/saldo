@@ -19,9 +19,10 @@ com a Pluggy, guarda as credenciais no chaveiro do sistema e mantém um cache lo
 
 ## Onde roda
 
-Cada [release](https://github.com/hernique33comiitei/saldo/releases/latest) traz três pacotes: o
-app para **Android** (`.apk`), e o app com o widget do Plasma para **Fedora** (`.rpm`) e
-**Ubuntu / Debian** (`.deb`).
+Cada [release](https://github.com/hernique33comiitei/saldo/releases/latest) traz o app para
+**Android** (`.apk`), e o app com o widget do Plasma para **Fedora** (um `.rpm` por versão) e
+**Debian / Ubuntu** (um `.deb` para cada). Antes de publicar, cada pacote é instalado e aberto numa
+instalação limpa de cada versão da tabela abaixo.
 
 ### Arquiteturas
 
@@ -64,22 +65,28 @@ Só o app: o widget é do Plasma (desktop).
 
 ### Fedora (RPM)
 
-Compilado no Fedora 44. Baixe o `.rpm` mais recente na
+Cada release traz um `.rpm` para cada versão do Fedora: `fc42`, `fc43` e `fc44` (o `fc44` também
+serve no Fedora 45 e mais novos). Baixe o da sua versão na
 [página de releases](https://github.com/hernique33comiitei/saldo/releases/latest) e instale:
 
 ```sh
-sudo dnf install ./saldo-*.x86_64.rpm
+sudo dnf install ./saldo-*.fc44.x86_64.rpm      # troque fc44 pela sua versão (cat /etc/fedora-release)
 ```
 
-### Ubuntu / Debian (DEB)
+### Debian / Ubuntu (DEB)
 
-Compilado no Ubuntu 26.04 LTS (as versões que instalam estão em [Onde roda](#onde-roda)). Baixe o
-`.deb` mais recente na [página de releases](https://github.com/hernique33comiitei/saldo/releases/latest) e instale (o
-apt baixa as dependências):
+Cada release traz dois `.deb`: `-debian13` (Debian 13 e testing) e `-ubuntu26.04` (Ubuntu 26.04 LTS,
+26.10 e derivados, como Kubuntu). Baixe o seu na
+[página de releases](https://github.com/hernique33comiitei/saldo/releases/latest) e instale (o apt
+baixa as dependências):
 
 ```sh
-sudo apt install ./saldo_*_amd64.deb
+sudo apt install ./saldo_*-debian13_amd64.deb     # Debian
+sudo apt install ./saldo_*-ubuntu26.04_amd64.deb  # Ubuntu
 ```
+
+Debian 12 e Ubuntu 24.04 ou anteriores não têm o KDE Frameworks 6, que o Saldo usa: não há pacote
+para eles.
 
 ### Android (APK)
 
