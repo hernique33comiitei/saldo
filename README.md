@@ -1,15 +1,28 @@
 # Saldo
 
-App para **Linux** (KDE, com widget do Plasma 6) e para **Android** para as suas finanças pessoais.
-O Saldo lê os seus bancos
-pelo **Open Finance** do Brasil, através da API gratuita de uso pessoal do **Meu Pluggy**, e mostra
-saldos, limites de cartão (geral e por cartão), faturas, investimentos e transações, com gráficos.
+Suas finanças dos bancos brasileiros num só lugar: **saldos**, **cartões de crédito** (limite geral
+e por cartão, próximas faturas), **investimentos** e **extrato**, com gráficos de entradas e saídas,
+gastos por categoria e evolução do saldo. Os dados vêm do **Open Finance Brasil**, pela API gratuita
+de uso pessoal do **Meu Pluggy**.
 
-Feito com Qt6 + QML + Kirigami (KDE Frameworks 6). Sem contas nem servidores: o app conversa direto
-com a Pluggy, guarda as credenciais no chaveiro do sistema e mantém um cache local dos dados.
+- **Android**: app com abas, visão geral do mês e extrato com filtros.
+- **Linux**: app para o KDE Plasma (roda também no GNOME) e um **widget do Plasma 6** para ver o
+  saldo e o limite direto no painel. Pacotes para Fedora, Debian e Ubuntu.
+- **Sem servidor e sem conta**: o app conversa direto com a Pluggy, guarda as credenciais no
+  chaveiro do sistema e mantém os dados só no seu aparelho.
+
+Feito com Qt 6 + QML + Kirigami (KDE Frameworks 6), em português e inglês.
 
 > Funciona só com bancos brasileiros: os dados vêm do Open Finance Brasil, com o Meu Pluggy como
 > intermediário.
+
+### No celular
+
+|                                                           |                                                         |                                                      |
+| --------------------------------------------------------- | ------------------------------------------------------- | ---------------------------------------------------- |
+| ![Visão geral no Android](data/screenshots/android-overview.png) | ![Extrato no Android](data/screenshots/android-transactions.png) | ![Cartões no Android](data/screenshots/android-cards.png) |
+
+### No computador
 
 ![Visão geral](data/screenshots/overview.png)
 

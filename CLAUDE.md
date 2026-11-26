@@ -302,7 +302,12 @@ i18n: translate the new sync error messages
   AppStream/README screenshots live in `data/screenshots/`: Brazilian Portuguese (`LANGUAGE=pt_BR
   LC_ALL=pt_BR.UTF-8`, run from a `cmake --install` prefix listed in `XDG_DATA_DIRS` so `saldo.mo`
   is found), the dark Breeze colors (a scratch `XDG_CONFIG_HOME` holding only a copy of
-  `kdeglobals` + `plasmarc`) and a fresh demo cache. The widget shot is `FullRepresentation.qml`
+  `kdeglobals` + `plasmarc`) and a fresh demo cache. The Android ones (`android-*.png`: overview,
+  transactions, cards) come from the phone, `tools/phone-test.sh run --demo --page <p> --theme
+  dark` + `shot`, with the app in Portuguese and Android's demo status bar on (`adb shell am
+  broadcast -a com.android.systemui.demo -e command enter`, then `clock -e hhmm 1000` and
+  `notifications -e visible false`; `exit` afterwards), so no real notification gets in, resized
+  to 540 px wide. The widget shot is `FullRepresentation.qml`
   loaded in a plain `Window` whose id is `root` (with `expanded`, `showInvestments`,
   `needsAttention`), grabbed with `QQuickWindow::grabWindow()`.
 - Widget without touching the session: `cmake --install` into a temp prefix, then run
